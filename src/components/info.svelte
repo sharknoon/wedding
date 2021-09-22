@@ -3,11 +3,30 @@
 	const location = 'Freudenstadt';
 	const restaurant = 'Berghütte Lauterbad';
 
-	const dateNow = new Date();
-	const years = date.getFullYear() - dateNow.getFullYear();
-	const months = date.getMonth() - dateNow.getMonth();
-	const days = date.getDate() - dateNow.getDate();
-	const hours = date.getHours() - dateNow.getHours();
+	const startDate = new Date(new Date().toISOString().substr(0, 10)); // need date in YYYY-MM-DD format
+	const endDate = new Date(date.toISOString().substr(0, 10));
+
+	const startYear = startDate.getFullYear();
+	const february =
+		(startYear % 4 === 0 && startYear % 100 !== 0) || startYear % 400 === 0 ? 29 : 28;
+	const daysInMonth = [31, february, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+	var yearDiff = endDate.getFullYear() - startYear;
+	var monthDiff = endDate.getMonth() - startDate.getMonth();
+	if (monthDiff < 0) {
+		yearDiff--;
+		monthDiff += 12;
+	}
+	var dayDiff = endDate.getDate() - startDate.getDate();
+	if (dayDiff < 0) {
+		if (monthDiff > 0) {
+			monthDiff--;
+		} else {
+			yearDiff--;
+			monthDiff = 11;
+		}
+		dayDiff += daysInMonth[startDate.getMonth()];
+	}
 </script>
 
 <div
@@ -28,16 +47,13 @@
 	</div>
 	<div class="absolute bottom-8 grid grid-cols-4 gap-6">
 		<div class="countdown">
-			<span class="cd-number">{years}</span><span>{years === 1 ? 'Jahr' : 'Jahre'}</span>
+			<span class="cd-number">{yearDiff}</span><span>{yearDiff === 1 ? 'Jahr' : 'Jahre'}</span>
 		</div>
 		<div class="countdown">
-			<span class="cd-number">{months}</span><span>{months === 1 ? 'Monat' : 'Monate'}</span>
+			<span class="cd-number">{monthDiff}</span><span>{monthDiff === 1 ? 'Monat' : 'Monate'}</span>
 		</div>
 		<div class="countdown">
-			<span class="cd-number">{days}</span><span>{days === 1 ? 'Tag' : 'Tage'}</span>
-		</div>
-		<div class="countdown">
-			<span class="cd-number">{hours}</span><span>{hours === 1 ? 'Stunde' : 'Stunden'}</span>
+			<span class="cd-number">{dayDiff}</span><span>{dayDiff === 1 ? 'Tag' : 'Tage'}</span>
 		</div>
 	</div>
 </div>
