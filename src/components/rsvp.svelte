@@ -20,44 +20,45 @@
 				year: 'numeric'
 			})}
 		</span>
-		<div class="absolute bottom-12 w-10/12 sm:w-8/12 xl:w-4/12">
-			<div
-				class="{disabled
-					? 'opacity-50'
-					: ''} border-2 border-yellow-700 rounded-xl bg-gray-100 p-8 flex flex-col gap-4 relative"
+	</div>
+
+	<div class="absolute bottom-12 w-10/12 sm:w-8/12 xl:w-4/12">
+		<div
+			class="{disabled
+				? 'opacity-50'
+				: ''} border-2 border-yellow-700 rounded-xl bg-gray-100 p-8 flex flex-col gap-4 relative"
+		>
+			{#each invitationMembers as member}
+				<label class="{invitationMembers.length <= 1 ? 'hidden' : ''} inline-flex items-center">
+					<input
+						type="checkbox"
+						checked
+						{disabled}
+						class="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-yellow-600 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-yellow-600"
+					/>
+					<span class="ml-2">{member}</span>
+				</label>
+			{/each}
+			<button
+				{disabled}
+				class="p-2 rounded bg-yellow-600 border-2 border-yellow-600 text-white focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-yellow-600"
 			>
-				{#each invitationMembers as member}
-					<label class="{invitationMembers.length <= 1 ? 'hidden' : ''} inline-flex items-center">
-						<input
-							type="checkbox"
-							checked
-							{disabled}
-							class="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-yellow-600 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-yellow-600"
-						/>
-						<span class="ml-2">{member}</span>
-					</label>
-				{/each}
-				<button
-					{disabled}
-					class="p-2 rounded bg-yellow-600 border-2 border-yellow-600 text-white focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-yellow-600"
+				Zusagen
+			</button>
+			<hr class="border-t-2 border-yellow-600 h-[2px]" />
+			<button
+				{disabled}
+				class="p-2 rounded bg-gray-100 border-2 border-yellow-600 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-yellow-600"
+			>
+				Absagen
+			</button>
+			{#if disabled}
+				<h1
+					class="absolute bottom-1/2 left-0 transform translate-y-1/2 font-body text-4xl text-center w-full filter drop-shadow-lg"
 				>
-					Zusagen
-				</button>
-				<hr class="border-t-2 border-yellow-600 h-[2px]" />
-				<button
-					{disabled}
-					class="p-2 rounded bg-gray-100 border-2 border-yellow-600 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-yellow-600"
-				>
-					Absagen
-				</button>
-				{#if disabled}
-					<h1
-						class="absolute bottom-1/2 left-0 transform translate-y-1/2 font-body text-4xl text-center w-full filter drop-shadow-lg"
-					>
-						Anmeldefrist abgeloffen
-					</h1>
-				{/if}
-			</div>
+					Anmeldefrist abgeloffen
+				</h1>
+			{/if}
 		</div>
 	</div>
 </div>
