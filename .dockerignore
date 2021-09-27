@@ -7,3 +7,4 @@ node_modules
 
 # Distribution folders
 .svelte-kit
+build
