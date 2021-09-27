@@ -1,0 +1,67 @@
+name: Build, Deploy and Clean
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to Github Container Registry
+        run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin 
+
+      - name: Build Docker Image
+        run: docker build -t ghcr.io/sharknoon/wedding .
+        
+      - name: Push Image to Registry
+        run: docker push ghcr.io/sharknoon/wedding
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove existing Container
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: sudo docker stop wedding || true; sudo docker rm wedding || true; sudo docker rmi ghcr.io/sharknoon/wedding || true
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASS }}
+   
+      - name: Start new Container
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: echo ${{ secrets.GHCR_PAT }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin && sudo docker pull ghcr.io/sharknoon/wedding && sudo docker run -d --name wedding --network traefik-net --restart=always ghcr.io/sharknoon/wedding
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASS }}
+
+  clean:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete untagged Images
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GHCR_PAT }}
+          script: |
+            const response = await github.request("GET /user/packages/container/${{ env.PACKAGE_NAME }}/versions",
+              { 
+                per_page: ${{ env.PER_PAGE }}
+              }
+            );
+            for(version of response.data) {
+                if (version.metadata.container.tags.length == 0) {
+                    console.log("Deleting " + version.id)
+                    const deleteResponse = await github.request("DELETE /user/packages/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
+                    console.log("Deleted " + deleteResponse.status)
+                }
+            }
+        env:
+          PACKAGE_NAME: wedding
+          PER_PAGE: 100
