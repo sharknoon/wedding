@@ -1,0 +1,12 @@
+FROM node:14 as build
+WORKDIR /app
+COPY . .
+RUN npm ci
+RUN npm run build
+
+FROM node:14 as production
+WORKDIR /app
+COPY --from=build /app/build .
+RUN echo "{\"type\": \"module\"}" > package.json
+EXPOSE 3000
+CMD ["node", "."]

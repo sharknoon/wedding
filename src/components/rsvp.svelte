@@ -1,6 +1,6 @@
 <script lang="ts">
 	const deadline = new Date('2023-03-23T15:00:00+02:00');
-	const invitationCategory = 'family'; //Can be 'family', 'single',
+	//const invitationCategory = 'family'; //Can be 'family', 'single',
 	const invitationMembers = ['Max Mustermann', 'Erika Musterfrau', 'Karin Musterkind'];
 
 	const disabled = true; //new Date().getTime() > deadline.getTime();

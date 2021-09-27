@@ -1,17 +1,12 @@
 module.exports = {
-	mode: "jit",
-	purge: [
-		"./src/**/*.svelte",
-		"./src/routes/__layout.svelte"
-	],
+	mode: 'jit',
+	purge: ['./src/**/*.svelte', './src/routes/__layout.svelte'],
 	theme: {
 		fontFamily: {
-			"display": ['"Great Vibes"'],
-			"body": ["Montserrat"]
+			display: ['"Great Vibes"'],
+			body: ['Montserrat']
 		},
-		extend: {},
+		extend: {}
 	},
-	plugins: [
-		require('@tailwindcss/forms'),
-	],
+	plugins: [require('@tailwindcss/forms')]
 };
