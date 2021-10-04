@@ -26,7 +26,7 @@
 			Josua
 		</h1>
 	</div>
-	<button on:click={scrollDown} class="absolute bottom-10 opacity-80 text-gray-200">
+	<button on:click={scrollDown} class="absolute bottom-12 opacity-80 text-gray-200">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-12 w-12 animate-bounce"

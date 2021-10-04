@@ -30,23 +30,23 @@
 </script>
 
 <div id="info" class="relative min-h-screen max-h-screen bg-no-repeat bg-cover bg-center">
-	<div
-		class="absolute top-8 w-full flex items-center flex-col min-h-screen max-h-screen font-body text-white filter drop-shadow-xl"
-	>
-		<div class="text-6xl md:text-8xl 2xl:text-9xl font-display">
-			{date.toLocaleDateString(undefined, {
-				day: '2-digit',
-				month: '2-digit',
-				year: 'numeric'
-			})}
-		</div>
-		<div class="text-xl md:text-4xl 2xl:text-5xl text-center">{restaurant}</div>
-		<div class="uppercase text-xl">-{location}-</div>
-		<div class="text-xl">
-			{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
+	<div class="absolute top-8 w-full flex justify-center">
+		<div class="flex items-center flex-col font-body text-white bg-black/50 rounded-lg p-4">
+			<div class="text-6xl md:text-8xl 2xl:text-9xl font-display">
+				{date.toLocaleDateString(undefined, {
+					day: '2-digit',
+					month: '2-digit',
+					year: 'numeric'
+				})}
+			</div>
+			<div class="text-xl md:text-4xl 2xl:text-5xl text-center">{restaurant}</div>
+			<div class="uppercase text-xl">-{location}-</div>
+			<div class="text-xl">
+				{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
+			</div>
 		</div>
 	</div>
-	<div class="absolute flex justify-center bottom-8 w-full ">
+	<div class="absolute flex justify-center bottom-12 w-full">
 		<div class="countdown">
 			<span class="cd-number">{yearDiff}</span>
 			<span class="cd-unit">{yearDiff === 1 ? 'Jahr' : 'Jahre'}</span>
@@ -67,12 +67,12 @@
 		background-image: url('/images/backgrounds/info.jpg');
 	}
 	.countdown {
-		@apply flex flex-col items-center mx-4 border-2 border-gray-900 rounded font-body text-gray-900 p-3 bg-white/30 md:min-w-[7rem];
+		@apply flex flex-col items-center border-2 border-gray-900 rounded-lg bg-white/50 mx-4 p-3 md:min-w-[7rem];
 	}
 	.cd-number {
-		@apply font-display text-3xl md:text-6xl;
+		@apply font-display font-bold text-gray-900 text-3xl md:text-6xl;
 	}
 	.cd-unit {
-		@apply font-bold;
+		@apply font-body font-bold text-gray-900;
 	}
 </style>
