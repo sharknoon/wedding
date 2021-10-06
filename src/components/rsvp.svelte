@@ -1,9 +1,18 @@
 <script lang="ts">
-	const heading = 'Liebe Familie Klosterhuber';
+	export let id: string;
+
+	let salutation = '';
+	let members = [];
 	const invitation =
 		'Nun ist es soweit: Wir werden heiraten! Ihr seid ganz herzlich eingeladen, diesen besonderen Moment mit uns zu feiern. Ihr dürft singen, Reden schwingen und Tanzen so lange es Euch gefällt! Es gibt zu essen und zu trinken und Ihr könnt gerne anziehen, worin Ihr Euch wohlfühlt. Wer dort übernachten möchte, der wendet sich bitte an die Pfrondorfer Mühle. Wer uns etwas zur Hochzeit schenken möchte: Wir freuen uns über eine Finanzspritze für unsere Flitterwochen auf [tolle insel hier einfügen]. Meldet Euch bitte bis zu diesem Tag bei uns, damit wir wissen, ob Ihr kommt.';
 	const deadline = new Date('2023-03-23T15:00:00+02:00');
-	const invitationMembers = ['Max Mustermann', 'Erika Musterfrau', 'Karin Musterkind'];
+
+	fetch(`/api/invitation/${id}`)
+		.then((response) => response.json())
+		.then((invitation) => {
+			salutation = invitation.salutation;
+			members = invitation.members;
+		});
 
 	const disabled = new Date().getTime() > deadline.getTime();
 </script>
@@ -12,7 +21,7 @@
 	<div
 		class="container mx-auto min-h-screen max-h-screen flex items-center flex-col justify-center gap-6"
 	>
-		<h1 class="font-display text-6xl text-center">{heading}</h1>
+		<h1 class="font-display text-6xl text-center">{salutation}</h1>
 		<p class="mt-4">
 			{invitation}
 		</p>
@@ -29,19 +38,19 @@
 				? 'opacity-50'
 				: ''} border-2 border-yellow-700 rounded-xl bg-gray-100 w-10/12 sm:w-8/12 xl:w-4/12 p-8 flex flex-col gap-4 relative"
 		>
-			{#each invitationMembers as member}
+			{#each members as member}
 				<label
-					class="{invitationMembers.length <= 1 ? 'hidden' : ''} {disabled
+					class="{members.length <= 1 ? 'hidden' : ''} {disabled
 						? 'cursor-default'
 						: 'cursor-pointer'} inline-flex items-center"
 				>
 					<input
 						type="checkbox"
-						checked
+						checked={member.accepted}
 						{disabled}
 						class="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-yellow-600 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-yellow-600"
 					/>
-					<span class="ml-2">{member}</span>
+					<span class="ml-2">{member.name}</span>
 				</label>
 			{/each}
 			<button

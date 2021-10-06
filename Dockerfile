@@ -1,10 +1,10 @@
-FROM node:14 as build
+FROM node:14 as build-stage
 WORKDIR /app
 COPY . .
 RUN npm ci
 RUN npm run build
 
-FROM node:14 as production
+FROM node:14 as production-stage
 WORKDIR /app
 COPY --from=build /app/build .
 RUN echo "{\"type\": \"module\"}" > package.json
