@@ -1,4 +1,4 @@
-name: Build, Deploy and Clean
+name: Build and deploy website
 on:
   push:
     branches:
