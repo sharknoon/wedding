@@ -1,4 +1,4 @@
-[![Build, Deploy and Clean](https://github.com/Sharknoon/wedding-frontend/actions/workflows/build-deploy-and-clean.yml/badge.svg)](https://github.com/Sharknoon/wedding-frontend/actions/workflows/build-deploy-and-clean.yml)
+[![Build and deploy website](https://github.com/Sharknoon/wedding-frontend/actions/workflows/build-and-deploy-website.yml/badge.svg)](https://github.com/Sharknoon/wedding-frontend/actions/workflows/build-and-deploy-website.yml)
 
 # Midrène's and Josua's Wedding
 
