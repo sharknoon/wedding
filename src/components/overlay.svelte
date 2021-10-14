@@ -23,7 +23,7 @@
 			</svg>
 			<span class="ml-4 text-white text-4xl font-display">Laden</span>
 		{:else}
-			<span class="text-white text-3xl font-body">{error}</span>
+			<span class="text-white text-3xl">{error}</span>
 		{/if}
 	</div>
 </div>

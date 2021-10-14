@@ -26,7 +26,7 @@
 	}
 </script>
 
-<div id="rsvp" class="bg-yellow-100 min-h-screen relative font-body">
+<div id="rsvp" class="bg-yellow-100 min-h-screen relative">
 	<div
 		class="container mx-auto min-h-screen flex items-center flex-col justify-center gap-2 md:gap-6"
 	>
@@ -34,7 +34,7 @@
 			{wedding?.invitation?.salutation || ''}
 		</h1>
 		{#each wedding?.details?.text || [] as line}
-			<p class="text-sm md:text-base text-center">
+			<p class="text-sm md:text-base lg:text-2xl text-center">
 				{line}
 			</p>
 		{/each}
@@ -126,7 +126,7 @@
 			</button>
 			{#if disabled}
 				<h1
-					class="absolute bottom-1/2 transform translate-y-1/2 font-body text-gray-800 text-3xl md:text-4xl text-center self-center"
+					class="absolute bottom-1/2 transform translate-y-1/2 text-gray-800 text-3xl md:text-4xl text-center self-center"
 				>
 					Anmeldefrist abgeloffen
 				</h1>

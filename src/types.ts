@@ -31,6 +31,7 @@ export type Details = {
 export type ProgramItem = {
     time: string;
     title: string;
+    background: string;
     description: string[];
 }
 

@@ -41,6 +41,6 @@
 
 <style>
 	#home {
-		background-image: url('/images/backgrounds/home.png');
+		background-image: url('/images/backgrounds/home.webp');
 	}
 </style>

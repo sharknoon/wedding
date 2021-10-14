@@ -15,6 +15,7 @@
 	import Home from '../../../components/home.svelte';
 	import Info from '../../../components/info.svelte';
 	import Rsvp from '../../../components/rsvp.svelte';
+	import Program from '../../../components/program.svelte';
 	import Map from '../../../components/map.svelte';
 	import FAQ from '../../../components/faq.svelte';
 
@@ -47,6 +48,7 @@
 	<Home />
 	<Info {wedding} />
 	<Rsvp {wedding} />
+	<Program {wedding} />
 	<Map />
 	<FAQ {wedding} />
 
