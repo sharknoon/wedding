@@ -15,9 +15,10 @@
 	import Home from '../../../components/home.svelte';
 	import Info from '../../../components/info.svelte';
 	import Rsvp from '../../../components/rsvp.svelte';
+	import Map from '../../../components/map.svelte';
 	import FAQ from '../../../components/faq.svelte';
 
-	$: invitation = null;
+	$: wedding = null;
 	$: loading = true;
 	$: error = null;
 	fetch(`https://midrene-und-josua.de/api/invitation/${id}`).then((response) => {
@@ -34,21 +35,22 @@
 					break;
 			}
 		} else {
-			response.json().then((i) => {
-				invitation = i;
+			response.json().then((w) => {
+				wedding = w;
 			});
 		}
 	});
 </script>
 
 <!-- Disables scrolling when no invitation is present -->
-<div class={invitation === null ? 'overflow-hidden h-screen' : ''}>
+<div class={wedding === null ? 'overflow-hidden h-screen' : ''}>
 	<Home />
-	<Info />
-	<Rsvp {invitation} />
-	<FAQ />
+	<Info {wedding} />
+	<Rsvp {wedding} />
+	<Map />
+	<FAQ {wedding} />
 
-	{#if invitation === null}
+	{#if wedding === null}
 		<Overlay {loading} {error} />
 	{/if}
 </div>

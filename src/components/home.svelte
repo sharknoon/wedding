@@ -7,7 +7,7 @@
 
 <div
 	id="home"
-	class="flex items-center justify-center bg-no-repeat bg-cover md:bg-center min-h-screen max-h-screen relative"
+	class="flex items-center justify-center bg-no-repeat bg-cover md:bg-center min-h-screen relative"
 >
 	<div class="filter drop-shadow-xl">
 		<h1

@@ -1,56 +1,18 @@
 <script lang="ts">
-	const faqs = [
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		},
-		{
-			question: 'A Querstion you might have',
-			answer:
-				'A quick answer, that maybe is a little bit longer, so I have to write useless text here in order to represent a longer anser :)'
-		}
-	];
+	import type { Wedding } from '../types';
+	export let wedding: Wedding;
 </script>
 
-<div class="min-h-screen">
-	{#each faqs as faq}
-		<h3>{faq.question}</h3>
-		<p>{faq.answer}</p>
-	{/each}
+<div id="faqs" class="min-h-screen">
+	<h1 class="text-center font-display text-6xl pt-6 pb-4">Häufige Fragen</h1>
+	<div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+		{#each wedding?.details?.faqs || [] as faq}
+			<div class="border-2 border-yellow-600 rounded-xl bg-gray-100 p-4 md:p-8">
+				<h3 class="text-center text-body text-2xl mb-2">{faq.question}</h3>
+				{#each faq.answer as line}
+					<p class="font-semibold text-body">{line}</p>
+				{/each}
+			</div>
+		{/each}
+	</div>
 </div>

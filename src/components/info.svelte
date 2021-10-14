@@ -1,35 +1,43 @@
 <script lang="ts">
-	const date = new Date('2023-09-23T15:00:00+02:00');
-	const location = 'Nagold';
-	const restaurant = 'Pfrondorfer Mühle';
+	import type { Wedding } from '../types';
+	export let wedding: Wedding;
 
-	const startDate = new Date(new Date().toISOString().substr(0, 10)); // need date in YYYY-MM-DD format
-	const endDate = new Date(date.toISOString().substr(0, 10));
+	$: date = new Date(wedding?.details?.date || null);
+	$: countdown = calculateCountdown(date);
 
-	const startYear = startDate.getFullYear();
-	const february =
-		(startYear % 4 === 0 && startYear % 100 !== 0) || startYear % 400 === 0 ? 29 : 28;
-	const daysInMonth = [31, february, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-	var yearDiff = endDate.getFullYear() - startYear;
-	var monthDiff = endDate.getMonth() - startDate.getMonth();
-	if (monthDiff < 0) {
-		yearDiff--;
-		monthDiff += 12;
-	}
-	var dayDiff = endDate.getDate() - startDate.getDate();
-	if (dayDiff < 0) {
-		if (monthDiff > 0) {
-			monthDiff--;
-		} else {
-			yearDiff--;
-			monthDiff = 11;
+	function calculateCountdown(date: Date) {
+		if (!date) {
+			return [0, 0, 0];
 		}
-		dayDiff += daysInMonth[startDate.getMonth()];
+		const startDate = new Date(new Date().toISOString().substr(0, 10));
+		const endDate = new Date(date.toISOString().substr(0, 10));
+
+		const startYear = startDate.getFullYear();
+		const february =
+			(startYear % 4 === 0 && startYear % 100 !== 0) || startYear % 400 === 0 ? 29 : 28;
+		const daysInMonth = [31, february, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+		var yearDiff = endDate.getFullYear() - startYear;
+		var monthDiff = endDate.getMonth() - startDate.getMonth();
+		if (monthDiff < 0) {
+			yearDiff--;
+			monthDiff += 12;
+		}
+		var dayDiff = endDate.getDate() - startDate.getDate();
+		if (dayDiff < 0) {
+			if (monthDiff > 0) {
+				monthDiff--;
+			} else {
+				yearDiff--;
+				monthDiff = 11;
+			}
+			dayDiff += daysInMonth[startDate.getMonth()];
+		}
+		return [yearDiff, monthDiff, dayDiff];
 	}
 </script>
 
-<div id="info" class="relative min-h-screen max-h-screen bg-no-repeat bg-cover bg-center">
+<div id="info" class="relative min-h-screen bg-no-repeat bg-cover bg-center">
 	<div class="absolute top-8 w-full flex justify-center">
 		<div class="flex items-center flex-col font-body text-white bg-black/50 rounded-lg p-4">
 			<div class="text-6xl md:text-8xl 2xl:text-9xl font-display">
@@ -39,25 +47,30 @@
 					year: 'numeric'
 				})}
 			</div>
-			<div class="text-xl md:text-4xl 2xl:text-5xl text-center">{restaurant}</div>
-			<div class="uppercase text-xl">-{location}-</div>
-			<div class="text-xl">
-				{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
+			<div class="text-xl md:text-4xl 2xl:text-5xl text-center">
+				{wedding?.details?.locationParty}
+			</div>
+			<div class="w-full flex divide-x">
+				<div class="flex-auto text-xl text-center pr-2">{wedding?.details?.streetParty}</div>
+				<div class="flex-auto text-xl text-center px-2">{wedding?.details?.cityParty}</div>
+				<div class="flex-auto text-xl text-center pl-2">
+					{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="absolute flex justify-center bottom-12 w-full">
 		<div class="countdown">
-			<span class="cd-number">{yearDiff}</span>
-			<span class="cd-unit">{yearDiff === 1 ? 'Jahr' : 'Jahre'}</span>
+			<span class="cd-number">{countdown[0]}</span>
+			<span class="cd-unit">{countdown[0] === 1 ? 'Jahr' : 'Jahre'}</span>
 		</div>
 		<div class="countdown">
-			<span class="cd-number">{monthDiff}</span>
-			<span class="cd-unit">{monthDiff === 1 ? 'Monat' : 'Monate'}</span>
+			<span class="cd-number">{countdown[1]}</span>
+			<span class="cd-unit">{countdown[1] === 1 ? 'Monat' : 'Monate'}</span>
 		</div>
 		<div class="countdown">
-			<span class="cd-number">{dayDiff}</span>
-			<span class="cd-unit">{dayDiff === 1 ? 'Tag' : 'Tage'}</span>
+			<span class="cd-number">{countdown[2]}</span>
+			<span class="cd-unit">{countdown[2] === 1 ? 'Tag' : 'Tage'}</span>
 		</div>
 	</div>
 </div>
