@@ -21,6 +21,6 @@
 	}
 
 	html {
-		@apply bg-yellow-50 select-none font-body;
+		@apply bg-black select-none font-body text-gray-200;
 	}
 </style>

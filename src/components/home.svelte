@@ -16,7 +16,7 @@
 			Midrène
 		</h1>
 		<p
-			class="text-center font-display font-semibold text-3xl md:text-4xl 2xl:text-6xl text-gray-200"
+			class="text-center font-display font-semibold text-3xl md:text-4xl 2xl:text-6xl text-red-600"
 		>
 			und
 		</p>
@@ -26,7 +26,7 @@
 			Josua
 		</h1>
 	</div>
-	<button on:click={scrollDown} class="absolute bottom-12 opacity-80 text-gray-200">
+	<button on:click={scrollDown} class="absolute bottom-12 opacity-80 text-gray-900">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-12 w-12 animate-bounce"

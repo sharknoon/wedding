@@ -44,15 +44,16 @@
 </script>
 
 <!-- Disables scrolling when no invitation is present -->
-<div class={wedding === null ? 'overflow-hidden h-screen' : ''}>
-	<Home />
-	<Info {wedding} />
-	<Rsvp {wedding} />
-	<Program {wedding} />
-	<Map />
-	<FAQ {wedding} />
+<!--<div class={wedding === null ? 'overflow-hidden h-screen' : ''}>-->
+<Home />
+<Info {wedding} />
+<Rsvp {wedding} />
+<Program {wedding} />
+<Map />
+<!--	<FAQ {wedding} />
 
 	{#if wedding === null}
 		<Overlay {loading} {error} />
 	{/if}
 </div>
+-->

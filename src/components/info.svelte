@@ -39,7 +39,7 @@
 
 <div id="info" class="relative min-h-screen bg-no-repeat bg-cover bg-center">
 	<div class="absolute top-8 w-full flex justify-center">
-		<div class="flex items-center flex-col text-white bg-black/50 rounded-lg p-4">
+		<div class="flex items-center flex-col bg-black/50 rounded-lg border-2 border-red-600 p-4">
 			<div class="text-6xl md:text-8xl 2xl:text-9xl font-display">
 				{date.toLocaleDateString(undefined, {
 					day: '2-digit',
@@ -50,7 +50,7 @@
 			<div class="text-xl md:text-4xl 2xl:text-5xl text-center">
 				{wedding?.details?.locationParty}
 			</div>
-			<div class="w-full flex divide-x">
+			<div class="w-full flex divide-x-2 divide-red-600">
 				<div class="flex-auto text-xl text-center pr-2">{wedding?.details?.streetParty}</div>
 				<div class="flex-auto text-xl text-center px-2">{wedding?.details?.cityParty}</div>
 				<div class="flex-auto text-xl text-center pl-2">
@@ -80,12 +80,12 @@
 		background-image: url('/images/backgrounds/info.webp');
 	}
 	.countdown {
-		@apply flex flex-col items-center border-2 border-gray-900 rounded-lg bg-white/50 mx-4 p-3 md:min-w-[7rem];
+		@apply flex flex-col items-center border-2 border-red-600 rounded-lg bg-black/50 mx-4 p-3 md:min-w-[7rem];
 	}
 	.cd-number {
-		@apply font-display font-bold text-gray-900 text-3xl md:text-6xl;
+		@apply font-display font-bold text-3xl md:text-6xl;
 	}
 	.cd-unit {
-		@apply font-bold text-gray-900;
+		@apply font-bold;
 	}
 </style>
