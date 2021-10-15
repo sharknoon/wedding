@@ -44,7 +44,7 @@
 		>
 			{#each wedding?.invitation?.members || [] as member}
 				{#if wedding?.invitation?.members?.length > 1}
-					<label class="{disabled ? 'cursor-default' : 'cursor-pointer'} inline-flex items-center">
+					<label class="inline-flex items-center">
 						<input
 							type="checkbox"
 							bind:checked={member.accepted}
@@ -58,9 +58,7 @@
 			<button
 				on:click={() => updateMembers()}
 				{disabled}
-				class="{disabled
-					? 'cursor-default'
-					: ''} p-2 text-white rounded bg-red-600 hover:bg-red-700 border-2 border-red-600 hover:border-red-700 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-red-600 transition relative"
+				class="p-2 text-white rounded bg-red-600 hover:bg-red-700 border-2 border-red-600 hover:border-red-700 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-red-600 transition relative"
 			>
 				{#if acceptedPersons.length > 0}
 					{acceptedPersons.length} Person{acceptedPersons.length !== 1 ? 'en' : ''} zusagen

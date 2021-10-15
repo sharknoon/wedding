@@ -1,8 +1,5 @@
-const { colors } = require('tailwindcss/defaultTheme');
-
 module.exports = {
-	mode: 'jit',
-	purge: ['./src/**/*.svelte', './src/routes/__layout.svelte'],
+	content: ['./src/**/*.svelte', './src/routes/__layout.svelte'],
 	theme: {
 		fontFamily: {
 			display: ['"Great Vibes"'],

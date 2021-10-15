@@ -22,25 +22,38 @@
 	$: wedding = null;
 	$: loading = true;
 	$: error = null;
-	fetch(`https://midrene-und-josua.de/api/invitation/${id}`).then((response) => {
-		loading = false;
-		if (!response.ok) {
-			switch (response.status) {
-				case 404:
-					error = 'Einladung konnte nicht gefunden werden';
-					break;
-				case 400:
-					error = 'Fehlende ID der Einladung';
-				default:
-					error = 'Einladung konnte nicht geladen werden';
-					break;
+	fetch(`https://midrene-und-josua.de/api/invitation/${id}`)
+		.then((response) => {
+			if (!response.ok) {
+				switch (response.status) {
+					case 404:
+						error = 'Einladung konnte nicht gefunden werden';
+						break;
+					case 400:
+						error = 'Fehlende ID der Einladung';
+					default:
+						error = 'Unbekannter Fehler';
+						break;
+				}
+			} else {
+				response
+					.json()
+					.then((w) => {
+						wedding = w;
+					})
+					.catch((e) => {
+						error = 'Einladung konnte nicht gelesen werden';
+						console.error(e);
+					});
 			}
-		} else {
-			response.json().then((w) => {
-				wedding = w;
-			});
-		}
-	});
+		})
+		.catch((e) => {
+			error = 'Einladung konnte nicht geladen werden';
+			console.error(e);
+		})
+		.finally(() => {
+			loading = false;
+		});
 </script>
 
 <!-- Disables scrolling when no invitation is present -->
