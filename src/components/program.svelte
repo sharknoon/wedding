@@ -30,7 +30,7 @@
 				on:click={() => (activeItem = i)}
 				class="{activeItem === i
 					? 'bg-red-700'
-					: 'bg-red-600'} hover:bg-red-700 transition rounded-full w-24 h-24 p-4 text-xl font-bold flex flex-col align-middle justify-center text-center z-0 ring-4 ring-red-600 ring-offset-4 ring-offset-gray-50"
+					: 'bg-red-600'} hover:bg-red-700 transition rounded-full w-24 h-24 p-4 text-xl font-bold flex flex-col align-middle justify-center text-center text-white z-0 ring-4 ring-red-600 ring-offset-4 ring-offset-gray-50"
 			>
 				<span>
 					{new Date(programItem.time).toLocaleTimeString(undefined, {

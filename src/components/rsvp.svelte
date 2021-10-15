@@ -51,7 +51,7 @@
 							{disabled}
 							class="rounded bg-gray-300 border-transparent focus:border-transparent focus:bg-gray-300 text-red-600 hover:text-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-600 transition"
 						/>
-						<span class="ml-2 max-w-full break-words">{member.name}</span>
+						<span class="ml-2 max-w-full break-words text-gray-900">{member.name}</span>
 					</label>
 				{/if}
 			{/each}
@@ -60,7 +60,7 @@
 				{disabled}
 				class="{disabled
 					? 'cursor-default'
-					: ''} p-2 rounded bg-red-600 hover:bg-red-700 border-2 border-red-600 hover:border-red-700 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-red-600 transition relative"
+					: ''} p-2 text-white rounded bg-red-600 hover:bg-red-700 border-2 border-red-600 hover:border-red-700 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-red-600 transition relative"
 			>
 				{#if acceptedPersons.length > 0}
 					{acceptedPersons.length} Person{acceptedPersons.length !== 1 ? 'en' : ''} zusagen
