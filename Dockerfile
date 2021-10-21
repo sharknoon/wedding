@@ -5,8 +5,10 @@ RUN npm ci
 RUN npm run build
 
 FROM node:14 as production-stage
+ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build-stage /app/build .
-RUN echo "{\"type\": \"module\"}" > package.json
+COPY --from=build-stage /app/package.json .
+RUN npm i
 EXPOSE 3000
 CMD ["node", "."]
