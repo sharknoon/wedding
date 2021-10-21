@@ -18,7 +18,7 @@
 				{wedding?.details?.program?.[activeItem]?.title}
 			</h1>
 			{#each wedding?.details?.program?.[activeItem]?.description || [] as line}
-				<p class="text-gray-900">{line}</p>
+				<p class="text-gray-900 font-body">{line}</p>
 			{/each}
 		</div>
 	</div>
@@ -30,7 +30,7 @@
 				on:click={() => (activeItem = i)}
 				class="{activeItem === i
 					? 'bg-red-700'
-					: 'bg-red-600'} hover:bg-red-700 transition rounded-full w-24 h-24 p-4 text-xl font-bold flex flex-col align-middle justify-center text-center text-white z-0 ring-4 ring-red-600 ring-offset-4 ring-offset-gray-50"
+					: 'bg-red-600'} hover:bg-red-700 transition rounded-full w-24 h-24 p-4 text-xl font-body font-bold flex flex-col align-middle justify-center text-center text-white z-0 ring-4 ring-red-600 ring-offset-4 ring-offset-gray-50"
 			>
 				<span>
 					{new Date(programItem.time).toLocaleTimeString(undefined, {

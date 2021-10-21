@@ -19,8 +19,18 @@
 		font-weight: normal;
 		font-style: normal;
 	}
-
-	html {
-		@apply bg-black select-none font-body text-gray-200;
+	@font-face {
+		font-family: 'Cheap Pine Sans';
+		src: url('/fonts/cheap-pine-sans.woff2') format('woff2'),
+			url('/fonts/cheap-pine-sans.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'Cheap Pine Regular';
+		src: url('/fonts/cheap-pine-regular.woff2') format('woff2'),
+			url('/fonts/cheap-pine-regular.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
 	}
 </style>

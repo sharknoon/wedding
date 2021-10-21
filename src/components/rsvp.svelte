@@ -34,13 +34,13 @@
 			{wedding?.invitation?.salutation || ''}
 		</h1>
 		{#each wedding?.details?.text || [] as line}
-			<p class="text-sm md:text-base lg:text-2xl text-center">
+			<p class="text-sm md:text-base lg:text-2xl font-body text-center">
 				{line}
 			</p>
 		{/each}
 
 		<div
-			class="border-2 border-red-600 rounded-xl bg-gray-100 w-full md:w-10/12 lg:w-7/12 xl:w-5/12 p-4 md:p-8 m-2 flex flex-col gap-4 relative"
+			class="font-body border-2 border-red-600 rounded-xl bg-gray-100 w-full md:w-10/12 lg:w-7/12 xl:w-5/12 p-4 md:p-8 m-2 flex flex-col gap-4 relative"
 		>
 			{#each wedding?.invitation?.members || [] as member}
 				{#if wedding?.invitation?.members?.length > 1}
