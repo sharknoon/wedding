@@ -8,7 +8,7 @@
 		<a
 			href="/prints/invitation"
 			class=" text-6xl font-cheap-pine transition transform hover:scale-110 ease-in-out filter drop-shadow-2xl"
-			>Einladung</a
+			>Save the Date Karte</a
 		>
 		<a
 			href="/prints/menue"
