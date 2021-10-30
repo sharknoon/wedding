@@ -14,8 +14,8 @@
 	$: backTitle = url === '/prints' ? 'Zur Hauptwebsite' : 'Zurück';
 </script>
 
-<div class="h-screen flex justify-center items-center bg-gray-100">
-	<div class="fixed top-0 left-0 m-3 transform hover:scale-110 transition">
+<div class="min-h-screen flex flex-col justify-center items-center gap-16 py-16 bg-gray-100">
+	<div class="fixed top-0 left-0 m-3 transform hover:scale-110 transition z-10">
 		<a href={backLink} class="flex items-center gap-2">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
