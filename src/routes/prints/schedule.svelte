@@ -1,6 +1,49 @@
 <script lang="ts">
-	import { each } from 'svelte/internal';
+	// Program
+	const programItems = [
+		{
+			time: new Date(1970, 0, 1, 14),
+			title: 'Kirchliche Trauung'
+		},
+		{
+			time: new Date(1970, 0, 1, 15),
+			title: 'Sektempfang'
+		},
+		{
+			time: new Date(1970, 0, 1, 16),
+			title: 'Karikaturist'
+		},
+		{
+			time: new Date(1970, 0, 1, 17, 30),
+			title: 'Buffet'
+		},
+		{
+			time: new Date(1970, 0, 1, 19),
+			title: 'Hochzeitstorte'
+		},
+		{
+			time: new Date(1970, 0, 1, 20),
+			title: 'Konzert'
+		},
+		{
+			time: new Date(1970, 0, 1, 20, 30),
+			title: 'Eröffnungstanz'
+		},
+		{
+			time: new Date(1970, 0, 1, 21),
+			title: 'Aftershowparty'
+		},
+		{
+			time: new Date(1970, 0, 1, 23),
+			title: 'Mitternachtssnack'
+		},
+		{
+			time: new Date(1970, 0, 1, 0),
+			title: 'Ende'
+		}
+	];
 
+	// Bride and Groom
 	const milestones = [
 		{
 			date: new Date(2016, 2, 29),
@@ -215,106 +258,37 @@
 				class="absolute left-1/2 top-2 bottom-2 transform -translate-x-1/2 bg-black w-[0.125rem]"
 			/>
 			<div class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around">
-				<div class="h-[0.175rem] w-[47.5%] bg-black" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black self-end" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black self-end" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black self-end" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black self-end" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black" />
-				<div class="h-[0.175rem] w-[47.5%] bg-black self-end" />
+				{#each programItems as programItem, id}
+					<div class="h-[0.175rem] w-[47.5%] bg-black {id % 2 === 0 ? '' : 'self-end'}" />
+				{/each}
 			</div>
 			<div
 				class="absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 flex flex-col justify-around"
 			>
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
-				<div class="w-3 h-3 rounded-full bg-black" />
+				{#each programItems as _}
+					<div class="w-3 h-3 rounded-full bg-black" />
+				{/each}
 			</div>
 			<div
 				class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around font-cheap-pine-sans text-3xl tracking-widest"
 			>
-				<span class="w-[47.5%] self-end">14 Uhr</span>
-				<span class="w-[47.5%] text-right">15 Uhr</span>
-				<span class="w-[47.5%] self-end">16 Uhr</span>
-				<span class="w-[47.5%] text-right">17:30 Uhr</span>
-				<span class="w-[47.5%] self-end">19 Uhr</span>
-				<span class="w-[47.5%] text-right">20 Uhr</span>
-				<span class="w-[47.5%] self-end">20:30 Uhr</span>
-				<span class="w-[47.5%] text-right">21 Uhr</span>
-				<span class="w-[47.5%] self-end">23 Uhr</span>
-				<span class="w-[47.5%] text-right">0 Uhr</span>
+				{#each programItems as programItem, id}
+					<span class="w-[47.5%] {id % 2 === 0 ? 'self-end' : 'text-right'}">
+						{programItem.time.getHours()}{programItem.time.getMinutes() === 0
+							? ''
+							: ':' + programItem.time.getMinutes()} Uhr
+					</span>
+				{/each}
 			</div>
 			<div class="flex flex-col justify-between w-full text-white text-2xl font-bold uppercase">
-				<div class="relative mb-2 mr-2 self-start">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
-					/>
-					<div class="relative bg-black border-2 border-white px-1">Kirchliche Trauung</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-end">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-[16px] ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Sektempfang</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-start">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Karikaturist</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-end">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-[16px] ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Buffet</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-start">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Hochzeitstorte</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-end">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-[16px] ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Konzert</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-start">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Eröffnungstanz</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-end">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-[16px] ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Aftershowparty</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-start">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Mitternachtssnack</div>
-				</div>
-				<div class="relative mb-2 mr-2 self-end">
-					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-[16px] ring-white"
-					/>
-					<div class="relative bg-black  border-2 border-white px-1">Ende</div>
-				</div>
+				{#each programItems as programItem, id}
+					<div class="relative mb-2 mr-2 {id % 2 === 0 ? 'self-start' : 'self-end'}">
+						<div
+							class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
+						/>
+						<div class="relative bg-black border-2 border-white px-1">{programItem.title}</div>
+					</div>
+				{/each}
 			</div>
 		</div>
 		<hr class="border border-black my-1" />
