@@ -133,9 +133,9 @@
 			image: ''
 		},
 		{
-			category: 'Floristik',
-			name: '',
-			image: ''
+			category: 'Karikaturist',
+			name: 'Stefan Theurer',
+			image: '/images/people/stefan-theurer.png'
 		},
 		{
 			category: 'Musik / Gesang',
