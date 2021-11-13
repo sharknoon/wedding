@@ -104,6 +104,55 @@
 		'November',
 		'Dezember'
 	];
+
+	// Service Providers
+	const serviceProviders = [
+		{
+			category: 'Planung',
+			name: 'Jessica Schömer',
+			image: '/images/people/jessica-schoemer.png'
+		},
+		{
+			category: 'Location',
+			name: 'Aylin Weirowski',
+			image: '/images/people/aylin-weirowski.png'
+		},
+		{
+			category: 'Fotograf',
+			name: 'Benjamin Halbauer',
+			image: '/images/people/benjamin-halbauer.png'
+		},
+		{
+			category: 'Dekoration',
+			name: 'Silvana Klingauf',
+			image: '/images/people/silvana-klingauf.png'
+		},
+		{
+			category: 'Eheringe',
+			name: 'Estelle',
+			image: ''
+		},
+		{
+			category: 'Floristik',
+			name: '',
+			image: ''
+		},
+		{
+			category: 'Musik / Gesang',
+			name: 'Mareike Riegert',
+			image: '/images/people/mareike-riegert.png'
+		},
+		{
+			category: 'Hochzeitskleid',
+			name: 'Katalin Szücs',
+			image: '/images/people/katalin-szuecs.png'
+		},
+		{
+			category: 'DJ',
+			name: 'Janis Blum',
+			image: '/images/people/janis-blum.png'
+		}
+	];
 </script>
 
 <Frame>
@@ -425,10 +474,13 @@
 	<Divider />
 	<div class="flex-grow flex flex-col gap-4 items-center justify-center text-center px-24">
 		<div class="font-cheap-pine text-6xl"><span class="text-red-600">Schön</span>,</div>
-        <div class="font-cheap-pine-sans text-4xl">dass Ihr da seid</div>
-        <p class="mb-8">Wir wünschen Euch eine wunderschöne Feier, einen guten Appetit, anregende Gespräche und eine fantastische Zeit mit all unseren Lieblingsmenschen</p>
-        <div class="font-cheap-pine text-6xl"><span class="text-red-600">Danke</span>,</div>
-        <div class="font-cheap-pine-sans text-4xl">dass Ihr diesen besonderen Tag mit uns teilt!</div>
+		<div class="font-cheap-pine-sans text-4xl">dass Ihr da seid</div>
+		<p class="mb-8">
+			Wir wünschen Euch eine wunderschöne Feier, einen guten Appetit, anregende Gespräche und eine
+			fantastische Zeit mit all unseren Lieblingsmenschen
+		</p>
+		<div class="font-cheap-pine text-6xl"><span class="text-red-600">Danke</span>,</div>
+		<div class="font-cheap-pine-sans text-4xl">dass Ihr diesen besonderen Tag mit uns teilt!</div>
 	</div>
 	<Divider direction="up" />
 	<Footer />
@@ -436,22 +488,52 @@
 
 <Frame>
 	<Divider />
-	<div class="flex-grow flex flex-col gap-4 items-center justify-center text-center px-24">
+	<div class="flex-grow flex flex-col justify-center items-center gap-2 text-center">
 		<div class="font-cheap-pine text-6xl">Danke</div>
-        <div class="font-cheap-pine-sans text-4xl">an unsere Dienstleister</div>
-        
+		<div class="font-cheap-pine-sans text-4xl">an unsere Dienstleister</div>
+		<div class="grid grid-cols-3 grid-rows-3 gap-6">
+			{#each serviceProviders as serviceProvider}
+				<div class="relative mb-3 mr-3">
+					<div class="absolute top-2 left-2 w-full h-full bg-white border-4 border-red-600" />
+					<div
+						class="relative border-4 border-black bg-white max-w-[10rem] flex flex-col items-center ring-2 ring-white"
+					>
+						<div class="flex-grow">
+							<img src={serviceProvider.image} alt={serviceProvider.name} class="w-full" />
+						</div>
+						<span class="self-stretch bg-black text-white text-center">{serviceProvider.name}</span>
+					</div>
+				</div>
+			{/each}
+		</div>
 	</div>
-    <div class="flex items-center justify-around">
-            <div class="relative mb-3 mr-3">
-                <div class="absolute top-2 left-2 w-full h-full bg-white border-4 border-red-600" />
-                <div
-                    class="relative border-4 border-black bg-white min-w-[5.5rem] max-w-[5.5rem] min-h-[6.5rem] flex flex-col items-center ring-2 ring-white"
-                >
-                    <div class="flex-grow">Bild...</div>
-                    <span class="self-stretch bg-black text-white text-center">Text</span>
-                </div>
-            </div>
-    </div>
+	<Divider direction="up" />
+	<Footer />
+</Frame>
+
+<Frame>
+	<Divider />
+	<div class="flex-grow flex flex-col justify-center items-center gap-8">
+		<div class="self-stretch flex gap-4 px-4 mx-12 items-center">
+			<div class="flex-grow border-t-2 border-black" />
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-10 w-10"
+				viewBox="0 0 20 20"
+				fill="rgb(220,38,38)"
+			>
+				<path
+					fill-rule="evenodd"
+					d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+					clip-rule="evenodd"
+				/>
+			</svg>
+			<div class="flex-grow border-t-2 border-black" />
+		</div>
+		<div class="text-center uppercase font-cheap-pine-sans tracking-wider leading-4 pb-1 text-2xl">
+			Gesucht und Gefunden, in Liebe verbunden
+		</div>
+	</div>
 	<Divider direction="up" />
 	<Footer />
 </Frame>
