@@ -200,6 +200,6 @@
 
 <style lang="postcss">
 	.image {
-		background-image: url('/images/people/heads.jpg');
+		background-image: url('/images/people/midrene-and-josua.png');
 	}
 </style>
