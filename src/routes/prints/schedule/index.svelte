@@ -151,6 +151,21 @@
 			category: 'DJ',
 			name: 'Janis Blum',
 			image: '/images/people/janis-blum.png'
+		},
+		{
+			category: 'Konditorei',
+			name: 'Marika Schäfer',
+			image: '/images/people/marika-schaefer.png'
+		},
+		{
+			category: 'Floristik',
+			name: '-',
+			image: ''
+		},
+		{
+			category: 'Herrenanzug',
+			name: '-',
+			image: ''
 		}
 	];
 </script>
@@ -488,20 +503,23 @@
 
 <Frame>
 	<Divider />
-	<div class="flex-grow flex flex-col justify-center items-center gap-2 text-center">
-		<div class="font-cheap-pine text-6xl">Danke</div>
-		<div class="font-cheap-pine-sans text-4xl">an unsere Dienstleister</div>
-		<div class="grid grid-cols-3 grid-rows-3 gap-6">
+	<div class="flex-grow flex flex-col justify-center items-center gap-8 text-center">
+		<div class="font-cheap-pine text-5xl">Danke an unsere Dienstleister</div>
+		<div class="grid grid-cols-4 grid-rows-3 gap-6">
 			{#each serviceProviders as serviceProvider}
-				<div class="relative mb-3 mr-3">
+				<div class="relative mb-2 mr-2">
 					<div class="absolute top-2 left-2 w-full h-full bg-white border-4 border-red-600" />
 					<div
-						class="relative border-4 border-black bg-white max-w-[10rem] flex flex-col items-center ring-2 ring-white"
+						class="relative h-full border-4 border-black bg-white flex flex-col ring-2 ring-white"
 					>
-						<div class="flex-grow">
-							<img src={serviceProvider.image} alt={serviceProvider.name} class="w-full" />
+						<div
+							class="w-full h-[7rem] bg-cover bg-center bg-no-repeat"
+							style="background-image: url({serviceProvider.image});"
+						/>
+						<div class="flex-grow bg-black px-1 text-white w-full flex flex-col justify-center">
+							<span class="self-stretch">{serviceProvider.name}</span>
+							<span class="self-stretch italic">{serviceProvider.category}</span>
 						</div>
-						<span class="self-stretch bg-black text-white text-center">{serviceProvider.name}</span>
 					</div>
 				</div>
 			{/each}
