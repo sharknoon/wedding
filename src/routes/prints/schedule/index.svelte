@@ -129,8 +129,8 @@
 		},
 		{
 			category: 'Eheringe',
-			name: 'Estelle',
-			image: ''
+			name: 'Estelle Kohlstruck',
+			image: '/images/people/estelle-kohlstruck.png'
 		},
 		{
 			category: 'Karikaturist',
