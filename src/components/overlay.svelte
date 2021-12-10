@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="fixed top-0 right-0 bottom-0 left-0 backdrop-filter backdrop-blur-xl backdrop-brightness-50 flex items-center justify-center"
+	class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-xl backdrop-brightness-50 flex items-center justify-center"
 >
 	<div class="flex items-center text-background p-12">
 		{#if loading}

@@ -65,7 +65,7 @@
 				{:else}
 					Teilnahme absagen
 				{/if}
-				<div class="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2">
+				<div class="absolute right-0 top-1/2 -translate-y-1/2 mr-2">
 					{#if updateStatus === 'pending'}
 						<svg
 							class="animate-spin -ml-1 mr-3 h-5 w-5"
@@ -123,7 +123,7 @@
 			{#if disabled}
 				<div class="absolute top-0 right-0 bottom-0 left-0 bg-black/50 rounded-lg" />
 				<h1
-					class="absolute bottom-1/2 transform translate-y-1/2 text-3xl md:text-4xl text-center self-center"
+					class="absolute bottom-1/2 translate-y-1/2 text-3xl md:text-4xl text-center self-center"
 				>
 					Anmeldefrist abgeloffen
 				</h1>

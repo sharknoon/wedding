@@ -22,9 +22,9 @@
 			{/each}
 		</div>
 	</div>
-	<div class="flex-grow"><!-- Spacer --></div>
+	<div class="grow"><!-- Spacer --></div>
 	<div class="flex justify-between p-24 relative bg-gradient-to-t from-gray-50 via-gray-50">
-		<div class="absolute top-1/2 left-28 right-28 transform -translate-y-1/2 bg-red-600 h-4" />
+		<div class="absolute top-1/2 left-28 right-28 -translate-y-1/2 bg-red-600 h-4" />
 		{#each wedding?.details?.program || [] as programItem, i}
 			<div
 				on:click={() => (activeItem = i)}
