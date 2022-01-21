@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-	export const load = ({ page }) => {
+	export const load = ({ url }) => {
 		return {
 			props: {
-				url: page.path
+				url: url.pathname
 			}
 		};
 	};

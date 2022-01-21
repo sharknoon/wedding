@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-	export const load = ({ page }) => {
+	export const load = ({ params }) => {
 		return {
 			props: {
-				id: page.params.id
+				id: params.id
 			}
 		};
 	};
@@ -57,7 +57,7 @@
 </script>
 
 <!-- Disables scrolling when no invitation is present -->
-<div class={wedding === null ? 'overflow-hidden h-screen' : ''}>
+<div style:overflow={wedding ? 'auto' : 'hidden'} style:height={wedding ? 'auto' : '100vh'}>
 	<Home />
 	<Info {wedding} />
 	<Rsvp {wedding} />
@@ -65,7 +65,7 @@
 	<Map />
 	<FAQ {wedding} />
 
-	{#if wedding === null}
+	{#if !wedding}
 		<Overlay {loading} {error} />
 	{/if}
 </div>
