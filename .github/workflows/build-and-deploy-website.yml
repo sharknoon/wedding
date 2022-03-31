@@ -19,27 +19,27 @@ jobs:
       - name: Push Image to Registry
         run: docker push ghcr.io/sharknoon/wedding-frontend
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Remove existing Container
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: sudo docker stop wedding-frontend || true; sudo docker rm wedding-frontend || true; sudo docker rmi ghcr.io/sharknoon/wedding-frontend || true
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASS }}
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Remove existing Container
+  #       uses: garygrossgarten/github-action-ssh@release
+  #       with:
+  #         command: sudo docker stop wedding-frontend || true; sudo docker rm wedding-frontend || true; sudo docker rmi ghcr.io/sharknoon/wedding-frontend || true
+  #         host: ${{ secrets.SERVER_HOST }}
+  #         port: ${{ secrets.SERVER_PORT }}
+  #         username: ${{ secrets.SERVER_USER }}
+  #         password: ${{ secrets.SERVER_PASS }}
 
-      - name: Start new Container
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: echo ${{ secrets.GHCR_PAT }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin && sudo docker pull ghcr.io/sharknoon/wedding-frontend && sudo docker run -d --name wedding-frontend --network traefik-net --restart=always ghcr.io/sharknoon/wedding-frontend
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASS }}
+  #     - name: Start new Container
+  #       uses: garygrossgarten/github-action-ssh@release
+  #       with:
+  #         command: echo ${{ secrets.GHCR_PAT }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin && sudo docker pull ghcr.io/sharknoon/wedding-frontend && sudo docker run -d --name wedding-frontend --network traefik-net --restart=always ghcr.io/sharknoon/wedding-frontend
+  #         host: ${{ secrets.SERVER_HOST }}
+  #         port: ${{ secrets.SERVER_PORT }}
+  #         username: ${{ secrets.SERVER_USER }}
+  #         password: ${{ secrets.SERVER_PASS }}
 
   clean:
     needs: deploy
