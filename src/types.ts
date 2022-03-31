@@ -1,8 +1,3 @@
-export type Wedding = {
-  invitation: Invitation;
-  details: Details;
-};
-
 export type Invitation = {
   _id: string;
   salutation: string;
@@ -16,12 +11,9 @@ export type Member = {
 
 export type Details = {
   date: string;
-  locationChurch: string;
-  streetChurch: string;
-  cityChurch: string;
-  locationParty: string;
-  streetParty: string;
-  cityParty: string;
+  locationName: string;
+  street: string;
+  city: string;
   text: string[];
   deadline: string;
   program: ProgramItem[];

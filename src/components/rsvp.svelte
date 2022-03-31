@@ -1,21 +1,23 @@
 <script lang="ts">
-	import type { Wedding } from '../types';
-	export let wedding: Wedding;
+	import type { Details, Invitation } from '../types';
 
-	$: deadline = new Date(wedding?.details?.deadline || null);
+	export let invitation: Invitation;
+	export let details: Details;
+
+	$: deadline = new Date(details?.deadline || null);
 	$: disabled = new Date().getTime() > deadline.getTime();
 
-	$: acceptedPersons = wedding?.invitation?.members?.filter((m) => m.accepted) || [];
+	$: acceptedPersons = invitation?.members?.filter((m) => m.accepted) || [];
 	let updateStatus = 'none';
 
 	function updateMembers() {
 		updateStatus = 'pending';
-		fetch(`https://midrene-und-josua.de/api/invitation/${wedding?.invitation?._id}`, {
+		fetch(`/invitation/${invitation?._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(wedding?.invitation?.members)
+			body: JSON.stringify(invitation?.members)
 		}).then((response) => {
 			if (response.status === 200) {
 				updateStatus = 'success';
@@ -33,9 +35,9 @@
 		<h1
 			class="my-2 max-w-full break-words text-center font-cheap-pine text-4xl md:my-4 md:text-6xl"
 		>
-			{wedding?.invitation?.salutation || ''}
+			{invitation?.salutation || ''}
 		</h1>
-		{#each wedding?.details?.text || [] as line}
+		{#each details?.text || [] as line}
 			<p class="text-center font-cheap-pine-sans text-xl md:text-2xl lg:text-3xl">
 				{line}
 			</p>
@@ -44,8 +46,8 @@
 		<div
 			class="relative m-2 flex w-full flex-col gap-4 border-4 border-black bg-gray-100 p-4 font-cheap-pine-sans md:w-10/12 md:p-8 lg:w-7/12 xl:w-5/12"
 		>
-			{#each wedding?.invitation?.members || [] as member}
-				{#if wedding?.invitation?.members?.length > 1}
+			{#each invitation?.members || [] as member}
+				{#if invitation?.members?.length > 1}
 					<label class="inline-flex items-center">
 						<input
 							type="checkbox"

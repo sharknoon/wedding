@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Wedding } from '../types';
-	export let wedding: Wedding;
+	import type { Details } from '../types';
+	export let details: Details;
 </script>
 
 <div id="faqs" class="min-h-screen">
 	<h1 class="pt-6 pb-4 text-center font-cheap-pine text-6xl">Häufige Fragen</h1>
 	<div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-		{#each wedding?.details?.faqs || [] as faq}
+		{#each details?.faqs || [] as faq}
 			<div class="divide-y-2 divide-red-600 border-4 border-black p-2">
 				<h3 class="mb-2 text-center font-cheap-pine-sans text-3xl">{faq.question}</h3>
 				<div>
