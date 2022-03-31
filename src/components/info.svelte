@@ -43,10 +43,10 @@
 
 <div
 	id="info"
-	class="relative min-h-screen bg-cover bg-center bg-no-repeat"
+	class="relative flex min-h-screen flex-col justify-between gap-8 bg-cover bg-center bg-no-repeat p-8"
 	style="background-image: url('/images/backgrounds/info.webp')"
 >
-	<div class="absolute top-8 flex w-full justify-center">
+	<div class="flex w-full justify-center">
 		<div
 			class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-cheap-pine-sans"
 		>
@@ -71,7 +71,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="py-1 text-center text-xl md:text-4xl 2xl:text-5xl">
+			<div class="py-1 text-center text-3xl md:text-4xl 2xl:text-5xl">
 				{details?.locationName}
 			</div>
 			<div class="flex w-full divide-x-2 divide-black pt-2">
@@ -83,13 +83,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="absolute bottom-12 flex w-full justify-center gap-4">
+	<div class="flex w-full justify-center gap-4">
 		{#each countdown as c}
 			<div
-				class="flex aspect-square min-w-[7rem] flex-col items-center justify-center border-4 border-black bg-white font-cheap-pine-sans"
+				class="flex aspect-square min-w-[6rem] flex-col items-center justify-center border-4 border-black bg-white font-cheap-pine-sans md:min-w-[7rem]"
 			>
-				<span class="font-cheap-pine text-3xl md:text-6xl">{c.value}</span>
-				<span class="text-2xl font-bold">{c.unit}</span>
+				<span class="font-cheap-pine text-5xl md:text-6xl">{c.value}</span>
+				<span class="text-2xl font-bold md:text-3xl">{c.unit}</span>
 			</div>
 		{/each}
 	</div>
