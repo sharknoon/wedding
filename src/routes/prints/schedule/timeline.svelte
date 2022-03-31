@@ -34,12 +34,12 @@
 		{#each marriageItems as marriageItem, index}
 			<div class="relative mb-2 mr-2">
 				<div
-					class="absolute top-[6px] left-[6px] w-full h-full {currentMarriageItem === index
+					class="absolute top-[6px] left-[6px] h-full w-full {currentMarriageItem === index
 						? 'bg-white border-4 border-red-600 ring-4 ring-white'
 						: ''}"
 				/>
 				<div
-					class="relative bg-black text-white border-2 border-l-4 {currentMarriageItem !== index
+					class="relative border-2 border-l-4 bg-black text-white {currentMarriageItem !== index
 						? 'border-r-4'
 						: ''} border-white p-[0.35rem]"
 				>

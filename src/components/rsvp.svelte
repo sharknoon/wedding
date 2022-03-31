@@ -26,21 +26,23 @@
 	}
 </script>
 
-<div id="rsvp" class="min-h-screen relative">
+<div id="rsvp" class="relative min-h-screen">
 	<div
-		class="container mx-auto min-h-screen flex items-center flex-col justify-center gap-2 md:gap-6"
+		class="container mx-auto flex min-h-screen flex-col items-center justify-center gap-2 md:gap-6"
 	>
-		<h1 class="font-display text-4xl md:text-6xl text-center break-words max-w-full my-2 md:my-4">
+		<h1
+			class="my-2 max-w-full break-words text-center font-cheap-pine text-4xl md:my-4 md:text-6xl"
+		>
 			{wedding?.invitation?.salutation || ''}
 		</h1>
 		{#each wedding?.details?.text || [] as line}
-			<p class="text-sm md:text-base lg:text-2xl font-body text-center">
+			<p class="text-center font-cheap-pine-sans text-xl md:text-2xl lg:text-3xl">
 				{line}
 			</p>
 		{/each}
 
 		<div
-			class="font-body border-2 border-red-600 rounded-xl bg-gray-100 w-full md:w-10/12 lg:w-7/12 xl:w-5/12 p-4 md:p-8 m-2 flex flex-col gap-4 relative"
+			class="relative m-2 flex w-full flex-col gap-4 border-4 border-black bg-gray-100 p-4 font-cheap-pine-sans md:w-10/12 md:p-8 lg:w-7/12 xl:w-5/12"
 		>
 			{#each wedding?.invitation?.members || [] as member}
 				{#if wedding?.invitation?.members?.length > 1}
@@ -49,26 +51,26 @@
 							type="checkbox"
 							bind:checked={member.accepted}
 							{disabled}
-							class="rounded bg-gray-300 border-transparent focus:border-transparent focus:bg-gray-300 text-red-600 hover:text-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-600 transition"
+							class="border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 						/>
-						<span class="ml-2 max-w-full break-words text-gray-900">{member.name}</span>
+						<span class="ml-2 max-w-full break-words text-xl text-gray-900">{member.name}</span>
 					</label>
 				{/if}
 			{/each}
 			<button
 				on:click={() => updateMembers()}
 				{disabled}
-				class="p-2 text-white rounded bg-red-600 hover:bg-red-700 border-2 border-red-600 hover:border-red-700 focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-red-600 transition relative"
+				class="relative border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
 				{#if acceptedPersons.length > 0}
 					{acceptedPersons.length} Person{acceptedPersons.length !== 1 ? 'en' : ''} zusagen
 				{:else}
 					Teilnahme absagen
 				{/if}
-				<div class="absolute right-0 top-1/2 -translate-y-1/2 mr-2">
+				<div class="absolute right-0 top-1/2 mr-2 -translate-y-1/2">
 					{#if updateStatus === 'pending'}
 						<svg
-							class="animate-spin -ml-1 mr-3 h-5 w-5"
+							class="-ml-1 mr-3 h-5 w-5 animate-spin"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
@@ -121,9 +123,9 @@
 				</div>
 			</button>
 			{#if disabled}
-				<div class="absolute top-0 right-0 bottom-0 left-0 bg-black/50 rounded-lg" />
+				<div class="absolute top-0 right-0 bottom-0 left-0 rounded-lg bg-black/50" />
 				<h1
-					class="absolute bottom-1/2 translate-y-1/2 text-3xl md:text-4xl text-center self-center"
+					class="absolute bottom-1/2 translate-y-1/2 self-center text-center text-3xl md:text-4xl"
 				>
 					Anmeldefrist abgeloffen
 				</h1>

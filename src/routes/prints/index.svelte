@@ -3,21 +3,21 @@
 	<link rel="icon" href="favicon.svg" />
 </svelte:head>
 
-<div class="h-screen flex justify-center items-center bg-gray-100">
+<div class="flex h-screen items-center justify-center bg-gray-100">
 	<nav class="flex flex-col gap-8 text-center">
 		<a
 			href="/prints/invitation"
-			class=" text-6xl font-cheap-pine transition hover:scale-110 ease-in-out drop-shadow-2xl"
+			class=" font-cheap-pine text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 			>Save the Date Karte</a
 		>
 		<a
 			href="/prints/menue"
-			class=" text-6xl font-cheap-pine transition hover:scale-110 ease-in-out drop-shadow-2xl"
+			class=" font-cheap-pine text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 			>Menükarte</a
 		>
 		<a
 			href="/prints/schedule"
-			class=" text-6xl font-cheap-pine transition hover:scale-110 ease-in-out drop-shadow-2xl"
+			class=" font-cheap-pine text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 			>Programmheft</a
 		>
 	</nav>

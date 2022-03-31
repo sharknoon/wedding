@@ -1,12 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import domtoimage from 'dom-to-image';
 	import Divider from './divider.svelte';
 	import Footer from './footer.svelte';
 	import Frame from './frame.svelte';
 	import Header from './header.svelte';
 	import Timeline from './timeline.svelte';
-
-	// General
-	let pageCounter = 0;
 
 	// Program
 	const programItems = [
@@ -168,26 +167,45 @@
 			image: ''
 		}
 	];
+
+	onMount(() => {
+		const frames = document.getElementsByClassName('frame');
+		const testframe = frames[0];
+		testframe.setAttribute('style', 'transform: scale(2);');
+		domtoimage.toPng(frames[0]).then(function (dataUrl) {
+			var img = new Image();
+			img.src = dataUrl;
+			document.body.appendChild(img);
+		});
+
+		Promise.all(Array.from(frames).map((frame) => domtoimage.toPng(frame))).then((pages) => {
+			const content = pages.map((page) => {
+				image: page;
+			});
+			const docDefinition = { content: content };
+			//pdfmake.createPdf(docDefinition).download();
+		});
+	});
 </script>
 
 <Frame>
-	<div class="grow flex flex-col justify-center items-center gap-8 px-12">
-		<div class="grid grid-rows-1 grid-cols-2 w-[21rem] h-[21rem]">
-			<div class="col-start-1 row-start-1 image bg-cover bg-center bg-no-repeat grayscale" />
+	<div id="test" class="flex grow flex-col items-center justify-center gap-8 px-12">
+		<div class="grid h-[21rem] w-[21rem] grid-cols-2 grid-rows-1">
+			<div class="image col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale" />
 			<div class="col-start-2 row-start-1 flex flex-col">
 				<div
-					class="flex-1 flex justify-center items-end text-center text-4xl uppercase font-cheap-pine-sans tracking-widest"
+					class="flex flex-1 items-end justify-center text-center font-cheap-pine-sans text-4xl uppercase tracking-widest"
 				>
 					B l a c k
 				</div>
 				<div
-					class="flex-1 bg-black text-white text-center text-4xl uppercase font-cheap-pine-sans tracking-widest"
+					class="flex-1 bg-black text-center font-cheap-pine-sans text-4xl uppercase tracking-widest text-white"
 				>
 					W h i t e
 				</div>
 			</div>
 		</div>
-		<div class="self-stretch flex gap-4 px-4 mx-12 items-center">
+		<div class="mx-12 flex items-center gap-4 self-stretch px-4">
 			<div class="grow border-t-2 border-black" />
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -203,30 +221,30 @@
 			</svg>
 			<div class="grow border-t-2 border-black" />
 		</div>
-		<div class="text-center uppercase font-cheap-pine-sans tracking-wider leading-4 pb-1 text-2xl">
+		<div class="pb-1 text-center font-cheap-pine-sans text-2xl uppercase leading-4 tracking-wider">
 			Gesucht und Gefunden, in Liebe verbunden
 		</div>
 	</div>
 	<Divider direction="up" />
-	<div class="flex items-center divide-x-2 divide-black my-3">
-		<span class="text-8xl font-cheap-pine pr-2">23</span>
-		<div class="flex flex-col text-center px-2">
+	<div class="my-3 flex items-center divide-x-2 divide-black">
+		<span class="pr-2 font-cheap-pine text-8xl">23</span>
+		<div class="flex flex-col px-2 text-center">
 			<span
-				class="font-cheap-pine-sans text-4xl tracking-widest leading-none bg-black text-white px-1"
+				class="bg-black px-1 font-cheap-pine-sans text-4xl leading-none tracking-widest text-white"
 				>September</span
 			>
-			<span class="font-cheap-pine-sans text-6xl tracking-wider font-bold leading-[0.85]"
+			<span class="font-cheap-pine-sans text-6xl font-bold leading-[0.85] tracking-wider"
 				>2 0 2 3</span
 			>
 		</div>
-		<div class="grow flex flex-col text-center">
-			<span class="font-cheap-pine-sans text-4xl tracking-widest leading-none">
+		<div class="flex grow flex-col text-center">
+			<span class="font-cheap-pine-sans text-4xl leading-none tracking-widest">
 				Midrène's und Josua's
 			</span>
 			<div class="flex items-center justify-between px-3">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="text-red-600 h-9 w-9"
+					class="h-9 w-9 text-red-600"
 					viewBox="0 0 20 20"
 					fill="currentcolor"
 				>
@@ -235,7 +253,7 @@
 				<span class="font-cheap-pine text-6xl tracking-widest"> Hochzeit </span>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="text-red-600 h-9 w-9"
+					class="h-9 w-9 text-red-600"
 					viewBox="0 0 20 20"
 					fill="currentcolor"
 				>
@@ -249,16 +267,16 @@
 <Frame>
 	<Header title="Programm" />
 	<Divider />
-	<div class="grow flex py-3 relative">
-		<div class="absolute left-1/2 top-2 bottom-2 -translate-x-1/2 bg-black w-[0.125rem]" />
+	<div class="relative flex grow py-3">
+		<div class="absolute left-1/2 top-2 bottom-2 w-[0.125rem] -translate-x-1/2 bg-black" />
 		<div class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around">
 			{#each programItems as _, id}
 				<div class="h-[0.175rem] w-[47.5%] bg-black {id % 2 === 0 ? '' : 'self-end'}" />
 			{/each}
 		</div>
-		<div class="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 flex flex-col justify-around">
+		<div class="absolute left-1/2 top-0 bottom-0 flex -translate-x-1/2 flex-col justify-around">
 			{#each programItems as _}
-				<div class="w-3 h-3 rounded-full bg-black" />
+				<div class="h-3 w-3 rounded-full bg-black" />
 			{/each}
 		</div>
 		<div
@@ -272,13 +290,13 @@
 				</span>
 			{/each}
 		</div>
-		<div class="flex flex-col justify-between w-full text-white text-2xl font-bold uppercase">
+		<div class="flex w-full flex-col justify-between text-2xl font-bold uppercase text-white">
 			{#each programItems as programItem, id}
 				<div class="relative mb-2 mr-2 {id % 2 === 0 ? 'self-start' : 'self-end'}">
 					<div
-						class="absolute top-[6px] left-[6px] w-full h-full bg-white border-4 border-red-600 ring-8 ring-white"
+						class="absolute top-[6px] left-[6px] h-full w-full border-4 border-red-600 bg-white ring-8 ring-white"
 					/>
-					<div class="relative bg-black border-2 border-white px-1">{programItem.title}</div>
+					<div class="relative border-2 border-white bg-black px-1">{programItem.title}</div>
 				</div>
 			{/each}
 		</div>
@@ -290,18 +308,18 @@
 <Frame>
 	<Header title="Das Brautpaar" />
 	<Divider />
-	<div class="grow relative">
+	<div class="relative grow">
 		<div class="absolute right-0 left-0 top-1/2 -translate-y-1/2">
 			<hr class="border border-black" />
 		</div>
-		<div class="absolute right-0 left-0 top-1/2 -translate-y-1/2 flex justify-around">
+		<div class="absolute right-0 left-0 top-1/2 flex -translate-y-1/2 justify-around">
 			{#each milestones as _}
-				<div class="w-3 h-3 rounded-full bg-black" />
+				<div class="h-3 w-3 rounded-full bg-black" />
 			{/each}
 		</div>
 		<div class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-around">
 			{#each milestones as _, id}
-				<div class="w-[0.175rem] h-36 bg-black {id % 2 === 0 ? 'mb-44' : 'mt-44'}" />
+				<div class="h-36 w-[0.175rem] bg-black {id % 2 === 0 ? 'mb-44' : 'mt-44'}" />
 			{/each}
 		</div>
 		<div
@@ -311,9 +329,9 @@
 				<div
 					class="flex flex-col text-center {id % 2 === 0 ? 'mt-[25%]' : 'mb-[25%]'} min-w-[5.5rem]"
 				>
-					<span class="text-7xl font-cheap-pine leading-[0.9]">{milestone.date.getDate()}</span>
+					<span class="font-cheap-pine text-7xl leading-[0.9]">{milestone.date.getDate()}</span>
 					<span
-						class="font-cheap-pine-sans text-xl tracking-widest leading-none bg-black text-white px-1"
+						class="bg-black px-1 font-cheap-pine-sans text-xl leading-none tracking-widest text-white"
 					>
 						{monthNames[milestone.date.getMonth()]}
 					</span>
@@ -328,12 +346,12 @@
 		<div class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-around">
 			{#each milestones as milestone, id}
 				<div class="relative mb-3 mr-3 {id % 2 === 0 ? 'mb-[75%]' : 'mt-[75%]'}">
-					<div class="absolute top-2 left-2 w-full h-full bg-white border-4 border-red-600" />
+					<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
 					<div
-						class="relative border-4 border-black bg-white min-w-[5.5rem] max-w-[5.5rem] min-h-[6.5rem] flex flex-col items-center ring-2 ring-white"
+						class="relative flex min-h-[6.5rem] min-w-[5.5rem] max-w-[5.5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
 					>
 						{@html milestone.image}
-						<span class="self-stretch bg-black text-white text-center">{milestone.title}</span>
+						<span class="self-stretch bg-black text-center text-white">{milestone.title}</span>
 					</div>
 				</div>
 			{/each}
@@ -346,7 +364,7 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col items-center justify-center gap-12 text-center">
+	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<h1 class="font-cheap-pine text-5xl">Kirchliche Trauung</h1>
 		<div>
 			<h2 class="font-cheap-pine-sans text-4xl">Einzug der Braut</h2>
@@ -365,7 +383,7 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col gap-4 items-center justify-center">
+	<div class="flex grow flex-col items-center justify-center gap-4">
 		<div class="font-cheap-pine-sans text-4xl">Ins Wasser fällt ein Stein</div>
 		<img src="/images/sheetmusic/Ins_Wasser_faellt_ein_Stein.svg" alt="sheet notes" />
 	</div>
@@ -376,7 +394,7 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col items-center justify-center gap-12 text-center">
+	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<div>
 			<h2 class="font-cheap-pine-sans text-4xl">Gebet</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
@@ -394,7 +412,7 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col gap-4 items-center justify-center">
+	<div class="flex grow flex-col items-center justify-center gap-4">
 		<div class="font-cheap-pine-sans text-4xl">Liebe ist nicht nur ein Wort</div>
 		<img src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg" alt="sheet notes" />
 	</div>
@@ -405,18 +423,18 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col items-center justify-center text-center">
+	<div class="flex grow flex-col items-center justify-center text-center">
 		<div class="mb-6">
 			<h2 class="font-cheap-pine-sans text-4xl">Predigt</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
 		</div>
 		<div class="mb-6">
 			<h2 class="font-cheap-pine-sans text-4xl">Trauvers</h2>
-			<p class="text-2xl italic w-2/3 mx-auto mb-4">
+			<p class="mx-auto mb-4 w-2/3 text-2xl italic">
 				"Du führst mich den Weg zum Leben. In deiner Nähe finde ich ungetrübte Freude; aus deiner
 				Hand kommt mir ewiges Glück"
 			</p>
-			<p class="text-2xl italic w-2/3 mx-auto">Psalm 16,11</p>
+			<p class="mx-auto w-2/3 text-2xl italic">Psalm 16,11</p>
 		</div>
 		<h2 class="font-cheap-pine-sans text-4xl">Da berühren sich Himmel und Erde</h2>
 		<img src="/images/sheetmusic/Da_beruehren_sich_Himmel_und_Erde.svg" alt="sheet notes" />
@@ -428,7 +446,7 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col items-center justify-center gap-12 text-center">
+	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<div>
 			<h2 class="font-cheap-pine-sans text-4xl">Trauung</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
@@ -453,7 +471,7 @@
 
 <Frame>
 	<Timeline />
-	<div class="grow flex flex-col justify-center items-center">
+	<div class="flex grow flex-col items-center justify-center">
 		<h2 class="font-cheap-pine-sans text-4xl">Der Herr segne dich</h2>
 		<img src="/images/sheetmusic/Der_Herr_segne_dich.svg" alt="sheet notes" class="w-5/6" />
 	</div>
@@ -463,7 +481,7 @@
 <Frame>
 	<Timeline />
 	<Divider />
-	<div class="grow flex flex-col items-center justify-center gap-12 text-center">
+	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<div>
 			<h2 class="font-cheap-pine-sans text-4xl">Segen</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
@@ -483,7 +501,7 @@
 
 <Frame>
 	<Divider />
-	<div class="grow flex flex-col gap-4 items-center justify-center text-center px-24">
+	<div class="flex grow flex-col items-center justify-center gap-4 px-24 text-center">
 		<div class="font-cheap-pine text-6xl"><span class="text-red-600">Schön</span>,</div>
 		<div class="font-cheap-pine-sans text-4xl">dass Ihr da seid</div>
 		<p class="mb-8">
@@ -499,20 +517,20 @@
 
 <Frame>
 	<Divider />
-	<div class="grow flex flex-col justify-center items-center gap-8 text-center">
+	<div class="flex grow flex-col items-center justify-center gap-8 text-center">
 		<div class="font-cheap-pine text-5xl">Danke an unsere Dienstleister</div>
 		<div class="grid grid-cols-4 grid-rows-3 gap-6">
 			{#each serviceProviders as serviceProvider}
 				<div class="relative mb-2 mr-2">
-					<div class="absolute top-2 left-2 w-full h-full bg-white border-4 border-red-600" />
+					<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
 					<div
-						class="relative h-full border-4 border-black bg-white flex flex-col ring-2 ring-white"
+						class="relative flex h-full flex-col border-4 border-black bg-white ring-2 ring-white"
 					>
 						<div
-							class="w-full h-[7rem] bg-cover bg-center bg-no-repeat"
+							class="h-[7rem] w-full bg-cover bg-center bg-no-repeat"
 							style="background-image: url({serviceProvider.image});"
 						/>
-						<div class="grow bg-black px-1 text-white w-full flex flex-col justify-center">
+						<div class="flex w-full grow flex-col justify-center bg-black px-1 text-white">
 							<span class="self-stretch">{serviceProvider.name}</span>
 							<span class="self-stretch italic">{serviceProvider.category}</span>
 						</div>
@@ -527,8 +545,8 @@
 
 <Frame>
 	<Divider />
-	<div class="grow flex flex-col justify-center items-center gap-8">
-		<div class="self-stretch flex gap-4 px-4 mx-12 items-center">
+	<div class="flex grow flex-col items-center justify-center gap-8">
+		<div class="mx-12 flex items-center gap-4 self-stretch px-4">
 			<div class="grow border-t-2 border-black" />
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -544,7 +562,7 @@
 			</svg>
 			<div class="grow border-t-2 border-black" />
 		</div>
-		<div class="text-center uppercase font-cheap-pine-sans tracking-wider leading-4 pb-1 text-2xl">
+		<div class="pb-1 text-center font-cheap-pine-sans text-2xl uppercase leading-4 tracking-wider">
 			Gesucht und Gefunden, in Liebe verbunden
 		</div>
 	</div>

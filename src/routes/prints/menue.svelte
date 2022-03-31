@@ -1,1 +1,1 @@
-<div class="text-6xl font-cheap-pine">Die Menükarte ist noch nicht ganz fertig ...</div>
+<div class="font-cheap-pine text-6xl">Die Menükarte ist noch nicht ganz fertig ...</div>

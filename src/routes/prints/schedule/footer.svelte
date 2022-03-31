@@ -2,7 +2,7 @@
 	import { totalPages } from './stores';
 	let currentPage = 0;
 	totalPages.update((totalPages) => {
-        currentPage = totalPages + 1;
+		currentPage = totalPages + 1;
 		return totalPages + 1;
 	});
 </script>

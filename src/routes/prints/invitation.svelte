@@ -15,30 +15,30 @@
 	});
 </script>
 
-<div class="flex shadow-2xl h-[18rem] w-[42rem] p-2 bg-white">
-	<div class="grid grid-rows-1 grid-cols-5 w-full">
-		<div class="col-start-1 row-start-1 image bg-cover bg-center bg-no-repeat grayscale" />
+<div class="flex h-[18rem] w-[42rem] bg-white p-2 shadow-2xl">
+	<div class="grid w-full grid-cols-5 grid-rows-1">
+		<div class="image col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale" />
 		<div class="col-start-2 row-start-1 flex flex-col">
 			<div
-				class="flex-1 flex justify-center items-end text-center text-4xl uppercase font-cheap-pine-sans tracking-widest"
+				class="flex flex-1 items-end justify-center text-center font-cheap-pine-sans text-4xl uppercase tracking-widest"
 			>
 				B l a c k
 			</div>
 			<div
-				class="flex-1 bg-black text-white text-center text-4xl uppercase font-cheap-pine-sans tracking-widest"
+				class="flex-1 bg-black text-center font-cheap-pine-sans text-4xl uppercase tracking-widest text-white"
 			>
 				W h i t e
 			</div>
 		</div>
 		<div class="col-span-3 flex flex-col justify-center">
-			<div class="uppercase text-center font-cheap-pine text-4xl">Die Hochzeit</div>
-			<div class="pt-3 uppercase text-3xl text-center font-cheap-pine-sans">
+			<div class="text-center font-cheap-pine text-4xl uppercase">Die Hochzeit</div>
+			<div class="pt-3 text-center font-cheap-pine-sans text-3xl uppercase">
 				von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 			</div>
-			<div class="text-center uppercase font-cheap-pine-sans tracking-wider leading-4 pb-1 text-lg">
+			<div class="pb-1 text-center font-cheap-pine-sans text-lg uppercase leading-4 tracking-wider">
 				Gesucht und Gefunden, in Liebe verbunden
 			</div>
-			<div class="flex gap-4 px-4 mx-12 items-center">
+			<div class="mx-12 flex items-center gap-4 px-4">
 				<div class="grow border-t-2 border-black" />
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -54,59 +54,59 @@
 				</svg>
 				<div class="grow border-t-2 border-black" />
 			</div>
-			<div class="font-cheap-pine-sans text-center text-3xl leading-none">Save the Date</div>
-			<div class="font-cheap-pine-sans text-center text-2xl text-red-600 leading-none">
+			<div class="text-center font-cheap-pine-sans text-3xl leading-none">Save the Date</div>
+			<div class="text-center font-cheap-pine-sans text-2xl leading-none text-red-600">
 				23.09.2023
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="flex shadow-2xl h-[18rem] w-[42rem] p-2 bg-white">
+<div class="flex h-[18rem] w-[42rem] bg-white p-2 shadow-2xl">
 	<div
-		class="text-center text-2xl text-red-600 pl-2 border-l-2 border-black vertical-lr rotate-180"
+		class="rotate-180 border-l-2 border-black pl-2 text-center text-2xl text-red-600 vertical-lr"
 	>
 		23 09 23
 	</div>
 	<div
-		class="grow flex flex-col justify-between divide-y-2 divide-black px-2 border-r-[0.1rem] border-dashed border-gray-400"
+		class="flex grow flex-col justify-between divide-y-2 divide-black border-r-[0.1rem] border-dashed border-gray-400 px-2"
 	>
 		<div class="flex items-center py-4">
-			<div class="grow border-t-2 border-black bg-black mx-6" />
-			<span class="text-5xl font-cheap-pine uppercase">Die Hochzeit</span>
-			<div class="grow border-t-2 border-black bg-black mx-6" />
+			<div class="mx-6 grow border-t-2 border-black bg-black" />
+			<span class="font-cheap-pine text-5xl uppercase">Die Hochzeit</span>
+			<div class="mx-6 grow border-t-2 border-black bg-black" />
 		</div>
 		<div class="flex gap-1 p-1">
-			<div class="grid grid-cols-5 grid-rows-5 justify-center items-center">
+			<div class="grid grid-cols-5 grid-rows-5 items-center justify-center">
 				<div
-					class="col-start-1 col-span-5 row-start-1 font-cheap-pine-sans leading-none text-lg uppercase text-center"
+					class="col-span-5 col-start-1 row-start-1 text-center font-cheap-pine-sans text-lg uppercase leading-none"
 				>
 					September
 				</div>
 				<div
-					class="col-start-1 row-start-1 row-span-5 uppercase font-cheap-pine-sans leading-[1.1] text-lg justify-self-center vertical-lr rotate-180"
+					class="col-start-1 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-lg uppercase leading-[1.1] vertical-lr"
 				>
 					Samstag
 				</div>
 				<div
-					class="col-start-2 row-start-2 col-span-3 row-span-3 text-center font-cheap-pine leading-[0.75] text-7xl"
+					class="col-span-3 col-start-2 row-span-3 row-start-2 text-center font-cheap-pine text-7xl leading-[0.75]"
 				>
 					23
 				</div>
 				<div
-					class="col-start-5 row-start-1 row-span-5 uppercase font-cheap-pine-sans leading-[1.1] text-lg justify-self-center vertical-lr rotate-180"
+					class="col-start-5 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-lg uppercase leading-[1.1] vertical-lr"
 				>
 					Ab 14 Uhr
 				</div>
 				<div
-					class="col-start-1 col-span-5 row-start-5 font-cheap-pine-sans text-2xl leading-[0.8] uppercase text-center"
+					class="col-span-5 col-start-1 row-start-5 text-center font-cheap-pine-sans text-2xl uppercase leading-[0.8]"
 				>
 					2 0 2 3
 				</div>
 			</div>
-			<div class="grow flex flex-col gap-1">
+			<div class="flex grow flex-col gap-1">
 				<div
-					class="bg-black text-white text-2xl text-center font-cheap-pine-sans uppercase tracking-widest flex items-center justify-evenly"
+					class="flex items-center justify-evenly bg-black text-center font-cheap-pine-sans text-2xl uppercase tracking-widest text-white"
 				>
 					<span>B l a c k</span>
 					<svg
@@ -123,8 +123,8 @@
 					</svg>
 					<span> W h i t e </span>
 				</div>
-				<div class="grow flex divide-x-2 divide-black">
-					<div class="grow flex justify-center items-center gap-2 font-cheap-pine-sans">
+				<div class="flex grow divide-x-2 divide-black">
+					<div class="flex grow items-center justify-center gap-2 font-cheap-pine-sans">
 						<div class="text-center">
 							<span class="text-sm">Abschnitt</span>
 							<br />
@@ -141,7 +141,7 @@
 							<span class="text-xl">2023</span>
 						</div>
 					</div>
-					<div class="grow flex justify-center items-center font-cheap-pine-sans">
+					<div class="flex grow items-center justify-center font-cheap-pine-sans">
 						<div class="text-center">
 							<span>Ticketpreis:</span>
 							<br />
@@ -151,7 +151,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="font-cheap-pine-sans text-lg text-center leading-tight py-1">
+		<div class="py-1 text-center font-cheap-pine-sans text-lg leading-tight">
 			<span>Wir bitten um eine Rückmeldung bis zum 23.03.2023.</span>
 			<br />
 			<span
@@ -159,23 +159,23 @@
 				<span class="text-red-600">Link</span> auf der rechten Seite.</span
 			>
 		</div>
-		<div class="text-center uppercase font-cheap-pine-sans text-2xl tracking-wider">
+		<div class="text-center font-cheap-pine-sans text-2xl uppercase tracking-wider">
 			Wir freuen uns auf eure Antwort
 		</div>
 	</div>
 	<div class="flex flex-col items-center justify-evenly">
-		<div class="text-center text-sm font-cheap-pine-sans">
+		<div class="text-center font-cheap-pine-sans text-sm">
 			https://midrene-und-josua.de<br />/invitation/jessica
 		</div>
-		<canvas id="qrcode" class="self-center mx-2" />
-		<div class="text-center text-sm font-cheap-pine-sans tansform rotate-180">
+		<canvas id="qrcode" class="mx-2 self-center" />
+		<div class="tansform rotate-180 text-center font-cheap-pine-sans text-sm">
 			https://midrene-und-josua.de<br />/invitation/jessica
 		</div>
 	</div>
-	<div class="flex justify-center items-center gap-3 py-1 border-l-2 border-black vertical-lr">
+	<div class="flex items-center justify-center gap-3 border-l-2 border-black py-1 vertical-lr">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="rotate-90 text-red-600 h-6 w-6"
+			class="h-6 w-6 rotate-90 text-red-600"
 			viewBox="0 0 20 20"
 			fill="currentcolor"
 		>
@@ -186,14 +186,14 @@
 		<div class="grow border border-black bg-black" />
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="rotate-90 text-red-600 h-6 w-6"
+			class="h-6 w-6 rotate-90 text-red-600"
 			viewBox="0 0 20 20"
 			fill="currentcolor"
 		>
 			<path d="M20 7h-7L10 .5 7 7H0l5.46 5.47-1.64 7 6.18-3.7 6.18 3.73-1.63-7z" />
 		</svg>
 	</div>
-	<div class="text-center text-2xl text-red-600 pl-2 border-l-2 border-black vertical-lr">
+	<div class="border-l-2 border-black pl-2 text-center text-2xl text-red-600 vertical-lr">
 		23 09 23
 	</div>
 </div>

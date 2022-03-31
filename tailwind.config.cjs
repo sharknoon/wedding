@@ -1,13 +1,11 @@
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-	content: ['./src/**/*.svelte', './src/routes/__layout.svelte'],
+	content: ['./src/**/*.{html,js,svelte,ts}', './src/routes/__layout.svelte'],
 	theme: {
 		fontFamily: {
-			display: ['"Great Vibes"'],
-			body: ['Montserrat'],
-			"cheap-pine-sans": ['"Cheap Pine Sans"'],
-			"cheap-pine": ['"Cheap Pine Regular"'],
+			'cheap-pine-sans': ['"Cheap Pine Sans"'],
+			'cheap-pine': ['"Cheap Pine Regular"']
 		}
 	},
 	plugins: [
@@ -15,7 +13,7 @@ module.exports = {
 		plugin(function ({ addUtilities }) {
 			const writingModeUtilities = {
 				'.horizontal-tb': {
-					writingMode: 'horizontal-tb',
+					writingMode: 'horizontal-tb'
 				},
 				'.vertical-rl': {
 					writingMode: 'vertical-rl'
@@ -23,8 +21,8 @@ module.exports = {
 				'.vertical-lr': {
 					writingMode: 'vertical-lr'
 				}
-			}
-			addUtilities(writingModeUtilities)
+			};
+			addUtilities(writingModeUtilities);
 		})
 	]
 };

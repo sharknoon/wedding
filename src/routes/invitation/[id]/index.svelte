@@ -64,7 +64,6 @@
 	<Program {wedding} />
 	<Map />
 	<FAQ {wedding} />
-
 	{#if !wedding}
 		<Overlay {loading} {error} />
 	{/if}
