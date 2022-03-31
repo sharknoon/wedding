@@ -42,7 +42,7 @@ jobs:
   #         password: ${{ secrets.SERVER_PASS }}
 
   clean:
-    needs: deploy
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Delete untagged Images
