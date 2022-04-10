@@ -1,4 +1,5 @@
 FROM node:16 as build-stage
+ARG VITE_MONGODB_URL
 WORKDIR /app
 COPY . .
 RUN npm ci
