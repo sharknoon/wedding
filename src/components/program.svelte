@@ -9,7 +9,7 @@
 	id="program"
 	class="flex min-h-screen flex-col bg-cover bg-center bg-no-repeat transition-all"
 	style="background-image: url('/images/backgrounds/{details?.program?.[activeItem]
-		?.background}.webp'"
+		?.background}.jpg'"
 >
 	<div class="m-6 flex self-start md:m-12 md:max-w-[50%]">
 		<div class="divide-y-2 divide-red-600 border-4 border-black bg-white p-6 md:p-12">

@@ -44,7 +44,7 @@
 <div
 	id="info"
 	class="relative flex min-h-screen flex-col justify-between gap-8 bg-cover bg-center bg-no-repeat p-8"
-	style="background-image: url('/images/backgrounds/info.webp')"
+	style="background-image: url('/images/backgrounds/info.jpg')"
 >
 	<div class="flex w-full justify-center">
 		<div
