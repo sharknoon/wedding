@@ -14,10 +14,10 @@ jobs:
         run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/sharknoon/wedding-frontend .
+        run: docker build -t ghcr.io/sharknoon/wedding .
 
       - name: Push Image to Registry
-        run: docker push ghcr.io/sharknoon/wedding-frontend
+        run: docker push ghcr.io/sharknoon/wedding
 
   # deploy:
   #   needs: build
@@ -26,7 +26,7 @@ jobs:
   #     - name: Remove existing Container
   #       uses: garygrossgarten/github-action-ssh@release
   #       with:
-  #         command: sudo docker stop wedding-frontend || true; sudo docker rm wedding-frontend || true; sudo docker rmi ghcr.io/sharknoon/wedding-frontend || true
+  #         command: sudo docker stop wedding || true; sudo docker rm wedding || true; sudo docker rmi ghcr.io/sharknoon/wedding || true
   #         host: ${{ secrets.SERVER_HOST }}
   #         port: ${{ secrets.SERVER_PORT }}
   #         username: ${{ secrets.SERVER_USER }}
@@ -35,7 +35,7 @@ jobs:
   #     - name: Start new Container
   #       uses: garygrossgarten/github-action-ssh@release
   #       with:
-  #         command: echo ${{ secrets.GHCR_PAT }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin && sudo docker pull ghcr.io/sharknoon/wedding-frontend && sudo docker run -d --name wedding-frontend --network traefik-net --restart=always ghcr.io/sharknoon/wedding-frontend
+  #         command: echo ${{ secrets.GHCR_PAT }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin && sudo docker pull ghcr.io/sharknoon/wedding && sudo docker run -d --name wedding --network traefik-net --restart=always ghcr.io/sharknoon/wedding
   #         host: ${{ secrets.SERVER_HOST }}
   #         port: ${{ secrets.SERVER_PORT }}
   #         username: ${{ secrets.SERVER_USER }}
@@ -63,5 +63,5 @@ jobs:
                 }
             }
         env:
-          PACKAGE_NAME: wedding-frontend
+          PACKAGE_NAME: wedding
           PER_PAGE: 100
