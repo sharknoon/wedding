@@ -14,7 +14,7 @@ jobs:
         run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker Image
-        run: docker build --build-arg VITE_MONGODB_URL=${{ secrets.VITE_MONGODB_URL }} -t ghcr.io/sharknoon/wedding .
+        run: docker build --build-arg VITE_MONGODB_URL="${{ secrets.VITE_MONGODB_URL }}" -t ghcr.io/sharknoon/wedding .
 
       - name: Push Image to Registry
         run: docker push ghcr.io/sharknoon/wedding
