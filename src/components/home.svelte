@@ -15,21 +15,21 @@
 				<div
 					class="top mb-2 flex translate-y-12 flex-col items-center opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100"
 				>
-					<span class="font-cheap-pine-sans text-4xl">Konstanz</span>
-					<span class="bg-black px-2 font-cheap-pine-sans text-2xl text-white">Juni 2019</span>
+					<span class="font-heading text-4xl">Konstanz</span>
+					<span class="bg-black px-2 font-heading text-2xl text-white">Juni 2019</span>
 				</div>
 			</div>
 			<div class="col-start-2 row-start-1 flex flex-col">
 				<div class="group flex flex-1 items-end justify-center">
 					<div
-						class="text-center font-cheap-pine-sans text-3xl uppercase tracking-widest transition group-hover:-translate-y-0.5 group-hover:scale-110 lg:text-4xl"
+						class="text-center font-heading text-3xl uppercase tracking-widest transition group-hover:-translate-y-0.5 group-hover:scale-110 lg:text-4xl"
 					>
 						B l a c k
 					</div>
 				</div>
 				<div class="group flex-1 bg-black">
 					<div
-						class="text-center font-cheap-pine-sans text-3xl uppercase tracking-widest text-white transition group-hover:translate-y-0.5 group-hover:scale-110 lg:text-4xl"
+						class="text-center font-heading text-3xl uppercase tracking-widest text-white transition group-hover:translate-y-0.5 group-hover:scale-110 lg:text-4xl"
 					>
 						W h i t e
 					</div>
@@ -41,20 +41,18 @@
 			class="flex aspect-square max-w-full grow flex-col justify-center sm:gap-4 lg:grow-0 lg:gap-8"
 		>
 			<div
-				class="text-center font-cheap-pine text-4xl uppercase transition hover:-rotate-3 hover:drop-shadow-2xl lg:text-8xl"
+				class="text-center font-display text-4xl uppercase transition hover:-rotate-3 hover:drop-shadow-2xl lg:text-8xl"
 			>
 				Die Hochzeit
 			</div>
-			<div class="group pt-3 text-center font-cheap-pine-sans text-3xl uppercase md:text-4xl">
+			<div class="group pt-3 text-center font-heading text-3xl uppercase md:text-4xl">
 				von <div class="inline-block text-red-600 transition group-hover:translate-x-[7.5rem]">
 					Midrène
 				</div>
 				&
 				<div class="inline-block text-red-600 transition group-hover:-translate-x-28">Josua</div>
 			</div>
-			<div
-				class="group pb-1 text-center font-cheap-pine-sans text-xl uppercase tracking-wider lg:text-2xl"
-			>
+			<div class="group pb-1 text-center font-body text-lg lg:text-xl">
 				Gesucht und Gefunden, in <span class="transition group-hover:text-red-600">Liebe</span> verbunden
 			</div>
 			<div class="group flex items-center gap-8">
@@ -73,7 +71,7 @@
 				</svg>
 				<div class="grow border-t-2 border-black transition group-hover:translate-x-2" />
 			</div>
-			<div class="group text-center font-cheap-pine-sans text-3xl leading-none md:text-4xl">
+			<div class="group text-center font-heading text-3xl leading-none md:text-4xl">
 				<span class="transition group-hover:text-red-600">23</span>. September 20<span
 					class="transition group-hover:text-red-600">23</span
 				>

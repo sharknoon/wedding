@@ -9,6 +9,6 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build-stage /app/build .
 COPY --from=build-stage /app/package.json .
-RUN npm i
+RUN npm ci
 EXPOSE 3000
 CMD ["node", "."]

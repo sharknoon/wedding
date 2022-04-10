@@ -7,18 +7,21 @@
 	<nav class="flex flex-col gap-8 text-center">
 		<a
 			href="/prints/invitation"
-			class=" font-cheap-pine text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
-			>Save the Date Karte</a
+			class=" font-heading text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 		>
+			Save the Date Karte
+		</a>
 		<a
 			href="/prints/menue"
-			class=" font-cheap-pine text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
-			>Menükarte</a
+			class=" font-heading text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 		>
+			Menükarte
+		</a>
 		<a
 			href="/prints/schedule"
-			class=" font-cheap-pine text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
-			>Programmheft</a
+			class=" font-heading text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 		>
+			Programmheft
+		</a>
 	</nav>
 </div>

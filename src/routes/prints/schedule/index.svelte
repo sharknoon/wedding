@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import domtoimage from 'dom-to-image';
 	import Divider from './divider.svelte';
 	import Footer from './footer.svelte';
-	import Frame from './frame.svelte';
+	import Page from './page.svelte';
 	import Header from './header.svelte';
 	import Timeline from './timeline.svelte';
 
@@ -64,7 +63,7 @@
 		{
 			date: new Date(2017, 6, 16),
 			title: 'Erstes Date',
-			image: `<svg class="h-10 w-10 grow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.1 279.6l222.1-222C523.3 36.38 508.3 0 478.3 0H33.72c-30 0-45 36.38-23.75 57.63L128 175.7V176h.3359l103.6 103.6V463L220.8 464H152C138.8 464 128 474.8 128 488S138.8 512 152 512h208c13.25 0 24-10.75 24-24s-10.75-24-24-24h-78.09c-1.701-.2207-3.203-1-4.965-1h3.02V279.6zM443.7 48l-80 80h-215.5l-80-80H443.7zM255.1 235.8L196.2 176h119.5L255.1 235.8z"></path></svg>`
+			image: `<svg class="h-10 w-10 m-1 grow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M279.1 279.6l222.1-222C523.3 36.38 508.3 0 478.3 0H33.72c-30 0-45 36.38-23.75 57.63L128 175.7V176h.3359l103.6 103.6V463L220.8 464H152C138.8 464 128 474.8 128 488S138.8 512 152 512h208c13.25 0 24-10.75 24-24s-10.75-24-24-24h-78.09c-1.701-.2207-3.203-1-4.965-1h3.02V279.6zM443.7 48l-80 80h-215.5l-80-80H443.7zM255.1 235.8L196.2 176h119.5L255.1 235.8z"></path></svg>`
 		},
 		{
 			date: new Date(2017, 7, 15),
@@ -137,7 +136,7 @@
 			image: '/images/people/stefan-theurer.png'
 		},
 		{
-			category: 'Musik / Gesang',
+			category: 'Gesang',
 			name: 'Mareike Riegert',
 			image: '/images/people/mareike-riegert.png'
 		},
@@ -169,37 +168,25 @@
 	];
 
 	onMount(() => {
-		const frames = document.getElementsByClassName('frame');
-		const testframe = frames[0];
-		testframe.setAttribute('style', 'transform: scale(2);');
-		domtoimage.toPng(frames[0]).then(function (dataUrl) {
-			var img = new Image();
-			img.src = dataUrl;
-			document.body.appendChild(img);
-		});
-
-		Promise.all(Array.from(frames).map((frame) => domtoimage.toPng(frame))).then((pages) => {
-			const content = pages.map((page) => {
-				image: page;
-			});
-			const docDefinition = { content: content };
-			//pdfmake.createPdf(docDefinition).download();
-		});
+		document.getElementById('print-button').onclick = () => window.print();
 	});
 </script>
 
-<Frame>
+<Page>
 	<div id="test" class="flex grow flex-col items-center justify-center gap-8 px-12">
-		<div class="grid h-[21rem] w-[21rem] grid-cols-2 grid-rows-1">
-			<div class="image col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale" />
+		<div class="grid h-[17rem] w-[17rem] grid-cols-2 grid-rows-1">
+			<div
+				style="background-image: url('/images/people/midrene-and-josua.png')"
+				class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
+			/>
 			<div class="col-start-2 row-start-1 flex flex-col">
 				<div
-					class="flex flex-1 items-end justify-center text-center font-cheap-pine-sans text-4xl uppercase tracking-widest"
+					class="flex flex-1 items-end justify-center text-center font-heading text-4xl uppercase tracking-widest"
 				>
 					B l a c k
 				</div>
 				<div
-					class="flex-1 bg-black text-center font-cheap-pine-sans text-4xl uppercase tracking-widest text-white"
+					class="flex-1 bg-black text-center font-heading text-4xl uppercase tracking-widest text-white"
 				>
 					W h i t e
 				</div>
@@ -221,24 +208,21 @@
 			</svg>
 			<div class="grow border-t-2 border-black" />
 		</div>
-		<div class="pb-1 text-center font-cheap-pine-sans text-2xl uppercase leading-4 tracking-wider">
+		<div class="pb-1 text-center font-heading text-xl uppercase leading-4 tracking-wider">
 			Gesucht und Gefunden, in Liebe verbunden
 		</div>
 	</div>
 	<Divider direction="up" />
-	<div class="my-3 flex items-center divide-x-2 divide-black">
-		<span class="pr-2 font-cheap-pine text-8xl">23</span>
+	<div class="my-2 flex items-center divide-x-2 divide-black">
+		<span class="pr-2 font-display text-7xl">23</span>
 		<div class="flex flex-col px-2 text-center">
-			<span
-				class="bg-black px-1 font-cheap-pine-sans text-4xl leading-none tracking-widest text-white"
+			<span class="bg-black px-1 font-heading text-2xl leading-none tracking-widest text-white"
 				>September</span
 			>
-			<span class="font-cheap-pine-sans text-6xl font-bold leading-[0.85] tracking-wider"
-				>2 0 2 3</span
-			>
+			<span class="font-heading text-5xl font-bold leading-[0.85] tracking-wide">2 0 2 3</span>
 		</div>
 		<div class="flex grow flex-col text-center">
-			<span class="font-cheap-pine-sans text-4xl leading-none tracking-widest">
+			<span class="font-heading text-3xl leading-none tracking-widest">
 				Midrène's und Josua's
 			</span>
 			<div class="flex items-center justify-between px-3">
@@ -250,7 +234,7 @@
 				>
 					<path d="M20 7h-7L10 .5 7 7H0l5.46 5.47-1.64 7 6.18-3.7 6.18 3.73-1.63-7z" />
 				</svg>
-				<span class="font-cheap-pine text-6xl tracking-widest"> Hochzeit </span>
+				<span class="font-display text-5xl tracking-widest"> Hochzeit </span>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-9 w-9 text-red-600"
@@ -262,9 +246,9 @@
 			</div>
 		</div>
 	</div>
-</Frame>
+</Page>
 
-<Frame>
+<Page>
 	<Header title="Programm" />
 	<Divider />
 	<div class="relative flex grow py-3">
@@ -280,7 +264,7 @@
 			{/each}
 		</div>
 		<div
-			class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around font-cheap-pine-sans text-3xl tracking-widest"
+			class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around font-heading text-2xl tracking-widest"
 		>
 			{#each programItems as programItem, id}
 				<span class="w-[47.5%] {id % 2 === 0 ? 'self-end' : 'text-right'}">
@@ -290,52 +274,52 @@
 				</span>
 			{/each}
 		</div>
-		<div class="flex w-full flex-col justify-between text-2xl font-bold uppercase text-white">
+		<div class="flex w-full flex-col justify-between text-lg font-bold uppercase text-white">
 			{#each programItems as programItem, id}
 				<div class="relative mb-2 mr-2 {id % 2 === 0 ? 'self-start' : 'self-end'}">
 					<div
 						class="absolute top-[6px] left-[6px] h-full w-full border-4 border-red-600 bg-white ring-8 ring-white"
 					/>
-					<div class="relative border-2 border-white bg-black px-1">{programItem.title}</div>
+					<div class="relative border-2 border-white bg-black px-1">
+						{programItem.title}
+					</div>
 				</div>
 			{/each}
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="1" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Header title="Das Brautpaar" />
 	<Divider />
 	<div class="relative grow">
 		<div class="absolute right-0 left-0 top-1/2 -translate-y-1/2">
 			<hr class="border border-black" />
 		</div>
-		<div class="absolute right-0 left-0 top-1/2 flex -translate-y-1/2 justify-around">
+		<div class="absolute right-0 left-0 top-1/2 mx-4 flex -translate-y-1/2 justify-around">
 			{#each milestones as _}
 				<div class="h-3 w-3 rounded-full bg-black" />
 			{/each}
 		</div>
-		<div class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-around">
+		<div class="absolute top-0 right-0 bottom-0 left-0 mx-4 flex items-center justify-around">
 			{#each milestones as _, id}
-				<div class="h-36 w-[0.175rem] bg-black {id % 2 === 0 ? 'mb-44' : 'mt-44'}" />
+				<div class="h-28 w-[0.175rem] bg-black {id % 2 === 0 ? 'mb-36' : 'mt-36'}" />
 			{/each}
 		</div>
 		<div
-			class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-around font-cheap-pine-sans text-3xl"
+			class="absolute top-0 right-0 bottom-0 left-0 mx-4 flex items-center justify-around font-heading text-3xl"
 		>
 			{#each milestones as milestone, id}
 				<div
-					class="flex flex-col text-center {id % 2 === 0 ? 'mt-[25%]' : 'mb-[25%]'} min-w-[5.5rem]"
+					class="flex flex-col text-center {id % 2 === 0 ? 'mt-[25%]' : 'mb-[25%]'} min-w-[4.5rem]"
 				>
-					<span class="font-cheap-pine text-7xl leading-[0.9]">{milestone.date.getDate()}</span>
-					<span
-						class="bg-black px-1 font-cheap-pine-sans text-xl leading-none tracking-widest text-white"
-					>
+					<span class="font-display text-6xl leading-[0.9]">{milestone.date.getDate()}</span>
+					<span class="bg-black px-1 font-heading text-lg leading-none tracking-wider text-white">
 						{monthNames[milestone.date.getMonth()]}
 					</span>
-					<div class="flex justify-between font-cheap-pine-sans text-4xl font-bold">
+					<div class="flex justify-between font-heading text-3xl font-bold">
 						{#each milestone.date.getFullYear().toString().split('') as num}
 							<span>{num}</span>
 						{/each}
@@ -343,183 +327,205 @@
 				</div>
 			{/each}
 		</div>
-		<div class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-around">
+		<div class="absolute top-0 right-0 bottom-0 left-0 mr-8 flex items-center justify-start">
 			{#each milestones as milestone, id}
-				<div class="relative mb-3 mr-3 {id % 2 === 0 ? 'mb-[75%]' : 'mt-[75%]'}">
-					<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
-					<div
-						class="relative flex min-h-[6.5rem] min-w-[5.5rem] max-w-[5.5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
-					>
-						{@html milestone.image}
-						<span class="self-stretch bg-black text-center text-white">{milestone.title}</span>
+				{#if id % 2 == 0}
+					<div class="relative mr-3 mb-[85%]">
+						<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
+						<div
+							class="relative flex min-h-[6rem] min-w-[5rem] max-w-[5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
+						>
+							{@html milestone.image}
+							<span class="self-stretch bg-black text-center text-sm text-white"
+								>{milestone.title}</span
+							>
+						</div>
 					</div>
-				</div>
+					<div class="grow" />
+				{/if}
+			{/each}
+		</div>
+		<div class="absolute top-0 right-0 bottom-0 left-0 ml-8 flex items-center justify-end">
+			{#each milestones as milestone, id}
+				{#if id % 2 == 1}
+					<div class="grow" />
+					<div class="relative mb-3 mr-3 mt-[85%]">
+						<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
+						<div
+							class="relative flex min-h-[6rem] min-w-[5rem] max-w-[5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
+						>
+							{@html milestone.image}
+							<span class="self-stretch bg-black text-center text-sm text-white"
+								>{milestone.title}</span
+							>
+						</div>
+					</div>
+				{/if}
 			{/each}
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="2" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
-		<h1 class="font-cheap-pine text-5xl">Kirchliche Trauung</h1>
+		<h1 class="font-display text-4xl">Kirchliche Trauung</h1>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Einzug der Braut</h2>
+			<h2 class="font-heading text-3xl">Einzug der Braut</h2>
 			<div class="text-lg">Gesang: Mareike Riegert</div>
 			<div class="text-lg">Pianist:</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Begrüßung</h2>
+			<h2 class="font-heading text-3xl">Begrüßung</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="3" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-4">
-		<div class="font-cheap-pine-sans text-4xl">Ins Wasser fällt ein Stein</div>
+		<div class="font-heading text-3xl">Ins Wasser fällt ein Stein</div>
 		<img src="/images/sheetmusic/Ins_Wasser_faellt_ein_Stein.svg" alt="sheet notes" />
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="4" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Gebet</h2>
+			<h2 class="font-heading text-3xl">Gebet</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Biblische Lesung</h2>
+			<h2 class="font-heading text-3xl">Biblische Lesung</h2>
 			<div class="text-lg italic">1. Korintherbrief, 13. Kapitel</div>
 			<div class="text-lg">Trauzeugin: Eleonora Buss</div>
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="5" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-4">
-		<div class="font-cheap-pine-sans text-4xl">Liebe ist nicht nur ein Wort</div>
+		<div class="font-heading text-3xl">Liebe ist nicht nur ein Wort</div>
 		<img src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg" alt="sheet notes" />
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="6" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center text-center">
-		<div class="mb-6">
-			<h2 class="font-cheap-pine-sans text-4xl">Predigt</h2>
+		<div class="mb-3">
+			<h2 class="font-heading text-3xl">Predigt</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
 		</div>
-		<div class="mb-6">
-			<h2 class="font-cheap-pine-sans text-4xl">Trauvers</h2>
-			<p class="mx-auto mb-4 w-2/3 text-2xl italic">
+		<div class="mb-3">
+			<h2 class="font-heading text-3xl">Trauvers</h2>
+			<p class="mx-auto mb-2 w-2/3 text-lg italic">
 				"Du führst mich den Weg zum Leben. In deiner Nähe finde ich ungetrübte Freude; aus deiner
-				Hand kommt mir ewiges Glück"
+				Hand kommt mir ewiges Glück" - <span class="not-italic">Psalm 16,11</span>
 			</p>
-			<p class="mx-auto w-2/3 text-2xl italic">Psalm 16,11</p>
 		</div>
-		<h2 class="font-cheap-pine-sans text-4xl">Da berühren sich Himmel und Erde</h2>
+		<h2 class="font-heading text-4xl">Da berühren sich Himmel und Erde</h2>
 		<img src="/images/sheetmusic/Da_beruehren_sich_Himmel_und_Erde.svg" alt="sheet notes" />
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="7" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Trauung</h2>
+			<h2 class="font-heading text-3xl">Trauung</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Sandzeremonie</h2>
+			<h2 class="font-heading text-3xl">Sandzeremonie</h2>
 			<div class="text-lg">Trauzeugen: Eleonora Buss & Dennis Koch</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Trauungslied</h2>
+			<h2 class="font-heading text-3xl">Trauungslied</h2>
 			<div class="text-lg">Gesang: Mareike Riegert</div>
 			<div class="text-lg">Pianist:</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Fürbitten</h2>
+			<h2 class="font-heading text-3xl">Fürbitten</h2>
 			<div class="text-lg italic">mit Vater unser</div>
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="8" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<div class="flex grow flex-col items-center justify-center">
-		<h2 class="font-cheap-pine-sans text-4xl">Der Herr segne dich</h2>
+		<h2 class="font-heading text-3xl">Der Herr segne dich</h2>
 		<img src="/images/sheetmusic/Der_Herr_segne_dich.svg" alt="sheet notes" class="w-5/6" />
 	</div>
-	<Footer />
-</Frame>
+	<Footer currentPage="9" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Segen</h2>
+			<h2 class="font-heading text-3xl">Segen</h2>
 			<div class="text-lg">Pastorin: Christine Finkbeiner</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Auszug des Brautpaares</h2>
+			<h2 class="font-heading text-3xl">Auszug des Brautpaares</h2>
 			<div class="text-lg">Gesang: Mareike Riegert</div>
 			<div class="text-lg">Pianist:</div>
 		</div>
 		<div>
-			<h2 class="font-cheap-pine-sans text-4xl">Sektempfang</h2>
+			<h2 class="font-heading text-3xl">Sektempfang</h2>
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="10" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-4 px-24 text-center">
-		<div class="font-cheap-pine text-6xl"><span class="text-red-600">Schön</span>,</div>
-		<div class="font-cheap-pine-sans text-4xl">dass Ihr da seid</div>
+		<div class="font-display text-5xl"><span class="text-red-600">Schön</span>,</div>
+		<div class="font-heading text-3xl">dass Ihr da seid</div>
 		<p class="mb-8">
 			Wir wünschen Euch eine wunderschöne Feier, einen guten Appetit, anregende Gespräche und eine
 			fantastische Zeit mit all unseren Lieblingsmenschen
 		</p>
-		<div class="font-cheap-pine text-6xl"><span class="text-red-600">Danke</span>,</div>
-		<div class="font-cheap-pine-sans text-4xl">dass Ihr diesen besonderen Tag mit uns teilt!</div>
+		<div class="font-display text-5xl"><span class="text-red-600">Danke</span>,</div>
+		<div class="font-heading text-3xl">dass Ihr diesen besonderen Tag mit uns teilt!</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="11" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Divider />
-	<div class="flex grow flex-col items-center justify-center gap-8 text-center">
-		<div class="font-cheap-pine text-5xl">Danke an unsere Dienstleister</div>
-		<div class="grid grid-cols-4 grid-rows-3 gap-6">
+	<div class="flex grow flex-col items-center justify-center gap-2 text-center">
+		<div class="font-display text-4xl">Danke an unsere Dienstleister</div>
+		<div class="grid grid-cols-4 grid-rows-3 gap-4">
 			{#each serviceProviders as serviceProvider}
 				<div class="relative mb-2 mr-2">
 					<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
@@ -530,7 +536,7 @@
 							class="h-[7rem] w-full bg-cover bg-center bg-no-repeat"
 							style="background-image: url({serviceProvider.image});"
 						/>
-						<div class="flex w-full grow flex-col justify-center bg-black px-1 text-white">
+						<div class="flex w-full grow flex-col justify-center bg-black text-sm text-white">
 							<span class="self-stretch">{serviceProvider.name}</span>
 							<span class="self-stretch italic">{serviceProvider.category}</span>
 						</div>
@@ -540,10 +546,10 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
+	<Footer currentPage="12" totalPages="13" />
+</Page>
 
-<Frame>
+<Page>
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-8">
 		<div class="mx-12 flex items-center gap-4 self-stretch px-4">
@@ -562,16 +568,10 @@
 			</svg>
 			<div class="grow border-t-2 border-black" />
 		</div>
-		<div class="pb-1 text-center font-cheap-pine-sans text-2xl uppercase leading-4 tracking-wider">
+		<div class="pb-1 text-center font-heading text-xl uppercase leading-4 tracking-wider">
 			Gesucht und Gefunden, in Liebe verbunden
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer />
-</Frame>
-
-<style lang="postcss">
-	.image {
-		background-image: url('/images/people/midrene-and-josua.png');
-	}
-</style>
+	<Footer currentPage="13" totalPages="13" />
+</Page>

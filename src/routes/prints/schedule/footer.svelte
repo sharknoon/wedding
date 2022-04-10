@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { totalPages } from './stores';
-	let currentPage = 0;
-	totalPages.update((totalPages) => {
-		currentPage = totalPages + 1;
-		return totalPages + 1;
-	});
+	export let currentPage;
+	export let totalPages;
 </script>
 
-<div class="flex justify-between font-bold uppercase">
-	<span class="flex-1 text-left">Midrène's und Josua's Hochzeit</span>
-	<span class="flex-1 text-right">Seite {currentPage} / {$totalPages}</span>
+<div class="flex justify-between text-sm font-bold uppercase">
+	<span class="text-left">Midrène's und Josua's Hochzeit</span>
+	<span class="text-right">Seite {currentPage} / {totalPages}</span>
 </div>

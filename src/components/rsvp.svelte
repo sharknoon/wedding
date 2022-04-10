@@ -12,7 +12,7 @@
 
 	function updateMembers() {
 		updateStatus = 'pending';
-		fetch(`/invitation/${invitation?._id}`, {
+		fetch(`/${invitation?._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
@@ -23,6 +23,7 @@
 				updateStatus = 'success';
 			} else {
 				updateStatus = 'error';
+				alert('Fehler beim Speichern der Teilnehmerliste\n' + response.statusText);
 			}
 		});
 	}
@@ -32,19 +33,17 @@
 	<div
 		class="container mx-auto flex min-h-screen flex-col items-center justify-center gap-2 p-6 md:gap-6"
 	>
-		<h1
-			class="my-2 max-w-full break-words text-center font-cheap-pine text-4xl md:my-4 md:text-6xl"
-		>
+		<h1 class="my-2 max-w-full break-words text-center font-display text-4xl md:my-4 md:text-6xl">
 			{invitation?.salutation || ''}
 		</h1>
 		{#each details?.text || [] as line}
-			<p class="text-center font-cheap-pine-sans text-xl md:text-2xl lg:text-3xl">
+			<p class="text-center font-body text-lg md:text-xl lg:text-2xl">
 				{line}
 			</p>
 		{/each}
 
 		<div
-			class="relative m-2 flex w-full flex-col gap-4 border-4 border-black bg-gray-100 p-4 font-cheap-pine-sans md:w-10/12 md:p-8 lg:w-7/12 xl:w-5/12"
+			class="relative m-2 flex w-full flex-col gap-4 border-4 border-black bg-gray-100 p-4 font-body md:w-10/12 md:p-8 lg:w-7/12 xl:w-5/12"
 		>
 			{#each invitation?.members || [] as member}
 				{#if invitation?.members?.length > 1}

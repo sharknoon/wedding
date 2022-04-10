@@ -48,23 +48,21 @@
 >
 	<div class="flex w-full justify-center">
 		<div
-			class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-cheap-pine-sans"
+			class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-heading"
 		>
 			<div class="flex items-center divide-x-2 divide-black pb-2">
-				<span class="pr-2 font-cheap-pine text-8xl">
+				<span class="pr-2 font-display text-8xl">
 					{date.toLocaleDateString(undefined, {
 						day: '2-digit'
 					})}
 				</span>
 				<div class="flex grow flex-col pl-2 text-center">
-					<span
-						class="bg-black px-1 font-cheap-pine-sans text-4xl leading-none tracking-widest text-white"
-					>
+					<span class="bg-black px-1 font-heading text-4xl leading-none tracking-widest text-white">
 						{date.toLocaleDateString('de-DE', {
 							month: 'long'
 						})}
 					</span>
-					<span class="-mr-8 font-cheap-pine-sans text-6xl font-bold tracking-[2rem]">
+					<span class="-mr-8 font-heading text-6xl font-bold tracking-[2rem]">
 						{date.toLocaleDateString('de-DE', {
 							year: 'numeric'
 						})}
@@ -74,10 +72,10 @@
 			<div class="py-1 text-center text-3xl md:text-4xl 2xl:text-5xl">
 				{details?.locationName}
 			</div>
-			<div class="flex w-full divide-x-2 divide-black pt-2">
-				<div class="flex-auto pr-1 text-center text-xl">{details?.street}</div>
-				<div class="flex-auto px-1 text-center text-xl">{details?.city}</div>
-				<div class="flex-auto pl-1 text-center text-xl">
+			<div class="flex w-full divide-x-2 divide-black pt-2 text-center font-body text-lg">
+				<div class="flex-auto pr-1">{details?.street}</div>
+				<div class="flex-auto px-1">{details?.city}</div>
+				<div class="flex-auto pl-1">
 					{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
 				</div>
 			</div>
@@ -86,10 +84,10 @@
 	<div class="flex w-full justify-center gap-4">
 		{#each countdown as c}
 			<div
-				class="flex aspect-square min-w-[6rem] flex-col items-center justify-center border-4 border-black bg-white font-cheap-pine-sans md:min-w-[7rem]"
+				class="flex aspect-square min-w-[6rem] flex-col items-center justify-center border-4 border-black bg-white font-heading md:min-w-[7rem]"
 			>
-				<span class="font-cheap-pine text-5xl md:text-6xl">{c.value}</span>
-				<span class="text-2xl font-bold md:text-3xl">{c.unit}</span>
+				<span class="font-display text-5xl md:text-6xl">{c.value}</span>
+				<span class="text-2xl md:text-3xl">{c.unit}</span>
 			</div>
 		{/each}
 	</div>
