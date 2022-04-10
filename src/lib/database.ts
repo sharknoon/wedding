@@ -1,9 +1,8 @@
 import { Collection, Db, MongoClient, type UpdateResult } from "mongodb";
+import { MONGODB_URL } from "$lib/env";
 import type { Details, Invitation, Member } from "src/types";
 
-const url =
-  "mongodb+srv://sharknoon:86gnofbd3XgBsbFC@cluster0.uqmoe.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(url);
+const client = new MongoClient(MONGODB_URL);
 
 const dbName = "wedding";
 
