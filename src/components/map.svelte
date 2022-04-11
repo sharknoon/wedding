@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { GOOGLE_MAPS_API_KEY } from '$lib/env';
+</script>
+
 <iframe
 	id="map"
 	title="map"
@@ -5,6 +9,5 @@
 	class="h-screen w-full border-none"
 	loading="lazy"
 	allowfullscreen
-	src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDnvMREB1xbUYUzBc57wKVqYsMzzgGsEYM&q=Pfrondorfer+Muehle&maptype=satellite"
+	src="https://www.google.com/maps/embed/v1/place?key={GOOGLE_MAPS_API_KEY}&q=Pfrondorfer+Muehle&maptype=satellite"
 />
-<!-- You don't even need to try to steal this API Key, it is domain limited ;) -->

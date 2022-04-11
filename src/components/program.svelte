@@ -2,6 +2,8 @@
 	import type { Details } from '../types';
 	export let details: Details;
 
+	// TODO add image preloading
+
 	$: activeItem = 0;
 </script>
 

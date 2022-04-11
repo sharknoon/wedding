@@ -1,4 +1,9 @@
-import { Collection, Db, MongoClient, type UpdateResult } from "mongodb";
+import {
+  type Collection,
+  type Db,
+  MongoClient,
+  type UpdateResult,
+} from "mongodb";
 import { MONGODB_URL } from "$lib/env";
 import type { Details, Invitation, Member } from "src/types";
 
