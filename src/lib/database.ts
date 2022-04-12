@@ -1,11 +1,14 @@
 import {
   type Collection,
   type Db,
+  type DeleteResult,
+  type InsertOneResult,
   MongoClient,
   type UpdateResult,
+  type WithId,
 } from "mongodb";
 import { MONGODB_URL } from "$lib/env";
-import type { Details, Invitation, Member } from "src/types";
+import type { Details, Invitation } from "src/types";
 
 const client = new MongoClient(MONGODB_URL);
 
@@ -24,7 +27,7 @@ async function setup() {
   details = db.collection("details");
 }
 
-export async function getInvitations(
+export async function getInvitation(
   id: string,
 ): Promise<Invitation> {
   await setup();
@@ -36,10 +39,33 @@ export async function getDetails(): Promise<Details> {
   return details.findOne();
 }
 
-export async function updateInvitationMembers(
+export async function updateInvitation(
   id: string,
-  members: Member[],
+  invitation: Invitation,
 ): Promise<UpdateResult> {
   await setup();
-  return invitations.updateOne({ _id: id }, { $set: { members } });
+  const members = invitation.members;
+  const hotelRoomInterest = invitation.hotelRoomInterest;
+  return invitations.updateOne({ _id: id }, {
+    $set: { members, hotelRoomInterest },
+  });
+}
+
+export async function getAllInvitations(): Promise<
+  WithId<Invitation>[]
+> {
+  await setup();
+  return invitations.find().toArray();
+}
+
+export async function deleteInvitation(id: string): Promise<DeleteResult> {
+  await setup();
+  return invitations.deleteOne({ _id: id });
+}
+
+export async function createInvitation(
+  invitation: Invitation,
+): Promise<InsertOneResult<Invitation>> {
+  await setup();
+  return invitations.insertOne(invitation);
 }

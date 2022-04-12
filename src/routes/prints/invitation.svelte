@@ -1,9 +1,22 @@
+<script context="module">
+	export function load({ url }) {
+		const id = url.searchParams.get('id') || 'jessica';
+		return {
+			props: {
+				id
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
 
+	export let id = '';
+
 	onMount(() => {
-		QRCode.toCanvas(document.getElementById('qrcode'), 'https://midrene-und-josua.de/jessica', {
+		QRCode.toCanvas(document.getElementById('qrcode'), `https://midrene-und-josua.de/${id}`, {
 			errorCorrectionLevel: 'H',
 			margin: 0,
 			width: 128
@@ -18,7 +31,7 @@
 <div class="flex h-[18rem] w-[42rem] bg-white p-2 shadow-2xl">
 	<div class="grid w-full grid-cols-5 grid-rows-1">
 		<div
-			style="background-image: url('/images/people/midrene-and-josua.png')"
+			style="background-image: url('/images/people/midrene-and-josua.jpg')"
 			class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
 		/>
 		<div class="col-start-2 row-start-1 flex flex-col">
@@ -166,11 +179,11 @@
 	</div>
 	<div class="flex flex-col items-center justify-evenly">
 		<div class="text-center font-heading text-sm">
-			midrene-und-josua.de<br />/jessica
+			midrene-und-josua.de<br />/{id}
 		</div>
 		<canvas id="qrcode" class="mx-2 self-center" />
 		<div class="tansform rotate-180 text-center font-heading text-sm">
-			midrene-und-josua.de<br />/jessica
+			midrene-und-josua.de<br />/{id}
 		</div>
 	</div>
 	<div class="flex items-center justify-center gap-3 border-l-2 border-black py-1 vertical-lr">

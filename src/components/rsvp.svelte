@@ -10,20 +10,31 @@
 	$: acceptedPersons = invitation?.members?.filter((m) => m.accepted) || [];
 	let updateStatus = 'none';
 
-	function updateMembers() {
+	function updateInvitation() {
 		updateStatus = 'pending';
+		if (invitation.hotelRoomInterest === null) {
+			invitation.hotelRoomInterest = false;
+		}
+		for (const member of invitation.members) {
+			if (member.accepted === null) {
+				member.accepted = false;
+			}
+		}
+		if (invitation.members.every((m) => !m.accepted)) {
+			invitation.hotelRoomInterest = false;
+		}
 		fetch(`/${invitation?._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(invitation?.members)
+			body: JSON.stringify(invitation)
 		}).then((response) => {
 			if (response.status === 200) {
 				updateStatus = 'success';
 			} else {
 				updateStatus = 'error';
-				alert('Fehler beim Speichern der Teilnehmerliste\n' + response.statusText);
+				alert('Fehler beim Speichern der Einladung\n' + response.statusText);
 			}
 		});
 	}
@@ -46,20 +57,32 @@
 			class="relative m-2 flex w-full flex-col gap-4 border-4 border-black bg-gray-100 p-4 font-body md:w-10/12 md:p-8 lg:w-7/12 xl:w-5/12"
 		>
 			{#each invitation?.members || [] as member}
-				{#if invitation?.members?.length > 1}
-					<label class="inline-flex items-center">
-						<input
-							type="checkbox"
-							bind:checked={member.accepted}
-							{disabled}
-							class="border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
-						/>
-						<span class="ml-2 max-w-full break-words text-xl text-gray-900">{member.name}</span>
-					</label>
-				{/if}
+				<label class="inline-flex items-center">
+					<input
+						type="checkbox"
+						bind:checked={member.accepted}
+						{disabled}
+						class="border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+					/>
+					<span class="ml-2 max-w-full break-words text-xl text-gray-900">{member.name}</span>
+				</label>
 			{/each}
+			{#if invitation?.members?.some((m) => m.accepted)}
+				<hr class="border-black" />
+				<label class="inline-flex items-center">
+					<input
+						type="checkbox"
+						bind:checked={invitation.hotelRoomInterest}
+						{disabled}
+						class="border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+					/>
+					<span class="ml-2 max-w-full break-words text-xl text-gray-900">
+						Ein Hotelzimmer zur Übernachtung unverbindlich anfragen
+					</span>
+				</label>
+			{/if}
 			<button
-				on:click={() => updateMembers()}
+				on:click={() => updateInvitation()}
 				{disabled}
 				class="relative border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>

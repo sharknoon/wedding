@@ -2,6 +2,7 @@ export type Invitation = {
   _id: string;
   salutation: string;
   members: Member[];
+  hotelRoomInterest: boolean;
 };
 
 export type Member = {

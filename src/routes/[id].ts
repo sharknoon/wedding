@@ -1,8 +1,4 @@
-import {
-  getDetails,
-  getInvitations,
-  updateInvitationMembers,
-} from "$lib/database";
+import { getDetails, getInvitation, updateInvitation } from "$lib/database";
 
 /** @type {import('./[id]').RequestHandler} */
 export async function get({ params }) {
@@ -15,7 +11,7 @@ export async function get({ params }) {
     };
   }
 
-  const invitation = await getInvitations(invitationId);
+  const invitation = await getInvitation(invitationId);
   const details = await getDetails();
 
   return {
@@ -34,7 +30,7 @@ export async function put({ params, request }) {
     };
   }
 
-  const result = await updateInvitationMembers(
+  const result = await updateInvitation(
     invitationId,
     await request.json(),
   );
