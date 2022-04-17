@@ -34,7 +34,7 @@
 	}
 </script>
 
-<div id="rsvp" class="relative min-h-screen">
+<div id="rsvp" class="relative min-h-screen snap-start">
 	<div
 		class="container mx-auto flex min-h-screen flex-col items-center justify-center gap-2 p-6 md:gap-6"
 	>
@@ -56,7 +56,7 @@
 						type="checkbox"
 						bind:checked={member.accepted}
 						{disabled}
-						class="border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+						class="border-transparent bg-gray-300 text-red-600 transition hover:text-red-700 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-white"
 					/>
 					<span class="ml-2 max-w-full break-words text-xl text-gray-900">{member.name}</span>
 				</label>
@@ -66,7 +66,9 @@
 				{disabled}
 				class="relative border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
-				{#if acceptedPersons.length > 0}
+				{#if invitation.members.length === 1 && acceptedPersons.length === 1}
+					Teilname zusagen
+				{:else if acceptedPersons.length > 0}
 					{acceptedPersons.length} Person{acceptedPersons.length !== 1 ? 'en' : ''} zusagen
 				{:else}
 					Teilnahme absagen
@@ -127,11 +129,11 @@
 				</div>
 			</button>
 			{#if disabled}
-				<div class="absolute top-0 right-0 bottom-0 left-0 rounded-lg bg-black/50" />
+				<div class="absolute top-0 right-0 bottom-0 left-0 bg-black/50" />
 				<h1
-					class="absolute bottom-1/2 translate-y-1/2 self-center text-center text-3xl md:text-4xl"
+					class="absolute bottom-1/2 translate-y-1/2 self-center text-center text-3xl text-white md:text-4xl"
 				>
-					Anmeldefrist abgeloffen
+					Anmeldefrist abgelaufen
 				</h1>
 			{/if}
 		</div>

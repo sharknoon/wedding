@@ -170,6 +170,8 @@
 	onMount(() => {
 		document.getElementById('print-button').onclick = () => window.print();
 	});
+
+	const totalPages = 12;
 </script>
 
 <Page>
@@ -216,9 +218,9 @@
 	<div class="my-2 flex items-center divide-x-2 divide-black">
 		<span class="pr-2 font-display text-7xl">23</span>
 		<div class="flex flex-col px-2 text-center">
-			<span class="bg-black px-1 font-heading text-2xl leading-none tracking-widest text-white"
-				>September</span
-			>
+			<span class="bg-black px-1 font-heading text-2xl leading-none tracking-widest text-white">
+				September
+			</span>
 			<span class="font-heading text-5xl font-bold leading-[0.85] tracking-wide">2 0 2 3</span>
 		</div>
 		<div class="flex grow flex-col text-center">
@@ -288,7 +290,7 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="1" totalPages="13" />
+	<Footer currentPage="1" {totalPages} />
 </Page>
 
 <Page>
@@ -365,7 +367,7 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="2" totalPages="13" />
+	<Footer currentPage="2" {totalPages} />
 </Page>
 
 <Page>
@@ -384,7 +386,7 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="3" totalPages="13" />
+	<Footer currentPage="3" {totalPages} />
 </Page>
 
 <Page>
@@ -395,7 +397,7 @@
 		<img src="/images/sheetmusic/Ins_Wasser_faellt_ein_Stein.svg" alt="sheet notes" />
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="4" totalPages="13" />
+	<Footer currentPage="4" {totalPages} />
 </Page>
 
 <Page>
@@ -413,7 +415,7 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="5" totalPages="13" />
+	<Footer currentPage="5" {totalPages} />
 </Page>
 
 <Page>
@@ -424,7 +426,7 @@
 		<img src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg" alt="sheet notes" />
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="6" totalPages="13" />
+	<Footer currentPage="6" {totalPages} />
 </Page>
 
 <Page>
@@ -446,7 +448,7 @@
 		<img src="/images/sheetmusic/Da_beruehren_sich_Himmel_und_Erde.svg" alt="sheet notes" />
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="7" totalPages="13" />
+	<Footer currentPage="7" {totalPages} />
 </Page>
 
 <Page>
@@ -472,7 +474,7 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="8" totalPages="13" />
+	<Footer currentPage="8" {totalPages} />
 </Page>
 
 <Page>
@@ -481,7 +483,7 @@
 		<h2 class="font-heading text-3xl">Der Herr segne dich</h2>
 		<img src="/images/sheetmusic/Der_Herr_segne_dich.svg" alt="sheet notes" class="w-5/6" />
 	</div>
-	<Footer currentPage="9" totalPages="13" />
+	<Footer currentPage="9" {totalPages} />
 </Page>
 
 <Page>
@@ -502,7 +504,7 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="10" totalPages="13" />
+	<Footer currentPage="10" {totalPages} />
 </Page>
 
 <Page>
@@ -518,10 +520,10 @@
 		<div class="font-heading text-3xl">dass Ihr diesen besonderen Tag mit uns teilt!</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="11" totalPages="13" />
+	<Footer currentPage="11" {totalPages} />
 </Page>
 
-<Page>
+<!-- <Page>
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-2 text-center">
 		<div class="font-display text-4xl">Danke an unsere Dienstleister</div>
@@ -546,8 +548,8 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="12" totalPages="13" />
-</Page>
+	<Footer currentPage="12" totalPages={totalPages} />
+</Page> -->
 
 <Page>
 	<Divider />
@@ -573,5 +575,5 @@
 		</div>
 	</div>
 	<Divider direction="up" />
-	<Footer currentPage="13" totalPages="13" />
+	<Footer currentPage="12" {totalPages} />
 </Page>

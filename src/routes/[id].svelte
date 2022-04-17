@@ -3,7 +3,6 @@
 	import Home from '../components/home.svelte';
 	import Info from '../components/info.svelte';
 	import Rsvp from '../components/rsvp.svelte';
-	import Program from '../components/program.svelte';
 	import Map from '../components/map.svelte';
 	import FAQ from '../components/faq.svelte';
 
@@ -11,11 +10,11 @@
 	export let details: Details;
 </script>
 
-<div>
+<div class="snap-y snap-mandatory">
 	<Home />
 	<Info {details} />
 	<Rsvp {invitation} {details} />
-	<Program {details} />
+	<!--<Program {details} />-->
 	<Map />
 	<FAQ {details} />
 </div>

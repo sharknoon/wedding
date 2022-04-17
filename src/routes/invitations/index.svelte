@@ -66,14 +66,15 @@
 	}
 
 	$: {
-		newInvitation._id = newInvitation._id?.toLowerCase()?.replace(/(?![a-z0-9-])./g, '');
+		newInvitation._id = newInvitation.members
+			.map((m) => m.name.trim().split(' ').pop().toLowerCase())
+			.join('-');
 	}
 
 	$: validInvitation = false;
 
 	$: {
 		validInvitation =
-			newInvitation._id?.length > 0 &&
 			newInvitation.salutation?.length > 0 &&
 			newInvitation.members.length > 0 &&
 			newInvitation.members.every((m) => m.name?.length > 0);
@@ -257,7 +258,7 @@
 {#if showModal}
 	<div class="fixed inset-0 h-screen w-screen font-body">
 		<div class="flex h-full items-center justify-center bg-black/50">
-			<div class="flex w-[32rem] flex-col border-2 border-black bg-white p-3">
+			<div class="flex w-[32rem] max-w-[32rem] flex-col border-2 border-black bg-white p-3">
 				<h1 class="my-6 text-center font-heading text-4xl">Neue Einladung erstellen</h1>
 				<span>Anrede</span>
 				<input
@@ -319,10 +320,13 @@
 					</svg>
 					Neues Mitglied hinzufügen
 				</button>
-				<div class="mt-6 flex justify-end gap-3">
+				<div class="mt-6 flex max-w-full items-center gap-3">
+					<div class="min-w-0 grow break-words">
+						midrene-und-josua.de/{newInvitation._id}
+					</div>
 					<button
 						on:click={() => resetInvitationCreation()}
-						class="flex items-center justify-center gap-2 border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
+						class="flex items-center justify-center gap-2 self-end border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -339,7 +343,7 @@
 					<button
 						disabled={!validInvitation}
 						on:click={createInvitation}
-						class="flex items-center justify-center gap-2 border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2 disabled:bg-black/75"
+						class="flex items-center justify-center gap-2 self-end border-2 border-black bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:border-neutral-900 hover:bg-neutral-900 focus:ring-2 disabled:border-neutral-700 disabled:bg-neutral-700"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

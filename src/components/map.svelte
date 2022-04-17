@@ -6,7 +6,7 @@
 	id="map"
 	title="map"
 	height="450"
-	class="h-screen w-full border-none"
+	class="h-screen w-full snap-start border-none"
 	loading="lazy"
 	allowfullscreen
 	src="https://www.google.com/maps/embed/v1/place?key={GOOGLE_MAPS_API_KEY}&q=Pfrondorfer+Muehle&maptype=satellite"
