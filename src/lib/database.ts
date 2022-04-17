@@ -45,9 +45,8 @@ export async function updateInvitation(
 ): Promise<UpdateResult> {
   await setup();
   const members = invitation.members;
-  const hotelRoomInterest = invitation.hotelRoomInterest;
   return invitations.updateOne({ _id: id }, {
-    $set: { members, hotelRoomInterest },
+    $set: { members },
   });
 }
 
@@ -66,6 +65,7 @@ export async function deleteInvitation(id: string): Promise<DeleteResult> {
 export async function createInvitation(
   invitation: Invitation,
 ): Promise<InsertOneResult<Invitation>> {
+  console.log("createInvitation", invitation);
   await setup();
   return invitations.insertOne(invitation);
 }

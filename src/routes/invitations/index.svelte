@@ -5,7 +5,7 @@
 
 	function deleteInvitation(invitation: Invitation) {
 		confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?') &&
-			fetch(`/admin?id=${invitation._id}`, { method: 'DELETE' })
+			fetch(`?id=${invitation._id}`, { method: 'DELETE' })
 				.then(() => {
 					invitations = invitations.filter((i) => i._id !== invitation._id);
 				})
@@ -20,8 +20,7 @@
 				name: '',
 				accepted: undefined
 			}
-		],
-		hotelRoomInterest: undefined
+		]
 	};
 
 	function addMember() {
@@ -43,8 +42,7 @@
 					name: '',
 					accepted: undefined
 				}
-			],
-			hotelRoomInterest: undefined
+			]
 		};
 		showModal = false;
 	}
@@ -52,7 +50,7 @@
 	function createInvitation() {
 		invitations.push(newInvitation);
 		invitations = invitations;
-		fetch('/admin', {
+		fetch('', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
