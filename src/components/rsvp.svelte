@@ -12,16 +12,10 @@
 
 	function updateInvitation() {
 		updateStatus = 'pending';
-		if (invitation.hotelRoomInterest === null) {
-			invitation.hotelRoomInterest = false;
-		}
 		for (const member of invitation.members) {
 			if (member.accepted === null) {
 				member.accepted = false;
 			}
-		}
-		if (invitation.members.every((m) => !m.accepted)) {
-			invitation.hotelRoomInterest = false;
 		}
 		fetch(`/${invitation?._id}`, {
 			method: 'PUT',
@@ -67,20 +61,6 @@
 					<span class="ml-2 max-w-full break-words text-xl text-gray-900">{member.name}</span>
 				</label>
 			{/each}
-			{#if invitation?.members?.some((m) => m.accepted)}
-				<hr class="border-black" />
-				<label class="inline-flex items-center">
-					<input
-						type="checkbox"
-						bind:checked={invitation.hotelRoomInterest}
-						{disabled}
-						class="border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
-					/>
-					<span class="ml-2 max-w-full break-words text-xl text-gray-900">
-						Ein Hotelzimmer zur Übernachtung unverbindlich anfragen
-					</span>
-				</label>
-			{/if}
 			<button
 				on:click={() => updateInvitation()}
 				{disabled}

@@ -4,7 +4,7 @@
 	export let invitations: Invitation[];
 
 	function deleteInvitation(invitation: Invitation) {
-		confirm('Are you sure you want to delete this invitation?') &&
+		confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?') &&
 			fetch(`/admin?id=${invitation._id}`, { method: 'DELETE' })
 				.then(() => {
 					invitations = invitations.filter((i) => i._id !== invitation._id);
@@ -85,62 +85,17 @@
 <div class="container mx-auto font-body">
 	<h1 class="my-6 text-center font-display text-6xl">Einladungen</h1>
 
-	<div class="grid grid-cols-5 items-center divide-y-2 divide-black border-2 border-black text-lg">
-		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">
-			Identifikation
-		</div>
-		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">
-			Interesse Hotelzimmer
-		</div>
+	<div
+		class="grid grid-cols-[1fr_2fr_1fr] items-center divide-y-2 divide-black border-2 border-black text-lg"
+	>
 		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">Name</div>
-		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">Zusage</div>
+		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">
+			Teilnahme
+		</div>
 		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">
 			Aktionen
 		</div>
 		{#each invitations as invitation, index}
-			<div class="flex h-full items-center px-6 py-4 {index % 2 === 1 ? 'bg-gray-100' : ''}">
-				<a class="hover:underline" href={'/' + invitation._id}>{invitation._id}</a>
-			</div>
-			<div class="h-full {index % 2 === 1 ? 'bg-gray-100' : ''}">
-				{#if invitation.hotelRoomInterest}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="mx-auto h-full w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-					</svg>
-				{:else if invitation.hotelRoomInterest === false}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-full w-6 mx-auto"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				{:else}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-full w-6 mx-auto"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-						/>
-					</svg>
-				{/if}
-			</div>
 			<div
 				class="flex h-full flex-col justify-center gap-2 px-6 py-4 {index % 2 === 1
 					? 'bg-gray-100'
@@ -235,7 +190,7 @@
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+							d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
 						/>
 					</svg>
 				</a>
@@ -265,9 +220,6 @@
 	<div class="my-6 flex justify-between">
 		<div class="flex items-center gap-4">
 			<span>
-				Interesse an {invitations.map((i) => i.hotelRoomInterest).filter((i) => i).length} Hotelzimmer(n)</span
-			>
-			<span>
 				{invitations
 					.map((i) => i.members.map((m) => m.accepted).filter((i) => i).length)
 					.reduce((partialSum, a) => partialSum + a, 0)} Zusagen
@@ -280,7 +232,7 @@
 			<span>
 				{invitations
 					.map((i) => i.members.map((m) => m.accepted === null).filter((i) => i).length)
-					.reduce((partialSum, a) => partialSum + a, 0)} noch nicht geantwortet
+					.reduce((partialSum, a) => partialSum + a, 0)} Noch nicht geantwortet
 			</span>
 		</div>
 		<button
@@ -307,17 +259,6 @@
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div class="flex w-[32rem] flex-col border-2 border-black bg-white p-3">
 				<h1 class="my-6 text-center font-heading text-4xl">Neue Einladung erstellen</h1>
-				<span>Identifikation</span>
-				<input
-					type="text"
-					placeholder="mustermann"
-					bind:value={newInvitation._id}
-					class="col-span-3 border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
-				/>
-				<span class="text-sm text-gray-600">
-					Die Identifikation spiegelt sich im Link wieder, z.B. "midrene-und-josua.de/mustermann",
-					hier wurde der Nachname der Familie als Identifikation verwendet
-				</span>
 				<span>Anrede</span>
 				<input
 					type="text"
@@ -325,6 +266,10 @@
 					bind:value={newInvitation.salutation}
 					class="col-span-3 border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 				/>
+				<span class="text-sm text-gray-600">
+					Diese Anrede wird oben in der Einladung angezeigt. Typische Beispiele sind "Liebe Familie
+					Mustermann" oder "Liebe Erika, lieber Max".
+				</span>
 				<span class="mt-3 text-center text-lg">Mitglieder</span>
 				{#each newInvitation.members as member, index}
 					<span>Name</span>
