@@ -66,7 +66,7 @@
 				{disabled}
 				class="relative border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
-				{#if invitation.members.length === 1 && acceptedPersons.length === 1}
+				{#if invitation?.members?.length === 1 && acceptedPersons.length === 1}
 					Teilname zusagen
 				{:else if acceptedPersons.length > 0}
 					{acceptedPersons.length} Person{acceptedPersons.length !== 1 ? 'en' : ''} zusagen
