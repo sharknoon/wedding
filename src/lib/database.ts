@@ -65,7 +65,6 @@ export async function deleteInvitation(id: string): Promise<DeleteResult> {
 export async function createInvitation(
   invitation: Invitation,
 ): Promise<InsertOneResult<Invitation>> {
-  console.log("createInvitation", invitation);
   await setup();
   return invitations.insertOne(invitation);
 }

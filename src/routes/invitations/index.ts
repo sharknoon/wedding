@@ -39,18 +39,23 @@ export async function del({ url }) {
 }
 
 export async function put({ request }) {
-  const result = await createInvitation(
-    await request.json(),
-  );
-
-  if (!result.acknowledged) {
+  try {
+    const result = await createInvitation(
+      await request.json(),
+    );
+    if (!result.insertedId) {
+      return {
+        status: 500,
+        body: { message: "Invitation could not be saved" },
+      };
+    }
     return {
-      status: 500,
-      body: { message: "Invitation could not be saved" },
+      status: 200,
+      body: { message: "Ok" },
+    };
+  } catch (error) {
+    return {
+      status: 500
     };
   }
-  return {
-    status: 200,
-    body: { message: "Ok" },
-  };
 }

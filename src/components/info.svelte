@@ -83,12 +83,14 @@
 	</div>
 	<div class="flex w-full justify-center gap-4">
 		{#each countdown as c}
-			<div
-				class="flex aspect-square min-w-[6rem] flex-col items-center justify-center border-4 border-black bg-white font-heading md:min-w-[7rem]"
-			>
-				<span class="font-display text-5xl md:text-6xl">{c.value}</span>
-				<span class="text-2xl md:text-3xl">{c.unit}</span>
-			</div>
+			{#if c.value > 0}
+				<div
+					class="flex aspect-square min-w-[6rem] flex-col items-center justify-center border-4 border-black bg-white font-heading md:min-w-[7rem]"
+				>
+					<span class="font-display text-5xl md:text-6xl">{c.value}</span>
+					<span class="text-2xl md:text-3xl">{c.unit}</span>
+				</div>
+			{/if}
 		{/each}
 	</div>
 </div>

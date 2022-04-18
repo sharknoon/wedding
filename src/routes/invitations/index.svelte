@@ -56,10 +56,18 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(newInvitation, (_, v) => (v === undefined ? null : v))
-		}).catch((err) => {
-			invitations.pop();
-			alert(err);
-		});
+		})
+			.then((res) => {
+				console.log(res);
+				if (res.status === 500) {
+					invitations.pop();
+					alert(res.statusText);
+				}
+			})
+			.catch((err) => {
+				invitations.pop();
+				alert(err);
+			});
 		resetInvitationCreation();
 	}
 

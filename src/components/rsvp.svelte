@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Details, Invitation } from '../types';
+	import { SendStatus, type Details, type Invitation } from '../types';
 	import StatusIndicator from './status-indicator.svelte';
 
 	export let invitation: Invitation;
@@ -8,14 +8,23 @@
 	$: deadline = new Date(details?.deadline || null);
 	$: disabled = new Date().getTime() > deadline.getTime();
 
-	$: acceptedPersons = invitation?.members?.filter((m) => m.accepted) || [];
-	let status = 'none';
-
-	$: showModal = false;
+	let acceptStatus: SendStatus = SendStatus.NONE;
+	$: if (acceptStatus === SendStatus.SUCCESS) {
+		setTimeout(() => {
+			acceptStatus = SendStatus.NONE;
+		}, 4000);
+	}
+	let declineStatus: SendStatus = SendStatus.NONE;
+	$: if (declineStatus === SendStatus.SUCCESS) {
+		setTimeout(() => {
+			declineStatus = SendStatus.NONE;
+		}, 4000);
+	}
+	let showModal = false;
 
 	function declineInvitation() {
 		invitation?.members?.forEach((m) => (m.accepted = false));
-		updateInvitation();
+		updateInvitation(false);
 	}
 
 	function acceptInvitation() {
@@ -23,17 +32,19 @@
 		if (invitation?.members?.length > 1) {
 			showModal = true;
 		} else {
-			updateInvitation();
+			updateInvitation(true);
 		}
 	}
 
-	function updateInvitation() {
-		status = 'pending';
+	function updateInvitation(accepted: boolean) {
+		if (accepted) acceptStatus = SendStatus.PENDING;
+		else declineStatus = SendStatus.PENDING;
 		for (const member of invitation.members) {
 			if (member.accepted === null) {
 				member.accepted = false;
 			}
 		}
+		invitation = invitation;
 		fetch(`/${invitation?._id}`, {
 			method: 'PUT',
 			headers: {
@@ -42,10 +53,12 @@
 			body: JSON.stringify(invitation)
 		}).then((response) => {
 			if (response.status === 200) {
-				status = 'success';
+				if (accepted) acceptStatus = SendStatus.SUCCESS;
+				else declineStatus = SendStatus.SUCCESS;
 				showModal = false;
 			} else {
-				status = 'error';
+				if (accepted) acceptStatus = SendStatus.ERROR;
+				else declineStatus = SendStatus.ERROR;
 				alert('Fehler beim Speichern der Einladung\n' + response.statusText);
 			}
 		});
@@ -71,8 +84,14 @@
 				class="relative border-0 bg-black px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-green-600 focus:ring-2"
 			>
 				Teilnahme zusagen
-				<div class="absolute right-0 top-1/2 mr-2 -translate-y-1/2">
-					<StatusIndicator {status} />
+				<div
+					class="absolute inset-0 h-full w-full transition-all {acceptStatus !== SendStatus.NONE
+						? 'bg-black/75 text-white'
+						: ''}"
+				>
+					<div class="flex h-full items-center justify-center">
+						<StatusIndicator status={acceptStatus} />
+					</div>
 				</div>
 			</button>
 			<button
@@ -81,17 +100,32 @@
 				class="relative border-2 border-black py-2 px-4 text-xl ring-black ring-offset-2 ring-offset-white transition hover:border-red-600 hover:bg-red-600 hover:text-white focus:ring-2"
 			>
 				Teilnahme absagen
-				<div class="absolute right-0 top-1/2 mr-2 -translate-y-1/2">
-					<StatusIndicator {status} />
+				<div
+					class="absolute inset-0 h-full w-full transition-all {declineStatus !== SendStatus.NONE
+						? 'bg-black/75 text-white'
+						: ''}"
+				>
+					<div class="flex h-full items-center justify-center">
+						<StatusIndicator status={declineStatus} />
+					</div>
 				</div>
 			</button>
+		</div>
+		<div class="mx-auto font-body text-xl">
+			{#if invitation?.members?.every((m) => m.accepted === true)}
+				Wir freuen uns auf Euer Kommen!
+			{:else if invitation?.members?.some((m) => m.accepted === true)}
+				Schade, dass Ihr nicht alle kommen könnt, aber wir freuen uns auf Euer Kommen!
+			{:else if invitation?.members?.every((m) => m.accepted === false)}
+				Schade, dass Ihr nicht kommen könnt.
+			{/if}
 		</div>
 	</div>
 </div>
 {#if showModal}
 	<div class="fixed inset-0 h-screen w-screen font-body">
 		<div class="flex h-full items-center justify-center bg-black/50">
-			<div class="flex w-[32rem] max-w-[32rem] flex-col gap-2 border-2 border-black bg-white p-8">
+			<div class="flex w-[32rem] max-w-[32rem] flex-col gap-2 border-4 border-black bg-white p-8">
 				{#each invitation?.members || [] as member}
 					<label class="inline-flex items-center">
 						<input
@@ -103,12 +137,18 @@
 					</label>
 				{/each}
 				<button
-					on:click={() => updateInvitation()}
+					on:click={() => updateInvitation(true)}
 					class="relative mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 				>
 					Zusagen
-					<div class="absolute right-0 top-1/2 mr-2 -translate-y-1/2">
-						<StatusIndicator {status} />
+					<div
+						class="absolute inset-0 h-full w-full transition-all {acceptStatus !== SendStatus.NONE
+							? 'bg-black/75 text-white'
+							: ''}"
+					>
+						<div class="flex h-full items-center justify-center">
+							<StatusIndicator status={acceptStatus} />
+						</div>
 					</div>
 				</button>
 			</div>
