@@ -125,7 +125,9 @@
 {#if showModal}
 	<div class="fixed inset-0 h-screen w-screen font-body">
 		<div class="flex h-full items-center justify-center bg-black/50">
-			<div class="flex w-[32rem] max-w-[32rem] flex-col gap-2 border-4 border-black bg-white p-8">
+			<div
+				class="m-4 flex w-[32rem] max-w-[32rem] flex-col gap-2 border-4 border-black bg-white p-8"
+			>
 				{#each invitation?.members || [] as member}
 					<label class="inline-flex items-center">
 						<input

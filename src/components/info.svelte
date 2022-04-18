@@ -39,6 +39,10 @@
 			{ unit: dayDiff === 1 ? 'Tag' : 'Tage', value: dayDiff }
 		];
 	}
+
+	$: year = date.toLocaleDateString('de-DE', {
+		year: 'numeric'
+	});
 </script>
 
 <div
@@ -62,10 +66,10 @@
 							month: 'long'
 						})}
 					</span>
-					<span class="-mr-8 font-heading text-6xl font-bold tracking-[2rem]">
-						{date.toLocaleDateString('de-DE', {
-							year: 'numeric'
-						})}
+					<span class="flex justify-between font-heading text-6xl font-bold">
+						{#each year?.split('') as c}
+							<div>{c}</div>
+						{/each}
 					</span>
 				</div>
 			</div>

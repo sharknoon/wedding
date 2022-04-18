@@ -90,21 +90,29 @@
 </script>
 
 <div class="container mx-auto font-body">
-	<h1 class="my-6 text-center font-display text-6xl">Einladungen</h1>
+	<h1 class="my-6 text-center font-display text-5xl sm:text-6xl">Einladungen</h1>
 
 	<div
-		class="grid grid-cols-[1fr_2fr_1fr] items-center divide-y-2 divide-black border-2 border-black text-lg"
+		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
 	>
-		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">Name</div>
-		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">
+		<div
+			class="h-full bg-black py-2 px-1 text-center font-heading text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+		>
+			Name
+		</div>
+		<div
+			class="h-full bg-black py-2 px-1 text-center font-heading text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+		>
 			Teilnahme
 		</div>
-		<div class="h-full bg-black px-6 py-4 text-center font-heading text-3xl text-white">
+		<div
+			class="h-full bg-black py-2 px-1 text-center font-heading text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+		>
 			Aktionen
 		</div>
 		{#each invitations as invitation, index}
 			<div
-				class="flex h-full flex-col justify-center gap-2 px-6 py-4 {index % 2 === 1
+				class="flex h-full flex-col justify-around gap-2 p-2 sm:px-6 sm:py-4 {index % 2 === 1
 					? 'bg-gray-100'
 					: ''}"
 			>
@@ -113,7 +121,7 @@
 				{/each}
 			</div>
 			<div
-				class="flex h-full flex-col justify-center gap-2 px-6 py-4 {index % 2 === 1
+				class="flex h-full flex-col justify-around gap-2 px-6 py-4 {index % 2 === 1
 					? 'bg-gray-100'
 					: ''}"
 			>
@@ -159,7 +167,7 @@
 				{/each}
 			</div>
 			<div
-				class="flex h-full items-center justify-center gap-4 p-4 {index % 2 === 1
+				class="flex h-full flex-wrap items-center justify-center gap-4 p-4 {index % 2 === 1
 					? 'bg-gray-100'
 					: ''}"
 			>
@@ -224,7 +232,7 @@
 		{/each}
 	</div>
 
-	<div class="my-6 flex justify-between">
+	<div class="my-6 mx-2 flex flex-col items-center justify-between gap-4 md:mx-0 md:flex-row">
 		<div class="flex items-center gap-4">
 			<span>
 				{invitations
@@ -244,7 +252,7 @@
 		</div>
 		<button
 			on:click={() => (showModal = true)}
-			class="flex min-w-[20rem] items-center justify-center gap-2 border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+			class="flex items-center justify-center gap-2 border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2 sm:min-w-[20rem]"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -262,9 +270,9 @@
 </div>
 
 {#if showModal}
-	<div class="fixed inset-0 h-screen w-screen font-body">
+	<div class="fixed inset-0 h-screen w-screen max-w-[100vw] font-body">
 		<div class="flex h-full items-center justify-center bg-black/50">
-			<div class="flex w-[32rem] max-w-[32rem] flex-col border-2 border-black bg-white p-3">
+			<div class="flex w-[32rem] max-w-full flex-col border-2 border-black bg-white p-3">
 				<h1 class="my-6 text-center font-heading text-4xl">Neue Einladung erstellen</h1>
 				<span>Anrede</span>
 				<input
@@ -326,47 +334,49 @@
 					</svg>
 					Neues Mitglied hinzufügen
 				</button>
-				<div class="mt-6 flex max-w-full items-center gap-3">
-					<div class="min-w-0 grow break-words">
+				<div class="mt-6 flex max-w-full flex-col items-center gap-3 sm:flex-row">
+					<div class="min-w-0 max-w-full grow break-words">
 						midrene-und-josua.de/{newInvitation._id}
 					</div>
-					<button
-						on:click={() => resetInvitationCreation()}
-						class="flex items-center justify-center gap-2 self-end border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
+					<div class="flex gap-3">
+						<button
+							on:click={() => resetInvitationCreation()}
+							class="flex items-center justify-center gap-2 self-end border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
 						>
-							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-						</svg>
-						Abbrechen
-					</button>
-					<button
-						disabled={!validInvitation}
-						on:click={createInvitation}
-						class="flex items-center justify-center gap-2 self-end border-2 border-black bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:border-neutral-900 hover:bg-neutral-900 focus:ring-2 disabled:border-neutral-700 disabled:bg-neutral-700"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+							</svg>
+							Abbrechen
+						</button>
+						<button
+							disabled={!validInvitation}
+							on:click={createInvitation}
+							class="flex items-center justify-center gap-2 self-end border-2 border-black bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:border-neutral-900 hover:bg-neutral-900 focus:ring-2 disabled:border-neutral-700 disabled:bg-neutral-700"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-							/>
-						</svg>
-						Speichern
-					</button>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+								/>
+							</svg>
+							Speichern
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
