@@ -74,6 +74,7 @@
 	$: {
 		newInvitation._id = newInvitation.members
 			.map((m) => m.name.trim().split(' ').pop().toLowerCase())
+			.filter((name, index, self) => self.indexOf(name) === index)
 			.join('-');
 	}
 

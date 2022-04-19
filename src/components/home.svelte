@@ -5,9 +5,9 @@
 	}
 </script>
 
-<div id="home" class="flex min-h-screen snap-start flex-col items-center justify-between p-12">
+<div id="home" class="flex min-h-screen snap-start flex-col items-center justify-between p-6">
 	<div class="flex grow flex-col items-center lg:flex-row lg:justify-center lg:gap-12 xl:gap-48">
-		<div class="grid aspect-square w-[15rem] grid-cols-2 grid-rows-1 md:w-[20rem] lg:w-[40rem]">
+		<div class="grid aspect-square w-[15rem] grid-cols-2 grid-rows-1 md:w-[20rem] lg:w-[35rem]">
 			<div
 				style="background-image: url('/images/people/midrene-and-josua.jpg')"
 				class="image group col-start-1 row-start-1 flex items-end justify-center overflow-hidden bg-cover bg-center bg-no-repeat transition"
