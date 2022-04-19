@@ -1,15 +1,20 @@
+<!-- markdownlint-disable MD041 -->
 [![Build and deploy website](https://github.com/Sharknoon/wedding/actions/workflows/build-and-deploy-website.yml/badge.svg)](https://github.com/Sharknoon/wedding/actions/workflows/build-and-deploy-website.yml)
 
 # Midrène's and Josua's Wedding
 
-This is the website for my personal wedding. This site serves as a digital wedding invitation. Users can give a response, if they are participating on the wedding.
-
-See also the corresponding [wedding-backend](https://github.com/Sharknoon/wedding-backend)
+This is the website for our personal wedding. This site serves as a digital wedding invitation. Users can give a response, if they are participating on the wedding.
 
 ## Docker
 
+Two environment variables are needed to start the container.
+|Name|Required|Example|
+|-|-|-|
+|MONGODB_URL|yes|mongodb://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/myFirstDatabase|
+|GOOGLE_MAPS_API_KEY|yes|SDLKFALSFJKSJGAshAHaYeSMKWvrekl2MERK345|
+
 ```bash
-docker run -d -p 3000:3000 ghcr.io/sharknoon/wedding
+docker run -d -p 3000:3000 -e VITE_MONGODB_URL=<mongodb-url> -e VITE_GOOGLE_MAPS_API_KEY=<google-maps-api-key> ghcr.io/sharknoon/wedding
 ```
 
 ---

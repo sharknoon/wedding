@@ -1,6 +1,4 @@
 FROM node:16 as build-stage
-ARG VITE_MONGODB_URL
-ARG VITE_GOOGLE_MAPS_API_KEY
 WORKDIR /app
 COPY . .
 RUN npm ci
