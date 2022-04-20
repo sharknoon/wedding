@@ -20,7 +20,7 @@
 	<div class="hidden 2xl:block">2xl</div>
 </div>
 -->
-<div class="h-screen w-screen snap-y snap-proximity overflow-scroll">
+<div class="h-screen w-screen snap-y snap-proximity overflow-y-scroll">
 	<Home />
 	<Info {details} />
 	<Rsvp {invitation} {details} />
