@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Invitation } from 'src/types';
+	import type { Invitation } from '$lib/types';
 
 	export let invitations: Invitation[];
 
@@ -57,16 +57,23 @@
 			},
 			body: JSON.stringify(newInvitation, (_, v) => (v === undefined ? null : v))
 		})
-			.then((res) => {
-				console.log(res);
+			.then(async (res) => {
+				console.log(res.status + ' ' + res.statusText);
 				if (res.status === 500) {
 					invitations.pop();
-					alert(res.statusText);
+					invitations = invitations;
+					alert(res.status + res.statusText + '\n\n' + (await res.body));
+					console.log(await res.text());
 				}
 			})
 			.catch((err) => {
+				console.log('err');
 				invitations.pop();
+				invitations = invitations;
 				alert(err);
+			})
+			.finally(() => {
+				console.log('finally');
 			});
 		resetInvitationCreation();
 	}
@@ -75,6 +82,7 @@
 		newInvitation._id = newInvitation.members
 			.map((m) => m.name.trim().split(' ').pop().toLowerCase())
 			.filter((name, index, self) => self.indexOf(name) === index)
+			.filter((name) => name.length > 0)
 			.join('-');
 	}
 

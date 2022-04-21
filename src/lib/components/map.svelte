@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { GOOGLE_MAPS_API_KEY } from '$lib/env';
+	const GOOGLE_MAPS_API_KEY = process?.env.GOOGLE_MAPS_API_KEY;
+	if (!GOOGLE_MAPS_API_KEY) {
+		throw new Error('Missing GOOGLE_MAPS_API_KEY environment variable');
+	}
 </script>
 
 <iframe

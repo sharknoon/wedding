@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CountdownItem, Details } from '../types';
+	import type { CountdownItem, Details } from '$lib/types';
 	export let details: Details;
 
 	$: date = new Date(details?.date || null);

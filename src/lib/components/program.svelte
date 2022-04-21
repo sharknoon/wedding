@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Details } from '../types';
+	import type { Details } from '$lib/types';
 	export let details: Details;
 
 	// TODO add image preloading

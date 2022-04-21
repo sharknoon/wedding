@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SendStatus, type Details, type Invitation } from '../types';
+	import { SendStatus, type Details, type Invitation } from '$lib/types';
 	import StatusIndicator from './status-indicator.svelte';
 
 	export let invitation: Invitation;

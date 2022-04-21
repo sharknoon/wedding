@@ -7,12 +7,14 @@ import {
   type UpdateResult,
   type WithId,
 } from "mongodb";
-import { MONGODB_URL } from "$lib/env";
-import type { Details, Invitation } from "src/types";
+import type { Details, Invitation } from "$lib/types";
 
+const MONGODB_URL = process?.env.MONGODB_URL;
+if (!MONGODB_URL) {
+  console.error("env MONGODB_URL is not set");
+  process.exit(1);
+}
 const client = new MongoClient(MONGODB_URL);
-
-const dbName = "wedding";
 
 let db: Db;
 let invitations: Collection<Invitation>;
@@ -22,7 +24,7 @@ async function setup() {
   if (db && (await db.command({ ping: 1 }))) return;
   await client.connect();
   console.log("Connected to MongoDB");
-  db = client.db(dbName);
+  db = client.db("wedding");
   invitations = db.collection("invitations");
   details = db.collection("details");
 }

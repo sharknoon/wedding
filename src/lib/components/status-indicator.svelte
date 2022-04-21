@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SendStatus } from '../types';
+	import { SendStatus } from '$lib/types';
 
 	export let status: SendStatus = SendStatus.NONE;
 </script>

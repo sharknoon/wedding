@@ -29,7 +29,7 @@ export type ProgramItem = {
 
 export type FAQ = {
   question: string;
-  answer: string;
+  answer: string[];
 };
 
 export type CountdownItem = {
@@ -41,5 +41,10 @@ export enum SendStatus {
   NONE,
   PENDING,
   SUCCESS,
-  ERROR
+  ERROR,
 }
+
+export type EnvironmentVariables = {
+  MONGODB_URL: string;
+  GOOGLE_MAPS_API_KEY: string;
+};
