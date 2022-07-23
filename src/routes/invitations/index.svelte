@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Invitation } from '$lib/types';
+	import type { Invitation, Member } from '$lib/types';
 
 	export let invitations: Invitation[];
 
@@ -12,19 +12,20 @@
 				.catch((err) => alert(err));
 	}
 
+	const defaultMember: Member = {
+		name: '',
+		accepted: 'unknown'
+	};
+
+	let newInvitation: Invitation;
 	$: newInvitation = {
 		_id: undefined,
 		salutation: '',
-		members: [
-			{
-				name: '',
-				accepted: undefined
-			}
-		]
+		members: [{ ...defaultMember }]
 	};
 
 	function addMember() {
-		newInvitation.members.push({ name: '', accepted: undefined });
+		newInvitation.members.push({ ...defaultMember });
 		newInvitation = newInvitation;
 	}
 
@@ -37,12 +38,7 @@
 		newInvitation = {
 			_id: undefined,
 			salutation: '',
-			members: [
-				{
-					name: '',
-					accepted: undefined
-				}
-			]
+			members: [{ ...defaultMember }]
 		};
 		showModal = false;
 	}
@@ -55,14 +51,14 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(newInvitation, (_, v) => (v === undefined ? null : v))
+			body: JSON.stringify(newInvitation)
 		})
 			.then(async (res) => {
 				console.log(res.status + ' ' + res.statusText);
 				if (res.status === 500) {
 					invitations.pop();
 					invitations = invitations;
-					alert(res.status + res.statusText + '\n\n' + (await res.body));
+					alert(res.status + res.statusText + '\n\n' + res.body);
 					console.log(await res.text());
 				}
 			})
@@ -135,7 +131,7 @@
 					: ''}"
 			>
 				{#each invitation.members as member}
-					{#if member.accepted}
+					{#if member.accepted === 'true'}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-6 w-6"
@@ -146,7 +142,7 @@
 						>
 							<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
 						</svg>
-					{:else if member.accepted === false}
+					{:else if member.accepted === 'false'}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-6 w-6 mx-auto"
@@ -245,17 +241,21 @@
 		<div class="flex items-center gap-4">
 			<span>
 				{invitations
-					.map((i) => i.members.map((m) => m.accepted).filter((i) => i).length)
+					.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
 					.reduce((partialSum, a) => partialSum + a, 0)} Zusagen
 			</span>
 			<span>
 				{invitations
-					.map((i) => i.members.map((m) => m.accepted === false).filter((i) => i).length)
+					.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
 					.reduce((partialSum, a) => partialSum + a, 0)} Absagen
 			</span>
 			<span>
 				{invitations
-					.map((i) => i.members.map((m) => m.accepted === null).filter((i) => i).length)
+					.map(
+						(i) =>
+							i.members.map((m) => m.accepted !== 'true' && m.accepted !== 'false').filter((i) => i)
+								.length
+					)
 					.reduce((partialSum, a) => partialSum + a, 0)} Noch nicht geantwortet
 			</span>
 		</div>

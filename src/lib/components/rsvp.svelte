@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { SendStatus, type Details, type Invitation } from '$lib/types';
+	import { fade, scale } from 'svelte/transition';
 	import StatusIndicator from './status-indicator.svelte';
 
 	export let invitation: Invitation;
@@ -23,12 +24,14 @@
 	let showModal = false;
 
 	function declineInvitation() {
-		invitation?.members?.forEach((m) => (m.accepted = false));
+		invitation?.members?.forEach((m) => (m.accepted = 'false'));
+		invitation = invitation;
 		updateInvitation(false);
 	}
 
 	function acceptInvitation() {
-		invitation?.members?.forEach((m) => (m.accepted = true));
+		invitation?.members?.forEach((m) => (m.accepted = 'true'));
+		invitation = invitation;
 		if (invitation?.members?.length > 1) {
 			showModal = true;
 		} else {
@@ -40,8 +43,8 @@
 		if (accepted) acceptStatus = SendStatus.PENDING;
 		else declineStatus = SendStatus.PENDING;
 		for (const member of invitation.members) {
-			if (member.accepted === null) {
-				member.accepted = false;
+			if (member.accepted !== 'true' && member.accepted !== 'false') {
+				member.accepted = 'false';
 			}
 		}
 		invitation = invitation;
@@ -112,27 +115,34 @@
 			</button>
 		</div>
 		<div class="mx-auto font-body text-xl">
-			{#if invitation?.members?.every((m) => m.accepted === true)}
+			{#if invitation?.members?.every((m) => m.accepted === 'true')}
 				Wir freuen uns auf Euer Kommen!
-			{:else if invitation?.members?.some((m) => m.accepted === true)}
+			{:else if invitation?.members?.some((m) => m.accepted === 'true')}
 				Schade, dass Ihr nicht alle kommen könnt, aber wir freuen uns auf Euer Kommen!
-			{:else if invitation?.members?.every((m) => m.accepted === false)}
+			{:else if invitation?.members?.every((m) => m.accepted === 'false')}
 				Schade, dass Ihr nicht kommen könnt.
 			{/if}
 		</div>
 	</div>
 </div>
 {#if showModal}
-	<div class="fixed inset-0 h-screen w-screen font-body">
+	<div
+		class="fixed inset-0 h-screen w-screen font-body"
+		transition:fade
+		on:click|stopPropagation={() => (showModal = false)}
+	>
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div
+				on:click|stopPropagation={() => {}}
+				transition:scale
 				class="m-4 flex w-[32rem] max-w-[32rem] flex-col gap-2 border-4 border-black bg-white p-8"
 			>
 				{#each invitation?.members || [] as member}
 					<label class="inline-flex items-center">
 						<input
 							type="checkbox"
-							bind:checked={member.accepted}
+							checked={member.accepted === 'true'}
+							on:change={(e) => (member.accepted = e.target['checked'] ? 'true' : 'false')}
 							class="h-5 w-5 border-transparent bg-gray-300 text-red-600 transition hover:text-red-700 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-white"
 						/>
 						<span class="ml-2 max-w-full break-words text-2xl text-gray-900">{member.name}</span>
