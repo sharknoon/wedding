@@ -6,7 +6,7 @@
 	export let invitation: Invitation;
 	export let details: Details;
 
-	$: deadline = new Date(details?.deadline || null);
+	$: deadline = new Date(details?.deadline);
 	$: disabled = new Date().getTime() > deadline.getTime();
 
 	let acceptStatus: SendStatus = SendStatus.NONE;
@@ -72,15 +72,17 @@
 	<div
 		class="container mx-auto flex min-h-screen flex-col items-center justify-center gap-2 p-6 md:gap-6"
 	>
-		<h1 class="my-2 max-w-full break-words text-center font-display text-4xl md:my-4 md:text-6xl">
+		<h1
+			class="my-2 max-w-full break-words text-center font-cheap-pine text-4xl md:my-4 md:text-6xl"
+		>
 			{invitation?.salutation || ''}
 		</h1>
 		{#each details?.text || [] as line}
-			<p class="text-center font-body text-lg md:text-xl lg:text-2xl">
+			<p class="text-center font-oswald text-lg md:text-xl lg:text-2xl">
 				{line}
 			</p>
 		{/each}
-		<div class="mt-4 flex gap-6 font-body">
+		<div class="mt-4 flex gap-6 font-oswald">
 			<button
 				on:click={() => acceptInvitation()}
 				{disabled}
@@ -114,7 +116,7 @@
 				</div>
 			</button>
 		</div>
-		<div class="mx-auto font-body text-xl">
+		<div class="mx-auto font-oswald text-xl">
 			{#if invitation?.members?.every((m) => m.accepted === 'true')}
 				Wir freuen uns auf Euer Kommen!
 			{:else if invitation?.members?.some((m) => m.accepted === 'true')}
@@ -127,13 +129,13 @@
 </div>
 {#if showModal}
 	<div
-		class="fixed inset-0 h-screen w-screen font-body"
+		class="fixed inset-0 h-screen w-screen font-oswald"
 		transition:fade
 		on:click|stopPropagation={() => (showModal = false)}
 	>
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div
-				on:click|stopPropagation={() => {}}
+				on:click|stopPropagation
 				transition:scale
 				class="m-4 flex w-[32rem] max-w-[32rem] flex-col gap-2 border-4 border-black bg-white p-8"
 			>
@@ -142,7 +144,7 @@
 						<input
 							type="checkbox"
 							checked={member.accepted === 'true'}
-							on:change={(e) => (member.accepted = e.target['checked'] ? 'true' : 'false')}
+							on:change={(e) => (member.accepted = String(e.currentTarget.checked))}
 							class="h-5 w-5 border-transparent bg-gray-300 text-red-600 transition hover:text-red-700 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-white"
 						/>
 						<span class="ml-2 max-w-full break-words text-2xl text-gray-900">{member.name}</span>

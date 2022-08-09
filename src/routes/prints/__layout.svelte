@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export const load = ({ url }) => {
+	export const load: import('./__types/__layout').Load = ({ url }) => {
 		return {
 			props: {
 				url: url.pathname
@@ -8,8 +8,8 @@
 	};
 </script>
 
-<script>
-	export let url;
+<script lang="ts">
+	export let url: string;
 	$: backLink = url === '/prints' ? '/invitation/jessica' : '/prints';
 	$: backTitle = url === '/prints' ? 'Zur Hauptwebsite' : 'Zurück';
 </script>
@@ -33,12 +33,12 @@
 					d="M10 19l-7-7m0 0l7-7m-7 7h18"
 				/>
 			</svg>
-			<span class="font-heading text-4xl">{backTitle}</span>
+			<span class="font-cheap-pine-sans text-4xl">{backTitle}</span>
 		</a>
 	</div>
 	<div
 		class="fixed top-0 right-0 z-10 m-3 transition hover:scale-110 print:hidden"
-		id="print-button"
+		on:click={() => window.print()}
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -68,9 +68,6 @@
 		@page {
 			size: A5;
 			margin: 0;
-		}
-		body {
-			/*margin: 1.6cm;*/
 		}
 	}
 </style>

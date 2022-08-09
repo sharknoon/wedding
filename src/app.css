@@ -8,6 +8,7 @@
 		url('/fonts/cheap-pine-sans.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-cheap-pine: swap;
 }
 
 @font-face {
@@ -16,6 +17,7 @@
 		url('/fonts/cheap-pine-regular.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-cheap-pine: swap;
 }
 
 @font-face {
@@ -23,4 +25,5 @@
 	src: url('/fonts/oswald.woff2') format('woff2'), url('/fonts/oswald.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-cheap-pine: swap;
 }

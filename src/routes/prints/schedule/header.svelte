@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let title;
+	export let title: string;
 </script>
 
 <div class="relative">
@@ -55,7 +55,7 @@
 		</g>
 	</svg>
 
-	<div class="absolute top-[0.45rem] w-full text-center font-display text-5xl tracking-widest">
+	<div class="absolute top-[0.45rem] w-full text-center font-cheap-pine text-5xl tracking-widest">
 		{title}
 	</div>
 </div>

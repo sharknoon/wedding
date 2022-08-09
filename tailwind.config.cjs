@@ -4,9 +4,9 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}', './src/routes/__layout.svelte'],
 	theme: {
 		fontFamily: {
-			'display': ['"Cheap Pine Regular"'],
-			'heading': ['"Cheap Pine Sans"'],
-			'body': ['Oswald'],
+			'cheap-pine': ['"Cheap Pine Regular"'],
+			'cheap-pine-sans': ['"Cheap Pine Sans"'],
+			oswald: ['Oswald']
 		}
 	},
 	plugins: [

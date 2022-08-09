@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let currentPage;
-	export let totalPages;
+	export let currentPage: number;
+	export let totalPages: number;
 </script>
 
 <div class="flex justify-between text-sm font-bold uppercase">

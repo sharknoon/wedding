@@ -29,12 +29,12 @@ async function setup() {
 	details = db.collection('details');
 }
 
-export async function getInvitation(id: string): Promise<Invitation> {
+export async function getInvitation(id: string): Promise<WithId<Invitation> | null> {
 	await setup();
 	return invitations.findOne({ _id: id });
 }
 
-export async function getDetails(): Promise<Details> {
+export async function getDetails(): Promise<WithId<Details> | null> {
 	await setup();
 	return details.findOne();
 }

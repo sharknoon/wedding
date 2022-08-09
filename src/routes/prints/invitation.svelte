@@ -1,12 +1,12 @@
-<script context="module">
-	export function load({ url }) {
+<script lang="ts" context="module">
+	export const load: import('./__types/invitation').Load = ({ url }) => {
 		const id = url.searchParams.get('id') || 'jessica';
 		return {
 			props: {
 				id
 			}
 		};
-	}
+	};
 </script>
 
 <script lang="ts">
@@ -21,10 +21,6 @@
 			margin: 0,
 			width: 128
 		});
-
-		document.getElementById('print-button').onclick = () => {
-			window.print();
-		};
 	});
 </script>
 
@@ -36,22 +32,22 @@
 		/>
 		<div class="col-start-2 row-start-1 flex flex-col">
 			<div
-				class="flex flex-1 items-end justify-center text-center font-heading text-4xl uppercase tracking-widest"
+				class="flex flex-1 items-end justify-center text-center font-cheap-pine-sans text-4xl uppercase tracking-widest"
 			>
 				B l a c k
 			</div>
 			<div
-				class="flex-1 bg-black text-center font-heading text-4xl uppercase tracking-widest text-white"
+				class="flex-1 bg-black text-center font-cheap-pine-sans text-4xl uppercase tracking-widest text-white"
 			>
 				W h i t e
 			</div>
 		</div>
 		<div class="col-span-3 flex flex-col justify-center">
-			<div class="text-center font-display text-4xl uppercase">Die Hochzeit</div>
-			<div class="pt-3 text-center font-heading text-3xl uppercase">
+			<div class="text-center font-cheap-pine text-4xl uppercase">Die Hochzeit</div>
+			<div class="pt-3 text-center font-cheap-pine-sans text-3xl uppercase">
 				von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 			</div>
-			<div class="pb-1 text-center font-heading text-lg uppercase leading-4 tracking-wider">
+			<div class="pb-1 text-center font-cheap-pine-sans text-lg uppercase leading-4 tracking-wider">
 				Gesucht und Gefunden, in Liebe verbunden
 			</div>
 			<div class="mx-12 flex items-center gap-4 px-4">
@@ -70,8 +66,10 @@
 				</svg>
 				<div class="grow border-t-2 border-black" />
 			</div>
-			<div class="text-center font-heading text-3xl leading-none">Save the Date</div>
-			<div class="text-center font-heading text-2xl leading-none text-red-600">23.09.2023</div>
+			<div class="text-center font-cheap-pine-sans text-3xl leading-none">Save the Date</div>
+			<div class="text-center font-cheap-pine-sans text-2xl leading-none text-red-600">
+				23.09.2023
+			</div>
 		</div>
 	</div>
 </div>
@@ -87,40 +85,40 @@
 	>
 		<div class="flex items-center py-4">
 			<div class="mx-6 grow border-t-2 border-black bg-black" />
-			<span class="font-display text-5xl uppercase">Die Hochzeit</span>
+			<span class="font-cheap-pine text-5xl uppercase">Die Hochzeit</span>
 			<div class="mx-6 grow border-t-2 border-black bg-black" />
 		</div>
 		<div class="flex gap-1 p-1">
 			<div class="grid grid-cols-5 grid-rows-5 items-center justify-center">
 				<div
-					class="col-span-5 col-start-1 row-start-1 text-center font-heading text-lg uppercase leading-none"
+					class="col-span-5 col-start-1 row-start-1 text-center font-cheap-pine-sans text-lg uppercase leading-none"
 				>
 					September
 				</div>
 				<div
-					class="col-start-1 row-span-5 row-start-1 rotate-180 justify-self-center font-heading text-lg uppercase leading-[1.1] vertical-lr"
+					class="col-start-1 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-lg uppercase leading-[1.1] vertical-lr"
 				>
 					Samstag
 				</div>
 				<div
-					class="col-span-3 col-start-2 row-span-3 row-start-2 text-center font-display text-7xl leading-[0.75]"
+					class="col-span-3 col-start-2 row-span-3 row-start-2 text-center font-cheap-pine text-7xl leading-[0.75]"
 				>
 					23
 				</div>
 				<div
-					class="col-start-5 row-span-5 row-start-1 rotate-180 justify-self-center font-heading text-lg uppercase leading-[1.1] vertical-lr"
+					class="col-start-5 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-lg uppercase leading-[1.1] vertical-lr"
 				>
 					Ab 14 Uhr
 				</div>
 				<div
-					class="col-span-5 col-start-1 row-start-5 text-center font-heading text-2xl uppercase leading-[0.8]"
+					class="col-span-5 col-start-1 row-start-5 text-center font-cheap-pine-sans text-2xl uppercase leading-[0.8]"
 				>
 					2 0 2 3
 				</div>
 			</div>
 			<div class="flex grow flex-col gap-1">
 				<div
-					class="flex items-center justify-evenly bg-black text-center font-heading text-2xl uppercase tracking-widest text-white"
+					class="flex items-center justify-evenly bg-black text-center font-cheap-pine-sans text-2xl uppercase tracking-widest text-white"
 				>
 					<span>B l a c k</span>
 					<svg
@@ -138,7 +136,7 @@
 					<span> W h i t e </span>
 				</div>
 				<div class="flex grow divide-x-2 divide-black">
-					<div class="flex grow items-center justify-center gap-2 font-heading">
+					<div class="flex grow items-center justify-center gap-2 font-cheap-pine-sans">
 						<div class="text-center">
 							<span class="text-sm">Abschnitt</span>
 							<br />
@@ -155,7 +153,7 @@
 							<span class="text-xl">2023</span>
 						</div>
 					</div>
-					<div class="flex grow items-center justify-center font-heading">
+					<div class="flex grow items-center justify-center font-cheap-pine-sans">
 						<div class="text-center">
 							<span>Ticketpreis:</span>
 							<br />
@@ -165,7 +163,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="py-1 text-center font-heading text-lg leading-tight">
+		<div class="py-1 text-center font-cheap-pine-sans text-lg leading-tight">
 			<span>Wir bitten um eine Rückmeldung bis zum 23.03.2023.</span>
 			<br />
 			<span
@@ -173,16 +171,16 @@
 				<span class="text-red-600">Link</span> auf der rechten Seite.</span
 			>
 		</div>
-		<div class="text-center font-heading text-2xl uppercase tracking-wider">
+		<div class="text-center font-cheap-pine-sans text-2xl uppercase tracking-wider">
 			Wir freuen uns auf eure Antwort
 		</div>
 	</div>
 	<div class="flex flex-col items-center justify-evenly">
-		<div class="text-center font-heading text-sm">
+		<div class="text-center font-cheap-pine-sans text-sm">
 			midrene-und-josua.de<br />/{id}
 		</div>
 		<canvas id="qrcode" class="mx-2 self-center" />
-		<div class="tansform rotate-180 text-center font-heading text-sm">
+		<div class="tansform rotate-180 text-center font-cheap-pine-sans text-sm">
 			midrene-und-josua.de<br />/{id}
 		</div>
 	</div>
@@ -196,7 +194,7 @@
 			<path d="M20 7h-7L10 .5 7 7H0l5.46 5.47-1.64 7 6.18-3.7 6.18 3.73-1.63-7z" />
 		</svg>
 		<div class="grow border border-black bg-black" />
-		<div class="font-display text-3xl">Save the Date</div>
+		<div class="font-cheap-pine text-3xl">Save the Date</div>
 		<div class="grow border border-black bg-black" />
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

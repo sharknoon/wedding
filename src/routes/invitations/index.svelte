@@ -19,7 +19,7 @@
 
 	let newInvitation: Invitation;
 	$: newInvitation = {
-		_id: undefined,
+		_id: '',
 		salutation: '',
 		members: [{ ...defaultMember }]
 	};
@@ -36,7 +36,7 @@
 
 	function resetInvitationCreation() {
 		newInvitation = {
-			_id: undefined,
+			_id: '',
 			salutation: '',
 			members: [{ ...defaultMember }]
 		};
@@ -76,9 +76,9 @@
 
 	$: {
 		newInvitation._id = newInvitation.members
-			.map((m) => m.name.trim().split(' ').pop().toLowerCase())
+			.map((m) => m.name.trim().split(' ').pop()?.toLowerCase())
 			.filter((name, index, self) => self.indexOf(name) === index)
-			.filter((name) => name.length > 0)
+			.filter((name) => name?.length || 0 > 0)
 			.join('-');
 	}
 
@@ -94,24 +94,24 @@
 	$: showModal = false;
 </script>
 
-<div class="container mx-auto font-body">
-	<h1 class="my-6 text-center font-display text-5xl sm:text-6xl">Einladungen</h1>
+<div class="container mx-auto font-oswald">
+	<h1 class="my-6 text-center font-cheap-pine text-5xl sm:text-6xl">Einladungen</h1>
 
 	<div
 		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
 	>
 		<div
-			class="h-full bg-black py-2 px-1 text-center font-heading text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
 		>
 			Name
 		</div>
 		<div
-			class="h-full bg-black py-2 px-1 text-center font-heading text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
 		>
 			Teilnahme
 		</div>
 		<div
-			class="h-full bg-black py-2 px-1 text-center font-heading text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
 		>
 			Aktionen
 		</div>
@@ -145,7 +145,7 @@
 					{:else if member.accepted === 'false'}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6 mx-auto"
+							class="mx-auto h-6 w-6"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -156,7 +156,7 @@
 					{:else}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="h-full w-6 mx-auto"
+							class="mx-auto h-full w-6"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -279,10 +279,10 @@
 </div>
 
 {#if showModal}
-	<div class="fixed inset-0 h-screen w-screen max-w-[100vw] font-body">
+	<div class="fixed inset-0 h-screen w-screen max-w-[100vw] font-oswald">
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div class="flex w-[32rem] max-w-full flex-col border-2 border-black bg-white p-3">
-				<h1 class="my-6 text-center font-heading text-4xl">Neue Einladung erstellen</h1>
+				<h1 class="my-6 text-center font-cheap-pine-sans text-4xl">Neue Einladung erstellen</h1>
 				<span>Anrede</span>
 				<input
 					type="text"
