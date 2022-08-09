@@ -8,12 +8,8 @@ import {
 	type WithId
 } from 'mongodb';
 import type { Details, Invitation } from '$lib/types';
+import { MONGODB_URL } from './env';
 
-const MONGODB_URL = process?.env.MONGODB_URL;
-if (!MONGODB_URL) {
-	console.error('env MONGODB_URL is not set');
-	process.exit(1);
-}
 const client = new MongoClient(MONGODB_URL);
 
 let db: Db;

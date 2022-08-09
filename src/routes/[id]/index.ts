@@ -1,4 +1,5 @@
 import { getDetails, getInvitation, updateInvitation } from '$lib/database';
+import { GOOGLE_MAPS_API_KEY } from '$lib/env';
 
 export const GET: import('./__types/index').RequestHandler = async ({ params }) => {
 	const invitationId: string = params.id;
@@ -14,7 +15,7 @@ export const GET: import('./__types/index').RequestHandler = async ({ params }) 
 	const details = await getDetails();
 
 	return {
-		body: { invitation: invitation, details: details }
+		body: { invitation: invitation, details: details, googleMapsApiKey: GOOGLE_MAPS_API_KEY }
 	};
 };
 

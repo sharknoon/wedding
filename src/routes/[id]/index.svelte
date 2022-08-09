@@ -8,6 +8,7 @@
 
 	export let invitation: Invitation;
 	export let details: Details;
+	export let googleMapsApiKey: string;
 </script>
 
 <div class="h-screen w-screen snap-y snap-proximity overflow-y-scroll">
@@ -15,6 +16,6 @@
 	<Info {details} />
 	<Rsvp {invitation} {details} />
 	<!--<Program {details} />-->
-	<Map />
+	<Map apiKey={googleMapsApiKey} />
 	<FAQ {details} />
 </div>
