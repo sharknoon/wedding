@@ -11,6 +11,7 @@
 			frame.src = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Pfrondorfer+Muehle&maptype=satellite`;
 			frame.className += 'h-full w-full snap-start border-none';
 			frame.allowFullscreen = true;
+			frame.title = 'map';
 			map?.appendChild(frame);
 		}, 1500);
 	});

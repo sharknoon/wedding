@@ -15,6 +15,7 @@
 			>
 				<picture>
 					<source srcset="/images/people/midrene-and-josua.avif" type="image/avif" />
+					<source srcset="/images/people/midrene-and-josua.webp" type="image/webp" />
 					<img
 						class="absolute inset-0 h-full w-full object-cover"
 						src="/images/people/midrene-and-josua.png"

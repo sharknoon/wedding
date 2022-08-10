@@ -48,6 +48,7 @@
 <div id="info" class="relative min-h-screen snap-start">
 	<picture>
 		<source srcset="/images/backgrounds/info.avif" type="image/avif" />
+		<source srcset="/images/backgrounds/info.webp" type="image/webp" />
 		<img
 			class="absolute h-full w-full object-cover"
 			src="/images/backgrounds/info.jpg"

@@ -44,7 +44,7 @@ export enum SendStatus {
 	ERROR
 }
 
-export type EnvironmentVariables = {
-	MONGODB_URL: string;
-	GOOGLE_MAPS_API_KEY: string;
+export type Change<T> = {
+	type: 'insert' | 'update' | 'delete';
+	value?: T;
 };

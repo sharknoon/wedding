@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Invitation, Member } from '$lib/types';
 
-	export let invitations: Invitation[];
+	let invitations: Invitation[];
+
+	//TODO async fetch
 
 	function deleteInvitation(invitation: Invitation) {
 		confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?') &&

@@ -5,7 +5,8 @@ import {
 	type InsertOneResult,
 	MongoClient,
 	type UpdateResult,
-	type WithId
+	type WithId,
+	ChangeStream
 } from 'mongodb';
 import type { Details, Invitation } from '$lib/types';
 import { MONGODB_URL } from './env';
@@ -49,6 +50,14 @@ export async function updateInvitation(id: string, invitation: Invitation): Prom
 export async function getAllInvitations(): Promise<WithId<Invitation>[]> {
 	await setup();
 	return invitations.find().toArray();
+}
+
+export async function streamAllInvitations(): Promise<ChangeStream<Invitation>> {
+	await setup();
+	return invitations.watch(undefined, {
+		fullDocument: 'updateLookup',
+		fullDocumentBeforeChange: 'whenAvailable'
+	});
 }
 
 export async function deleteInvitation(id: string): Promise<DeleteResult> {
