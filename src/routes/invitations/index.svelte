@@ -1,9 +1,15 @@
 <script lang="ts">
 	import type { Invitation, Member } from '$lib/types';
+	import { onMount } from 'svelte';
 
-	let invitations: Invitation[];
+	export let invitations: Invitation[];
 
-	//TODO async fetch
+	onMount(() => {
+		const evtSource = new EventSource('/invitations/events');
+		evtSource.onmessage = (event) => {
+			console.log(event.data);
+		};
+	});
 
 	function deleteInvitation(invitation: Invitation) {
 		confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?') &&
@@ -56,22 +62,16 @@
 			body: JSON.stringify(newInvitation)
 		})
 			.then(async (res) => {
-				console.log(res.status + ' ' + res.statusText);
 				if (res.status === 500) {
 					invitations.pop();
 					invitations = invitations;
 					alert(res.status + res.statusText + '\n\n' + res.body);
-					console.log(await res.text());
 				}
 			})
 			.catch((err) => {
-				console.log('err');
 				invitations.pop();
 				invitations = invitations;
 				alert(err);
-			})
-			.finally(() => {
-				console.log('finally');
 			});
 		resetInvitationCreation();
 	}

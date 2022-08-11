@@ -4,7 +4,6 @@
 	export let apiKey: string;
 
 	onMount(() => {
-		console.log('mount');
 		setTimeout(function () {
 			var map = document.getElementById('map');
 			var frame = document.createElement('iframe');
