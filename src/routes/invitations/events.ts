@@ -1,5 +1,4 @@
 import { streamAllInvitations } from '$lib/database';
-import type { Invitation } from '$lib/types';
 
 const controllers = new Set<ReadableStreamController<string>>();
 const stream = await streamAllInvitations();

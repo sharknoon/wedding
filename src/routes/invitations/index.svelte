@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Invitation, Member } from '$lib/types';
 	import { onMount } from 'svelte';
+	import { fade, slide } from 'svelte/transition';
 
 	export let invitations: Invitation[];
 	$: i = invitations;
@@ -9,17 +10,14 @@
 		const evtSource = new EventSource('/invitations/events');
 		evtSource.onerror = (e) => console.error(e);
 		evtSource.addEventListener('insert', (event) => {
-			console.log('insert' + JSON.stringify(event.data));
-			i.push(event.data);
-			i = i;
+			i = [...i, JSON.parse(event.data)];
 		});
 		evtSource.addEventListener('update', (event) => {
-			console.log('update: ' + event);
-			i = i.map((i) => (i._id === event.data._id ? event.data : i));
+			const invitation = JSON.parse(event.data);
+			i = i.map((i) => (i._id === invitation._id ? invitation : i));
 		});
 		evtSource.addEventListener('delete', (event) => {
 			i = i.filter((i) => i._id !== event.data);
-			i = i;
 		});
 	});
 
@@ -87,21 +85,36 @@
 			.join('-');
 	}
 
-	$: validInvitation = false;
-
-	$: {
-		validInvitation =
-			newInvitation.salutation?.length > 0 &&
-			newInvitation.members.length > 0 &&
-			newInvitation.members.every((m) => m.name?.length > 0);
-	}
+	$: validInvitation =
+		newInvitation.salutation?.length > 0 &&
+		newInvitation.members.length > 0 &&
+		newInvitation.members.every((m) => m.name?.length > 0);
 
 	$: showModal = false;
+
+	$: acceptances = 0;
+	$: {
+		acceptances = i
+			.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
+			.reduce((partialSum, a) => partialSum + a, 0);
+	}
+
+	$: cancellations = i
+		.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
+		.reduce((partialSum, a) => partialSum + a, 0);
+
+	$: notYetResponded = i
+		.map(
+			(i) =>
+				i.members.map((m) => m.accepted !== 'true' && m.accepted !== 'false').filter((i) => i)
+					.length
+		)
+		.reduce((partialSum, a) => partialSum + a, 0);
 </script>
 
-<div class="container mx-auto font-oswald">
+<div class="container mx-auto font-oswald md:px-16">
 	<h1 class="my-6 text-center font-cheap-pine text-5xl sm:text-6xl">Einladungen</h1>
-	{JSON.stringify(i.map((i) => i._id))}
+
 	<div
 		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
 	>
@@ -122,6 +135,7 @@
 		</div>
 		{#each i as invitation, index}
 			<div
+				transition:slide|local
 				class="flex h-full flex-col justify-around gap-2 p-2 sm:px-6 sm:py-4 {index % 2 === 1
 					? 'bg-gray-100'
 					: ''}"
@@ -131,6 +145,7 @@
 				{/each}
 			</div>
 			<div
+				transition:slide|local
 				class="flex h-full flex-col justify-around gap-2 px-6 py-4 {index % 2 === 1
 					? 'bg-gray-100'
 					: ''}"
@@ -138,6 +153,7 @@
 				{#each invitation.members as member}
 					{#if member.accepted === 'true'}
 						<svg
+							in:fade
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-6 w-6"
 							fill="none"
@@ -149,6 +165,7 @@
 						</svg>
 					{:else if member.accepted === 'false'}
 						<svg
+							in:fade
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-6 w-6"
 							fill="none"
@@ -160,6 +177,7 @@
 						</svg>
 					{:else}
 						<svg
+							in:fade
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-full w-6"
 							fill="none"
@@ -177,6 +195,7 @@
 				{/each}
 			</div>
 			<div
+				transition:slide|local
 				class="flex h-full flex-wrap items-center justify-center gap-4 p-4 {index % 2 === 1
 					? 'bg-gray-100'
 					: ''}"
@@ -245,23 +264,13 @@
 	<div class="my-6 mx-2 flex flex-col items-center justify-between gap-4 md:mx-0 md:flex-row">
 		<div class="flex items-center gap-4">
 			<span>
-				{i
-					.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
-					.reduce((partialSum, a) => partialSum + a, 0)} Zusagen
+				{acceptances} Zusagen
 			</span>
 			<span>
-				{i
-					.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
-					.reduce((partialSum, a) => partialSum + a, 0)} Absagen
+				{cancellations} Absagen
 			</span>
 			<span>
-				{i
-					.map(
-						(i) =>
-							i.members.map((m) => m.accepted !== 'true' && m.accepted !== 'false').filter((i) => i)
-								.length
-					)
-					.reduce((partialSum, a) => partialSum + a, 0)} Noch nicht geantwortet
+				{notYetResponded} Noch nicht geantwortet
 			</span>
 		</div>
 		<button

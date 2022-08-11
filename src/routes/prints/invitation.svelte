@@ -27,7 +27,7 @@
 <div class="flex h-[18rem] w-[42rem] bg-white p-2 shadow-2xl">
 	<div class="grid w-full grid-cols-5 grid-rows-1">
 		<div
-			style="background-image: url('/images/people/midrene-and-josua.jpg')"
+			style="background-image: url('/images/people/midrene-and-josua.webp')"
 			class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
 		/>
 		<div class="col-start-2 row-start-1 flex flex-col">
@@ -177,11 +177,11 @@
 	</div>
 	<div class="flex flex-col items-center justify-evenly">
 		<div class="text-center font-cheap-pine-sans text-sm">
-			midrene-und-josua.de<br />/{id}
+			www.midrene-und-josua.de<br />/{id}
 		</div>
 		<canvas id="qrcode" class="mx-2 self-center" />
 		<div class="tansform rotate-180 text-center font-cheap-pine-sans text-sm">
-			midrene-und-josua.de<br />/{id}
+			www.midrene-und-josua.de<br />/{id}
 		</div>
 	</div>
 	<div class="flex items-center justify-center gap-3 border-l-2 border-black py-1 vertical-lr">
