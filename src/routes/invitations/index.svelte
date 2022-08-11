@@ -3,21 +3,30 @@
 	import { onMount } from 'svelte';
 
 	export let invitations: Invitation[];
+	$: i = invitations;
 
 	onMount(() => {
 		const evtSource = new EventSource('/invitations/events');
-		evtSource.onmessage = (event) => {
-			console.log(event.data);
-		};
+		evtSource.onerror = (e) => console.error(e);
+		evtSource.addEventListener('insert', (event) => {
+			console.log('insert' + JSON.stringify(event.data));
+			i.push(event.data);
+			i = i;
+		});
+		evtSource.addEventListener('update', (event) => {
+			console.log('update: ' + event);
+			i = i.map((i) => (i._id === event.data._id ? event.data : i));
+		});
+		evtSource.addEventListener('delete', (event) => {
+			i = i.filter((i) => i._id !== event.data);
+			i = i;
+		});
 	});
 
 	function deleteInvitation(invitation: Invitation) {
-		confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?') &&
-			fetch(`?id=${invitation._id}`, { method: 'DELETE' })
-				.then(() => {
-					invitations = invitations.filter((i) => i._id !== invitation._id);
-				})
-				.catch((err) => alert(err));
+		if (confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?')) {
+			fetch(`?id=${invitation._id}`, { method: 'DELETE' }).catch((err) => alert(err));
+		}
 	}
 
 	const defaultMember: Member = {
@@ -52,8 +61,6 @@
 	}
 
 	function createInvitation() {
-		invitations.push(newInvitation);
-		invitations = invitations;
 		fetch('', {
 			method: 'PUT',
 			headers: {
@@ -63,14 +70,10 @@
 		})
 			.then(async (res) => {
 				if (res.status === 500) {
-					invitations.pop();
-					invitations = invitations;
-					alert(res.status + res.statusText + '\n\n' + res.body);
+					alert(res.status + res.statusText + '\n\n' + (await res.text()));
 				}
 			})
 			.catch((err) => {
-				invitations.pop();
-				invitations = invitations;
 				alert(err);
 			});
 		resetInvitationCreation();
@@ -98,7 +101,7 @@
 
 <div class="container mx-auto font-oswald">
 	<h1 class="my-6 text-center font-cheap-pine text-5xl sm:text-6xl">Einladungen</h1>
-
+	{JSON.stringify(i.map((i) => i._id))}
 	<div
 		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
 	>
@@ -117,7 +120,7 @@
 		>
 			Aktionen
 		</div>
-		{#each invitations as invitation, index}
+		{#each i as invitation, index}
 			<div
 				class="flex h-full flex-col justify-around gap-2 p-2 sm:px-6 sm:py-4 {index % 2 === 1
 					? 'bg-gray-100'
@@ -242,17 +245,17 @@
 	<div class="my-6 mx-2 flex flex-col items-center justify-between gap-4 md:mx-0 md:flex-row">
 		<div class="flex items-center gap-4">
 			<span>
-				{invitations
+				{i
 					.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
 					.reduce((partialSum, a) => partialSum + a, 0)} Zusagen
 			</span>
 			<span>
-				{invitations
+				{i
 					.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
 					.reduce((partialSum, a) => partialSum + a, 0)} Absagen
 			</span>
 			<span>
-				{invitations
+				{i
 					.map(
 						(i) =>
 							i.members.map((m) => m.accepted !== 'true' && m.accepted !== 'false').filter((i) => i)

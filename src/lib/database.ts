@@ -55,8 +55,7 @@ export async function getAllInvitations(): Promise<WithId<Invitation>[]> {
 export async function streamAllInvitations(): Promise<ChangeStream<Invitation>> {
 	await setup();
 	return invitations.watch(undefined, {
-		fullDocument: 'updateLookup',
-		fullDocumentBeforeChange: 'whenAvailable'
+		fullDocument: 'updateLookup'
 	});
 }
 

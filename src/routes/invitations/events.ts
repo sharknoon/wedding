@@ -1,28 +1,33 @@
 import { streamAllInvitations } from '$lib/database';
-import type { Change, Invitation } from '$lib/types';
+import type { Invitation } from '$lib/types';
 
-const controllers = new Set<ReadableStreamController<Change<Invitation>>>();
+const controllers = new Set<ReadableStreamController<string>>();
 const stream = await streamAllInvitations();
 stream.on('change', (c) => {
-	let change: Change<Invitation>;
+	let data = '';
 	switch (c.operationType) {
 		case 'insert':
 		case 'update':
-			change = { type: c.operationType, value: c.fullDocument };
+			data = JSON.stringify(c.fullDocument);
 			break;
 		case 'delete':
-			change = { type: c.operationType, value: c.fullDocumentBeforeChange };
+			data = c.documentKey._id;
 			break;
-		default:
-			change = { type: 'insert' };
 	}
-	controllers.forEach((controller) => controller.enqueue(change));
+	const result = `event: ${c.operationType}\ndata: ${data}\n\n`;
+	controllers.forEach((controller) => controller.enqueue(result));
 });
 
 export const GET: import('./__types/index').RequestHandler = async () => {
-	let controller: ReadableStreamController<Change<Invitation>>;
+	let controller: ReadableStreamController<string>;
 
 	return {
+		status: 200,
+		headers: {
+			'Content-Type': 'text/event-stream',
+			'Cache-Control': 'no-cache',
+			Connection: 'keep-alive'
+		},
 		body: new ReadableStream({
 			start: (c) => {
 				controller = c;

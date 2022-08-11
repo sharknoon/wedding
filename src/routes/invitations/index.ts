@@ -8,7 +8,7 @@ export const GET: import('./__types/index').RequestHandler = async () => {
 	};
 };
 
-export const DEL: import('./__types/index').RequestHandler = async ({ url }) => {
+export const DELETE: import('./__types/index').RequestHandler = async ({ url }) => {
 	const invitationId: string = url.searchParams.get('id') || '';
 
 	if (!invitationId) {

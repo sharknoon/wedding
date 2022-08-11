@@ -43,8 +43,3 @@ export enum SendStatus {
 	SUCCESS,
 	ERROR
 }
-
-export type Change<T> = {
-	type: 'insert' | 'update' | 'delete';
-	value?: T;
-};
