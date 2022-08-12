@@ -11,7 +11,7 @@
 	export let googleMapsApiKey: string;
 </script>
 
-<div class="h-full snap-y snap-proximity overflow-y-scroll">
+<div class="absolute h-full snap-y snap-proximity overflow-y-scroll">
 	<Home />
 	<Info {details} />
 	<Rsvp {invitation} {details} />
@@ -21,9 +21,10 @@
 </div>
 
 <style global>
-	html,
-	body,
-	#svelte {
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
 		height: 100%;
 	}
 </style>
