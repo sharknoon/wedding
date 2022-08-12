@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { CountdownItem, Details } from '$lib/types';
-	export let details: Details;
+	import type { CountdownItem } from '$lib/types';
+	import { details } from '$lib/stores';
 
-	$: date = new Date(details?.date);
+	$: date = new Date($details?.date);
 	$: countdown = calculateCountdown(date);
 
 	function calculateCountdown(date: Date): CountdownItem[] {
@@ -82,11 +82,11 @@
 					</div>
 				</div>
 				<div class="py-1 text-center text-3xl md:text-4xl 2xl:text-5xl">
-					{details?.locationName}
+					{$details?.locationName}
 				</div>
 				<div class="flex w-full divide-x-2 divide-black pt-2 text-center font-oswald text-lg">
-					<div class="flex-auto pr-1">{details?.street}</div>
-					<div class="flex-auto px-1">{details?.city}</div>
+					<div class="flex-auto pr-1">{$details?.street}</div>
+					<div class="flex-auto px-1">{$details?.city}</div>
 					<div class="flex-auto pl-1">
 						{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
 					</div>

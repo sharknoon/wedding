@@ -14,6 +14,15 @@ export const GET: import('./__types/index').RequestHandler = async ({ params }) 
 	const invitation = await getInvitation(invitationId);
 	const details = await getDetails();
 
+	if (!invitation) {
+		return {
+			status: 303,
+			headers: {
+				location: `/`
+			}
+		};
+	}
+
 	return {
 		body: { invitation: invitation, details: details, googleMapsApiKey: GOOGLE_MAPS_API_KEY }
 	};

@@ -1,38 +1,34 @@
 <script lang="ts">
-	import { SendStatus, type Details, type Invitation } from '$lib/types';
+	import { SendStatus } from '$lib/types';
+	import { invitation, details } from '$lib/stores';
 	import { fade, scale } from 'svelte/transition';
 	import StatusIndicator from './status-indicator.svelte';
 
-	export let invitation: Invitation;
-	export let details: Details;
-
-	$: deadline = new Date(details?.deadline);
+	$: deadline = new Date($details?.deadline);
 	$: disabled = new Date().getTime() > deadline.getTime();
 
 	let acceptStatus: SendStatus = SendStatus.NONE;
 	$: if (acceptStatus === SendStatus.SUCCESS) {
 		setTimeout(() => {
 			acceptStatus = SendStatus.NONE;
-		}, 4000);
+		}, 2000);
 	}
 	let declineStatus: SendStatus = SendStatus.NONE;
 	$: if (declineStatus === SendStatus.SUCCESS) {
 		setTimeout(() => {
 			declineStatus = SendStatus.NONE;
-		}, 4000);
+		}, 2000);
 	}
 	let showModal = false;
 
 	function declineInvitation() {
-		invitation?.members?.forEach((m) => (m.accepted = 'false'));
-		invitation = invitation;
+		$invitation?.members?.forEach((m) => (m.accepted = 'false'));
 		updateInvitation(false);
 	}
 
 	function acceptInvitation() {
-		invitation?.members?.forEach((m) => (m.accepted = 'true'));
-		invitation = invitation;
-		if (invitation?.members?.length > 1) {
+		$invitation?.members?.forEach((m) => (m.accepted = 'true'));
+		if ($invitation?.members?.length > 1) {
 			showModal = true;
 		} else {
 			updateInvitation(true);
@@ -42,18 +38,18 @@
 	function updateInvitation(accepted: boolean) {
 		if (accepted) acceptStatus = SendStatus.PENDING;
 		else declineStatus = SendStatus.PENDING;
-		for (const member of invitation.members) {
+		for (const member of $invitation.members) {
 			if (member.accepted !== 'true' && member.accepted !== 'false') {
 				member.accepted = 'false';
 			}
 		}
-		invitation = invitation;
-		fetch(`/${invitation?._id}`, {
+		invitation.set($invitation);
+		fetch(`/${$invitation?._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(invitation)
+			body: JSON.stringify($invitation)
 		}).then((response) => {
 			if (response.status === 200) {
 				if (accepted) acceptStatus = SendStatus.SUCCESS;
@@ -68,68 +64,45 @@
 	}
 </script>
 
-<div id="rsvp" class="relative min-h-full snap-start">
-	<div
-		class="container absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2 p-6 md:gap-6"
-	>
-		<h1
-			class="my-2 max-w-full break-words text-center font-cheap-pine text-4xl md:my-4 md:text-6xl"
+<div class="fixed bottom-0 right-0 z-10 w-full bg-white p-2 md:w-fit">
+	<div class="flex gap-2 font-oswald">
+		<button
+			on:click={() => acceptInvitation()}
+			{disabled}
+			class="relative grow border-0 bg-black px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-green-600 focus:ring-2"
 		>
-			{invitation?.salutation || ''}
-		</h1>
-		{#each details?.text || [] as line}
-			<p class="text-center font-oswald text-lg md:text-xl lg:text-2xl">
-				{line}
-			</p>
-		{/each}
-		<div class="mt-4 flex gap-6 font-oswald">
-			<button
-				on:click={() => acceptInvitation()}
-				{disabled}
-				class="relative border-0 bg-black px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-green-600 focus:ring-2"
+			Teilnahme zusagen
+			<div
+				class="absolute inset-0 h-full w-full transition-all {acceptStatus !== SendStatus.NONE
+					? 'bg-black/75 text-white'
+					: ''}"
 			>
-				Teilnahme zusagen
-				<div
-					class="absolute inset-0 h-full w-full transition-all {acceptStatus !== SendStatus.NONE
-						? 'bg-black/75 text-white'
-						: ''}"
-				>
-					<div class="flex h-full items-center justify-center">
-						<StatusIndicator status={acceptStatus} />
-					</div>
+				<div class="flex h-full items-center justify-center">
+					<StatusIndicator status={acceptStatus} />
 				</div>
-			</button>
-			<button
-				on:click={() => declineInvitation()}
-				{disabled}
-				class="relative border-2 border-black py-2 px-4 text-xl ring-black ring-offset-2 ring-offset-white transition hover:border-red-600 hover:bg-red-600 hover:text-white focus:ring-2"
+			</div>
+		</button>
+		<button
+			on:click={() => declineInvitation()}
+			{disabled}
+			class="relative grow border-2 border-black py-2 px-4 text-xl ring-black ring-offset-2 ring-offset-white transition hover:border-red-600 hover:bg-red-600 hover:text-white focus:ring-2"
+		>
+			Teilnahme absagen
+			<div
+				class="absolute inset-0 h-full w-full transition-all {declineStatus !== SendStatus.NONE
+					? 'bg-black/75 text-white'
+					: ''}"
 			>
-				Teilnahme absagen
-				<div
-					class="absolute inset-0 h-full w-full transition-all {declineStatus !== SendStatus.NONE
-						? 'bg-black/75 text-white'
-						: ''}"
-				>
-					<div class="flex h-full items-center justify-center">
-						<StatusIndicator status={declineStatus} />
-					</div>
+				<div class="flex h-full items-center justify-center">
+					<StatusIndicator status={declineStatus} />
 				</div>
-			</button>
-		</div>
-		<div class="mx-auto font-oswald text-xl">
-			{#if invitation?.members?.every((m) => m.accepted === 'true')}
-				Wir freuen uns auf Euer Kommen!
-			{:else if invitation?.members?.some((m) => m.accepted === 'true')}
-				Schade, dass Ihr nicht alle kommen könnt, aber wir freuen uns auf Euer Kommen!
-			{:else if invitation?.members?.every((m) => m.accepted === 'false')}
-				Schade, dass Ihr nicht kommen könnt.
-			{/if}
-		</div>
+			</div>
+		</button>
 	</div>
 </div>
 {#if showModal}
 	<div
-		class="fixed inset-0 h-screen w-screen font-oswald"
+		class="fixed inset-0 z-50 h-screen w-screen font-oswald"
 		transition:fade
 		on:click|stopPropagation={() => (showModal = false)}
 	>
@@ -139,7 +112,7 @@
 				transition:scale
 				class="m-4 flex w-[32rem] max-w-[32rem] flex-col gap-2 border-4 border-black bg-white p-8"
 			>
-				{#each invitation?.members || [] as member}
+				{#each $invitation?.members || [] as member}
 					<label class="inline-flex items-center">
 						<input
 							type="checkbox"
