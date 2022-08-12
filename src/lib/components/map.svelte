@@ -16,4 +16,4 @@
 	});
 </script>
 
-<div id="map" class="h-screen" />
+<div id="map" class="h-full" />

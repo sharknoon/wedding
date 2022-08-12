@@ -12,7 +12,7 @@ module.exports = {
 	plugins: [
 		require('@tailwindcss/forms'),
 		plugin(function ({ addUtilities }) {
-			const writingModeUtilities = {
+			addUtilities({
 				'.horizontal-tb': {
 					writingMode: 'horizontal-tb'
 				},
@@ -22,8 +22,7 @@ module.exports = {
 				'.vertical-lr': {
 					writingMode: 'vertical-lr'
 				}
-			};
-			addUtilities(writingModeUtilities);
+			});
 		})
 	]
 };

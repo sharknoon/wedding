@@ -92,12 +92,9 @@
 
 	$: showModal = false;
 
-	$: acceptances = 0;
-	$: {
-		acceptances = i
-			.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
-			.reduce((partialSum, a) => partialSum + a, 0);
-	}
+	$: acceptances = i
+		.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
+		.reduce((partialSum, a) => partialSum + a, 0);
 
 	$: cancellations = i
 		.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
@@ -112,24 +109,24 @@
 		.reduce((partialSum, a) => partialSum + a, 0);
 </script>
 
-<div class="container mx-auto font-oswald md:px-16">
-	<h1 class="my-6 text-center font-cheap-pine text-5xl sm:text-6xl">Einladungen</h1>
+<div class="font-oswald container mx-auto md:px-16">
+	<h1 class="font-cheap-pine my-6 text-center text-5xl sm:text-6xl">Einladungen</h1>
 
 	<div
 		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
 	>
 		<div
-			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+			class="font-cheap-pine-sans h-full bg-black py-2 px-1 text-center text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
 		>
 			Name
 		</div>
 		<div
-			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+			class="font-cheap-pine-sans h-full bg-black py-2 px-1 text-center text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
 		>
 			Teilnahme
 		</div>
 		<div
-			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
+			class="font-cheap-pine-sans h-full bg-black py-2 px-1 text-center text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
 		>
 			Aktionen
 		</div>
@@ -293,10 +290,10 @@
 </div>
 
 {#if showModal}
-	<div class="fixed inset-0 h-screen w-screen max-w-[100vw] font-oswald">
+	<div class="font-oswald fixed inset-0 h-screen w-screen max-w-[100vw]">
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div class="flex w-[32rem] max-w-full flex-col border-2 border-black bg-white p-3">
-				<h1 class="my-6 text-center font-cheap-pine-sans text-4xl">Neue Einladung erstellen</h1>
+				<h1 class="font-cheap-pine-sans my-6 text-center text-4xl">Neue Einladung erstellen</h1>
 				<span>Anrede</span>
 				<input
 					type="text"
