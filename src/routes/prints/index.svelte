@@ -9,7 +9,7 @@
 			href="/prints/invitation"
 			class=" font-cheap-pine-sans text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 		>
-			Save the Date Karte
+			Save-the-Date Karte
 		</a>
 		<a
 			href="/prints/menue"
@@ -22,6 +22,18 @@
 			class=" font-cheap-pine-sans text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
 		>
 			Programmheft
+		</a>
+		<a
+			href="/prints/thankyoucard"
+			class=" font-cheap-pine-sans text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
+		>
+			Dankeskarte
+		</a>
+		<a
+			href="/prints/musicwishcard"
+			class=" font-cheap-pine-sans text-6xl drop-shadow-2xl transition ease-in-out hover:scale-110"
+		>
+			Musikwunschkarte
 		</a>
 	</nav>
 </div>

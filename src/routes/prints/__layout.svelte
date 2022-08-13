@@ -10,8 +10,8 @@
 
 <script lang="ts">
 	export let url: string;
-	$: backLink = url === '/prints' ? '/invitation/jessica' : '/prints';
-	$: backTitle = url === '/prints' ? 'Zur Hauptwebsite' : 'Zurück';
+	$: backLink = url === '/prints' ? '/invitations' : '/prints';
+	$: backTitle = url === '/prints' ? 'Zu den Einladungen' : 'Zurück';
 </script>
 
 <div

@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	export const load: import('./__types/invitation').Load = ({ url }) => {
-		const id = url.searchParams.get('id') || 'jessica';
+		const id = url.searchParams.get('id') || 'guhl';
 		return {
 			props: {
 				id
