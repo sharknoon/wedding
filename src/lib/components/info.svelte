@@ -55,7 +55,7 @@
 			alt="info"
 		/>
 	</picture>
-	<div class="absolute flex h-full w-full flex-col justify-between gap-8 p-2 md:pb-[4.5rem]">
+	<div class="flex flex-col justify-between gap-8 p-2 md:pb-[4.5rem]">
 		<div class="relative flex w-full justify-center">
 			<div
 				class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-cheap-pine-sans"
