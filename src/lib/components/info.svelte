@@ -45,7 +45,7 @@
 	});
 </script>
 
-<div id="info" class="relative min-h-full snap-start">
+<div id="info" class="relative h-full snap-start">
 	<picture>
 		<source srcset="/images/backgrounds/info.avif" type="image/avif" />
 		<source srcset="/images/backgrounds/info.webp" type="image/webp" />
@@ -55,45 +55,43 @@
 			alt="info"
 		/>
 	</picture>
-	<div class="flex flex-col justify-between gap-8 p-2 md:pb-[4.5rem]">
-		<div class="relative flex w-full justify-center">
-			<div
-				class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-cheap-pine-sans"
-			>
-				<div class="flex items-center divide-x-2 divide-black pb-2">
-					<span class="pr-2 font-cheap-pine text-8xl">
-						{date.toLocaleDateString(undefined, {
-							day: '2-digit'
+	<div class="relative flex h-full flex-col items-center justify-between gap-8 p-2 md:pb-[4.5rem]">
+		<div
+			class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-cheap-pine-sans"
+		>
+			<div class="flex items-center divide-x-2 divide-black pb-2">
+				<span class="pr-2 font-cheap-pine text-8xl">
+					{date.toLocaleDateString(undefined, {
+						day: '2-digit'
+					})}
+				</span>
+				<div class="flex grow flex-col pl-2 text-center">
+					<span
+						class="bg-black px-1 font-cheap-pine-sans text-4xl leading-none tracking-widest text-white"
+					>
+						{date.toLocaleDateString('de-DE', {
+							month: 'long'
 						})}
 					</span>
-					<div class="flex grow flex-col pl-2 text-center">
-						<span
-							class="bg-black px-1 font-cheap-pine-sans text-4xl leading-none tracking-widest text-white"
-						>
-							{date.toLocaleDateString('de-DE', {
-								month: 'long'
-							})}
-						</span>
-						<span class="flex justify-between font-cheap-pine-sans text-6xl font-bold">
-							{#each year?.split('') as c}
-								<div>{c}</div>
-							{/each}
-						</span>
-					</div>
+					<span class="flex justify-between font-cheap-pine-sans text-6xl font-bold">
+						{#each year?.split('') as c}
+							<div>{c}</div>
+						{/each}
+					</span>
 				</div>
-				<div class="py-1 text-center text-3xl md:text-4xl 2xl:text-5xl">
-					{$details?.locationName}
-				</div>
-				<div class="flex w-full divide-x-2 divide-black pt-2 text-center font-oswald text-lg">
-					<div class="flex-auto pr-1">{$details?.street}</div>
-					<div class="flex-auto px-1">{$details?.city}</div>
-					<div class="flex-auto pl-1">
-						{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
-					</div>
+			</div>
+			<div class="py-1 text-center text-3xl md:text-4xl 2xl:text-5xl">
+				{$details?.locationName}
+			</div>
+			<div class="flex w-full divide-x-2 divide-black pt-2 text-center font-oswald text-lg">
+				<div class="flex-auto pr-1">{$details?.street}</div>
+				<div class="flex-auto px-1">{$details?.city}</div>
+				<div class="flex-auto pl-1">
+					{date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })} Uhr
 				</div>
 			</div>
 		</div>
-		<div class="relative flex w-full justify-center gap-4">
+		<div class="flex gap-4">
 			{#each countdown as c}
 				<div
 					class="flex aspect-square min-w-[6rem] flex-col items-center justify-center border-4 border-black bg-white font-cheap-pine-sans md:min-w-[7rem]"
