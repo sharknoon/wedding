@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { invitation, details } from '$lib/stores';
+
+	$: deadline = new Date($details?.deadline);
 </script>
 
 <div id="rsvp" class="min-h-full snap-start">
@@ -14,14 +16,20 @@
 				{line}
 			</p>
 		{/each}
-		<div class="mx-auto font-oswald text-xl">
+		<p class="text-center font-oswald text-lg md:text-xl lg:text-2xl">
 			{#if $invitation?.members?.every((m) => m.accepted === 'true')}
 				Wir freuen uns auf Euer Kommen!
 			{:else if $invitation?.members?.some((m) => m.accepted === 'true')}
 				Schade, dass Ihr nicht alle kommen könnt, aber wir freuen uns auf Euer Kommen!
 			{:else if $invitation?.members?.every((m) => m.accepted === 'false')}
 				Schade, dass Ihr nicht kommen könnt.
+			{:else}
+				Meldet Euch bitte bis zum {deadline.toLocaleDateString('de-DE', {
+					day: '2-digit',
+					month: '2-digit',
+					year: 'numeric'
+				})} bei uns, damit wir wissen, ob Ihr kommt.
 			{/if}
-		</div>
+		</p>
 	</div>
 </div>

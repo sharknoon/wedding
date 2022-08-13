@@ -64,7 +64,7 @@
 	}
 </script>
 
-<div class="fixed bottom-0 right-0 z-10 w-full bg-white p-2 md:w-fit">
+<div class="bg-white p-2 md:fixed md:bottom-0 md:right-0">
 	<div class="flex gap-2 font-oswald">
 		<button
 			on:click={() => acceptInvitation()}

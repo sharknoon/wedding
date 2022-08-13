@@ -16,12 +16,14 @@
 	d.set(details);
 </script>
 
-<RSVP />
-<div class="fixed h-full h-[100dvh] w-full snap-y snap-proximity overflow-y-scroll">
-	<Home />
-	<Info />
-	<Details />
-	<!--<Program {details} />-->
-	<Map apiKey={googleMapsApiKey} />
-	<FAQ />
+<div class="fixed inset-0 flex flex-col">
+	<div class="grow snap-y snap-proximity overflow-y-scroll">
+		<Home />
+		<Info />
+		<Details />
+		<!--<Program {details} />-->
+		<Map apiKey={googleMapsApiKey} />
+		<FAQ />
+	</div>
+	<RSVP />
 </div>
