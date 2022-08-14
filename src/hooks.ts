@@ -1,6 +1,7 @@
 import { ADMIN_LOGIN } from '$lib/env';
 
 export const handle: import('@sveltejs/kit').Handle = async ({ event, resolve }) => {
+	/*
 	if (event.url.pathname.startsWith('/invitations')) {
 		const auth = event.request.headers.get('Authorization');
 
@@ -13,6 +14,6 @@ export const handle: import('@sveltejs/kit').Handle = async ({ event, resolve })
 			});
 		}
 	}
-
+*/
 	return resolve(event);
 };
