@@ -1,9 +1,26 @@
 <script lang="ts">
+	import { printIds } from '../stores';
 	import Divider from './divider.svelte';
 	import Footer from './footer.svelte';
 	import Page from './page.svelte';
 	import Header from './header.svelte';
 	import Timeline from './timeline.svelte';
+
+	$printIds = [
+		'schedule-1',
+		'schedule-2',
+		'schedule-3',
+		'schedule-4',
+		'schedule-5',
+		'schedule-6',
+		'schedule-7',
+		'schedule-8',
+		'schedule-9',
+		'schedule-10',
+		'schedule-11',
+		'schedule-12',
+		'schedule-13'
+	];
 
 	// Program
 	const programItems = [
@@ -169,11 +186,11 @@
 	const totalPages = 12;
 </script>
 
-<Page>
-	<div id="test" class="flex grow flex-col items-center justify-center gap-8 px-12">
+<Page id="schedule-1">
+	<div class="flex grow flex-col items-center justify-center gap-8 px-12">
 		<div class="grid h-[17rem] w-[17rem] grid-cols-2 grid-rows-1">
 			<div
-				style="background-image: url('/images/people/midrene-and-josua.webp')"
+				style="background-image: url('/images/people/midrene-and-josua-large.png')"
 				class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
 			/>
 			<div class="col-start-2 row-start-1 flex flex-col">
@@ -249,7 +266,7 @@
 	</div>
 </Page>
 
-<Page>
+<Page id="schedule-2">
 	<Header title="Programm" />
 	<Divider />
 	<div class="relative flex grow py-3">
@@ -292,7 +309,7 @@
 	<Footer currentPage={1} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-3">
 	<Header title="Das Brautpaar" />
 	<Divider />
 	<div class="relative grow">
@@ -371,7 +388,7 @@
 	<Footer currentPage={2} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-4">
 	<Timeline />
 	<Divider />
 	<div class="text-1curcenter flex grow flex-col items-center justify-center gap-12">
@@ -390,7 +407,7 @@
 	<Footer currentPage={3} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-5">
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-4">
@@ -401,7 +418,7 @@
 	<Footer currentPage={4} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-6">
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
@@ -419,7 +436,7 @@
 	<Footer currentPage={5} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-7">
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-4">
@@ -430,7 +447,7 @@
 	<Footer currentPage={6} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-8">
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center text-center">
@@ -452,7 +469,7 @@
 	<Footer currentPage={7} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-9">
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
@@ -478,7 +495,7 @@
 	<Footer currentPage={8} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-10">
 	<Timeline />
 	<div class="flex grow flex-col items-center justify-center">
 		<h2 class="font-cheap-pine-sans text-3xl">Der Herr segne dich</h2>
@@ -487,7 +504,7 @@
 	<Footer currentPage={9} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-11">
 	<Timeline />
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-12 text-center">
@@ -508,7 +525,7 @@
 	<Footer currentPage={10} {totalPages} />
 </Page>
 
-<Page>
+<Page id="schedule-12">
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-4 px-24 text-center">
 		<div class="font-cheap-pine text-5xl"><span class="text-red-600">Schön</span>,</div>
@@ -552,7 +569,7 @@
 	<Footer currentPage="12" totalPages={totalPages} />
 </Page> -->
 
-<Page>
+<Page id="schedule-13">
 	<Divider />
 	<div class="flex grow flex-col items-center justify-center gap-8">
 		<div class="mx-12 flex items-center gap-4 self-stretch px-4">

@@ -12,22 +12,31 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
+	import { printIds } from './stores';
 
 	export let id = '';
 
+	$printIds = ['invitation-front', 'invitation-back'];
+
+	$: qrcode = '';
+
 	onMount(() => {
-		QRCode.toCanvas(document.getElementById('qrcode'), `https://midrene-und-josua.de/${id}`, {
-			errorCorrectionLevel: 'H',
-			margin: 0,
-			width: 128
-		});
+		QRCode.toDataURL(
+			`https://midrene-und-josua.de/${id}`,
+			{
+				errorCorrectionLevel: 'H',
+				margin: 0,
+				width: 128
+			},
+			(_, url) => (qrcode = url)
+		);
 	});
 </script>
 
-<div class="flex h-[18rem] w-[42rem] bg-white p-2 shadow-2xl">
+<div class="flex h-[18rem] w-[42rem] max-w-[42rem] bg-white p-2 shadow-2xl" id="invitation-front">
 	<div class="grid w-full grid-cols-5 grid-rows-1">
 		<div
-			style="background-image: url('/images/people/midrene-and-josua.webp')"
+			style="background-image: url('/images/people/midrene-and-josua-large.png')"
 			class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
 		/>
 		<div class="col-start-2 row-start-1 flex flex-col">
@@ -74,15 +83,13 @@
 	</div>
 </div>
 
-<div class="flex h-[18rem] w-[42rem] bg-white p-2 shadow-2xl">
+<div class="flex h-[18rem] w-[42rem] max-w-[42rem] bg-white p-2 shadow-2xl" id="invitation-back">
 	<div
 		class="rotate-180 border-l-2 border-black pl-2 text-center text-2xl text-red-600 vertical-lr"
 	>
 		23 09 23
 	</div>
-	<div
-		class="flex grow flex-col justify-between divide-y-2 divide-black border-r-[0.1rem] border-dashed border-gray-400 px-2"
-	>
+	<div class="flex grow flex-col justify-between divide-y-2 divide-black px-2">
 		<div class="flex items-center py-4">
 			<div class="mx-6 grow border-t-2 border-black bg-black" />
 			<span class="font-cheap-pine text-5xl uppercase">Die Hochzeit</span>
@@ -179,7 +186,7 @@
 		<div class="text-center font-cheap-pine-sans text-sm">
 			www.midrene-und-josua.de<br />/{id}
 		</div>
-		<canvas id="qrcode" class="mx-2 self-center" />
+		<img src={qrcode} alt="qrcode" class="mx-2 self-center" style="image-rendering: pixelated;" />
 		<div class="tansform rotate-180 text-center font-cheap-pine-sans text-sm">
 			www.midrene-und-josua.de<br />/{id}
 		</div>
