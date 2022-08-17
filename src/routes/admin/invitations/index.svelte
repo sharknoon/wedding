@@ -2,12 +2,15 @@
 	import type { Invitation, Member } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { fade, slide } from 'svelte/transition';
+	import { downloadIds } from '$lib/stores';
 
 	export let invitations: Invitation[];
 	$: i = invitations;
 
+	$downloadIds = [];
+
 	onMount(() => {
-		const evtSource = new EventSource('/invitations/events');
+		const evtSource = new EventSource('/admin/invitations/events');
 		evtSource.onerror = (e) => console.error(e);
 		evtSource.addEventListener('insert', (event) => {
 			i = [...i, JSON.parse(event.data)];
@@ -34,7 +37,6 @@
 
 	let newInvitation: Invitation;
 	$: newInvitation = {
-		_id: '',
 		salutation: '',
 		members: [{ ...defaultMember }]
 	};
@@ -51,7 +53,6 @@
 
 	function resetInvitationCreation() {
 		newInvitation = {
-			_id: '',
 			salutation: '',
 			members: [{ ...defaultMember }]
 		};
@@ -67,8 +68,10 @@
 			body: JSON.stringify(newInvitation)
 		})
 			.then(async (res) => {
-				if (res.status === 500) {
-					alert(res.status + res.statusText + '\n\n' + (await res.text()));
+				if (res.status >= 400) {
+					alert(
+						'Die Einladung konnte nicht gespeichert werden (Möglicherweise ist die ID doppelt vorhanden)'
+					);
 				}
 			})
 			.catch((err) => {
@@ -109,9 +112,7 @@
 		.reduce((partialSum, a) => partialSum + a, 0);
 </script>
 
-<div class="container mx-auto font-oswald md:px-16">
-	<h1 class="my-6 text-center font-cheap-pine text-5xl sm:text-6xl">Einladungen</h1>
-
+<div class="container mx-auto font-oswald">
 	<div
 		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
 	>
@@ -358,49 +359,44 @@
 					</svg>
 					Neues Mitglied hinzufügen
 				</button>
-				<div class="mt-6 flex max-w-full flex-col items-center gap-3 sm:flex-row">
-					<div class="min-w-0 max-w-full grow break-words">
-						midrene-und-josua.de/{newInvitation._id}
-					</div>
-					<div class="flex gap-3">
-						<button
-							on:click={() => resetInvitationCreation()}
-							class="flex items-center justify-center gap-2 self-end border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
+				<div class="mt-6 flex max-w-full justify-end gap-3">
+					<button
+						on:click={() => resetInvitationCreation()}
+						class="flex items-center justify-center gap-2 self-end border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2"
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-6 w-6"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-							</svg>
-							Abbrechen
-						</button>
-						<button
-							disabled={!validInvitation}
-							on:click={createInvitation}
-							class="flex items-center justify-center gap-2 self-end border-2 border-black bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:border-neutral-900 hover:bg-neutral-900 focus:ring-2 disabled:border-neutral-700 disabled:bg-neutral-700"
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+						Abbrechen
+					</button>
+					<button
+						disabled={!validInvitation}
+						on:click={createInvitation}
+						class="flex items-center justify-center gap-2 self-end border-2 border-black bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:border-neutral-900 hover:bg-neutral-900 focus:ring-2 disabled:border-neutral-700 disabled:bg-neutral-700"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2"
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-6 w-6"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-								/>
-							</svg>
-							Speichern
-						</button>
-					</div>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+							/>
+						</svg>
+						Speichern
+					</button>
 				</div>
 			</div>
 		</div>

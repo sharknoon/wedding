@@ -1,4 +1,10 @@
-import { createInvitation, deleteInvitation, getAllInvitations } from '$lib/database';
+import {
+	createInvitation,
+	deleteInvitation,
+	existsInvitation,
+	getAllInvitations
+} from '$lib/database';
+import type { Invitation } from '$lib/types';
 
 export const GET: import('./__types/index').RequestHandler = async () => {
 	const invitations = await getAllInvitations();
@@ -33,15 +39,29 @@ export const DELETE: import('./__types/index').RequestHandler = async ({ url }) 
 };
 
 export const PUT: import('./__types/index').RequestHandler = async ({ request }) => {
-	const result = await createInvitation(await request.json());
-	if (!result.insertedId) {
+	try {
+		const invitation: Invitation = await request.json();
+		const id = invitation.members
+			.map((m) => m.name.trim().split(' ').pop()?.toLowerCase())
+			.filter((name, index, self) => self.indexOf(name) === index)
+			.filter((name) => name?.length || 0 > 0)
+			.join('-');
+		invitation._id = id;
+		let counter = 0;
+		while (await existsInvitation(invitation._id)) {
+			console.log(invitation._id);
+			counter++;
+			invitation._id = `${id}-${counter}`;
+		}
+		await createInvitation(invitation);
 		return {
-			status: 500,
+			status: 200,
+			body: { message: 'Ok' }
+		};
+	} catch (error) {
+		return {
+			status: 400,
 			body: { message: 'Invitation could not be saved' }
 		};
 	}
-	return {
-		status: 200,
-		body: { message: 'Ok' }
-	};
 };

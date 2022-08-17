@@ -16,7 +16,7 @@ export const GET: import('./__types/index').RequestHandler = async ({ params }) 
 
 	if (!invitation) {
 		return {
-			status: 303,
+			status: 302,
 			headers: {
 				location: `/`
 			}

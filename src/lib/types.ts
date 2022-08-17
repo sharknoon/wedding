@@ -1,5 +1,5 @@
 export type Invitation = {
-	_id: string;
+	_id?: string;
 	salutation: string;
 	members: Member[];
 };

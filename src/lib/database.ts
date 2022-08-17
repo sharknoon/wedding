@@ -31,6 +31,11 @@ export async function getInvitation(id: string): Promise<WithId<Invitation> | nu
 	return invitations.findOne({ _id: id });
 }
 
+export async function existsInvitation(id: string): Promise<boolean> {
+	await setup();
+	return (await invitations.countDocuments({ _id: id })) > 0;
+}
+
 export async function getDetails(): Promise<WithId<Details> | null> {
 	await setup();
 	return details.findOne();
