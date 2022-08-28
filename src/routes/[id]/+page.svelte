@@ -1,19 +1,17 @@
 <script lang="ts">
-	import type { Details as D, Invitation } from '$lib/types';
-	import { invitation as i, details as d } from '$lib/stores';
+	import { invitation, details } from '$lib/stores';
 	import RSVP from '$lib/components/rsvp.svelte';
 	import Home from '$lib/components/home.svelte';
 	import Info from '$lib/components/info.svelte';
 	import Details from '$lib/components/details.svelte';
 	import Map from '$lib/components/map.svelte';
 	import FAQ from '$lib/components/faq.svelte';
+	import type { PageData } from './$types';
 
-	export let invitation: Invitation;
-	export let details: D;
-	export let googleMapsApiKey: string;
+	export let data: PageData;
 
-	i.set(invitation);
-	d.set(details);
+	invitation.set(data.invitation);
+	details.set(data.details);
 </script>
 
 <div class="fixed inset-0 flex flex-col">
@@ -22,7 +20,7 @@
 		<Info />
 		<Details />
 		<!--<Program {details} />-->
-		<Map apiKey={googleMapsApiKey} />
+		<Map apiKey={data.googleMapsApiKey} />
 		<FAQ />
 	</div>
 	<RSVP />

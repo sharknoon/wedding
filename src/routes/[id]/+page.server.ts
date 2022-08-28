@@ -1,53 +1,34 @@
+import { error, redirect } from '@sveltejs/kit';
 import { getDetails, getInvitation, updateInvitation } from '$lib/database';
 import { GOOGLE_MAPS_API_KEY } from '$lib/env';
 
-export const GET: import('./__types/index').RequestHandler = async ({ params }) => {
+export const load: import('./$types').PageServerLoad = async ({ params }) => {
 	const invitationId: string = params.id;
 
 	if (!invitationId) {
-		return {
-			status: 400,
-			body: { message: 'Missing invitation id' }
-		};
+		throw error(100, 'Missing invitation id');
 	}
 
 	const invitation = await getInvitation(invitationId);
 	const details = await getDetails();
 
 	if (!invitation) {
-		return {
-			status: 302,
-			headers: {
-				location: `/`
-			}
-		};
+		throw redirect(302, '/');
 	}
 
-	return {
-		body: { invitation: invitation, details: details, googleMapsApiKey: GOOGLE_MAPS_API_KEY }
-	};
+	return { invitation: invitation, details: details, googleMapsApiKey: GOOGLE_MAPS_API_KEY };
 };
 
-export const PUT: import('./__types/index').RequestHandler = async ({ params, request }) => {
+export const PUT: import('./$types').Action = async ({ params, request }) => {
 	const invitationId: string = params.id;
 
 	if (!invitationId) {
-		return {
-			status: 400,
-			body: { message: 'Missing invitation id' }
-		};
+		throw error(400, 'Missing invitation id');
 	}
 
 	const result = await updateInvitation(invitationId, await request.json());
 
 	if (result.matchedCount != 1) {
-		return {
-			status: 404,
-			body: { message: 'Invitation not found' }
-		};
+		throw error(404, 'Invitation not found');
 	}
-	return {
-		status: 200,
-		body: { message: 'Ok' }
-	};
 };

@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import {
 	createInvitation,
 	deleteInvitation,
@@ -6,39 +7,27 @@ import {
 } from '$lib/database';
 import type { Invitation } from '$lib/types';
 
-export const GET: import('./__types/index').RequestHandler = async () => {
+export const load: import('./$types').PageServerLoad = async () => {
 	const invitations = await getAllInvitations();
 
-	return {
-		body: { invitations: invitations }
-	};
+	return { invitations: invitations };
 };
 
-export const DELETE: import('./__types/index').RequestHandler = async ({ url }) => {
+export const DELETE: import('./$types').Action = async ({ url }) => {
 	const invitationId: string = url.searchParams.get('id') || '';
 
 	if (!invitationId) {
-		return {
-			status: 400,
-			body: { message: 'Missing invitation id' }
-		};
+		throw error(400, 'Missing invitation id');
 	}
 
 	const result = await deleteInvitation(invitationId);
 
 	if (result.deletedCount !== 1) {
-		return {
-			status: 400,
-			body: { message: 'Could not delete invitation ' + invitationId }
-		};
+		throw error(400, 'Could not delete invitation ' + invitationId);
 	}
-
-	return {
-		status: 200
-	};
 };
 
-export const PUT: import('./__types/index').RequestHandler = async ({ request }) => {
+export const PUT: import('./$types').Action = async ({ request }) => {
 	try {
 		const invitation: Invitation = await request.json();
 		const id = invitation.members
@@ -54,14 +43,7 @@ export const PUT: import('./__types/index').RequestHandler = async ({ request })
 			invitation._id = `${id}-${counter}`;
 		}
 		await createInvitation(invitation);
-		return {
-			status: 200,
-			body: { message: 'Ok' }
-		};
-	} catch (error) {
-		return {
-			status: 400,
-			body: { message: 'Invitation could not be saved' }
-		};
+	} catch {
+		throw error(500, 'Invitation could not be saved');
 	}
 };

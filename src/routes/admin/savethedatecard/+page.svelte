@@ -1,20 +1,10 @@
-<script lang="ts" context="module">
-	export const load: import('./__types/invitation').Load = ({ url }) => {
-		const id = url.searchParams.get('id') || 'guhl';
-		return {
-			props: {
-				id
-			}
-		};
-	};
-</script>
-
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
 	import { downloadIds } from '$lib/stores';
+	import type { PageData } from './$types';
 
-	export let id = '';
+	export let data: PageData;
 
 	$downloadIds = ['savethedate-front', 'savethedate-back'];
 
@@ -22,7 +12,7 @@
 
 	onMount(() => {
 		QRCode.toDataURL(
-			`https://midrene-und-josua.de/${id}`,
+			`https://midrene-und-josua.de/${data.id}`,
 			{
 				errorCorrectionLevel: 'H',
 				margin: 0,
@@ -190,11 +180,11 @@
 		</div>
 		<div class="flex flex-col items-center justify-evenly">
 			<div class="text-center font-cheap-pine-sans text-sm">
-				www.midrene-und-josua.de<br />/{id}
+				www.midrene-und-josua.de<br />/{data.id}
 			</div>
 			<img src={qrcode} alt="qrcode" class="mx-2 self-center" style="image-rendering: pixelated;" />
 			<div class="tansform rotate-180 text-center font-cheap-pine-sans text-sm">
-				www.midrene-und-josua.de<br />/{id}
+				www.midrene-und-josua.de<br />/{data.id}
 			</div>
 		</div>
 		<div class="flex items-center justify-center gap-3 border-l-2 border-black py-1 vertical-lr">

@@ -17,17 +17,11 @@ stream.on('change', (c) => {
 	controllers.forEach((controller) => controller.enqueue(result));
 });
 
-export const GET: import('./__types/index').RequestHandler = async () => {
+export const GET: import('./$types').RequestHandler = async () => {
 	let controller: ReadableStreamController<string>;
 
-	return {
-		status: 200,
-		headers: {
-			'Content-Type': 'text/event-stream',
-			'Cache-Control': 'no-cache',
-			Connection: 'keep-alive'
-		},
-		body: new ReadableStream({
+	return new Response(
+		new ReadableStream({
 			start: (c) => {
 				controller = c;
 				controllers.add(controller);
@@ -35,6 +29,13 @@ export const GET: import('./__types/index').RequestHandler = async () => {
 			cancel: () => {
 				controllers.delete(controller);
 			}
-		})
-	};
+		}),
+		{
+			headers: {
+				'Content-Type': 'text/event-stream',
+				'Cache-Control': 'no-cache',
+				Connection: 'keep-alive'
+			}
+		}
+	);
 };

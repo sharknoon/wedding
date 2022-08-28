@@ -3,9 +3,10 @@
 	import { onMount } from 'svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { downloadIds } from '$lib/stores';
+	import type { PageData } from './$types';
 
-	export let invitations: Invitation[];
-	$: i = invitations;
+	export let data: PageData;
+	$: i = data.invitations;
 
 	$downloadIds = [];
 
@@ -202,7 +203,7 @@
 			>
 				<a
 					target="_blank"
-					href={'/prints/invitation?id=' + invitation._id}
+					href={'/admin/savethedatecard?id=' + invitation._id}
 					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 				>
 					<svg

@@ -1,20 +1,11 @@
-<script lang="ts" context="module">
-	export const load: import('./__types/__layout').Load = ({ url }) => {
-		return {
-			props: {
-				path: url.pathname
-			}
-		};
-	};
-</script>
-
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { download } from '$lib/download';
 	import { downloadIds } from '$lib/stores';
+	import type { LayoutData } from './$types';
 
-	export let path: string;
+	export let data: LayoutData;
 
 	const tabs = [
 		{
@@ -52,7 +43,7 @@
 	$: paths = tabs.map((t) => t.href);
 
 	onMount(() => {
-		if (!paths.includes(path)) {
+		if (!paths.includes(data.path)) {
 			goto(tabs[0].href);
 		}
 	});
@@ -64,7 +55,7 @@
 			<a href={tab.href} class="relative flex items-center gap-1 py-4">
 				{@html tab.icon}
 				<span class="font-cheap-pine-sans text-2xl">{tab.name}</span>
-				<div class="absolute bottom-0 h-1 w-full {tab.href === path ? 'bg-black' : ''}" />
+				<div class="absolute bottom-0 h-1 w-full {tab.href === data.path ? 'bg-black' : ''}" />
 			</a>
 		{/each}
 	</div>
