@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { download } from '$lib/download';
+	import { downloadNodeAsPng } from '$lib/download';
 	import { downloadIds } from '$lib/stores';
 	import type { LayoutData } from './$types';
 
@@ -62,7 +62,7 @@
 	<div class="relative">
 		<hr class="border-b-2 border-black pb-[-1px]" />
 		{#if $downloadIds.length > 0}
-			<button on:click={() => download($downloadIds)} class="absolute right-4 top-4">
+			<button on:click={() => downloadNodeAsPng($downloadIds)} class="absolute right-4 top-4">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-8 w-8"

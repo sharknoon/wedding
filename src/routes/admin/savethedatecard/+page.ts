@@ -1,5 +1,4 @@
-
-export const load: import('./$types').Load = ({ url }) => {
+export const load: import('./$types').PageLoad = ({ url }) => {
 	const id = url.searchParams.get('id') || 'guhl';
 	return {
 		id

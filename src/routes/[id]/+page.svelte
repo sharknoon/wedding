@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { invitation, details } from '$lib/stores';
-	import RSVP from '$lib/components/rsvp.svelte';
-	import Home from '$lib/components/home.svelte';
-	import Info from '$lib/components/info.svelte';
-	import Details from '$lib/components/details.svelte';
-	import Map from '$lib/components/map.svelte';
-	import FAQ from '$lib/components/faq.svelte';
+	import RSVP from './rsvp.svelte';
+	import Home from './home.svelte';
+	import Info from './info.svelte';
+	import Details from './details.svelte';
+	import Map from './map.svelte';
+	import FAQ from './faq.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	invitation.set(data.invitation);
-	details.set(data.details);
+	if (data.details) {
+		details.set(data.details);
+	}
 </script>
 
 <div class="fixed inset-0 flex flex-col">

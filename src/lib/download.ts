@@ -1,15 +1,15 @@
 import domtoimage from 'dom-to-image';
 
-export function download(printIds: string[], scale = 8) {
-	for (const printId of printIds) {
+export function downloadNodeAsPng(nodeIds: string[], imageScale = 8) {
+	for (const printId of nodeIds) {
 		const node = document.getElementById(printId);
 		if (!node) return;
 		domtoimage
 			.toBlob(node, {
-				width: node.clientWidth * scale,
-				height: node.clientHeight * scale,
+				width: node.clientWidth * imageScale,
+				height: node.clientHeight * imageScale,
 				style: {
-					transform: `scale(${scale})`,
+					transform: `scale(${imageScale})`,
 					transformOrigin: 'top left'
 				}
 			})
