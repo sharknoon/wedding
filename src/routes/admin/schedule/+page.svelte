@@ -18,8 +18,7 @@
 		'schedule-9',
 		'schedule-10',
 		'schedule-11',
-		'schedule-12',
-		'schedule-13'
+		'schedule-12'
 	];
 
 	// Program
@@ -183,7 +182,7 @@
 		}
 	];*/
 
-	const totalPages = 12;
+	const totalPages = 10;
 </script>
 
 <div class="flex flex-col items-center gap-16">
@@ -192,7 +191,7 @@
 			<div class="grid h-[17rem] w-[17rem] grid-cols-2 grid-rows-1">
 				<div
 					style="background-image: url('/images/people/midrene-and-josua-large.png')"
-					class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
+					class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat"
 				/>
 				<div class="col-start-2 row-start-1 flex flex-col">
 					<div
@@ -392,7 +391,7 @@
 	</Page>
 
 	<Page id="schedule-4">
-		<Timeline />
+		<Timeline index={0} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 			<h1 class="font-cheap-pine text-4xl">Kirchliche Trauung</h1>
@@ -411,47 +410,38 @@
 	</Page>
 
 	<Page id="schedule-5">
-		<Timeline />
+		<Timeline index={1} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-4">
 			<div class="font-cheap-pine-sans text-3xl">Ins Wasser fällt ein Stein</div>
 			<img src="/images/sheetmusic/Ins_Wasser_faellt_ein_Stein.svg" alt="sheet notes" />
+			<div class="text-center">
+				<h2 class="font-cheap-pine-sans text-3xl">Gebet</h2>
+				<div class="text-lg">Pastorin: Christine Finkbeiner</div>
+			</div>
 		</div>
 		<Divider direction="up" />
 		<Footer currentPage={4} {totalPages} />
 	</Page>
 
 	<Page id="schedule-6">
-		<Timeline />
+		<Timeline index={2} />
 		<Divider />
-		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
-			<div>
-				<h2 class="font-cheap-pine-sans text-3xl">Gebet</h2>
-				<div class="text-lg">Pastorin: Christine Finkbeiner</div>
-			</div>
-			<div>
+		<div class="flex grow flex-col items-center justify-center gap-4">
+			<div class="text-center">
 				<h2 class="font-cheap-pine-sans text-3xl">Biblische Lesung</h2>
 				<div class="text-lg italic">1. Korintherbrief, 13. Kapitel</div>
 				<div class="text-lg">Trauzeugin: Hanna Harsch</div>
 			</div>
+			<div class="font-cheap-pine-sans text-3xl">Liebe ist nicht nur ein Wort</div>
+			<img src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg" alt="sheet notes" />
 		</div>
 		<Divider direction="up" />
 		<Footer currentPage={5} {totalPages} />
 	</Page>
 
 	<Page id="schedule-7">
-		<Timeline />
-		<Divider />
-		<div class="flex grow flex-col items-center justify-center gap-4">
-			<div class="font-cheap-pine-sans text-3xl">Liebe ist nicht nur ein Wort</div>
-			<img src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg" alt="sheet notes" />
-		</div>
-		<Divider direction="up" />
-		<Footer currentPage={6} {totalPages} />
-	</Page>
-
-	<Page id="schedule-8">
-		<Timeline />
+		<Timeline index={3} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center text-center">
 			<div class="mb-3">
@@ -469,11 +459,11 @@
 			<img src="/images/sheetmusic/Da_beruehren_sich_Himmel_und_Erde.svg" alt="sheet notes" />
 		</div>
 		<Divider direction="up" />
-		<Footer currentPage={7} {totalPages} />
+		<Footer currentPage={6} {totalPages} />
 	</Page>
 
-	<Page id="schedule-9">
-		<Timeline />
+	<Page id="schedule-8">
+		<Timeline index={4} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 			<div>
@@ -495,20 +485,20 @@
 			</div>
 		</div>
 		<Divider direction="up" />
-		<Footer currentPage={8} {totalPages} />
+		<Footer currentPage={7} {totalPages} />
 	</Page>
 
-	<Page id="schedule-10">
-		<Timeline />
+	<Page id="schedule-9">
+		<Timeline index={5} />
 		<div class="flex grow flex-col items-center justify-center">
 			<h2 class="font-cheap-pine-sans text-3xl">Der Herr segne dich</h2>
 			<img src="/images/sheetmusic/Der_Herr_segne_dich.svg" alt="sheet notes" class="w-5/6" />
 		</div>
-		<Footer currentPage={9} {totalPages} />
+		<Footer currentPage={8} {totalPages} />
 	</Page>
 
-	<Page id="schedule-11">
-		<Timeline />
+	<Page id="schedule-10">
+		<Timeline index={6} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
 			<div>
@@ -528,10 +518,10 @@
 			</div>
 		</div>
 		<Divider direction="up" />
-		<Footer currentPage={10} {totalPages} />
+		<Footer currentPage={9} {totalPages} />
 	</Page>
 
-	<Page id="schedule-12">
+	<Page id="schedule-11">
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-4 px-24 text-center">
 			<div class="font-cheap-pine text-5xl"><span class="text-red-600">Schön</span>,</div>
@@ -544,7 +534,7 @@
 			<div class="font-cheap-pine-sans text-3xl">dass Ihr diesen besonderen Tag mit uns teilt!</div>
 		</div>
 		<Divider direction="up" />
-		<Footer currentPage={11} {totalPages} />
+		<Footer currentPage={10} {totalPages} />
 	</Page>
 
 	<!-- <Page>
@@ -575,7 +565,7 @@
 	<Footer currentPage="12" totalPages={totalPages} />
 </Page> -->
 
-	<Page id="schedule-13">
+	<Page id="schedule-12">
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-8">
 			<div class="mx-12 flex items-center gap-4 self-stretch px-4">
@@ -599,6 +589,17 @@
 			</div>
 		</div>
 		<Divider direction="up" />
-		<Footer currentPage={12} {totalPages} />
 	</Page>
+
+	<div class="text-center">
+		148x210mm, DIN A5, Bröschüre mit Drahtheftung, <a
+			class="hover:underline"
+			href="https://www.wir-machen-druck.de/broschueren-drahtheftung-din-a5-extrem-guenstig-drucken,category,9436.html"
+			target="_blank"
+		>
+			WIRmachenDRUCK
+		</a>
+		<br />
+		Datenformat: 154x216mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
+	</div>
 </div>

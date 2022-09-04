@@ -1,8 +1,8 @@
 import domtoimage from 'dom-to-image';
 
 export function downloadNodeAsPng(nodeIds: string[], imageScale = 8) {
-	for (const printId of nodeIds) {
-		const node = document.getElementById(printId);
+	for (const nodeId of nodeIds) {
+		const node = document.getElementById(nodeId);
 		if (!node) return;
 		domtoimage
 			.toBlob(node, {
@@ -17,7 +17,7 @@ export function downloadNodeAsPng(nodeIds: string[], imageScale = 8) {
 				const a = document.createElement('a');
 				const url = URL.createObjectURL(blob);
 				a.href = url;
-				a.download = printId + '.png';
+				a.download = nodeId + '.png';
 				document.body.appendChild(a);
 				a.click();
 				setTimeout(function () {

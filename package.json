@@ -7,7 +7,7 @@
 	},
 	"license": "Unlicense",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host",
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
@@ -21,6 +21,7 @@
 		"@sveltejs/kit": "next",
 		"@types/dom-to-image": "^2.6.4",
 		"@types/qrcode": "^1.4.2",
+		"@types/sharp": "^0.30.5",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
 		"autoprefixer": "^10.4.8",
@@ -44,6 +45,7 @@
 		"@tailwindcss/forms": "^0.5.2",
 		"dom-to-image": "^2.6.0",
 		"mongodb": "^4.8.1",
-		"qrcode": "^1.5.1"
+		"qrcode": "^1.5.1",
+		"sharp": "^0.30.7"
 	}
 }

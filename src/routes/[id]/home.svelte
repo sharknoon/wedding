@@ -67,6 +67,7 @@
 			</div>
 			<div class="group flex items-center gap-8">
 				<div class="grow border-t-2 border-black transition group-hover:-translate-x-2" />
+				<!-- old heroicons 1 icon -->
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-10 w-10 transition group-hover:scale-110"
@@ -91,12 +92,13 @@
 	<button on:click={scrollDown} class="text-gray-800" aria-label="go down to the next section">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="h-12 w-12 animate-bounce"
 			fill="none"
 			viewBox="0 0 24 24"
+			stroke-width="2"
 			stroke="currentColor"
+			class="h-12 w-12 animate-bounce"
 		>
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+			<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
 		</svg>
 	</button>
 </div>

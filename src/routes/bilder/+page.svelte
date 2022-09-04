@@ -1,0 +1,3 @@
+<div class="text-center font-oswald text-4xl">
+	Habt noch ein wenig Geduld, die Bilder werden noch vom Fotographen bearbeitet ...
+</div>

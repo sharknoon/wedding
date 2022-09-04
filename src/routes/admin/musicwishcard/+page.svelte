@@ -4,9 +4,9 @@
 	$downloadIds = ['musicwishcard-front', 'musicwishcard-back'];
 </script>
 
-<div class="flex h-full flex-col items-center justify-center gap-16">
+<div class="flex flex-col items-center gap-16">
 	<div
-		class="flex h-[18rem] max-h-[18rem] w-[25rem] flex-col justify-around bg-white p-2 shadow-2xl"
+		class="flex h-[80mm] max-h-[80mm] w-[111mm] flex-col justify-around bg-white p-[6mm] shadow-2xl"
 		id="musicwishcard-front"
 	>
 		<div class="flex grow items-center gap-2">
@@ -57,7 +57,7 @@
 	</div>
 
 	<div
-		class="flex h-[18rem] max-h-[18rem] w-[25rem] flex-col gap-2 divide-y-2 divide-black bg-white p-2 shadow-2xl"
+		class="flex h-[80mm] max-h-[80mm] w-[111mm] flex-col gap-2 divide-y-2 divide-black bg-white p-[6mm] shadow-2xl"
 		id="musicwishcard-back"
 	>
 		<div class="flex items-center py-1">
@@ -74,7 +74,7 @@
 			<div class="font-cheap-pine-sans text-3xl">DJ Janis Blum</div>
 			<div class="font-cheap-pine-sans text-3xl text-red-600">feat.</div>
 			<div
-				class="flex items-center justify-evenly bg-black px-1 text-center font-cheap-pine-sans text-2xl uppercase tracking-widest text-white"
+				class="flex items-center justify-evenly bg-black px-1 text-center font-cheap-pine-sans text-2xl uppercase tracking-wider text-white"
 			>
 				<span>B l a c k</span>
 				<svg
@@ -92,5 +92,17 @@
 				<span> W h i t e </span>
 			</div>
 		</div>
+	</div>
+
+	<div class="text-center">
+		105x74mm, DIN A7 quer, beidseitig bedruckter Flyer, <a
+			class="hover:underline"
+			href="https://www.wir-machen-druck.de/flyer-din-a7-quer-105-cm-x-74-cm-beidseitig-bedruckt.html"
+			target="_blank"
+		>
+			WIRmachenDRUCK
+		</a>
+		<br />
+		Datenformat: 111x80mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
 	</div>
 </div>
