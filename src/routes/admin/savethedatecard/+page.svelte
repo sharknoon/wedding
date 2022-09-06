@@ -3,8 +3,12 @@
 	import QRCode from 'qrcode';
 	import { downloadIds } from '$lib/stores';
 	import type { PageData } from './$types';
+	import { details } from '$lib/stores';
 
 	export let data: PageData;
+
+	$: date = new Date($details?.date);
+	$: deadline = new Date($details?.deadline);
 
 	$downloadIds = ['savethedate-front', 'savethedate-back'];
 
@@ -73,7 +77,11 @@
 				</div>
 				<div class="text-center font-cheap-pine-sans text-4xl leading-none">Save the Date</div>
 				<div class="text-center font-cheap-pine-sans text-3xl leading-none text-red-600">
-					23.09.2023
+					{date.toLocaleDateString('DE-DE', {
+						day: '2-digit',
+						month: 'long',
+						year: 'numeric'
+					})}
 				</div>
 			</div>
 		</div>
@@ -86,7 +94,15 @@
 		<div
 			class="rotate-180 border-l-[3px] border-black pl-3 text-center text-3xl text-red-600 vertical-lr"
 		>
-			23 09 23
+			{date.toLocaleDateString('DE-DE', {
+				day: '2-digit'
+			})}
+			{date.toLocaleDateString('DE-DE', {
+				month: '2-digit'
+			})}
+			{date.toLocaleDateString('DE-DE', {
+				year: '2-digit'
+			})}
 		</div>
 		<div class="flex grow flex-col justify-between divide-y-[3px] divide-black px-3">
 			<div class="flex items-center py-5">
@@ -99,17 +115,23 @@
 					<div
 						class="col-span-5 col-start-1 row-start-1 text-center font-cheap-pine-sans text-2xl uppercase leading-none"
 					>
-						September
+						{date.toLocaleDateString('DE-DE', {
+							month: 'long'
+						})}
 					</div>
 					<div
 						class="col-start-1 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-2xl uppercase leading-[1.1] vertical-lr"
 					>
-						Samstag
+						{date.toLocaleDateString('DE-DE', {
+							weekday: 'long'
+						})}
 					</div>
 					<div
 						class="col-span-3 col-start-2 row-span-3 row-start-2 text-center font-cheap-pine text-8xl leading-[0.75]"
 					>
-						23
+						{date.toLocaleDateString('DE-DE', {
+							day: '2-digit'
+						})}
 					</div>
 					<div
 						class="col-start-5 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-2xl uppercase leading-[1.1] vertical-lr"
@@ -117,9 +139,11 @@
 						Ab 14 Uhr
 					</div>
 					<div
-						class="col-span-5 col-start-1 row-start-5 text-center font-cheap-pine-sans text-2xl uppercase leading-[0.8]"
+						class="col-span-5 col-start-1 row-start-5 text-center font-cheap-pine-sans text-2xl uppercase leading-[0.8] tracking-widest"
 					>
-						2 0 2 3
+						{date.toLocaleDateString('DE-DE', {
+							year: 'numeric'
+						})}
 					</div>
 				</div>
 				<div class="flex grow flex-col gap-1">
@@ -146,17 +170,29 @@
 							<div class="text-center">
 								<span class="text-lg">Abschnitt</span>
 								<br />
-								<span class="text-2xl">23</span>
+								<span class="text-2xl">
+									{date.toLocaleDateString('DE-DE', {
+										day: '2-digit'
+									})}</span
+								>
 							</div>
 							<div class="text-center">
 								<span class="text-lg">Reihe</span>
 								<br />
-								<span class="text-2xl">09</span>
+								<span class="text-2xl">
+									{date.toLocaleDateString('DE-DE', {
+										month: '2-digit'
+									})}</span
+								>
 							</div>
 							<div class="text-center">
 								<span class="text-lg">Sitz</span>
 								<br />
-								<span class="text-2xl">2023</span>
+								<span class="text-2xl">
+									{date.toLocaleDateString('DE-DE', {
+										year: 'numeric'
+									})}</span
+								>
 							</div>
 						</div>
 						<div class="flex grow items-center justify-center font-cheap-pine-sans">
@@ -170,7 +206,13 @@
 				</div>
 			</div>
 			<div class="py-1 text-center font-cheap-pine-sans text-xl leading-tight">
-				<span>Wir bitten um eine Rückmeldung bis zum 23.03.2023.</span>
+				<span
+					>Wir bitten um eine Rückmeldung bis zum {deadline.toLocaleDateString('de-DE', {
+						day: '2-digit',
+						month: '2-digit',
+						year: 'numeric'
+					})}.</span
+				>
 				<br />
 				<span
 					>Nutzt dazu bitte den <span class="text-red-600">QR-Code</span> /
@@ -214,7 +256,15 @@
 			</svg>
 		</div>
 		<div class="border-l-[3px] border-black pl-3 text-center text-3xl text-red-600 vertical-lr">
-			23 09 23
+			{date.toLocaleDateString('DE-DE', {
+				day: '2-digit'
+			})}
+			{date.toLocaleDateString('DE-DE', {
+				month: '2-digit'
+			})}
+			{date.toLocaleDateString('DE-DE', {
+				year: '2-digit'
+			})}
 		</div>
 	</div>
 

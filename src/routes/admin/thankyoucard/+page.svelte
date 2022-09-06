@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
 	import type { PageData } from './$types';
+	import { details } from '$lib/stores';
 
 	export let data: PageData;
 
@@ -36,7 +37,7 @@
 			<div
 				class="absolute bottom-8 right-8 border-2 border-black bg-white p-2 font-oswald tracking-wide"
 			>
-				Midrène und Josua Frank<br />Lerchenbergstraße 94<br />73733 Esslingen am Neckar
+				Midrène und Josua Frank<br />{$details?.privateStreet}<br />{$details?.privateCity}
 			</div>
 		</div>
 		<div class="flex items-center justify-evenly gap-2">

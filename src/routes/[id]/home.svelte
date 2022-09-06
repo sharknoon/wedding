@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { details } from '$lib/stores';
+
+	$: date = new Date($details?.date);
+
 	function scrollDown() {
 		const element = document.querySelector('#info');
 		if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -83,8 +87,17 @@
 				<div class="grow border-t-2 border-black transition group-hover:translate-x-2" />
 			</div>
 			<div class="group text-center font-cheap-pine-sans text-3xl leading-none md:text-4xl">
-				<span class="transition group-hover:text-red-600">23</span>. September 20<span
-					class="transition group-hover:text-red-600">23</span
+				<span class="transition group-hover:text-red-600">
+					{date.toLocaleDateString(undefined, {
+						day: '2-digit'
+					})}</span
+				>. {date.toLocaleDateString('de-DE', {
+					month: 'long'
+				})}
+				20<span class="transition group-hover:text-red-600"
+					>{date.toLocaleDateString('de-DE', {
+						year: '2-digit'
+					})}</span
 				>
 			</div>
 		</div>

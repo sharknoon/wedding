@@ -18,6 +18,9 @@ export type Details = {
 	deadline: string;
 	program: ProgramItem[];
 	faqs: FAQ[];
+	privateStreet: string;
+	privateCity: string;
+	milestones: Milestone[];
 };
 
 export type ProgramItem = {
@@ -30,6 +33,12 @@ export type ProgramItem = {
 export type FAQ = {
 	question: string;
 	answer: string[];
+};
+
+export type Milestone = {
+	date: string;
+	title: string;
+	image: string;
 };
 
 export type CountdownItem = {

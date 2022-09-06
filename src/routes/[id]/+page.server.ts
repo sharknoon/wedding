@@ -1,5 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
-import { getDetails, getInvitation, updateInvitation } from '$lib/database';
+import { getInvitation, updateInvitation } from '$lib/database';
 import { GOOGLE_MAPS_API_KEY } from '$lib/env';
 
 export const load: import('./$types').PageServerLoad = async ({ params }) => {
@@ -10,13 +10,12 @@ export const load: import('./$types').PageServerLoad = async ({ params }) => {
 	}
 
 	const invitation = await getInvitation(invitationId);
-	const details = await getDetails();
 
 	if (!invitation) {
 		throw redirect(302, '/');
 	}
 
-	return { invitation: invitation, details: details, googleMapsApiKey: GOOGLE_MAPS_API_KEY };
+	return { invitation: invitation, googleMapsApiKey: GOOGLE_MAPS_API_KEY };
 };
 
 export const PUT: import('./$types').Action = async ({ params, request }) => {

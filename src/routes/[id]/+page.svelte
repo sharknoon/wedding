@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invitation, details } from '$lib/stores';
+	import { invitation } from '$lib/stores';
 	import RSVP from './rsvp.svelte';
 	import Home from './home.svelte';
 	import Info from './info.svelte';
@@ -11,9 +11,6 @@
 	export let data: PageData;
 
 	invitation.set(data.invitation);
-	if (data.details) {
-		details.set(data.details);
-	}
 </script>
 
 <div class="fixed inset-0 flex flex-col">

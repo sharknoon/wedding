@@ -1,5 +1,5 @@
 export const load: import('./$types').PageLoad = ({ url }) => {
-	const id = url.searchParams.get('id') || 'guhl';
+	const id = url.searchParams.get('id') || 'mustermann';
 	return {
 		id
 	};
