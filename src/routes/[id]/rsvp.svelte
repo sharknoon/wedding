@@ -44,7 +44,7 @@
 			}
 		}
 		invitation.set($invitation);
-		fetch(`/${$invitation?._id}`, {
+		fetch(`/api/invitations/${$invitation?._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'

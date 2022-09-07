@@ -1,33 +1,35 @@
 <script lang="ts">
 	import type { Invitation, Member } from '$lib/types';
 	import { onMount } from 'svelte';
-	import { fade, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { downloadIds } from '$lib/stores';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: i = data.invitations;
+	$: invitations = data.invitations;
 
 	$downloadIds = [];
 
 	onMount(() => {
-		const evtSource = new EventSource('/admin/invitations/events');
+		const evtSource = new EventSource('/api/invitations/events');
 		evtSource.onerror = (e) => console.error(e);
 		evtSource.addEventListener('insert', (event) => {
-			i = [...i, JSON.parse(event.data)];
+			invitations = [...invitations, JSON.parse(event.data)];
 		});
 		evtSource.addEventListener('update', (event) => {
-			const invitation = JSON.parse(event.data);
-			i = i.map((i) => (i._id === invitation._id ? invitation : i));
+			const newInvitation = JSON.parse(event.data);
+			invitations = invitations.map((oldInvitation) =>
+				oldInvitation._id === newInvitation._id ? newInvitation : oldInvitation
+			);
 		});
 		evtSource.addEventListener('delete', (event) => {
-			i = i.filter((i) => i._id !== event.data);
+			invitations = invitations.filter((i) => i._id !== event.data);
 		});
 	});
 
 	function deleteInvitation(invitation: Invitation) {
 		if (confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?')) {
-			fetch(`?id=${invitation._id}`, { method: 'DELETE' }).catch((err) => alert(err));
+			fetch(`/api/invitations/${invitation._id}`, { method: 'DELETE' }).catch((err) => alert(err));
 		}
 	}
 
@@ -61,8 +63,8 @@
 	}
 
 	function createInvitation() {
-		fetch('', {
-			method: 'PUT',
+		fetch('/api/invitations', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -96,15 +98,15 @@
 
 	$: showModal = false;
 
-	$: acceptances = i
+	$: acceptances = invitations
 		.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
-	$: cancellations = i
+	$: cancellations = invitations
 		.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
-	$: notYetResponded = i
+	$: notYetResponded = invitations
 		.map(
 			(i) =>
 				i.members.map((m) => m.accepted !== 'true' && m.accepted !== 'false').filter((i) => i)
@@ -132,7 +134,7 @@
 		>
 			Aktionen
 		</div>
-		{#each i as invitation, index}
+		{#each invitations as invitation, index}
 			<div
 				transition:slide|local
 				class="flex h-full flex-col justify-around gap-2 p-2 sm:px-6 sm:py-4 {index % 2 === 1
@@ -152,7 +154,6 @@
 				{#each invitation.members as member}
 					{#if member.accepted === 'true'}
 						<svg
-							in:fade
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-6 w-6"
 							fill="none"
@@ -164,7 +165,6 @@
 						</svg>
 					{:else if member.accepted === 'false'}
 						<svg
-							in:fade
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-6 w-6"
 							fill="none"
@@ -176,7 +176,6 @@
 						</svg>
 					{:else}
 						<svg
-							in:fade
 							xmlns="http://www.w3.org/2000/svg"
 							class="mx-auto h-full w-6"
 							fill="none"
