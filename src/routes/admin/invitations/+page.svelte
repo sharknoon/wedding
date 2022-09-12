@@ -13,19 +13,97 @@
 	onMount(() => {
 		const evtSource = new EventSource('/api/invitations/events');
 		evtSource.onerror = (e) => console.error(e);
-		evtSource.addEventListener('insert', (event) => {
+		const insertInvitation = (event: MessageEvent<any>) => {
 			invitations = [...invitations, JSON.parse(event.data)];
-		});
-		evtSource.addEventListener('update', (event) => {
+		};
+		const updateInvitation = (event: MessageEvent<any>) => {
 			const newInvitation = JSON.parse(event.data);
 			invitations = invitations.map((oldInvitation) =>
 				oldInvitation._id === newInvitation._id ? newInvitation : oldInvitation
 			);
-		});
-		evtSource.addEventListener('delete', (event) => {
+		};
+		const deleteInvitation = (event: MessageEvent<any>) => {
 			invitations = invitations.filter((i) => i._id !== event.data);
-		});
+		};
+		evtSource.addEventListener('insert', insertInvitation);
+		evtSource.addEventListener('update', updateInvitation);
+		evtSource.addEventListener('replace', updateInvitation);
+		evtSource.addEventListener('delete', deleteInvitation);
 	});
+
+	const defaultMember: Member = {
+		name: '',
+		accepted: 'unknown'
+	};
+
+	let workingInvitation: Invitation;
+	$: workingInvitation = {
+		salutation: '',
+		members: [{ ...defaultMember }]
+	};
+
+	function showInvitationModal(mode: 'create' | 'edit', invitation?: Invitation) {
+		if (mode === 'edit' && invitation) {
+			workingInvitation = invitation;
+			modalTitle = 'Einladung bearbeiten';
+		} else {
+			workingInvitation = {
+				salutation: '',
+				members: [{ ...defaultMember }]
+			};
+			modalTitle = 'Neue Einladung erstellen';
+		}
+
+		showModal = true;
+	}
+
+	function addMember() {
+		workingInvitation.members.push({ ...defaultMember });
+		workingInvitation = workingInvitation;
+	}
+
+	function removeMember(index: number) {
+		workingInvitation.members.splice(index, 1);
+		workingInvitation = workingInvitation;
+	}
+
+	function hideInvitationModal() {
+		showModal = false;
+	}
+
+	function createInvitation(invitation: Invitation) {
+		fetch('/api/invitations', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(invitation)
+		})
+			.then((res) => {
+				if (res.status >= 400) {
+					alert('Die Einladung konnte nicht gespeichert werden');
+				}
+			})
+			.catch((err) => alert(err));
+		hideInvitationModal();
+	}
+
+	function updateInvitation(invitation: Invitation) {
+		fetch(`/api/invitations/${invitation._id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(workingInvitation)
+		})
+			.then((res) => {
+				if (res.status >= 400) {
+					alert('Die Einladung konnte nicht gespeichert werden');
+				}
+			})
+			.catch((err) => alert(err));
+		hideInvitationModal();
+	}
 
 	function deleteInvitation(invitation: Invitation) {
 		if (confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?')) {
@@ -33,70 +111,13 @@
 		}
 	}
 
-	const defaultMember: Member = {
-		name: '',
-		accepted: 'unknown'
-	};
-
-	let newInvitation: Invitation;
-	$: newInvitation = {
-		salutation: '',
-		members: [{ ...defaultMember }]
-	};
-
-	function addMember() {
-		newInvitation.members.push({ ...defaultMember });
-		newInvitation = newInvitation;
-	}
-
-	function removeMember(index: number) {
-		newInvitation.members.splice(index, 1);
-		newInvitation = newInvitation;
-	}
-
-	function resetInvitationCreation() {
-		newInvitation = {
-			salutation: '',
-			members: [{ ...defaultMember }]
-		};
-		showModal = false;
-	}
-
-	function createInvitation() {
-		fetch('/api/invitations', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(newInvitation)
-		})
-			.then(async (res) => {
-				if (res.status >= 400) {
-					alert(
-						'Die Einladung konnte nicht gespeichert werden (Möglicherweise ist die ID doppelt vorhanden)'
-					);
-				}
-			})
-			.catch((err) => {
-				alert(err);
-			});
-		resetInvitationCreation();
-	}
-
-	$: {
-		newInvitation._id = newInvitation.members
-			.map((m) => m.name.trim().split(' ').pop()?.toLowerCase())
-			.filter((name, index, self) => self.indexOf(name) === index)
-			.filter((name) => name?.length || 0 > 0)
-			.join('-');
-	}
-
 	$: validInvitation =
-		newInvitation.salutation?.length > 0 &&
-		newInvitation.members.length > 0 &&
-		newInvitation.members.every((m) => m.name?.length > 0);
+		workingInvitation.salutation?.length > 0 &&
+		workingInvitation.members.length > 0 &&
+		workingInvitation.members.every((m) => m.name?.length > 0);
 
-	$: showModal = false;
+	let showModal = false;
+	let modalTitle = '';
 
 	$: acceptances = invitations
 		.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
@@ -181,8 +202,8 @@
 						</svg>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted !==
-								'true' && member.accepted !== 'false'
+							class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
+							'unknown'
 								? 'h-6 w-6'
 								: 'h-0 w-0'}"
 							fill="none"
@@ -248,6 +269,25 @@
 					</svg>
 				</a>
 				<button
+					on:click={() => showInvitationModal('edit', invitation)}
+					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+						/>
+					</svg>
+				</button>
+				<button
 					on:click={() => deleteInvitation(invitation)}
 					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-600 focus:ring-2"
 				>
@@ -283,7 +323,7 @@
 			</span>
 		</div>
 		<button
-			on:click={() => (showModal = true)}
+			on:click={() => showInvitationModal('create')}
 			class="flex items-center justify-center gap-2 border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2 sm:min-w-[20rem]"
 		>
 			<svg
@@ -305,29 +345,89 @@
 	<div class="fixed inset-0 h-screen w-screen max-w-[100vw] font-oswald">
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div class="flex w-[32rem] max-w-full flex-col border-2 border-black bg-white p-3">
-				<h1 class="my-6 text-center font-cheap-pine-sans text-4xl">Neue Einladung erstellen</h1>
+				<h1 class="my-6 text-center font-cheap-pine-sans text-4xl">{modalTitle}</h1>
 				<span>Anrede</span>
 				<input
 					type="text"
 					placeholder="Liebe Erika, lieber Max"
-					bind:value={newInvitation.salutation}
-					class="col-span-3 border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+					bind:value={workingInvitation.salutation}
+					class="col-span-3 border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 				/>
 				<span class="text-sm text-gray-600">
 					Diese Anrede wird oben in der Einladung angezeigt. Typische Beispiele sind "Liebe Familie
 					Mustermann" oder "Liebe Erika, lieber Max".
 				</span>
 				<span class="mt-3 text-center text-lg">Mitglieder</span>
-				{#each newInvitation.members as member, index}
-					<span>Name</span>
+				{#each workingInvitation.members as member, index}
+					<span>Name, Teilnahme</span>
 					<div class="col-span-3 flex gap-2">
 						<input
 							type="text"
 							placeholder="Erika Mustermann"
 							bind:value={member.name}
-							class="w-full border-transparent bg-gray-300 text-black transition hover:text-black/75 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+							class="w-full border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 						/>
-						{#if newInvitation.members.length > 1}
+						<div class="flex">
+							<button
+								on:click={() => (member.accepted = 'unknown')}
+								class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
+								'unknown'
+									? 'bg-black text-white hover:bg-black/75'
+									: 'bg-gray-300 hover:bg-gray-300/75'}"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							</button>
+							<button
+								on:click={() => (member.accepted = 'true')}
+								class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
+								'true'
+									? 'bg-black text-white hover:bg-black/75'
+									: 'bg-gray-300 hover:bg-gray-300/75'}"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+								</svg>
+							</button>
+							<button
+								on:click={() => (member.accepted = 'false')}
+								class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
+								'false'
+									? 'bg-black text-white hover:bg-black/75'
+									: 'bg-gray-300 hover:bg-gray-300/75'}"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+								</svg>
+							</button>
+						</div>
+						{#if workingInvitation.members.length > 1}
 							<button
 								on:click={() => removeMember(index)}
 								class="flex items-center justify-center border-0 bg-black p-2 text-lg text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-600 focus:ring-2"
@@ -368,7 +468,7 @@
 				</button>
 				<div class="mt-6 flex max-w-full justify-end gap-3">
 					<button
-						on:click={() => resetInvitationCreation()}
+						on:click={hideInvitationModal}
 						class="flex items-center justify-center gap-2 self-end border-2 border-black p-2 text-xl ring-black ring-offset-2 ring-offset-white transition hover:bg-black hover:text-white focus:ring-2"
 					>
 						<svg
@@ -385,7 +485,10 @@
 					</button>
 					<button
 						disabled={!validInvitation}
-						on:click={createInvitation}
+						on:click={() =>
+							workingInvitation._id
+								? updateInvitation(workingInvitation)
+								: createInvitation(workingInvitation)}
 						class="flex items-center justify-center gap-2 self-end border-2 border-black bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:border-neutral-900 hover:bg-neutral-900 focus:ring-2 disabled:border-neutral-700 disabled:bg-neutral-700"
 					>
 						<svg

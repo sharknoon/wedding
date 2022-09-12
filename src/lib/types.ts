@@ -6,7 +6,7 @@ export type Invitation = {
 
 export type Member = {
 	name: string;
-	accepted: string;
+	accepted: 'unknown' | 'true' | 'false';
 };
 
 export type Details = {

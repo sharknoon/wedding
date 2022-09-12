@@ -7,6 +7,7 @@ stream.on('change', (c) => {
 	switch (c.operationType) {
 		case 'insert':
 		case 'update':
+		case 'replace':
 			data = JSON.stringify(c.fullDocument);
 			break;
 		case 'delete':

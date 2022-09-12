@@ -2,6 +2,7 @@ import {
 	type Collection,
 	type Db,
 	type DeleteResult,
+	type Document,
 	type InsertOneResult,
 	MongoClient,
 	type UpdateResult,
@@ -41,15 +42,12 @@ export async function getDetails(): Promise<WithId<Details> | null> {
 	return details.findOne();
 }
 
-export async function updateInvitation(id: string, invitation: Invitation): Promise<UpdateResult> {
+export async function updateInvitation(
+	id: string,
+	invitation: Invitation
+): Promise<Document | UpdateResult> {
 	await setup();
-	const members = invitation.members;
-	return invitations.updateOne(
-		{ _id: id },
-		{
-			$set: { members }
-		}
-	);
+	return invitations.replaceOne({ _id: id }, invitation);
 }
 
 export async function getAllInvitations(): Promise<WithId<Invitation>[]> {
