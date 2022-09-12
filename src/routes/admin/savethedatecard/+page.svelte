@@ -269,7 +269,7 @@
 	</div>
 
 	<div class="text-center">
-		210x99mm, DIN lang quer, beidseitig bedruckte und perforierte Eintrittskarte, <a
+		210x99mm, Eintrittskarte DIN lang quer perforiert (4/4 beidseitig bedruckt), <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/eintrittskarte-din-lang-quer-perforiert-44-beidseitig-bedruckt.html"
 			target="_blank"
@@ -277,6 +277,6 @@
 			WIRmachenDRUCK
 		</a>
 		<br />
-		Datenformat: 216x105mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
+		Datenformat: 216x105mm, Beschnitt: 3mm, Sicherheitsabstand: 3mm
 	</div>
 </div>

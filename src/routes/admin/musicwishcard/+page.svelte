@@ -95,7 +95,7 @@
 	</div>
 
 	<div class="text-center">
-		105x74mm, DIN A7 quer, beidseitig bedruckter Flyer, <a
+		105x74mm, Flyer DIN A7 Quer, beidseitig bedruckt, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/flyer-din-a7-quer-105-cm-x-74-cm-beidseitig-bedruckt.html"
 			target="_blank"

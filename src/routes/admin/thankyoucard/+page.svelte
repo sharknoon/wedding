@@ -133,7 +133,7 @@
 	</div>
 
 	<div class="text-center">
-		296x105mm, DIN A6 quer, beidseitig bedruckte und in der Mitte vertikal gefalzte Einladungskarte, <a
+		296x105mm, Einladungskarte, gefalzt auf DIN A6 quer, 4-seiter, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/einladungskarte-gefalzt-auf-din-a6-quer-4seiter.html"
 			target="_blank"
@@ -141,6 +141,6 @@
 			WIRmachenDRUCK
 		</a>
 		<br />
-		Datenformat: 302x111mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
+		Datenformat: 302x111mm, Beschnitt: 3mm, Sicherheitsabstand: 3mm
 	</div>
 </div>

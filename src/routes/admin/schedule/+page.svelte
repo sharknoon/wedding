@@ -275,7 +275,11 @@
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-4">
 			<div class="font-cheap-pine-sans text-3xl">Ins Wasser fällt ein Stein</div>
-			<img src="/images/sheetmusic/Ins_Wasser_faellt_ein_Stein.svg" alt="sheet notes" />
+			<img
+				src="/images/sheetmusic/Ins_Wasser_faellt_ein_Stein.svg"
+				alt="sheet notes"
+				class="max-w-[105%]"
+			/>
 			<div class="text-center">
 				<h2 class="font-cheap-pine-sans text-3xl">Gebet</h2>
 				<div class="text-lg">Pastorin: Christine Finkbeiner</div>
@@ -295,7 +299,11 @@
 				<div class="text-lg">Trauzeugin: Hanna Harsch</div>
 			</div>
 			<div class="font-cheap-pine-sans text-3xl">Liebe ist nicht nur ein Wort</div>
-			<img src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg" alt="sheet notes" />
+			<img
+				src="/images/sheetmusic/Liebe_ist_nicht_nur_ein_Wort.svg"
+				alt="sheet notes"
+				class="max-w-[105%]"
+			/>
 		</div>
 		<Divider direction="up" />
 		<Footer currentPage={5} {totalPages} />
@@ -352,10 +360,13 @@
 	<Page id="schedule-9" withFooter={false}>
 		<Timeline index={5} />
 		<div class="-mt-2 -mb-2 flex grow flex-col items-center justify-center">
-			<h2 class="font-cheap-pine-sans text-3xl">Der Herr segne dich</h2>
-			<img src="/images/sheetmusic/Der_Herr_segne_dich.svg" alt="sheet notes" class="-mt-4" />
+			<h2 class="-mt-2 font-cheap-pine-sans text-2xl">Der Herr segne dich</h2>
+			<img
+				src="/images/sheetmusic/Der_Herr_segne_dich.svg"
+				alt="sheet notes"
+				class="-mt-4 max-w-[105%]"
+			/>
 		</div>
-		<Footer currentPage={8} {totalPages} />
 	</Page>
 
 	<Page id="schedule-10">
@@ -425,9 +436,9 @@
 	</Page>
 
 	<div class="text-center">
-		148x210mm, DIN A5, Bröschüre mit Drahtheftung, <a
+		148x210mm, Broschüre mit Drahtheftung, Endformat DIN A5, 12-seitig, <a
 			class="hover:underline"
-			href="https://www.wir-machen-druck.de/broschueren-drahtheftung-din-a5-extrem-guenstig-drucken,category,9436.html"
+			href="https://www.wir-machen-druck.de/broschuere-mit-drahtheftung-endformat-din-a5-12seitig.html"
 			target="_blank"
 		>
 			WIRmachenDRUCK
