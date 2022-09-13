@@ -137,178 +137,157 @@
 </script>
 
 <div class="container mx-auto font-oswald">
-	<div
-		class="grid grid-cols-[auto_1fr_auto] items-center divide-y-2 divide-black border-2 border-black text-lg md:grid-cols-[1fr_2fr_1fr]"
-	>
-		<div
-			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
-		>
-			Name
-		</div>
-		<div
-			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
-		>
-			Teilnahme
-		</div>
-		<div
-			class="h-full bg-black py-2 px-1 text-center font-cheap-pine-sans text-xl text-white sm:px-6 sm:py-4 sm:text-3xl"
-		>
-			Aktionen
-		</div>
+	<table class="w-full table-auto divide-y-2 divide-black border-2 border-black text-lg">
+		<tr class="h-full bg-black font-cheap-pine-sans text-xl text-white">
+			<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Name </th>
+			<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Teilnahme </th>
+			<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Anrede </th>
+			<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Aktionen </th>
+		</tr>
 		{#each invitations as invitation, index}
-			<div
-				transition:slide|local
-				class="flex h-full flex-col justify-around gap-2 p-2 sm:px-6 sm:py-4 {index % 2 === 1
-					? 'bg-gray-100'
-					: ''}"
-			>
-				{#each invitation.members as member}
-					<div>{member.name}</div>
-				{/each}
-			</div>
-			<div
-				transition:slide|local
-				class="flex h-full flex-col justify-around gap-2 px-6 py-4 {index % 2 === 1
-					? 'bg-gray-100'
-					: ''}"
-			>
-				{#each invitation.members as member}
-					<div class="relative">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
-							'true'
-								? 'h-6 w-6'
-								: 'h-0 w-0'}"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
+			<tr class={index % 2 === 1 ? 'bg-gray-100' : ''}>
+				<td transition:slide|local class="h-7 p-3">
+					{#each invitation.members as member}
+						<div>{member.name}</div>
+					{/each}
+				</td>
+				<td transition:slide|local class="p-3">
+					{#each invitation.members as member}
+						<div class="relative mx-auto h-7 w-7">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
+								'true'
+									? 'h-6 w-6'
+									: 'h-0 w-0'}"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
+								'false'
+									? 'h-6 w-6'
+									: 'h-0 w-0'}"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+							</svg>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
+								'unknown'
+									? 'h-6 w-6'
+									: 'h-0 w-0'}"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+						</div>
+					{/each}
+				</td>
+				<td transition:slide|local class="p-3">
+					<div>{invitation.salutation}</div>
+				</td>
+				<td transition:slide|local class="p-3">
+					<div class="flex h-full flex-wrap items-center justify-center gap-4 md:flex-nowrap">
+						<a
+							target="_blank"
+							href={'/admin/savethedatecard?id=' + invitation._id}
+							class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 						>
-							<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-						</svg>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
-							'false'
-								? 'h-6 w-6'
-								: 'h-0 w-0'}"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+								/>
+							</svg>
+						</a>
+						<a
+							target="_blank"
+							href={'/' + invitation._id}
+							class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 						>
-							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-						</svg>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all {member.accepted ===
-							'unknown'
-								? 'h-6 w-6'
-								: 'h-0 w-0'}"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+								/>
+							</svg>
+						</a>
+						<button
+							on:click={() => showInvitationModal('edit', invitation)}
+							class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+								/>
+							</svg>
+						</button>
+						<button
+							on:click={() => deleteInvitation(invitation)}
+							class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-600 focus:ring-2"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+								/>
+							</svg>
+						</button>
 					</div>
-				{/each}
-			</div>
-			<div
-				transition:slide|local
-				class="flex h-full flex-wrap items-center justify-center gap-4 p-4 md:flex-nowrap {index %
-					2 ===
-				1
-					? 'bg-gray-100'
-					: ''}"
-			>
-				<a
-					target="_blank"
-					href={'/admin/savethedatecard?id=' + invitation._id}
-					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-						/>
-					</svg>
-				</a>
-				<a
-					target="_blank"
-					href={'/' + invitation._id}
-					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-						/>
-					</svg>
-				</a>
-				<button
-					on:click={() => showInvitationModal('edit', invitation)}
-					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-						/>
-					</svg>
-				</button>
-				<button
-					on:click={() => deleteInvitation(invitation)}
-					class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-600 focus:ring-2"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-						/>
-					</svg>
-				</button>
-			</div>
+				</td>
+			</tr>
 		{/each}
-	</div>
+	</table>
 
 	<div class="my-6 mx-2 flex flex-col items-center justify-between gap-4 md:mx-0 md:flex-row">
 		<div class="flex items-center gap-4">
