@@ -3,7 +3,7 @@
 </script>
 
 <div class="relative">
-	<svg class="-mx-4" version="1.1" viewBox="0 0 264.58 39.688" xmlns="http://www.w3.org/2000/svg">
+	<svg class="-mx-5" version="1.1" viewBox="0 0 264.58 39.688" xmlns="http://www.w3.org/2000/svg">
 		<path fill="#000" d="m46.302 34.297-5.5562-5.5562h5.5562z" stroke-width=".39688" />
 		<path
 			transform="matrix(.28414 0 0 .28414 9.5684 -16.833)"
@@ -55,7 +55,7 @@
 		</g>
 	</svg>
 
-	<div class="absolute top-[0.65rem] w-full text-center font-cheap-pine text-4xl tracking-widest">
+	<div class="absolute top-[0.45rem] w-full text-center font-cheap-pine text-3xl tracking-widest">
 		{title}
 	</div>
 </div>

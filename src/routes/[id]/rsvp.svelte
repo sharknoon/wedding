@@ -117,7 +117,7 @@
 						<input
 							type="checkbox"
 							checked={member.accepted === 'true'}
-							on:change={(e) => (member.accepted = String(e.currentTarget.checked))}
+							on:change={(e) => (member.accepted = e.currentTarget.checked ? 'true' : 'false')}
 							class="h-5 w-5 border-transparent bg-gray-300 text-red-600 transition hover:text-red-700 focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-white"
 						/>
 						<span class="ml-2 max-w-full break-words text-2xl text-gray-900">{member.name}</span>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Invitation, Member } from '$lib/types';
 	import { onMount } from 'svelte';
-	import { slide } from 'svelte/transition';
+	import { slide, fade, scale } from 'svelte/transition';
 	import { downloadIds } from '$lib/stores';
 	import type { PageData } from './$types';
 
@@ -342,114 +342,136 @@
 </div>
 
 {#if showModal}
-	<div class="fixed inset-0 h-screen w-screen max-w-[100vw] font-oswald">
+	<div
+		class="fixed inset-0 h-screen w-screen max-w-[100vw] font-oswald"
+		transition:fade
+		on:click|stopPropagation={hideInvitationModal}
+	>
 		<div class="flex h-full items-center justify-center bg-black/50">
-			<div class="flex w-[32rem] max-w-full flex-col border-2 border-black bg-white p-3">
+			<div
+				class="flex w-[32rem] max-w-full flex-col border-2 border-black bg-white p-3"
+				on:click|stopPropagation
+			>
 				<h1 class="my-6 text-center font-cheap-pine-sans text-4xl">{modalTitle}</h1>
 				<span>Anrede</span>
 				<input
 					type="text"
 					placeholder="Liebe Erika, lieber Max"
 					bind:value={workingInvitation.salutation}
-					class="col-span-3 border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+					class="border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 				/>
 				<span class="text-sm text-gray-600">
 					Diese Anrede wird oben in der Einladung angezeigt. Typische Beispiele sind "Liebe Familie
 					Mustermann" oder "Liebe Erika, lieber Max".
 				</span>
 				<span class="mt-3 text-center text-lg">Mitglieder</span>
-				{#each workingInvitation.members as member, index}
-					<span>Name, Teilnahme</span>
-					<div class="col-span-3 flex gap-2">
-						<input
-							type="text"
-							placeholder="Erika Mustermann"
-							bind:value={member.name}
-							class="w-full border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
-						/>
-						<div class="flex">
-							<button
-								on:click={() => (member.accepted = 'unknown')}
-								class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
-								'unknown'
-									? 'bg-black text-white hover:bg-black/75'
-									: 'bg-gray-300 hover:bg-gray-300/75'}"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-6 w-6"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									stroke-width="2"
+				<div class="flex flex-col gap-2">
+					{#each workingInvitation.members as member, index}
+						<div class="flex items-end gap-2">
+							<div class="grow">
+								{#if index === 0}
+									<span>Name</span>
+								{/if}
+								<input
+									type="text"
+									placeholder="Erika Mustermann"
+									bind:value={member.name}
+									class="h-10 w-full border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+								/>
+							</div>
+							<div>
+								{#if index === 0}
+									<span>Teilnahme</span>
+								{/if}
+								<div class="flex">
+									<button
+										on:click={() => (member.accepted = 'unknown')}
+										class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
+										'unknown'
+											? 'bg-black text-white hover:bg-black/75'
+											: 'bg-gray-300 hover:bg-gray-300/75'}"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+											/>
+										</svg>
+									</button>
+									<button
+										on:click={() => (member.accepted = 'true')}
+										class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
+										'true'
+											? 'bg-black text-white hover:bg-black/75'
+											: 'bg-gray-300 hover:bg-gray-300/75'}"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+										</svg>
+									</button>
+									<button
+										on:click={() => (member.accepted = 'false')}
+										class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
+										'false'
+											? 'bg-black text-white hover:bg-black/75'
+											: 'bg-gray-300 hover:bg-gray-300/75'}"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M6 18L18 6M6 6l12 12"
+											/>
+										</svg>
+									</button>
+								</div>
+							</div>
+							{#if workingInvitation.members.length > 1}
+								<button
+									on:click={() => removeMember(index)}
+									class="flex items-center justify-center border-0 bg-black p-2 text-lg text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-600 focus:ring-2"
 								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-									/>
-								</svg>
-							</button>
-							<button
-								on:click={() => (member.accepted = 'true')}
-								class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
-								'true'
-									? 'bg-black text-white hover:bg-black/75'
-									: 'bg-gray-300 hover:bg-gray-300/75'}"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-6 w-6"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									stroke-width="2"
-								>
-									<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-								</svg>
-							</button>
-							<button
-								on:click={() => (member.accepted = 'false')}
-								class="flex items-center justify-center gap-2 border-0 p-2 text-lg ring-black ring-offset-2 ring-offset-white transition focus:ring-2 {member.accepted ===
-								'false'
-									? 'bg-black text-white hover:bg-black/75'
-									: 'bg-gray-300 hover:bg-gray-300/75'}"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-6 w-6"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									stroke-width="2"
-								>
-									<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-								</svg>
-							</button>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+										/>
+									</svg>
+								</button>
+							{/if}
 						</div>
-						{#if workingInvitation.members.length > 1}
-							<button
-								on:click={() => removeMember(index)}
-								class="flex items-center justify-center border-0 bg-black p-2 text-lg text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-600 focus:ring-2"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-6 w-6"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									stroke-width="2"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-									/>
-								</svg>
-							</button>
-						{/if}
-					</div>
-				{/each}
+					{/each}
+				</div>
 				<button
 					on:click={addMember}
 					class="mt-3 flex items-center justify-center gap-2 self-start border-0 bg-black p-2 text-lg text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
