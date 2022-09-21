@@ -116,7 +116,14 @@
 	>
 		<div class="flex flex-col items-center justify-center gap-6">
 			<h1 class="font-cheap-pine text-4xl tracking-wide">Die Hochzeitsfotos</h1>
-			<img src={qrcode} alt="qrcode" class="mx-2 self-center" style="image-rendering: pixelated;" />
+			<img
+				src={qrcode}
+				width="160"
+				height="160"
+				alt="qrcode"
+				class="mx-2 self-center"
+				style="image-rendering: pixelated;"
+			/>
 			<div class="font-cheap-pine-sans text-xl">www.{$page.url.host}/bilder</div>
 		</div>
 		<div class="pt-6 pl-8">

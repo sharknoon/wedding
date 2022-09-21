@@ -227,7 +227,14 @@
 			<div class="text-center font-cheap-pine-sans text-lg">
 				www.{$page.url.host}<br />/{data.id}
 			</div>
-			<img src={qrcode} alt="qrcode" class="mx-2 self-center" style="image-rendering: pixelated;" />
+			<img
+				src={qrcode}
+				width="160"
+				height="160"
+				alt="qrcode"
+				class="mx-2 self-center"
+				style="image-rendering: pixelated;"
+			/>
 			<div class="tansform rotate-180 text-center font-cheap-pine-sans text-lg">
 				www.{$page.url.host}<br />/{data.id}
 			</div>
