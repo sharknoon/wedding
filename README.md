@@ -9,13 +9,14 @@ This is the website for our personal wedding. This site serves as a digital wedd
 ## Docker
 
 Two environment variables are needed to start the container.
-|Name|Required|Example|
+|Name|Required|Example / Default|
 |-|-|-|
 |MONGODB_URL|yes|mongodb://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/myFirstDatabase|
-|GOOGLE_MAPS_API_KEY|yes|SDLKFALSFJKSJGAshAHaYeSMKWvrekl2MERK345|
+|PUBLIC_GOOGLE_MAPS_API_KEY|yes|SDLKFALSFJKSJGAshAHaYeSMKWvrekl2MERK342|
+|ADMIN_LOGIN|no, but strongly recommended|admin:admin|
 
 ```bash
-docker run -d -p 3000:3000 -e VITE_MONGODB_URL=<mongodb-url> -e VITE_GOOGLE_MAPS_API_KEY=<google-maps-api-key> ghcr.io/sharknoon/wedding
+docker run -d -p 3000:3000 -e MONGODB_URL=<mongodb-url> -e PUBLIC_GOOGLE_MAPS_API_KEY=<google-maps-api-key> -e ADMIN_LOGIN=<admin-login> ghcr.io/sharknoon/wedding
 ```
 
 ---

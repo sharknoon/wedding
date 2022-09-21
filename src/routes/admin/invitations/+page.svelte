@@ -1,12 +1,8 @@
 <script lang="ts">
 	import type { Invitation, Member } from '$lib/types';
 	import { onMount } from 'svelte';
-	import { slide, fade, scale } from 'svelte/transition';
-	import { downloadIds, invitation } from '$lib/stores';
-	import type { PageData } from './$types';
-
-	export let data: PageData;
-	$: invitations = data.invitations;
+	import { slide, fade } from 'svelte/transition';
+	import { downloadIds, invitations } from '$lib/client/stores';
 
 	$downloadIds = [];
 
@@ -14,16 +10,21 @@
 		const evtSource = new EventSource('/api/invitations/events');
 		evtSource.onerror = (e) => console.error(e);
 		const insertInvitation = (event: MessageEvent<any>) => {
-			invitations = [...invitations, JSON.parse(event.data)];
+			invitations.update((i) => {
+				i.push(JSON.parse(event.data));
+				return i;
+			});
 		};
 		const updateInvitation = (event: MessageEvent<any>) => {
 			const newInvitation = JSON.parse(event.data);
-			invitations = invitations.map((oldInvitation) =>
-				oldInvitation._id === newInvitation._id ? newInvitation : oldInvitation
+			invitations.update((i) =>
+				i.map((oldInvitation) =>
+					oldInvitation._id === newInvitation._id ? newInvitation : oldInvitation
+				)
 			);
 		};
 		const deleteInvitation = (event: MessageEvent<any>) => {
-			invitations = invitations.filter((i) => i._id !== event.data);
+			invitations.update((i) => i.filter((i) => i._id !== event.data));
 		};
 		evtSource.addEventListener('insert', insertInvitation);
 		evtSource.addEventListener('update', updateInvitation);
@@ -119,15 +120,15 @@
 	let showModal = false;
 	let modalTitle = '';
 
-	$: acceptances = invitations
+	$: acceptances = $invitations
 		.map((i) => i.members.map((m) => m.accepted === 'true').filter((i) => i).length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
-	$: cancellations = invitations
+	$: cancellations = $invitations
 		.map((i) => i.members.map((m) => m.accepted === 'false').filter((i) => i).length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
-	$: notYetResponded = invitations
+	$: notYetResponded = $invitations
 		.map(
 			(i) =>
 				i.members.map((m) => m.accepted !== 'true' && m.accepted !== 'false').filter((i) => i)
@@ -147,7 +148,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each invitations as invitation, invitationIndex}
+			{#each $invitations as invitation, invitationIndex}
 				{@const rowspan = invitation.members.length}
 				{#each invitation.members as member, memberIndex}
 					<tr

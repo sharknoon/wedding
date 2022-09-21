@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SendStatus } from '$lib/types';
-	import { invitation, details } from '$lib/stores';
+	import { invitation, details } from '$lib/client/stores';
 	import { fade, scale } from 'svelte/transition';
 	import StatusIndicator from './status-indicator.svelte';
 

@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/stores';
+	import { details, downloadIds } from '$lib/client/stores';
 	import Divider from './divider.svelte';
 	import Footer from './footer.svelte';
 	import Page from './page.svelte';
 	import Header from './header.svelte';
 	import Timeline from './timeline.svelte';
-	import { details } from '$lib/stores';
 
 	$downloadIds = [
 		'schedule-1',

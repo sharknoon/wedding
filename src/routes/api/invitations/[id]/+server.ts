@@ -1,4 +1,4 @@
-import { deleteInvitation, updateInvitation } from '$lib/database';
+import { deleteInvitation, updateInvitation } from '$lib/server/database';
 import { error } from '@sveltejs/kit';
 
 export const PUT: import('./$types').RequestHandler = async ({ params, request }) => {

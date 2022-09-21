@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/stores';
+	import { downloadIds } from '$lib/client/stores';
 	import Divider from './divider.svelte';
 	import Header from './header.svelte';
 	import Footer from './footer.svelte';

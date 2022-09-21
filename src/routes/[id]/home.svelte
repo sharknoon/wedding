@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { details } from '$lib/stores';
+	import { details } from '$lib/client/stores';
 
 	$: date = new Date($details?.date);
 

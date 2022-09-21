@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invitation } from '$lib/stores';
+	import { details, invitation } from '$lib/client/stores';
 	import RSVP from './rsvp.svelte';
 	import Home from './home.svelte';
 	import Info from './info.svelte';
@@ -10,6 +10,7 @@
 
 	export let data: PageData;
 
+	details.set(data.details);
 	invitation.set(data.invitation);
 </script>
 
@@ -19,7 +20,7 @@
 		<Info />
 		<Details />
 		<!--<Program {details} />-->
-		<Map apiKey={data.googleMapsApiKey} />
+		<Map />
 		<FAQ />
 	</div>
 	<RSVP />

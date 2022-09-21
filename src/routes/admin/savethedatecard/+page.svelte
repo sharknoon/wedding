@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
-	import { downloadIds } from '$lib/stores';
+	import { details, downloadIds } from '$lib/client/stores';
 	import type { PageData } from './$types';
-	import { details } from '$lib/stores';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 
@@ -16,7 +16,7 @@
 
 	onMount(() => {
 		QRCode.toDataURL(
-			`https://midrene-und-josua.de/${data.id}`,
+			`${$page.url.origin}/${data.id}`,
 			{
 				errorCorrectionLevel: 'H',
 				margin: 0,
@@ -225,11 +225,11 @@
 		</div>
 		<div class="flex flex-col items-center justify-evenly">
 			<div class="text-center font-cheap-pine-sans text-lg">
-				www.midrene-und-josua.de<br />/{data.id}
+				www.{$page.url.host}<br />/{data.id}
 			</div>
 			<img src={qrcode} alt="qrcode" class="mx-2 self-center" style="image-rendering: pixelated;" />
 			<div class="tansform rotate-180 text-center font-cheap-pine-sans text-lg">
-				www.midrene-und-josua.de<br />/{data.id}
+				www.{$page.url.host}<br />/{data.id}
 			</div>
 		</div>
 		<div

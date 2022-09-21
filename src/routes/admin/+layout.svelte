@@ -1,9 +1,12 @@
 <script lang="ts">
-	import { downloadNodeAsPng } from '$lib/download';
-	import { downloadIds } from '$lib/stores';
-	import type { LayoutData } from './$types';
+	import { downloadNodeAsPng } from '$lib/client/download';
+	import { details, downloadIds, invitations } from '$lib/client/stores';
+	import type { LayoutServerData } from './$types';
 
-	export let data: LayoutData;
+	export let data: LayoutServerData;
+
+	details.set(data.details);
+	invitations.set(data.invitations);
 
 	const tabs = [
 		{

@@ -1,4 +1,4 @@
-import { createInvitation, existsInvitation } from '$lib/database';
+import { createInvitation, existsInvitation } from '$lib/server/database';
 import type { Invitation } from '$lib/types';
 import { error } from '@sveltejs/kit';
 

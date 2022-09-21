@@ -1,4 +1,4 @@
-import { streamAllInvitations } from '$lib/database';
+import { streamAllInvitations } from '$lib/server/database';
 
 const controllers = new Set<ReadableStreamController<string>>();
 const stream = await streamAllInvitations();

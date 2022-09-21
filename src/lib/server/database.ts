@@ -10,19 +10,20 @@ import {
 	ChangeStream
 } from 'mongodb';
 import type { Details, Invitation } from '$lib/types';
-import { MONGODB_URL } from './env';
+import { env } from '$env/dynamic/private';
 
-const client = new MongoClient(MONGODB_URL);
+const client = new MongoClient(env.MONGODB_URL);
 
 let db: Db;
 let invitations: Collection<Invitation>;
 let details: Collection<Details>;
 
 async function setup() {
-	if (db && (await db.command({ ping: 1 }))) return;
+	if (db) return;
 	await client.connect();
-	console.log('Connected to MongoDB');
 	db = client.db('wedding');
+	await db.command({ ping: 1 });
+	console.info('Connected to MongoDB');
 	invitations = db.collection('invitations');
 	details = db.collection('details');
 }

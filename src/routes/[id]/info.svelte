@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CountdownItem } from '$lib/types';
-	import { details } from '$lib/stores';
+	import { details } from '$lib/client/stores';
 
 	$: date = new Date($details?.date);
 	$: countdown = calculateCountdown(date);

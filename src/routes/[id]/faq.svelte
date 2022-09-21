@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { details } from '$lib/stores';
+	import { details } from '$lib/client/stores';
 </script>
 
 <div id="faqs" class="min-h-full snap-start md:pb-14">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/stores';
+	import { downloadIds } from '$lib/client/stores';
 
 	$downloadIds = ['musicwishcard-front', 'musicwishcard-back'];
 </script>

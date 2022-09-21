@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invitation, details } from '$lib/stores';
+	import { invitation, details } from '$lib/client/stores';
 
 	$: deadline = new Date($details?.deadline);
 </script>

@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/stores';
+	import { downloadIds } from '$lib/client/stores';
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
 	import type { PageData } from './$types';
-	import { details } from '$lib/stores';
+	import { details } from '$lib/client/stores';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 
@@ -13,7 +14,7 @@
 
 	onMount(() => {
 		QRCode.toDataURL(
-			`https://midrene-und-josua.de/bilder`,
+			`${$page.url.origin}/bilder`,
 			{
 				errorCorrectionLevel: 'H',
 				margin: 0,
@@ -116,7 +117,7 @@
 		<div class="flex flex-col items-center justify-center gap-6">
 			<h1 class="font-cheap-pine text-4xl tracking-wide">Die Hochzeitsfotos</h1>
 			<img src={qrcode} alt="qrcode" class="mx-2 self-center" style="image-rendering: pixelated;" />
-			<div class="font-cheap-pine-sans text-xl">www.midrene-und-josua.de/bilder</div>
+			<div class="font-cheap-pine-sans text-xl">www.{$page.url.host}/bilder</div>
 		</div>
 		<div class="pt-6 pl-8">
 			<h1 class="font-cheap-pine text-3xl tracking-wide">{data.salutation}</h1>
