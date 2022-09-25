@@ -10,8 +10,7 @@
 <div
 	id="program"
 	class="flex min-h-screen flex-col bg-cover bg-center bg-no-repeat transition-all"
-	style="background-image: url('/images/backgrounds/{details?.program?.[activeItem]
-		?.background}.jpg'"
+	style="background-image: url('/images/backgrounds/{details?.program?.[activeItem]?.background}'"
 >
 	<div class="m-6 flex self-start md:m-12 md:max-w-[50%]">
 		<div class="divide-y-2 divide-red-600 border-4 border-black bg-white p-6 md:p-12">
@@ -25,7 +24,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="grow"><!-- Spacer --></div>
+	<!-- Spacer -->
+	<div class="grow" />
 	<div class="relative grid grid-cols-3 justify-between gap-12 p-8 sm:flex sm:p-16 md:p-24">
 		<div
 			class="absolute top-1/2 left-16 right-16 hidden h-4 -translate-y-1/2 bg-black sm:block md:left-28 md:right-28"

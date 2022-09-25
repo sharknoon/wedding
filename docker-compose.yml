@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: mongo
+    restart: always
+    command: mongod --replSet rs0 --bind_ip localhost,db
+
+  db-init:
+    image: mongo
+    restart: 'no'
+    depends_on:
+      - db
+    command: >
+      mongosh --host db:27017 --eval 'rs.initiate();'
+
+  app:
+    image: wedding
+    build: .
+    depends_on:
+      - mongoinit
+    ports:
+      - 3000:3000
+    environment:
+      MONGODB_URL: mongodb://db/
+      ADMIN_LOGIN: admin:admin

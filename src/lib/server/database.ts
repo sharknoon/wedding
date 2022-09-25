@@ -7,7 +7,7 @@ import {
 	MongoClient,
 	type UpdateResult,
 	type WithId,
-	ChangeStream,
+	type ChangeStream,
 	ObjectId
 } from 'mongodb';
 import type { Details, Invitation } from '$lib/types';
@@ -18,8 +18,8 @@ const client = new MongoClient(env.MONGODB_URL, {
 });
 
 let db: Db;
-let invitations: Collection<Invitation>;
-let details: Collection<Details>;
+let invitationsCollection: Collection<Invitation>;
+let detailsCollection: Collection<Details>;
 
 async function setup() {
 	if (db) return;
@@ -27,19 +27,24 @@ async function setup() {
 	db = client.db('wedding');
 	await db.command({ ping: 1 });
 	console.info('Connected to MongoDB');
-	invitations = db.collection('invitations');
-	invitations.createIndex({ slug: 1 }, { unique: true });
-	details = db.collection('details');
+	invitationsCollection = db.collection('invitations');
+	invitationsCollection.createIndex({ slug: 1 }, { unique: true });
+	detailsCollection = db.collection('details');
 }
 
 export async function getInvitationByPath(slug: string): Promise<WithId<Invitation> | null> {
 	await setup();
-	return invitations.findOne({ slug: slug });
+	return invitationsCollection.findOne({ slug: slug });
 }
 
 export async function getDetails(): Promise<WithId<Details> | null> {
 	await setup();
-	return details.findOne();
+	return detailsCollection.findOne();
+}
+
+export async function setDetails(details: Details) {
+	await setup();
+	detailsCollection.insertOne(details);
 }
 
 export async function updateInvitation(
@@ -47,29 +52,29 @@ export async function updateInvitation(
 	invitation: Invitation
 ): Promise<Document | UpdateResult> {
 	await setup();
-	return invitations.replaceOne({ _id: id }, invitation);
+	return invitationsCollection.replaceOne({ _id: id }, invitation);
 }
 
 export async function getAllInvitations(): Promise<WithId<Invitation>[]> {
 	await setup();
-	return invitations.find().toArray();
+	return invitationsCollection.find().toArray();
 }
 
 export async function streamAllInvitations(): Promise<ChangeStream<Invitation>> {
 	await setup();
-	return invitations.watch(undefined, {
+	return invitationsCollection.watch(undefined, {
 		fullDocument: 'updateLookup'
 	});
 }
 
 export async function deleteInvitation(id: string): Promise<DeleteResult> {
 	await setup();
-	return invitations.deleteOne({ _id: id });
+	return invitationsCollection.deleteOne({ _id: id });
 }
 
 export async function createInvitation(
 	invitation: Invitation
 ): Promise<InsertOneResult<Invitation>> {
 	await setup();
-	return invitations.insertOne(invitation);
+	return invitationsCollection.insertOne(invitation);
 }
