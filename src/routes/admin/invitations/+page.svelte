@@ -3,20 +3,19 @@
 	import { onMount } from 'svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { downloadIds, invitations } from '$lib/client/stores';
-	import { ObjectId } from 'mongodb';
 
 	$downloadIds = [];
 
 	onMount(() => {
 		const evtSource = new EventSource('/api/invitations/events');
 		evtSource.onerror = (e) => console.error(e);
-		const insertInvitation = (event: MessageEvent<any>) => {
+		const insertInvitation = (event: MessageEvent<string>) => {
 			invitations.update((i) => {
 				i.push(JSON.parse(event.data));
 				return i;
 			});
 		};
-		const updateInvitation = (event: MessageEvent<any>) => {
+		const updateInvitation = (event: MessageEvent<string>) => {
 			const newInvitation = JSON.parse(event.data);
 			invitations.update((i) =>
 				i.map((oldInvitation) =>
@@ -24,7 +23,7 @@
 				)
 			);
 		};
-		const deleteInvitation = (event: MessageEvent<any>) => {
+		const deleteInvitation = (event: MessageEvent<string>) => {
 			invitations.update((i) => i.filter((i) => i._id !== event.data));
 		};
 		evtSource.addEventListener('insert', insertInvitation);
@@ -40,13 +39,13 @@
 
 	let workingInvitation: Invitation;
 	$: workingInvitation = {
-		_id: ObjectId.generate().toString(),
 		slug: '',
 		salutation: '',
 		members: [{ ...defaultMember }]
 	};
-	$: {
-		const slug = workingInvitation.members
+
+	function generateSlug(existingInvitations: Invitation[], members: Member[]): string {
+		const slug = members
 			// map to the last name
 			.map((m) => m.name.trim().split(' ').pop()?.toLowerCase())
 			// filter out duplicates
@@ -54,13 +53,14 @@
 			// filter out empty strings and undefined
 			.filter((name) => name?.length || 0 > 0)
 			.join('-');
-		workingInvitation.slug = slug;
+		let slugWithNumber = slug;
 
 		let counter = 1;
-		while ($invitations.some((i) => i.slug.toLowerCase() === slug)) {
+		while (existingInvitations.some((i) => i.slug.toLowerCase() === slugWithNumber)) {
 			counter++;
-			workingInvitation.slug = `${slug}-${counter}`;
+			slugWithNumber = `${slug}${counter}`;
 		}
+		return slugWithNumber;
 	}
 
 	function showInvitationModal(mode: 'create' | 'edit', invitation?: Invitation) {
@@ -69,7 +69,6 @@
 			modalTitle = 'Einladung bearbeiten';
 		} else {
 			workingInvitation = {
-				_id: ObjectId.generate().toString(),
 				slug: '',
 				salutation: '',
 				members: [{ ...defaultMember }]
@@ -95,6 +94,7 @@
 	}
 
 	function createInvitation(invitation: Invitation) {
+		invitation.slug = generateSlug($invitations, invitation.members);
 		fetch('/api/invitations', {
 			method: 'POST',
 			headers: {

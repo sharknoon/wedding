@@ -7,12 +7,15 @@ import {
 	MongoClient,
 	type UpdateResult,
 	type WithId,
-	ChangeStream
+	ChangeStream,
+	ObjectId
 } from 'mongodb';
 import type { Details, Invitation } from '$lib/types';
 import { env } from '$env/dynamic/private';
 
-const client = new MongoClient(env.MONGODB_URL);
+const client = new MongoClient(env.MONGODB_URL, {
+	pkFactory: { createPk: () => new ObjectId().toString() }
+});
 
 let db: Db;
 let invitations: Collection<Invitation>;

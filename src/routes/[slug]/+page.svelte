@@ -6,7 +6,7 @@
 	import Details from './details.svelte';
 	import Map from './map.svelte';
 	import FAQ from './faq.svelte';
-	import type { PageData } from '../../../.svelte-kit/types/src/routes/[id]/$types';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
