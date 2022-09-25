@@ -1,15 +1,15 @@
-import { getDetails, getInvitation } from '$lib/server/database';
+import { getDetails, getInvitationByPath } from '$lib/server/database';
 import { error, redirect } from '@sveltejs/kit';
 
 export const load: import('./$types').PageServerLoad = async ({ params }) => {
-	const invitationId: string = params.id;
+	const invitationPath: string = params.slug;
 
-	if (!invitationId) {
-		throw error(100, 'Missing invitation id');
+	if (!invitationPath) {
+		throw error(100, 'Missing invitation slug');
 	}
 
 	const details = await getDetails();
-	const invitation = await getInvitation(invitationId);
+	const invitation = await getInvitationByPath(invitationPath);
 
 	if (!details) {
 		throw error(500, 'Einladungsdetails konnten nicht abgerufen werden');

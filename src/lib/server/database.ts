@@ -25,17 +25,13 @@ async function setup() {
 	await db.command({ ping: 1 });
 	console.info('Connected to MongoDB');
 	invitations = db.collection('invitations');
+	invitations.createIndex({ slug: 1 }, { unique: true });
 	details = db.collection('details');
 }
 
-export async function getInvitation(id: string): Promise<WithId<Invitation> | null> {
+export async function getInvitationByPath(slug: string): Promise<WithId<Invitation> | null> {
 	await setup();
-	return invitations.findOne({ _id: id });
-}
-
-export async function existsInvitation(id: string): Promise<boolean> {
-	await setup();
-	return (await invitations.countDocuments({ _id: id })) > 0;
+	return invitations.findOne({ slug: slug });
 }
 
 export async function getDetails(): Promise<WithId<Details> | null> {

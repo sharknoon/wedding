@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { downloadIds, invitations } from '$lib/client/stores';
+	import { ObjectId } from 'mongodb';
 
 	$downloadIds = [];
 
@@ -39,9 +40,28 @@
 
 	let workingInvitation: Invitation;
 	$: workingInvitation = {
+		_id: ObjectId.generate().toString(),
+		slug: '',
 		salutation: '',
 		members: [{ ...defaultMember }]
 	};
+	$: {
+		const slug = workingInvitation.members
+			// map to the last name
+			.map((m) => m.name.trim().split(' ').pop()?.toLowerCase())
+			// filter out duplicates
+			.filter((name, index, self) => self.indexOf(name) === index)
+			// filter out empty strings and undefined
+			.filter((name) => name?.length || 0 > 0)
+			.join('-');
+		workingInvitation.slug = slug;
+
+		let counter = 1;
+		while ($invitations.some((i) => i.slug.toLowerCase() === slug)) {
+			counter++;
+			workingInvitation.slug = `${slug}-${counter}`;
+		}
+	}
 
 	function showInvitationModal(mode: 'create' | 'edit', invitation?: Invitation) {
 		if (mode === 'edit' && invitation) {
@@ -49,6 +69,8 @@
 			modalTitle = 'Einladung bearbeiten';
 		} else {
 			workingInvitation = {
+				_id: ObjectId.generate().toString(),
+				slug: '',
 				salutation: '',
 				members: [{ ...defaultMember }]
 			};

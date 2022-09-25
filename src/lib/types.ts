@@ -1,5 +1,6 @@
 export type Invitation = {
 	_id?: string;
+	slug: string;
 	salutation: string;
 	members: Member[];
 };
