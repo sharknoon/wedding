@@ -246,7 +246,7 @@
 								>
 									<a
 										target="_blank"
-										href={'/admin/savethedatecard?id=' + invitation._id}
+										href={'/admin/savethedatecard?slug=' + invitation.slug}
 										class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 									>
 										<svg
@@ -266,7 +266,7 @@
 									</a>
 									<a
 										target="_blank"
-										href={'/' + invitation._id}
+										href={'/' + invitation.slug}
 										class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 									>
 										<svg

@@ -16,7 +16,7 @@
 
 	onMount(() => {
 		QRCode.toDataURL(
-			`${$page.url.origin}/${data.id}`,
+			`${$page.url.origin}/${data.slug}`,
 			{
 				errorCorrectionLevel: 'H',
 				margin: 0,
@@ -225,7 +225,7 @@
 		</div>
 		<div class="flex flex-col items-center justify-evenly">
 			<div class="text-center font-cheap-pine-sans text-lg">
-				www.{$page.url.host}<br />/{data.id}
+				www.{$page.url.host}<br />/{data.slug}
 			</div>
 			<img
 				src={qrcode}
@@ -236,7 +236,7 @@
 				style="image-rendering: pixelated;"
 			/>
 			<div class="tansform rotate-180 text-center font-cheap-pine-sans text-lg">
-				www.{$page.url.host}<br />/{data.id}
+				www.{$page.url.host}<br />/{data.slug}
 			</div>
 		</div>
 		<div
