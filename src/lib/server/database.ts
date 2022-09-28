@@ -30,6 +30,36 @@ async function setup() {
 	invitationsCollection = db.collection('invitations');
 	invitationsCollection.createIndex({ slug: 1 }, { unique: true });
 	detailsCollection = db.collection('details');
+	if ((await detailsCollection.countDocuments()) === 0) {
+		detailsCollection.insertOne({
+			date: '2042-01-01T00:00:42.000',
+			locationName: 'locationName',
+			street: 'street',
+			city: 'city',
+			text: ['This is some example invitation text.', 'Change me in the database.'],
+			deadline: '2042-01-01T00:00:42.000',
+			program: [
+				{
+					time: '2042-01-01T00:00:42.000',
+					title: 'Program item no. 1',
+					background: 'some-image.jpg',
+					description: ['This is a example text for a program item.', 'Change me in the database.']
+				}
+			],
+			faqs: [
+				{
+					question: 'Example question no. 1',
+					answer: ['This is a example answer for a faq item.', 'Change me in the database.']
+				}
+			],
+			privateStreet: 'privateStreet',
+			privateCity: 'privateCity',
+			milestones: [{ date: '2042-01-01T00:00:42.000', title: 'title', image: 'heart' }]
+		});
+		console.info(
+			'Database has been freshly initialized. Please fill in the required informations in the details collection in the database.'
+		);
+	}
 }
 
 export async function getInvitationByPath(slug: string): Promise<WithId<Invitation> | null> {
@@ -40,11 +70,6 @@ export async function getInvitationByPath(slug: string): Promise<WithId<Invitati
 export async function getDetails(): Promise<WithId<Details> | null> {
 	await setup();
 	return detailsCollection.findOne();
-}
-
-export async function setDetails(details: Details) {
-	await setup();
-	detailsCollection.insertOne(details);
 }
 
 export async function updateInvitation(
