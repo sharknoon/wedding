@@ -79,6 +79,15 @@
 			.replace(/\u00dc/g, 'Ue');
 	}
 
+	function cleanInvitation(invitation: Invitation) {
+		invitation.slug = invitation.slug.trim();
+		invitation.salutation = invitation.salutation.trim();
+		invitation.members = invitation.members.map((i) => {
+			i.name = i.name.trim();
+			return i;
+		});
+	}
+
 	function showInvitationModal(mode: 'create' | 'edit', invitation?: Invitation) {
 		if (mode === 'edit' && invitation) {
 			workingInvitation = invitation;
@@ -110,6 +119,7 @@
 	}
 
 	function createInvitation(invitation: Invitation) {
+		cleanInvitation(invitation);
 		fetch('/api/invitations', {
 			method: 'POST',
 			headers: {
@@ -127,6 +137,7 @@
 	}
 
 	function updateInvitation(invitation: Invitation) {
+		cleanInvitation(invitation);
 		fetch(`/api/invitations/${invitation._id}`, {
 			method: 'PUT',
 			headers: {
