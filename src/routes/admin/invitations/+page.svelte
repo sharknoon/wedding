@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { downloadIds, invitations } from '$lib/client/stores';
+	import { page } from '$app/stores';
 
 	$downloadIds = [];
 
@@ -44,23 +45,38 @@
 		members: [{ ...defaultMember }]
 	};
 
-	function generateSlug(existingInvitations: Invitation[], members: Member[]): string {
-		const slug = members
+	function generateSlug(existingInvitations: Invitation[], invitation: Invitation): string {
+		const slug = invitation.members
 			// map to the last name
 			.map((m) => m.name.trim().split(' ').pop()?.toLowerCase())
 			// filter out duplicates
 			.filter((name, index, self) => self.indexOf(name) === index)
 			// filter out empty strings and undefined
 			.filter((name) => name?.length || 0 > 0)
+			// replace umlauts
+			.map((name) => replaceUmlauts(name || ''))
 			.join('-');
 		let slugWithNumber = slug;
 
 		let counter = 1;
-		while (existingInvitations.some((i) => i.slug.toLowerCase() === slugWithNumber)) {
+		// filter out own invitation
+		const invitations = existingInvitations.filter((i) => i._id !== invitation._id);
+		while (invitations.some((i) => i.slug.toLowerCase() === slugWithNumber)) {
 			counter++;
 			slugWithNumber = `${slug}${counter}`;
 		}
 		return slugWithNumber;
+	}
+
+	function replaceUmlauts(str: string) {
+		return str
+			.replace(/\u00df/g, 'ss')
+			.replace(/\u00e4/g, 'ae')
+			.replace(/\u00f6/g, 'oe')
+			.replace(/\u00fc/g, 'ue')
+			.replace(/\u00c4/g, 'Ae')
+			.replace(/\u00d6/g, 'Oe')
+			.replace(/\u00dc/g, 'Ue');
 	}
 
 	function showInvitationModal(mode: 'create' | 'edit', invitation?: Invitation) {
@@ -94,7 +110,6 @@
 	}
 
 	function createInvitation(invitation: Invitation) {
-		invitation.slug = generateSlug($invitations, invitation.members);
 		fetch('/api/invitations', {
 			method: 'POST',
 			headers: {
@@ -397,6 +412,8 @@
 									type="text"
 									placeholder="Erika Mustermann"
 									bind:value={member.name}
+									on:input={() =>
+										(workingInvitation.slug = generateSlug($invitations, workingInvitation))}
 									class="h-10 w-full border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 								/>
 							</div>
@@ -509,6 +526,19 @@
 					</svg>
 					Neues Mitglied hinzufügen
 				</button>
+				<span class="mt-3">Link</span>
+				<div class="group flex items-stretch">
+					<div class="flex items-center bg-black py-2 px-3 text-white">{$page.url.host}/</div>
+					<input
+						type="text"
+						placeholder="mustermann"
+						bind:value={workingInvitation.slug}
+						class="h-10 w-full border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+					/>
+				</div>
+				<span class="text-sm text-gray-600">
+					Unter diesem Link ist die Einladung erreichbar. Bei Bedarf kann dieser geändert werden.
+				</span>
 				<div class="mt-6 flex max-w-full justify-end gap-3">
 					<button
 						on:click={hideInvitationModal}
