@@ -527,13 +527,13 @@
 					Neues Mitglied hinzufügen
 				</button>
 				<span class="mt-3">Link</span>
-				<div class="group flex items-stretch">
+				<div class="flex items-stretch">
 					<div class="flex items-center bg-black py-2 px-3 text-white">{$page.url.host}/</div>
 					<input
 						type="text"
 						placeholder="mustermann"
 						bind:value={workingInvitation.slug}
-						class="h-10 w-full border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
+						class="h-10 grow border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 					/>
 				</div>
 				<span class="text-sm text-gray-600">
