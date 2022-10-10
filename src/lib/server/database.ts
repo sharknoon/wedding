@@ -62,7 +62,7 @@ async function setup() {
 	}
 }
 
-export async function getInvitationByPath(slug: string): Promise<WithId<Invitation> | null> {
+export async function getInvitationBySlug(slug: string): Promise<WithId<Invitation> | null> {
 	await setup();
 	return invitationsCollection.findOne({ slug: slug });
 }
