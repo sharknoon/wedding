@@ -13,6 +13,11 @@ import {
 import type { Details, Invitation } from '$lib/types';
 import { env } from '$env/dynamic/private';
 
+if (!env.MONGODB_URL) {
+	console.error('Missing MONGODB_URL env');
+	process.exit();
+}
+
 const client = new MongoClient(env.MONGODB_URL, {
 	pkFactory: { createPk: () => new ObjectId().toString() }
 });

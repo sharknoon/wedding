@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { downloadIds, invitations } from '$lib/client/stores';
-	import { page } from '$app/stores';
 
 	$downloadIds = [];
 
