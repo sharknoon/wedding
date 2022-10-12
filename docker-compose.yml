@@ -14,10 +14,9 @@ services:
       mongosh --host db:27017 --eval 'rs.initiate();'
 
   app:
-    image: wedding
     build: .
     depends_on:
-      - mongoinit
+      - db-init
     ports:
       - 3000:3000
     environment:
