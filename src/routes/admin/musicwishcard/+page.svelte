@@ -13,7 +13,7 @@
 			<div class="grid aspect-square h-auto w-1/2 grid-cols-2 grid-rows-2">
 				<div
 					style="background-image: url('/images/people/midrene-and-josua-large.png')"
-					class="col-start-1 row-span-2 row-start-1 bg-cover bg-center bg-no-repeat grayscale"
+					class="col-start-1 row-span-2 row-start-1 bg-cover bg-center bg-no-repeat"
 				/>
 				<div
 					class="col-start-2 row-start-1 flex justify-center self-end font-cheap-pine-sans text-2xl uppercase tracking-widest"
