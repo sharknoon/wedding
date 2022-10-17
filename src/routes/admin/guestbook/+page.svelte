@@ -2,7 +2,7 @@
 	import Site from './site.svelte';
 	import { downloadIds } from '$lib/client/stores';
 
-	$downloadIds = [];
+	$downloadIds = [1, 2, 3].map((i) => `guestbook-${i}`);
 
 	const heartBox1Texts = [
 		'Welche besonderen Erinnerungen habt ihr zusammen mit dem Brautpaar?',
@@ -16,13 +16,13 @@
 	];
 	const normalBox2Texts = [
 		'Das sollte man in einer Ehe einmal im Jahr machen:',
-		"Was ist das beste Rezept für eine gute Ehe?<div class='text-sm text-left leading-none'>&#9634; Das habe ich so gehört<br />&#9634; Aus eigener Erfahrung<br />&#9634; Habe ich auch einem Kochbuch</div>",
+		"Was ist das beste Rezept für eine gute Ehe?<div class='text-sm text-left leading-none mt-1'>&#9634; Das habe ich so gehört<br />&#9634; Aus eigener Erfahrung<br />&#9634; Habe ich auch einem Kochbuch</div>",
 		'Mein bester Ratschlag für eine glückliche Ehe:'
 	];
 	const heartBox2Texts = [
 		'Welcher Moment des heutigen Abends wird dir ganz besonders in Erinnerung bleiben?',
 		'Beschreibe das Brautpaar in 3 Worten',
-		"Der schönste Augenblick heute war?<div class='text-sm leading-none flex gap-1'><div>gar nicht<br />zufrieden</div><div>0<br />&#9634;</div><div>1<br />&#9634;</div><div>2<br />&#9634;</div><div>3<br />&#9634;</div><div>4<br />&#9634;</div><div>5<br />&#9634;</div><div>6<br />&#9634;</div><div>7<br />&#9634;</div><div>8<br />&#9634;</div><div>9<br />&#9634;</div><div>10<br />&#9634;</div><div>voll<br />zufrieden</div></div>"
+		"Der schönste Augenblick heute war?<div class='text-sm leading-none flex gap-1 mt-2'><div>gar nicht<br />zufrieden</div><div>0<br />&#9634;</div><div>1<br />&#9634;</div><div>2<br />&#9634;</div><div>3<br />&#9634;</div><div>4<br />&#9634;</div><div>5<br />&#9634;</div><div>6<br />&#9634;</div><div>7<br />&#9634;</div><div>8<br />&#9634;</div><div>9<br />&#9634;</div><div>10<br />&#9634;</div><div>voll<br />zufrieden</div></div>"
 	];
 	const heartBox3Texts = [
 		'Das Beste am Heiraten ist:',
