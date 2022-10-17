@@ -58,7 +58,10 @@
 		'Mach ein Foto mit der Cousine der Braut'
 	];
 
-	$downloadIds = ['fotochallenge-front', ...challenges.map((_, i) => 'fotochallenge-back-' + i)];
+	$downloadIds = [
+		'fotochallenge-front',
+		...challenges.map((_, i) => 'fotochallenge-back-' + (i + 1))
+	];
 </script>
 
 <div class="flex flex-col items-center gap-16">
