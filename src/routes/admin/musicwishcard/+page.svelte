@@ -12,7 +12,7 @@
 		<div class="flex grow items-center gap-2">
 			<div class="grid aspect-square h-auto w-1/2 grid-cols-2 grid-rows-2">
 				<div
-					style="background-image: url('/images/people/midrene-and-josua-large.png')"
+					style="background-image: url('/images/people/midrene-and-josua-large.avif')"
 					class="col-start-1 row-span-2 row-start-1 bg-cover bg-center bg-no-repeat"
 				/>
 				<div

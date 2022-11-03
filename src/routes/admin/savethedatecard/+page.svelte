@@ -10,7 +10,7 @@
 	$: date = new Date($details?.date);
 	$: deadline = new Date($details?.deadline);
 
-	$downloadIds = ['savethedate-front', 'savethedate-back'];
+	$downloadIds = [`savethedate-front-${data.slug}`, `savethedate-back-${data.slug}`];
 
 	$: qrcode = '';
 
@@ -30,11 +30,11 @@
 <div class="flex flex-col items-center gap-16">
 	<div
 		class="flex h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
-		id="savethedate-front"
+		id={'savethedate-front-' + data.slug}
 	>
 		<div class="grid w-full grid-cols-5 grid-rows-1">
 			<div
-				style="background-image: url('/images/people/midrene-and-josua-large.png')"
+				style="background-image: url('/images/people/midrene-and-josua-large.avif')"
 				class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat"
 			/>
 			<div class="col-start-2 row-start-1 flex flex-col">
@@ -89,7 +89,7 @@
 
 	<div
 		class="flex h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
-		id="savethedate-back"
+		id={'savethedate-back-' + data.slug}
 	>
 		<div
 			class="rotate-180 border-l-[3px] border-black pl-3 text-center text-3xl text-red-600 vertical-lr"

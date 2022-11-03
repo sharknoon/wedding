@@ -43,7 +43,7 @@
 			<div class="flex grow flex-col items-center justify-center gap-8 px-12">
 				<div class="grid h-[17rem] w-[17rem] grid-cols-2 grid-rows-1">
 					<div
-						style="background-image: url('/images/people/midrene-and-josua-large.png')"
+						style="background-image: url('/images/people/midrene-and-josua-large.avif')"
 						class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat"
 					/>
 					<div class="col-start-2 row-start-1 flex flex-col">

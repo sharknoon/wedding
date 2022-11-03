@@ -8,7 +8,7 @@
 
 	export let data: PageData;
 
-	$downloadIds = ['thankyou-outer', 'thankyou-inner'];
+	$downloadIds = [`thankyou-outer-${data.slug}`, `thankyou-inner-${data.slug}`];
 
 	$: qrcode = '';
 
@@ -28,7 +28,7 @@
 <div class="flex flex-col items-center gap-16">
 	<div
 		class="grid h-[111mm] w-[302mm] max-w-[302mm] grid-cols-2 bg-white p-[6mm] shadow-2xl"
-		id="thankyou-outer"
+		id={'thankyou-outer-' + data.slug}
 	>
 		<div class="relative">
 			<div
@@ -60,7 +60,7 @@
 				/>
 				<div
 					class="row-span-2 bg-cover bg-center bg-no-repeat"
-					style="background-image: url(/images/people/midrene-and-josua-large.png);"
+					style="background-image: url(/images/people/midrene-and-josua-large.avif);"
 				/>
 				<div
 					class="bg-cover bg-center bg-no-repeat"
@@ -112,7 +112,7 @@
 
 	<div
 		class="grid h-[111mm] w-[302mm] max-w-[302mm] grid-cols-2 bg-white p-[6mm] shadow-2xl"
-		id="thankyou-inner"
+		id={'thankyou-inner-' + data.slug}
 	>
 		<div class="flex flex-col items-center justify-center gap-6">
 			<h1 class="font-cheap-pine text-4xl tracking-wide">Die Hochzeitsfotos</h1>

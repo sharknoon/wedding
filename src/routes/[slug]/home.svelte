@@ -29,8 +29,8 @@
 				<div
 					class="mb-2 flex translate-y-12 flex-col items-center opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100"
 				>
-					<span class="font-cheap-pine-sans text-4xl">Konstanz</span>
-					<span class="bg-black px-2 font-cheap-pine-sans text-2xl text-white">Juni 2019</span>
+					<span class="font-cheap-pine-sans text-3xl text-white">Reichenbach an der Fils</span>
+					<span class="bg-black px-2 font-cheap-pine-sans text-2xl text-white">Oktober 2022</span>
 				</div>
 			</div>
 			<div class="col-start-2 row-start-1 flex flex-col">

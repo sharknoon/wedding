@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 
 	let code = '';
+	$: href = code.trim().toLowerCase();
 	$: message = $page.url.searchParams.get('message') || '';
 </script>
 
@@ -17,13 +18,13 @@
 		<input
 			type="text"
 			name="code"
-			on:keyup={(e) => (e.key === 'Enter' ? (window.location.href = code.trim()) : '')}
+			on:keyup={(e) => (e.key === 'Enter' ? (window.location.href = href) : '')}
 			bind:value={code}
 			placeholder="Einladungscode"
 			class="h-10 border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"
 		/>
 		<button
-			on:click={() => (window.location.href = code.trim())}
+			on:click={() => (window.location.href = href)}
 			class="flex items-center bg-black py-2 px-3 text-white"
 		>
 			<svg
