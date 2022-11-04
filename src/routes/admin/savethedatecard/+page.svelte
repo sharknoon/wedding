@@ -205,7 +205,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="py-1 text-center font-cheap-pine-sans text-xl leading-tight">
+			<div class="py-1 text-center font-cheap-pine-sans text-2xl leading-tight">
 				<span>
 					Wir bitten um eine Rückmeldung bis zum {deadline.toLocaleDateString('de-DE', {
 						day: '2-digit',
@@ -215,19 +215,19 @@
 				</span>
 				<br />
 				<span>
-					Nutzt dazu bitte den <span class="text-red-600">QR-Code</span> /
-					<span class="text-red-600">Link</span> auf der rechten Seite.
+					<span class="text-red-600">Scant</span> dazu bitte den
+					<span class="text-red-600">QR-Code</span> auf der rechten Seite.
 				</span>
 			</div>
 			<div class="text-center font-cheap-pine-sans text-3xl uppercase tracking-wider">
 				Wir freuen uns auf eure Antwort
 			</div>
 		</div>
-		<div class="flex flex-col items-center justify-evenly">
+		<div class="relative flex flex-col items-center justify-evenly">
 			<div class="text-center font-cheap-pine-sans text-lg leading-none">
 				<div class="mb-3">www.{$page.url.host}</div>
 				<div>Einladungscode:</div>
-				<div class="text-3xl text-red-600">{data.slug}</div>
+				<div class="text-3xl">{data.slug}</div>
 			</div>
 			<img
 				src={qrcode}
@@ -237,10 +237,11 @@
 				class="mx-2 self-center"
 				style="image-rendering: pixelated;"
 			/>
+			<div class="absolute bg-white px-1 font-cheap-pine-sans text-3xl text-red-600">SCAN ME</div>
 			<div class="tansform rotate-180 text-center font-cheap-pine-sans text-lg leading-none">
 				<div class="mb-3">www.{$page.url.host}</div>
 				<div>Einladungscode:</div>
-				<div class="text-3xl text-red-600">{data.slug}</div>
+				<div class="text-3xl">{data.slug}</div>
 			</div>
 		</div>
 		<div

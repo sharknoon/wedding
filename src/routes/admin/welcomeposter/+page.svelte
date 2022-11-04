@@ -51,7 +51,7 @@
 
 			<div class="mx-auto grid aspect-square h-[35rem] grid-cols-2">
 				<div
-					style="background-image: url('/images/people/midrene-and-josua.JPG')"
+					style="background-image: url('/images/people/midrene-and-josua-large.avif')"
 					class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat"
 				/>
 				<div class="col-start-2 row-start-1 flex flex-col">

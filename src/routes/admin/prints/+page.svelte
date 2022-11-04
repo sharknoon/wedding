@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { downloadIds } from '$lib/client/stores';
+
+	$downloadIds = [];
 
 	const items = [
 		{

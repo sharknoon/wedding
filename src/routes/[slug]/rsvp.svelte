@@ -113,71 +113,53 @@
 				transition:scale
 				class="flex w-[32rem] max-w-[32rem] flex-col gap-2 border-2 border-black bg-white p-3"
 			>
-				{#each $invitation?.members || [] as member}
-					<div class="flex gap-2">
-						<div>
-							<span class="font-oswald">{member.name}</span>
-							<div
-								class="relative grid h-12 grid-cols-2 items-center gap-1 border-2 border-black p-1 text-center"
+				{#if $invitation.members.length > 1}
+					<div class="flex items-center gap-2 text-xl">
+						<span>Wir bringen</span>
+						<div class="flex items-center gap-2 border-2 border-black px-2 py-1">
+							<span>2 Personen</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
 							>
-								<div
-									class="absolute top-1 bottom-1 left-1 right-[calc(50%+0.125rem)] bg-black transition-all {member.accepted ===
-									'false'
-										? 'left-[calc(50%+0.125rem)] right-1 bg-green-600'
-										: 'left-1 right-[calc(50%+0.125rem)] bg-red-600'}"
-								/>
-								<button
-									type="button"
-									class="z-0 mb-1 px-1 text-lg {member.accepted === 'false'
-										? 'text-black'
-										: 'text-white'}"
-									on:click={() => (member.accepted = 'true')}>zusagen</button
-								>
-								<button
-									type="button"
-									class="z-0 mb-1 px-1 text-lg {member.accepted === 'true'
-										? 'text-black'
-										: 'text-white'}"
-									on:click={() => (member.accepted = 'false')}>absagen</button
-								>
-							</div>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+							</svg>
 						</div>
-						<div>
-							<span class="font-oswald">Ernährungsform</span>
-							<div
-								class="relative grid h-12 grid-cols-2 items-center gap-1 border-2 border-black p-1 text-center"
+						<span>mit</span>
+					</div>
+				{/if}
+				{#each $invitation.members as member}
+					<div class="flex items-center gap-2 text-xl">
+						<span>
+							{#if $invitation.members.length > 1}
+								{member.name.split(' ')[0]} isst
+							{:else}
+								Ich esse
+							{/if}
+						</span>
+						<div class="flex items-center gap-2 border-2 border-black px-2 py-1">
+							<span>vegetarisch</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
 							>
-								<div
-									class="absolute top-1 bottom-1 left-1 right-[calc(50%+0.125rem)] bg-black transition-all {member.accepted ===
-									'false'
-										? 'left-[calc(50%+0.125rem)] right-1 bg-green-600'
-										: 'left-1 right-[calc(50%+0.125rem)] bg-red-600'}"
-								/>
-								<button
-									type="button"
-									class="z-0 mb-1 px-1 text-lg {member.accepted === 'false'
-										? 'text-black'
-										: 'text-white'}"
-									on:click={() => (member.accepted = 'true')}>Fleischer</button
-								>
-								<button
-									type="button"
-									class="z-0 mb-1 px-1 text-lg {member.accepted === 'false'
-										? 'text-black'
-										: 'text-white'}"
-									on:click={() => (member.accepted = 'true')}>Vegetarier</button
-								>
-								<button
-									type="button"
-									class="z-0 mb-1 px-1 text-lg {member.accepted === 'true'
-										? 'text-black'
-										: 'text-white'}"
-									on:click={() => (member.accepted = 'false')}>Veganer</button
-								>
-							</div>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+							</svg>
 						</div>
 					</div>
 				{/each}
+				<div class="flex items-center gap-2 text-xl">
+					<span>Allergien</span>
+					<input type="text" class="border-2 border-black focus:outline-none" />
+				</div>
 				<button
 					on:click={() => updateInvitation(true)}
 					class="relative col-span-3 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"

@@ -8,6 +8,9 @@ export type Invitation = {
 export type Member = {
 	name: string;
 	accepted: 'unknown' | 'true' | 'false';
+	table: number;
+	diet: 'unknown' | 'meat eater' | 'vegetarian' | 'vegan';
+	allergies: string;
 };
 
 export type Details = {
