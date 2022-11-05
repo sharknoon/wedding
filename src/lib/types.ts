@@ -3,14 +3,14 @@ export type Invitation = {
 	slug: string;
 	salutation: string;
 	members: Member[];
+	allergies: string;
 };
 
 export type Member = {
 	name: string;
 	accepted: 'unknown' | 'true' | 'false';
 	table: number;
-	diet: 'unknown' | 'meat eater' | 'vegetarian' | 'vegan';
-	allergies: string;
+	diet: 'unknown' | 'omnivorian' | 'pescetarian' | 'vegetarian' | 'vegan';
 };
 
 export type Details = {
