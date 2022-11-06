@@ -4,23 +4,12 @@
 	import { fade, scale } from 'svelte/transition';
 	import StatusIndicator from './status-indicator.svelte';
 
-	let acceptStatus: SendStatus = SendStatus.NONE;
-	$: if (acceptStatus === SendStatus.SUCCESS) {
-		setTimeout(() => {
-			acceptStatus = SendStatus.NONE;
-		}, 2000);
-	}
-	let declineStatus: SendStatus = SendStatus.NONE;
-	$: if (declineStatus === SendStatus.SUCCESS) {
-		setTimeout(() => {
-			declineStatus = SendStatus.NONE;
-		}, 2000);
-	}
 	let showModal = false;
+	let workingInvitation = $invitation;
 
 	function declineInvitation() {
 		$invitation?.members?.forEach((m) => (m.accepted = 'false'));
-		updateInvitation(false);
+		updateInvitation();
 	}
 
 	function acceptInvitation() {
@@ -28,9 +17,7 @@
 		showModal = true;
 	}
 
-	function updateInvitation(accepted: boolean) {
-		if (accepted) acceptStatus = SendStatus.PENDING;
-		else declineStatus = SendStatus.PENDING;
+	function updateInvitation() {
 		for (const member of $invitation.members) {
 			if (member.accepted !== 'true' && member.accepted !== 'false') {
 				member.accepted = 'false';
@@ -45,12 +32,8 @@
 			body: JSON.stringify($invitation)
 		}).then((response) => {
 			if (response.status === 200) {
-				if (accepted) acceptStatus = SendStatus.SUCCESS;
-				else declineStatus = SendStatus.SUCCESS;
 				showModal = false;
 			} else {
-				if (accepted) acceptStatus = SendStatus.ERROR;
-				else declineStatus = SendStatus.ERROR;
 				alert('Fehler beim Speichern der Einladung\n' + response.statusText);
 			}
 		});
@@ -58,7 +41,7 @@
 </script>
 
 <div class="bg-white p-2 md:fixed md:bottom-0 md:right-0">
-	<div class="flex gap-4 font-oswald">
+	<div class="flex gap-2 font-oswald">
 		{#if $invitation.members.every((m) => m.accepted === 'unknown') || $invitation.members.every((m) => m.accepted === 'false')}
 			<button
 				on:click={() => acceptInvitation()}
@@ -69,15 +52,6 @@
 				{:else if $invitation.members.every((m) => m.accepted === 'false')}
 					Doch noch zusagen
 				{/if}
-				<div
-					class="absolute inset-0 h-full w-full transition-all {acceptStatus !== SendStatus.NONE
-						? 'bg-black/75 text-white'
-						: ''}"
-				>
-					<div class="flex h-full items-center justify-center">
-						<StatusIndicator status={acceptStatus} />
-					</div>
-				</div>
 			</button>
 		{:else}
 			<div class="flex items-center gap-2 text-xl">
@@ -98,24 +72,15 @@
 				{/if}
 			</div>
 		{/if}
-
-		{#if $invitation.members.every((m) => m.accepted === 'unknown')}
+		{#if $invitation.members.some((m) => m.accepted === 'true')}
 			<button
-				on:click={() => declineInvitation()}
-				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl ring-black ring-offset-2 ring-offset-white hover:text-white focus:ring-2"
+				on:click={() => acceptInvitation()}
+				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white focus:ring-2"
 			>
-				Absagen
-				<div
-					class="absolute inset-0 h-full w-full transition-all {declineStatus !== SendStatus.NONE
-						? 'bg-black/75 text-white'
-						: ''}"
-				>
-					<div class="flex h-full items-center justify-center">
-						<StatusIndicator status={declineStatus} />
-					</div>
-				</div>
+				Teilnahme ändern
 			</button>
-		{:else if $invitation.members.every((m) => m.accepted === 'false')}
+		{/if}
+		{#if $invitation.members.every((m) => m.accepted === 'false')}
 			<div class="flex items-center gap-2 text-xl">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -131,19 +96,10 @@
 			</div>
 		{:else}
 			<button
-				on:click={() => acceptInvitation()}
-				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white focus:ring-2"
+				on:click={() => declineInvitation()}
+				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white hover:text-white focus:ring-2"
 			>
-				Teilnahme ändern
-				<div
-					class="absolute inset-0 h-full w-full transition-all {declineStatus !== SendStatus.NONE
-						? 'bg-black/75 text-white'
-						: ''}"
-				>
-					<div class="flex h-full items-center justify-center">
-						<StatusIndicator status={declineStatus} />
-					</div>
-				</div>
+				Absagen
 			</button>
 		{/if}
 	</div>
@@ -160,11 +116,11 @@
 				transition:scale
 				class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-scroll border-2 border-black bg-white p-3 text-xl"
 			>
-				{#if $invitation.members.length > 1}
+				{#if workingInvitation.members.length > 1}
 					<div class="flex h-full items-center">Wir bringen</div>
 					<div class="flex">
 						<div class="flex flex-col">
-							{#each $invitation.members as member, index}
+							{#each workingInvitation.members as member, index}
 								<div>
 									<input
 										type="checkbox"
@@ -181,15 +137,16 @@
 						<div class="ml-4 flex h-full items-center">mit</div>
 					</div>
 				{/if}
-				{#each $invitation.members as member}
+				{#each workingInvitation.members as member}
 					<span>
-						{#if $invitation.members.length > 1}
+						{#if workingInvitation.members.length > 1}
 							{member.name.split(' ')[0]} isst
 						{:else}
 							Ich esse
 						{/if}
 					</span>
 					<select class="w-48 border-2 border-black p-1 text-xl" bind:value={member.diet}>
+						<option value="unknown" hidden>Bitte auswählen</option>
 						<option value="omnivorian">omnivorisch (Alles)</option>
 						<option value="pescetarian">pescetarisch (Fisch)</option>
 						<option value="vegetarian">vegetarisch</option>
@@ -202,27 +159,18 @@
 					rows="2"
 					placeholder="Max hat eine Nussallergie"
 					class="border-2 border-black focus:outline-none"
-					bind:value={$invitation.allergies}
+					bind:value={workingInvitation.allergies}
 				/>
 
 				<button
-					on:click={() => updateInvitation(true)}
+					on:click={() => updateInvitation()}
 					class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 				>
-					{#if $invitation.members.every((m) => m.accepted === 'false')}
+					{#if workingInvitation.members.every((m) => m.accepted === 'false')}
 						Absagen
 					{:else}
 						Zusagen
 					{/if}
-					<div
-						class="absolute inset-0 h-full w-full transition-all {acceptStatus !== SendStatus.NONE
-							? 'bg-black/75 text-white'
-							: ''}"
-					>
-						<div class="flex h-full items-center justify-center">
-							<StatusIndicator status={acceptStatus} />
-						</div>
-					</div>
 				</button>
 			</div>
 		</div>
