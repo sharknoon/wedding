@@ -1,40 +1,41 @@
 <script lang="ts">
-	import { SendStatus } from '$lib/types';
 	import { invitation } from '$lib/client/stores';
+	import type { Invitation } from '$lib/types';
 	import { fade, scale } from 'svelte/transition';
-	import StatusIndicator from './status-indicator.svelte';
 
 	let showModal = false;
-	let workingInvitation = $invitation;
+	$: workingInvitation = $invitation;
 
 	function declineInvitation() {
 		$invitation?.members?.forEach((m) => (m.accepted = 'false'));
-		updateInvitation();
+		updateInvitation($invitation);
 	}
 
 	function acceptInvitation() {
-		$invitation?.members?.forEach((m) => (m.accepted = 'true'));
+		workingInvitation?.members?.forEach((m) => (m.accepted = 'true'));
 		showModal = true;
 	}
 
-	function updateInvitation() {
-		for (const member of $invitation.members) {
+	function updateInvitation(i: Invitation) {
+		for (const member of i.members) {
 			if (member.accepted !== 'true' && member.accepted !== 'false') {
 				member.accepted = 'false';
 			}
 		}
-		invitation.set($invitation);
-		fetch(`/api/invitations/${$invitation?._id}`, {
+		fetch(`/api/invitations/${i?._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify($invitation)
-		}).then((response) => {
+			body: JSON.stringify(i)
+		}).then(async (response) => {
 			if (response.status === 200) {
 				showModal = false;
+				invitation.set(i);
 			} else {
-				alert('Fehler beim Speichern der Einladung\n' + response.statusText);
+				alert(
+					`Fehler beim Speichern der Einladung\n${response.statusText} ${await response.text()}`
+				);
 			}
 		});
 	}
@@ -158,12 +159,12 @@
 				<textarea
 					rows="2"
 					placeholder="Max hat eine Nussallergie"
-					class="border-2 border-black focus:outline-none"
+					class="border-2 border-black focus:scale-150"
 					bind:value={workingInvitation.allergies}
 				/>
 
 				<button
-					on:click={() => updateInvitation()}
+					on:click={() => updateInvitation(workingInvitation)}
 					class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 				>
 					{#if workingInvitation.members.every((m) => m.accepted === 'false')}

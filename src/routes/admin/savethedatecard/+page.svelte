@@ -1,36 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import QRCode from 'qrcode';
 	import { details, downloadIds } from '$lib/client/stores';
-	import type { PageData } from './$types';
-	import { page } from '$app/stores';
-
-	export let data: PageData;
 
 	$: date = new Date($details?.date);
-	$: deadline = new Date($details?.deadline);
 
-	$downloadIds = [`savethedate-front-${data.slug}`, `savethedate-back-${data.slug}`];
-
-	$: qrcode = '';
-
-	onMount(() => {
-		QRCode.toDataURL(
-			`${$page.url.origin}/${data.slug}`,
-			{
-				errorCorrectionLevel: 'H',
-				margin: 0,
-				width: 160
-			},
-			(_, url) => (qrcode = url)
-		);
-	});
+	$downloadIds = ['savethedate-front', 'savethedate-back'];
 </script>
 
 <div class="flex flex-col items-center gap-16">
 	<div
 		class="flex h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
-		id={'savethedate-front-' + data.slug}
+		id={'savethedate-front'}
 	>
 		<div class="grid w-full grid-cols-5 grid-rows-1">
 			<div
@@ -89,13 +68,13 @@
 
 	<div
 		class="h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
-		id={'savethedate-back-' + data.slug}
+		id={'savethedate-back'}
 	>
 		<div class="flex h-full flex-col border-2 border-dashed border-black p-4 font-oswald text-2xl">
 			<div class="flex grow flex-col justify-center gap-2 text-center">
 				<p>Wir werden heiraten!</p>
 				<p>
-					Bitte haltet euch deswegen den {date.toLocaleDateString('DE-DE', {
+					Bitte haltet euch den {date.toLocaleDateString('DE-DE', {
 						day: '2-digit',
 						month: 'long',
 						year: 'numeric'

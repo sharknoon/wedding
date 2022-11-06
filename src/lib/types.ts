@@ -49,10 +49,3 @@ export type CountdownItem = {
 	unit: string;
 	value: number;
 };
-
-export enum SendStatus {
-	NONE,
-	PENDING,
-	SUCCESS,
-	ERROR
-}
