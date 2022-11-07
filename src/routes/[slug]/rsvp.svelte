@@ -50,7 +50,7 @@
 		{#if $invitation.members.every((m) => m.accepted === 'unknown') || $invitation.members.every((m) => m.accepted === 'false')}
 			<button
 				on:click={() => acceptInvitation(workingInvitation)}
-				class="relative grow border-0 bg-green-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition focus:ring-2"
+				class="relative grow border-0 bg-green-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-green-700 focus:ring-2"
 			>
 				{#if $invitation.members.every((m) => m.accepted === 'unknown')}
 					Zusagen
@@ -80,7 +80,7 @@
 		{#if $invitation.members.some((m) => m.accepted === 'true')}
 			<button
 				on:click={() => acceptInvitation(workingInvitation)}
-				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white focus:ring-2"
+				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
 				Teilnahme ändern
 			</button>
@@ -102,7 +102,7 @@
 		{:else}
 			<button
 				on:click={() => declineInvitation(workingInvitation)}
-				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white hover:text-white focus:ring-2"
+				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
 			>
 				Absagen
 			</button>
@@ -163,7 +163,7 @@
 				<textarea
 					rows="2"
 					placeholder="Max hat eine Nussallergie"
-					class="border-2 border-black focus:scale-150"
+					class="border-2 border-black"
 					bind:value={workingInvitation.allergies}
 				/>
 

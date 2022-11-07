@@ -44,8 +44,3 @@ export type Milestone = {
 	title: string;
 	image: string;
 };
-
-export type CountdownItem = {
-	unit: string;
-	value: number;
-};

@@ -1,6 +1,10 @@
 <script lang="ts">
-	import type { CountdownItem } from '$lib/types';
 	import { details } from '$lib/client/stores';
+
+	type CountdownItem = {
+		unit: string;
+		value: number;
+	};
 
 	$: date = new Date($details?.date);
 	$: countdown = calculateCountdown(date);
