@@ -135,7 +135,7 @@
 	</div>
 
 	<div class="text-center">
-		210x99mm, Einladungskarte DIN lang Quer, beidseitig bedruckt, <a
+		210x99mm, Einladungskarte DIN lang Quer, beidseitig bedruckt, 350g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/einladungskarte-din-lang-quer-210-cm-x-99-cm-beidseitig-bedruckt.html"
 			target="_blank"

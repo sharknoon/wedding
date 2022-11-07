@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	<div class="text-center">
-		321x210mm, Aufsteller Prisma klein mit Mattfolie kaschiert, <a
+		321x210mm, Aufsteller Prisma klein mit Mattfolie kaschiert, 300g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/aufsteller-prisma-klein-mit-mattfolie-kaschiert.html"
 			target="_blank"

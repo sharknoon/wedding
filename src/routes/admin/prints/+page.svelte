@@ -66,15 +66,15 @@
 <div class="flex items-center justify-center">
 	<div class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 md:gap-6 md:p-6 lg:grid-cols-4">
 		{#each items as item}
-			<button
+			<a
 				class="flex min-w-0 flex-col justify-center gap-4 border-4 border-black p-4"
-				on:click={() => goto(item.href)}
+				href={item.href}
 			>
 				{@html item.icon}
 				<h2 class="mb-2 break-words text-center font-cheap-pine-sans text-2xl md:text-3xl">
 					{item.name}
 				</h2>
-			</button>
+			</a>
 		{/each}
 	</div>
 </div>

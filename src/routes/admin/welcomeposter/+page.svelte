@@ -71,7 +71,7 @@
 	</div>
 
 	<div class="text-center">
-		420x297mm, Plakat DIN A3 quer einseitig 4/0-farbig bedruckt <a
+		420x297mm, Plakat DIN A3 quer einseitig 4/0-farbig bedruckt, 300g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/plakat-din-a3-quer-420-x-297-mm-einseitig-40farbig-bedruckt-topseller.html"
 			target="_blank"

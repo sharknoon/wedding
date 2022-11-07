@@ -283,7 +283,7 @@
 	</div>
 
 	<div class="text-center">
-		210x99mm, Eintrittskarte DIN lang quer perforiert (4/4 beidseitig bedruckt), <a
+		210x99mm, Eintrittskarte DIN lang quer perforiert (4/4 beidseitig bedruckt), 300g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/eintrittskarte-din-lang-quer-perforiert-44-beidseitig-bedruckt.html"
 			target="_blank"

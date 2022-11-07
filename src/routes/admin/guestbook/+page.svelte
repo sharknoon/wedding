@@ -148,7 +148,7 @@
 
 	<div class="text-center">
 		216x303mm, Buch DIN A4 hoch, Umschlag: Hardcover 4/0-farbig, Inhalt: 48 farbige Innenseiten
-		(4/4-farbig), <a
+		(4/4-farbig), 135g Papier, <a
 			class="hover:underline"
 			href="
 			https://www.wir-machen-druck.de/buch-din-a4-hoch-umschlag-hardcover-40farbiginhalt-48-farbige-innenseiten-44farbig.html"

@@ -141,7 +141,7 @@
 	</div>
 
 	<div class="text-center">
-		296x105mm, Einladungskarte, gefalzt auf DIN A6 quer, 4-seiter, <a
+		296x105mm, Einladungskarte, gefalzt auf DIN A6 quer, 4-seiter, 300g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/einladungskarte-gefalzt-auf-din-a6-quer-4seiter.html"
 			target="_blank"

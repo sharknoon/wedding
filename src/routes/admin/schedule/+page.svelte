@@ -435,7 +435,7 @@
 	</Page>
 
 	<div class="text-center">
-		148x210mm, Broschüre mit Drahtheftung, Endformat DIN A5, 12-seitig, <a
+		148x210mm, Broschüre mit Drahtheftung, Endformat DIN A5, 12-seitig, 90/250g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/broschuere-mit-drahtheftung-endformat-din-a5-12seitig.html"
 			target="_blank"

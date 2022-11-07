@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="text-center">
-		594x420mm, Plakat DIN A2 quer einseitig 4/0-farbig bedruckt <a
+		594x420mm, Plakat DIN A2 quer einseitig 4/0-farbig bedruckt, 250g Papier, <a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/plakat-din-a2-quer-594-x-420-mm-einseitig-40farbig-bedruckt-topseller.html"
 			target="_blank"

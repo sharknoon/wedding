@@ -9,7 +9,7 @@
 
 <div class="flex flex-col items-center gap-16">
 	<div
-		class="h-[216mm] max-h-[216mm] w-[154mm] gap-[6mm] bg-white p-[6mm] shadow-2xl"
+		class="h-[216mm] max-h-[216mm] w-[106mm] gap-[6mm] bg-white p-[6mm] shadow-2xl"
 		id="menucard-front"
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
@@ -36,7 +36,7 @@
 	</div>
 
 	<div
-		class="h-[216mm] max-h-[216mm] w-[154mm] gap-[6mm] bg-white p-[6mm] shadow-2xl"
+		class="h-[216mm] max-h-[216mm] w-[106mm] gap-[6mm] bg-white p-[6mm] shadow-2xl"
 		id="menucard-back"
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
@@ -69,14 +69,14 @@
 	</div>
 
 	<div class="text-center">
-		148x210mm, Speisekarte DIN A5, beidseitig bedruckt, <a
+		100x210mm, Speisekarte DIN lang, beidseitig bedruckt, 250g Papier, <a
 			class="hover:underline"
-			href="https://www.wir-machen-druck.de/speisekarte-din-a5-148-cm-x-210-cm-beidseitig-bedruckt.html"
+			href="https://www.wir-machen-druck.de/speisekarte-din-lang-100-cm-x-210-cm-beidseitig-bedruckt.html"
 			target="_blank"
 		>
 			WIRmachenDRUCK
 		</a>
 		<br />
-		Datenformat: 154x216mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
+		Datenformat: 106x216mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
 	</div>
 </div>
