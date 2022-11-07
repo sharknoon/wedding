@@ -6,17 +6,21 @@
 	let showModal = false;
 	$: workingInvitation = $invitation;
 
-	function declineInvitation() {
-		$invitation?.members?.forEach((m) => (m.accepted = 'false'));
-		updateInvitation($invitation);
+	function declineInvitation(i: Invitation) {
+		i?.members?.forEach((m) => (m.accepted = 'false'));
+		updateInvitation(i);
 	}
 
-	function acceptInvitation() {
-		workingInvitation?.members?.forEach((m) => (m.accepted = 'true'));
+	function acceptInvitation(i: Invitation) {
+		i?.members?.forEach((m) => (m.accepted = 'true'));
 		showModal = true;
 	}
 
 	function updateInvitation(i: Invitation) {
+		if (i.members.some((m) => m.diet === 'unknown' || !m.diet)) {
+			alert('Bitte gebt auch eure Ernährungsform an.');
+			return;
+		}
 		for (const member of i.members) {
 			if (member.accepted !== 'true' && member.accepted !== 'false') {
 				member.accepted = 'false';
@@ -45,7 +49,7 @@
 	<div class="flex gap-2 font-oswald">
 		{#if $invitation.members.every((m) => m.accepted === 'unknown') || $invitation.members.every((m) => m.accepted === 'false')}
 			<button
-				on:click={() => acceptInvitation()}
+				on:click={() => acceptInvitation(workingInvitation)}
 				class="relative grow border-0 bg-green-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition focus:ring-2"
 			>
 				{#if $invitation.members.every((m) => m.accepted === 'unknown')}
@@ -75,7 +79,7 @@
 		{/if}
 		{#if $invitation.members.some((m) => m.accepted === 'true')}
 			<button
-				on:click={() => acceptInvitation()}
+				on:click={() => acceptInvitation(workingInvitation)}
 				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white focus:ring-2"
 			>
 				Teilnahme ändern
@@ -97,7 +101,7 @@
 			</div>
 		{:else}
 			<button
-				on:click={() => declineInvitation()}
+				on:click={() => declineInvitation(workingInvitation)}
 				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white hover:text-white focus:ring-2"
 			>
 				Absagen
