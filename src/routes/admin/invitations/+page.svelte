@@ -407,7 +407,7 @@
 	>
 		<div class="flex h-full items-center justify-center bg-black/50">
 			<div
-				class="flex max-h-screen w-[32rem] max-w-full flex-col overflow-scroll border-2 border-black bg-white p-3"
+				class="flex max-h-screen w-[32rem] max-w-full flex-col overflow-auto border-2 border-black bg-white p-3"
 				on:click|stopPropagation
 			>
 				<h1 class="my-6 text-center font-cheap-pine-sans text-4xl">{modalTitle}</h1>

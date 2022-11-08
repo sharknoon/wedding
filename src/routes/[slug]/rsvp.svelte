@@ -1,41 +1,58 @@
 <script lang="ts">
 	import { invitation } from '$lib/client/stores';
-	import type { Invitation } from '$lib/types';
 	import { fade, scale } from 'svelte/transition';
 
-	let showModal = false;
-	$: workingInvitation = $invitation;
+	type State = 'declined' | 'partly accepted' | 'completly accepted' | 'unknown';
+	let state: State = getState();
 
-	function declineInvitation(i: Invitation) {
-		i?.members?.forEach((m) => (m.accepted = 'false'));
-		updateInvitation(i);
+	function getState(): State {
+		if ($invitation.members.every((m) => m.accepted === 'unknown')) {
+			return 'unknown';
+		} else if ($invitation.members.every((m) => m.accepted === 'true')) {
+			return 'completly accepted';
+		} else if ($invitation.members.every((m) => m.accepted === 'false')) {
+			return 'declined';
+		} else if ($invitation.members.some((m) => m.accepted === 'true')) {
+			return 'partly accepted';
+		}
+		return 'unknown';
 	}
 
-	function acceptInvitation(i: Invitation) {
-		i?.members?.forEach((m) => (m.accepted = 'true'));
+	let showModal = false;
+
+	function declineInvitation() {
+		$invitation?.members?.forEach((m) => (m.accepted = 'false'));
+		updateInvitation();
+	}
+
+	function acceptInvitation() {
+		$invitation?.members?.forEach((m) => (m.accepted = 'true'));
 		showModal = true;
 	}
 
-	function updateInvitation(i: Invitation) {
-		if (i.members.some((m) => m.diet === 'unknown' || !m.diet)) {
+	function updateInvitation() {
+		// Need to add the diet if you plan to attend
+		if (
+			$invitation.members.some((m) => m.accepted === 'true' && (m.diet === 'unknown' || !m.diet))
+		) {
 			alert('Bitte gebt auch eure Ernährungsform an.');
 			return;
 		}
-		for (const member of i.members) {
+		for (const member of $invitation.members) {
 			if (member.accepted !== 'true' && member.accepted !== 'false') {
 				member.accepted = 'false';
 			}
 		}
-		fetch(`/api/invitations/${i?._id}`, {
+		fetch(`/api/invitations/${$invitation._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(i)
+			body: JSON.stringify($invitation)
 		}).then(async (response) => {
 			if (response.status === 200) {
 				showModal = false;
-				invitation.set(i);
+				state = getState();
 			} else {
 				alert(
 					`Fehler beim Speichern der Einladung\n${response.statusText} ${await response.text()}`
@@ -47,18 +64,20 @@
 
 <div class="bg-white p-2 md:fixed md:bottom-0 md:right-0">
 	<div class="flex gap-2 font-oswald">
-		{#if $invitation.members.every((m) => m.accepted === 'unknown') || $invitation.members.every((m) => m.accepted === 'false')}
+		{#if state === 'unknown'}
 			<button
-				on:click={() => acceptInvitation(workingInvitation)}
+				on:click={() => acceptInvitation()}
 				class="relative grow border-0 bg-green-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-green-700 focus:ring-2"
 			>
-				{#if $invitation.members.every((m) => m.accepted === 'unknown')}
-					Zusagen
-				{:else if $invitation.members.every((m) => m.accepted === 'false')}
-					Doch noch zusagen
-				{/if}
+				Zusagen
 			</button>
-		{:else}
+			<button
+				on:click={() => declineInvitation()}
+				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
+			>
+				Absagen
+			</button>
+		{:else if state === 'completly accepted' || state === 'partly accepted'}
 			<div class="flex items-center gap-2 text-xl">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -70,22 +89,31 @@
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
 				</svg>
-				{#if $invitation.members.every((m) => m.accepted === 'true')}
+				{#if state === 'completly accepted'}
 					Zugesagt
 				{:else}
 					{$invitation.members.filter((m) => m.accepted === 'true').length} Personen zugesagt
 				{/if}
 			</div>
-		{/if}
-		{#if $invitation.members.some((m) => m.accepted === 'true')}
 			<button
-				on:click={() => acceptInvitation(workingInvitation)}
+				on:click={() => acceptInvitation()}
 				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
 				Teilnahme ändern
 			</button>
-		{/if}
-		{#if $invitation.members.every((m) => m.accepted === 'false')}
+			<button
+				on:click={() => declineInvitation()}
+				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
+			>
+				Absagen
+			</button>
+		{:else if state === 'declined'}
+			<button
+				on:click={() => acceptInvitation()}
+				class="relative grow border-0 bg-green-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-green-700 focus:ring-2"
+			>
+				Doch noch zusagen
+			</button>
 			<div class="flex items-center gap-2 text-xl">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -99,13 +127,6 @@
 				</svg>
 				Abgesagt
 			</div>
-		{:else}
-			<button
-				on:click={() => declineInvitation(workingInvitation)}
-				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
-			>
-				Absagen
-			</button>
 		{/if}
 	</div>
 </div>
@@ -119,13 +140,13 @@
 			<div
 				on:click|stopPropagation
 				transition:scale
-				class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-scroll border-2 border-black bg-white p-3 text-xl"
+				class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
 			>
-				{#if workingInvitation.members.length > 1}
+				{#if $invitation.members.length > 1}
 					<div class="flex h-full items-center">Wir bringen</div>
 					<div class="flex">
 						<div class="flex flex-col">
-							{#each workingInvitation.members as member, index}
+							{#each $invitation.members as member, index}
 								<div>
 									<input
 										type="checkbox"
@@ -142,9 +163,9 @@
 						<div class="ml-4 flex h-full items-center">mit</div>
 					</div>
 				{/if}
-				{#each workingInvitation.members as member}
+				{#each $invitation.members as member}
 					<span>
-						{#if workingInvitation.members.length > 1}
+						{#if $invitation.members.length > 1}
 							{member.name.split(' ')[0]} isst
 						{:else}
 							Ich esse
@@ -164,14 +185,14 @@
 					rows="2"
 					placeholder="Max hat eine Nussallergie"
 					class="border-2 border-black"
-					bind:value={workingInvitation.allergies}
+					bind:value={$invitation.allergies}
 				/>
 
 				<button
-					on:click={() => updateInvitation(workingInvitation)}
+					on:click={() => updateInvitation()}
 					class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 				>
-					{#if workingInvitation.members.every((m) => m.accepted === 'false')}
+					{#if $invitation.members.every((m) => m.accepted === 'false')}
 						Absagen
 					{:else}
 						Zusagen
