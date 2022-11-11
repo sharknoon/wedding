@@ -16,7 +16,7 @@
 	];
 	const normalBox2Texts = [
 		'Das sollte man in einer Ehe einmal im Jahr machen:',
-		"Was ist das beste Rezept für eine gute Ehe?<div class='text-sm text-left leading-none mt-1'>&#9634; Das habe ich so gehört<br />&#9634; Aus eigener Erfahrung<br />&#9634; Habe ich auch einem Kochbuch</div>",
+		"Was ist das beste Rezept für eine gute Ehe?<div class='text-sm text-left leading-none mt-1'>&#9634; Das habe ich so gehört<br />&#9634; Aus eigener Erfahrung<br />&#9634; Habe ich aus einem Kochbuch</div>",
 		'Mein bester Ratschlag für eine glückliche Ehe:'
 	];
 	const heartBox2Texts = [
