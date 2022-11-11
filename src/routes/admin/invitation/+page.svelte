@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<div class="col-span-3 flex flex-col justify-center">
-				<div class="text-center font-cheap-pine text-5xl uppercase">Die Hochzeit</div>
+				<div class="text-center font-cheap-pine text-5xl uppercase">Die Einladung</div>
 				<div class="pt-4 text-center font-cheap-pine-sans text-4xl uppercase">
 					von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 				</div>
