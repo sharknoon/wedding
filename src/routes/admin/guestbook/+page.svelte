@@ -1,8 +1,6 @@
 <script lang="ts">
+	import DownloadButton from '../download-button.svelte';
 	import Site from './site.svelte';
-	import { downloadIds } from '$lib/client/stores';
-
-	$downloadIds = ['guestbook-front', ...[1, 2, 3].map((i) => `guestbook-${i}`), 'guestbook-back'];
 
 	const heartBox1Texts = [
 		'Welche besonderen Erinnerungen habt ihr zusammen mit dem Brautpaar?',
@@ -29,12 +27,16 @@
 		'So bleibt eure Liebe frisch:',
 		'Das solltet ihr im ersten Ehejahr unbedingt machen:'
 	];
+
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="h-[303mm] w-[216mm] max-w-[216mm] grid-cols-2 bg-white p-[8mm] shadow-2xl"
 		id="guestbook-front"
+		bind:this={downloadables[0]}
 	>
 		<div class="relative flex h-full flex-col border-2 border-dashed border-gray-900 p-4">
 			<h1 class="absolute top-[16%] left-1/2 mb-8 -translate-x-1/2 font-cheap-pine text-6xl">
@@ -85,39 +87,42 @@
 	</div>
 
 	{#each [1, 2, 3] as i}
-		<Site id={`guestbook-${i}`}>
-			<div slot="heart-box-1" class="flex h-full flex-col justify-between text-center">
-				<span>{heartBox1Texts[i - 1]}</span>
-				<hr class="border-black" />
-				<hr class="border-black" />
-				<hr class="border-black" />
-				<hr class="border-black" />
-				<hr class="border-black" />
-			</div>
-			<div slot="normal-box-1" class="flex h-full flex-col justify-between text-center">
-				<span class="leading-tight">{normalBox1Texts[i - 1]}</span>
-				<hr class="border-black" />
-			</div>
-			<div slot="normal-box-2" class="flex h-full flex-col justify-between text-center">
-				<span class="leading-tight">{@html normalBox2Texts[i - 1]}</span>
-				<hr class="border-black" />
-			</div>
-			<div slot="heart-box-2" class="flex h-full flex-col justify-between text-center">
-				<span class="leading-tight">{@html heartBox2Texts[i - 1]}</span>
-				<hr class="border-black" />
-				<hr class="border-black" />
-			</div>
-			<div slot="heart-box-3" class="flex h-full flex-col justify-between text-center">
-				<span class="leading-tight">{heartBox3Texts[i - 1]}</span>
-				<hr class="border-black" />
-				<hr class="border-black" />
-			</div>
-		</Site>
+		<div id={`guestbook-${i}`} bind:this={downloadables[i]}>
+			<Site>
+				<div slot="heart-box-1" class="flex h-full flex-col justify-between text-center">
+					<span>{heartBox1Texts[i - 1]}</span>
+					<hr class="border-black" />
+					<hr class="border-black" />
+					<hr class="border-black" />
+					<hr class="border-black" />
+					<hr class="border-black" />
+				</div>
+				<div slot="normal-box-1" class="flex h-full flex-col justify-between text-center">
+					<span class="leading-tight">{normalBox1Texts[i - 1]}</span>
+					<hr class="border-black" />
+				</div>
+				<div slot="normal-box-2" class="flex h-full flex-col justify-between text-center">
+					<span class="leading-tight">{@html normalBox2Texts[i - 1]}</span>
+					<hr class="border-black" />
+				</div>
+				<div slot="heart-box-2" class="flex h-full flex-col justify-between text-center">
+					<span class="leading-tight">{@html heartBox2Texts[i - 1]}</span>
+					<hr class="border-black" />
+					<hr class="border-black" />
+				</div>
+				<div slot="heart-box-3" class="flex h-full flex-col justify-between text-center">
+					<span class="leading-tight">{heartBox3Texts[i - 1]}</span>
+					<hr class="border-black" />
+					<hr class="border-black" />
+				</div>
+			</Site>
+		</div>
 	{/each}
 
 	<div
 		class="h-[303mm] w-[216mm] max-w-[216mm] grid-cols-2 bg-white p-[8mm] shadow-2xl"
 		id="guestbook-back"
+		bind:this={downloadables[4]}
 	>
 		<div class="flex h-full flex-col border-2 border-dashed border-gray-900 p-4">
 			<div class="flex grow flex-col items-center justify-center gap-8">

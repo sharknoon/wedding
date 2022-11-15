@@ -1,8 +1,4 @@
-<script lang="ts">
-	export let id: string;
-</script>
-
-<div class="h-[303mm] w-[216mm] max-w-[216mm] grid-cols-2 bg-white p-[8mm] shadow-2xl" {id}>
+<div class="h-[303mm] w-[216mm] max-w-[216mm] grid-cols-2 bg-white p-[8mm] shadow-2xl">
 	<div class="flex h-full flex-col border-2 border-dashed border-gray-900 p-4">
 		<div class="grid grow grid-cols-4 grid-rows-[auto_auto_1fr_1fr] gap-4">
 			<div class="col-span-2 border-[3px] border-black p-3 leading-none">

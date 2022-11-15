@@ -1,17 +1,25 @@
 <script lang="ts">
 	import { invitations } from '$lib/client/stores';
+	import DownloadButton from '../download-button.svelte';
+
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
-	<div class="h-[426mm] w-[600mm] max-w-[600mm] bg-white p-[9mm] shadow-2xl " id="welcomeposter">
+	<DownloadButton {downloadables} scale={4} />
+	<div
+		class="h-[426mm] w-[600mm] max-w-[600mm] bg-white p-[9mm] shadow-2xl "
+		id="tableassignments"
+		bind:this={downloadables[0]}
+	>
 		<div class="grid h-full grid-cols-3 border-4 border-dashed border-black p-6 text-center">
 			<h1 class="col-span-3 font-cheap-pine text-8xl">Sitzplan</h1>
 
 			{#each [1, 2, 3, 4, 5, 6] as table}
 				<div class="flex flex-col gap-3">
-					<h2 class="font-cheap-pine-sans text-6xl">Tisch {table}</h2>
+					<h2 class="font-cheap-pine-sans text-6xl text-red-600">Tisch {table}</h2>
 					{#each $invitations as invitation}
-						{#each invitation.members.filter((m) => m.table === table) as member}
+						{#each invitation.members.filter((m) => m.table === table && m.accepted === 'true') as member}
 							<div class="font-oswald text-4xl">{member.name}</div>
 						{/each}
 					{/each}

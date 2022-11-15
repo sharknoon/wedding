@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/client/stores';
+	import DownloadButton from '../download-button.svelte';
 
-	$downloadIds = ['musicwishcard-front', 'musicwishcard-back'];
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="flex h-[80mm] max-h-[80mm] w-[111mm] flex-col justify-around bg-white p-[6mm] shadow-2xl"
 		id="musicwishcard-front"
+		bind:this={downloadables[0]}
 	>
 		<div class="flex grow items-center gap-2">
 			<div class="grid aspect-square h-auto w-1/2 grid-cols-2 grid-rows-2">
@@ -59,6 +61,7 @@
 	<div
 		class="flex h-[80mm] max-h-[80mm] w-[111mm] flex-col gap-2 divide-y-2 divide-black bg-white p-[6mm] shadow-2xl"
 		id="musicwishcard-back"
+		bind:this={downloadables[1]}
 	>
 		<div class="flex items-center py-1">
 			<div class="mx-6 grow border-t-2 border-red-600" />

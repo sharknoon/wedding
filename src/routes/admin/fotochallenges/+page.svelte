@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/client/stores';
+	import DownloadButton from '../download-button.svelte';
 
 	const challenges = [
 		'Fotografiere dich mit dem schönsten Gegenstand der Hochzeit',
@@ -58,16 +58,15 @@
 		'Mach ein Foto mit der Cousine der Braut'
 	];
 
-	$downloadIds = [
-		'fotochallenge-front',
-		...challenges.map((_, i) => 'fotochallenge-back-' + (i + 1))
-	];
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="flex h-[80mm] max-h-[80mm] w-[111mm] flex-col justify-around bg-white p-[6mm] shadow-2xl"
 		id="fotochallenge-front"
+		bind:this={downloadables[0]}
 	>
 		<div class="flex grow items-center gap-2">
 			<div class="grid aspect-square h-auto w-1/2 grid-cols-2 grid-rows-2">
@@ -125,6 +124,7 @@
 		<div
 			class="flex h-[80mm] max-h-[80mm] w-[111mm] flex-col gap-2 divide-y-2 divide-black bg-white p-[6mm] shadow-2xl"
 			id={`fotochallenge-back-${i}`}
+			bind:this={downloadables[i + 1]}
 		>
 			<div class="flex items-center py-1">
 				<div class="mx-6 grow border-t-2 border-red-600" />
@@ -132,7 +132,7 @@
 				<div class="mx-6 grow border-t-2 border-red-600" />
 			</div>
 			<div class="flex grow items-center text-center font-oswald text-2xl">
-				<div>{challenge}</div>
+				<div class="w-full">{challenge}</div>
 			</div>
 			<div class="flex items-center justify-between pt-2">
 				<div class="font-cheap-pine-sans text-xl text-red-600">Mission:</div>

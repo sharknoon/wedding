@@ -1,26 +1,32 @@
 <script lang="ts">
+	import DownloadButton from '../download-button.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	const date = new Date(data.details.date);
 	const location = data.details.locationName;
+
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
-	<div class="h-[303mm] w-[426mm] max-w-[426mm] bg-white p-[9mm] shadow-2xl" id="welcomeposter">
+	<DownloadButton {downloadables} />
+	<div
+		class="h-[303mm] w-[426mm] max-w-[426mm] bg-white p-[9mm] shadow-2xl"
+		id="welcomeposter"
+		bind:this={downloadables[0]}
+	>
 		<div
-			class="grid h-full grid-cols-[4fr_3fr] items-center border-[3px] border-dashed border-black "
+			class="grid h-full grid-cols-[4fr_3fr] items-center border-[3px] border-dashed border-black"
 		>
-			<div class="mx-auto flex flex-col justify-center gap-4">
+			<div class="flex flex-col justify-center gap-4 text-center">
 				<h1 class="mb-16 font-cheap-pine text-8xl">Herzlich Willkommen</h1>
-				<div class="text-center font-cheap-pine text-7xl uppercase">zur Hochzeit</div>
-				<div class="pt-4 text-center font-cheap-pine-sans text-6xl uppercase">
+				<div class="font-cheap-pine text-7xl uppercase">zur Hochzeit</div>
+				<div class="pt-4 font-cheap-pine-sans text-6xl uppercase">
 					von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 				</div>
-				<div
-					class="pt-1 pb-2 text-center font-cheap-pine-sans text-3xl uppercase leading-4 tracking-wider"
-				>
+				<div class="pt-1 pb-2 font-cheap-pine-sans text-3xl uppercase leading-4 tracking-wider">
 					Gesucht und Gefunden, in Liebe verbunden
 				</div>
 				<div class="mx-16 flex items-center gap-5 px-5">
@@ -39,8 +45,8 @@
 					</svg>
 					<div class="grow border-t-[3px] border-black" />
 				</div>
-				<div class="text-center font-cheap-pine-sans text-6xl leading-none">{location}</div>
-				<div class="text-center font-cheap-pine-sans text-5xl leading-none text-red-600">
+				<div class="font-cheap-pine-sans text-6xl leading-none">{location}</div>
+				<div class="font-cheap-pine-sans text-5xl leading-none text-red-600">
 					{date.toLocaleDateString('DE-DE', {
 						day: '2-digit',
 						month: 'long',

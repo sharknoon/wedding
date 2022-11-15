@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/client/stores';
 	import Divider from './divider.svelte';
 	import Header from './header.svelte';
 	import Footer from './footer.svelte';
+	import DownloadButton from '../download-button.svelte';
 
-	$downloadIds = ['drinkmenu'];
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="grid h-[220mm] max-h-[220mm] w-[331mm] grid-cols-3 gap-[6mm] bg-white py-[8mm] pl-[17mm] pr-[23mm] shadow-2xl"
 		id="drinkmenu"
+		bind:this={downloadables[0]}
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Header title="Alkoholfreie Getränke" />

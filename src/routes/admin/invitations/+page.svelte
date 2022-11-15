@@ -2,9 +2,7 @@
 	import type { Invitation, Member } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { slide, fade } from 'svelte/transition';
-	import { downloadIds, invitations } from '$lib/client/stores';
-
-	$downloadIds = [];
+	import { invitations } from '$lib/client/stores';
 
 	onMount(() => {
 		const evtSource = new EventSource('/api/invitations/events');

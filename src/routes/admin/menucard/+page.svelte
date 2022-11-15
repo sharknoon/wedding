@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { downloadIds } from '$lib/client/stores';
+	import DownloadButton from '../download-button.svelte';
 	import Divider from './divider.svelte';
 	import Footer from './footer.svelte';
 	import Header from './header.svelte';
 
-	$downloadIds = ['menucard-front', 'menucard-back'];
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="h-[216mm] max-h-[216mm] w-[106mm] gap-[6mm] bg-white p-[6mm] shadow-2xl"
 		id="menucard-front"
+		bind:this={downloadables[0]}
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Header title="Menü" />
@@ -38,6 +40,7 @@
 	<div
 		class="h-[216mm] max-h-[216mm] w-[106mm] gap-[6mm] bg-white p-[6mm] shadow-2xl"
 		id="menucard-back"
+		bind:this={downloadables[1]}
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Divider />

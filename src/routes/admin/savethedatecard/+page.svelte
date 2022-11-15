@@ -1,15 +1,18 @@
 <script lang="ts">
-	import { details, downloadIds } from '$lib/client/stores';
+	import { details } from '$lib/client/stores';
+	import DownloadButton from '../download-button.svelte';
 
 	$: date = new Date($details?.date);
 
-	$downloadIds = ['savethedate-front', 'savethedate-back'];
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="flex h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
-		id={'savethedate-front'}
+		id="savethedate-front"
+		bind:this={downloadables[0]}
 	>
 		<div class="grid w-full grid-cols-5 grid-rows-1">
 			<div
@@ -68,7 +71,8 @@
 
 	<div
 		class="h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
-		id={'savethedate-back'}
+		id="savethedate-back"
+		bind:this={downloadables[1]}
 	>
 		<div class="flex h-full flex-col border-2 border-dashed border-black p-4 font-oswald text-2xl">
 			<div class="flex grow flex-col justify-center gap-2 text-center">

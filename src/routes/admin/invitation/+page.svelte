@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
-	import { details, downloadIds } from '$lib/client/stores';
+	import { details } from '$lib/client/stores';
 	import type { PageData } from './$types';
 	import { page } from '$app/stores';
+	import DownloadButton from '../download-button.svelte';
 
 	export let data: PageData;
 
 	$: date = new Date($details?.date);
 	$: deadline = new Date($details?.deadline);
-
-	$downloadIds = [`invitation-front-${data.slug}`, `invitation-back-${data.slug}`];
-
 	$: qrcode = '';
 
 	onMount(() => {
@@ -25,12 +23,16 @@
 			(_, url) => (qrcode = url)
 		);
 	});
+
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
+	<DownloadButton {downloadables} />
 	<div
 		class="flex h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
 		id={'invitation-front-' + data.slug}
+		bind:this={downloadables[0]}
 	>
 		<div class="grid w-full grid-cols-5 grid-rows-1">
 			<div
@@ -92,6 +94,7 @@
 	<div
 		class="flex h-[105mm] w-[216mm] max-w-[216mm] bg-white p-[6mm] shadow-2xl"
 		id={'invitation-back-' + data.slug}
+		bind:this={downloadables[1]}
 	>
 		<div
 			class="rotate-180 border-l-[3px] border-black pl-3 text-center text-3xl text-red-600 vertical-lr"

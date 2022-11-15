@@ -1,25 +1,11 @@
 <script lang="ts">
-	import { details, downloadIds } from '$lib/client/stores';
+	import { details } from '$lib/client/stores';
 	import Divider from './divider.svelte';
 	import Footer from './footer.svelte';
 	import Page from './page.svelte';
 	import Header from './header.svelte';
 	import Timeline from './timeline.svelte';
-
-	$downloadIds = [
-		'schedule-1',
-		'schedule-2',
-		'schedule-3',
-		'schedule-4',
-		'schedule-5',
-		'schedule-6',
-		'schedule-7',
-		'schedule-8',
-		'schedule-9',
-		'schedule-10',
-		'schedule-11',
-		'schedule-12'
-	];
+	import DownloadButton from '../download-button.svelte';
 
 	const icons: Record<string, string> = {
 		eye: `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 grow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>`,
@@ -33,10 +19,13 @@
 	const totalPages = 10;
 
 	$: date = new Date($details.date);
+
+	let downloadables: HTMLElement[] = [];
 </script>
 
 <div class="flex flex-col items-center gap-16">
-	<Page id="schedule-1">
+	<DownloadButton {downloadables} />
+	<Page id="schedule-1" bind:that={downloadables[0]}>
 		<div class="flex grow flex-col items-center justify-center gap-8 px-12">
 			<div class="grid h-[17rem] w-[17rem] grid-cols-2 grid-rows-1">
 				<div
@@ -124,7 +113,7 @@
 		</div>
 	</Page>
 
-	<Page id="schedule-2">
+	<Page id="schedule-2" bind:that={downloadables[1]}>
 		<Header title="Programm" />
 		<Divider />
 		<div class="relative flex grow py-3">
@@ -166,7 +155,7 @@
 		<Footer currentPage={1} {totalPages} />
 	</Page>
 
-	<Page id="schedule-3">
+	<Page id="schedule-3" bind:that={downloadables[2]}>
 		<Header title="Das Brautpaar" />
 		<Divider />
 		<div class="relative grow">
@@ -250,7 +239,7 @@
 		<Footer currentPage={2} {totalPages} />
 	</Page>
 
-	<Page id="schedule-4">
+	<Page id="schedule-4" bind:that={downloadables[3]}>
 		<Timeline index={0} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
@@ -269,7 +258,7 @@
 		<Footer currentPage={3} {totalPages} />
 	</Page>
 
-	<Page id="schedule-5">
+	<Page id="schedule-5" bind:that={downloadables[4]}>
 		<Timeline index={1} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-4">
@@ -288,7 +277,7 @@
 		<Footer currentPage={4} {totalPages} />
 	</Page>
 
-	<Page id="schedule-6">
+	<Page id="schedule-6" bind:that={downloadables[5]}>
 		<Timeline index={2} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-4">
@@ -308,7 +297,7 @@
 		<Footer currentPage={5} {totalPages} />
 	</Page>
 
-	<Page id="schedule-7">
+	<Page id="schedule-7" bind:that={downloadables[6]}>
 		<Timeline index={3} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center text-center">
@@ -330,7 +319,7 @@
 		<Footer currentPage={6} {totalPages} />
 	</Page>
 
-	<Page id="schedule-8">
+	<Page id="schedule-8" bind:that={downloadables[7]}>
 		<Timeline index={4} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
@@ -356,7 +345,7 @@
 		<Footer currentPage={7} {totalPages} />
 	</Page>
 
-	<Page id="schedule-9" withFooter={false}>
+	<Page id="schedule-9" withFooter={false} bind:that={downloadables[8]}>
 		<Timeline index={5} />
 		<div class="-mt-2 -mb-2 flex grow flex-col items-center justify-center">
 			<h2 class="-mt-2 font-cheap-pine-sans text-2xl">Der Herr segne dich</h2>
@@ -368,7 +357,7 @@
 		</div>
 	</Page>
 
-	<Page id="schedule-10">
+	<Page id="schedule-10" bind:that={downloadables[9]}>
 		<Timeline index={6} />
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-12 text-center">
@@ -392,7 +381,7 @@
 		<Footer currentPage={9} {totalPages} />
 	</Page>
 
-	<Page id="schedule-11">
+	<Page id="schedule-11" bind:that={downloadables[10]}>
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-4 px-24 text-center">
 			<div class="font-cheap-pine text-5xl"><span class="text-red-600">Schön</span>,</div>
@@ -408,7 +397,7 @@
 		<Footer currentPage={10} {totalPages} />
 	</Page>
 
-	<Page id="schedule-12">
+	<Page id="schedule-12" bind:that={downloadables[11]}>
 		<Divider />
 		<div class="flex grow flex-col items-center justify-center gap-8">
 			<div class="mx-12 flex items-center gap-4 self-stretch px-4">
