@@ -19,27 +19,12 @@ jobs:
       - name: Push Image to Registry
         run: docker push ghcr.io/sharknoon/wedding
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Remove existing Container
-  #       uses: garygrossgarten/github-action-ssh@release
-  #       with:
-  #         command: sudo docker stop wedding || true; sudo docker rm wedding || true; sudo docker rmi ghcr.io/sharknoon/wedding || true
-  #         host: ${{ secrets.SERVER_HOST }}
-  #         port: ${{ secrets.SERVER_PORT }}
-  #         username: ${{ secrets.SERVER_USER }}
-  #         password: ${{ secrets.SERVER_PASS }}
-
-  #     - name: Start new Container
-  #       uses: garygrossgarten/github-action-ssh@release
-  #       with:
-  #         command: echo ${{ secrets.GHCR_PAT }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin && sudo docker pull ghcr.io/sharknoon/wedding && sudo docker run -d --name wedding --network traefik-net --restart=always ghcr.io/sharknoon/wedding
-  #         host: ${{ secrets.SERVER_HOST }}
-  #         port: ${{ secrets.SERVER_PORT }}
-  #         username: ${{ secrets.SERVER_USER }}
-  #         password: ${{ secrets.SERVER_PASS }}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Portainer Container Recreation Webhook
+        run: curl -X POST https://portainer.sharknoon.de/api/webhooks/30c6e224-a3c6-4677-ad3e-7661eaee6e06
 
   clean:
     needs: build
