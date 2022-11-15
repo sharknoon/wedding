@@ -60,4 +60,16 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="text-center">
+		69x69mm, Hochwertige Flaschenetiketten auf Rolle mit freier Größe (rechteckig), Haftpapier weiß, <a
+			class="hover:underline"
+			href="https://www.wir-machen-druck.de/hochwertige-flaschenetiketten-auf-rolle-mit-freier-groesse-rechteckig.html"
+			target="_blank"
+		>
+			WIRmachenDRUCK
+		</a>
+		<br />
+		Datenformat: 75x75mm, Beschnitt: 3mm, Sicherheitsabstand: 3mm
+	</div>
 </div>
