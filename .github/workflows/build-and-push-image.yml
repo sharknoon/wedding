@@ -1,4 +1,4 @@
-name: Build and push image
+name: Build, push and deploy image
 on:
   push:
     branches:
@@ -13,40 +13,25 @@ jobs:
       - name: Login to Github Container Registry
         run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Build Docker Image
+      - name: Build Docker image
         run: docker build -t ghcr.io/sharknoon/wedding .
 
-      - name: Push Image to Registry
+      - name: Push image to registry
         run: docker push ghcr.io/sharknoon/wedding
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Call Portainer Container Recreation Webhook
+      - name: Call Portainer container recreation webhook
         run: curl -X POST ${{ secrets.PORTAINER_CONTAINER_WEBHOOK }}
 
   clean:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Delete untagged Images
-        uses: actions/github-script@v6
+      - name: Delete old image versions
+        uses: actions/delete-package-versions@v3
         with:
-          github-token: ${{ secrets.GHCR_PAT }}
-          script: |
-            const response = await github.request("GET /user/packages/container/${{ env.PACKAGE_NAME }}/versions",
-              { 
-                per_page: ${{ env.PER_PAGE }}
-              }
-            );
-            for(version of response.data) {
-                if (version.metadata.container.tags.length == 0) {
-                    console.log("Deleting " + version.id)
-                    const deleteResponse = await github.request("DELETE /user/packages/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
-                    console.log("Deleted " + deleteResponse.status)
-                }
-            }
-        env:
-          PACKAGE_NAME: wedding
-          PER_PAGE: 100
+          package-name: 'wedding'
+          min-versions-to-keep: 1
