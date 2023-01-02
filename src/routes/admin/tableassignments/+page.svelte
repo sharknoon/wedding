@@ -33,6 +33,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/plakat-din-a2-quer-594-x-420-mm-einseitig-40farbig-bedruckt-topseller.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

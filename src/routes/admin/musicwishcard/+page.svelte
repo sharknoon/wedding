@@ -102,6 +102,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/flyer-din-a7-quer-105-cm-x-74-cm-beidseitig-bedruckt.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

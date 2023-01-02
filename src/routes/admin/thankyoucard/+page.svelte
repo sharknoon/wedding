@@ -148,6 +148,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/einladungskarte-gefalzt-auf-din-a6-quer-4seiter.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

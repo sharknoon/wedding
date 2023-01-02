@@ -160,10 +160,14 @@
 	{/each}
 
 	<div class="text-center">
-		105x74mm, Flyer DIN A7 Quer, beidseitig bedruckt, 250g Papier, <a
+		{challenges.length} Sprüche
+		<br />
+		105x74mm, Flyer DIN A7 Quer, beidseitig bedruckt, 250g Papier,
+		<a
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/flyer-din-a7-quer-105-cm-x-74-cm-beidseitig-bedruckt.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

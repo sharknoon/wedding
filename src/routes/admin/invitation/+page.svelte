@@ -290,6 +290,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/eintrittskarte-din-lang-quer-perforiert-44-beidseitig-bedruckt.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

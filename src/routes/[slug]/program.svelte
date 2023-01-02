@@ -34,8 +34,8 @@
 			<div
 				on:click={() => (activeItem = i)}
 				class="{activeItem === i
-					? 'bg-black text-white hover:bg-gray-900 ring-red-600'
-					: 'bg-white text-black hover:bg-gray-300 ring-black'} z-0 flex aspect-square flex-col justify-center align-middle ring-4 ring-offset-4 ring-offset-gray-50 transition sm:h-12 sm:w-12 md:h-16 md:w-16 md:p-2 lg:h-20 lg:w-20 lg:p-4 xl:h-24 xl:w-24"
+					? 'bg-black text-white ring-red-600 hover:bg-gray-900'
+					: 'bg-white text-black ring-black hover:bg-gray-300'} z-0 flex aspect-square flex-col justify-center align-middle ring-4 ring-offset-4 ring-offset-gray-50 transition sm:h-12 sm:w-12 md:h-16 md:w-16 md:p-2 lg:h-20 lg:w-20 lg:p-4 xl:h-24 xl:w-24"
 			>
 				<span class="text-center font-cheap-pine-sans text-xl md:text-2xl lg:text-3xl">
 					<span class="font-bold">

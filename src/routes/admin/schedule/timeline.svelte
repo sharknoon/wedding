@@ -29,7 +29,7 @@
 			<div class="relative mb-2 mr-2">
 				<div
 					class="absolute top-[6px] left-[6px] h-full w-full {index === i
-						? 'bg-white border-4 border-red-600 ring-4 ring-white'
+						? 'border-4 border-red-600 bg-white ring-4 ring-white'
 						: ''}"
 				/>
 				<div

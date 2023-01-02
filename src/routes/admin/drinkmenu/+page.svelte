@@ -56,6 +56,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/aufsteller-prisma-klein-mit-mattfolie-kaschiert.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

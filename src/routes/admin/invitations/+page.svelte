@@ -202,7 +202,7 @@
 				{#each invitation.members as member, memberIndex}
 					<tr
 						class:bg-gray-100={invitationIndex % 2 === 1}
-						class={memberIndex === 0 ? 'border-black border-t-2' : ''}
+						class={memberIndex === 0 ? 'border-t-2 border-black' : ''}
 					>
 						<td
 							class="h-7 px-3"
@@ -272,9 +272,10 @@
 									class="flex h-full flex-wrap items-center justify-center gap-4 md:flex-nowrap"
 								>
 									<a
-										target="_blank"
-										href={'/admin/savethedatecard?slug=' + invitation.slug}
+										href={'/admin/invitation?slug=' + invitation.slug}
 										class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+										target="_blank"
+										rel="noreferrer"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -292,9 +293,10 @@
 										</svg>
 									</a>
 									<a
-										target="_blank"
 										href={'/' + invitation.slug}
 										class="border-0 bg-black p-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+										target="_blank"
+										rel="noreferrer"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -682,7 +684,6 @@
 
 				<span class="mt-3">Allergien</span>
 				<textarea
-					type="text"
 					placeholder="Max hat eine Nussallergie"
 					bind:value={workingInvitation.allergies}
 					class="h-10 grow border-transparent bg-gray-300 text-black transition focus:border-transparent focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-100"

@@ -66,6 +66,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/hochwertige-flaschenetiketten-auf-rolle-mit-freier-groesse-rechteckig.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

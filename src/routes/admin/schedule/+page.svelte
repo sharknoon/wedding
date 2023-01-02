@@ -428,6 +428,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/broschuere-mit-drahtheftung-endformat-din-a5-12seitig.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

@@ -15,6 +15,7 @@ stream.on('change', (c) => {
 			break;
 	}
 	const result = `event: ${c.operationType}\ndata: ${data}\n\n`;
+	// @ts-expect-error There is a bug in the ts library, hopefully be fixed soon TODO
 	controllers.forEach((controller) => controller.enqueue(result));
 });
 

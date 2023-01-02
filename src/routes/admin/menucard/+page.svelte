@@ -76,6 +76,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/speisekarte-din-lang-100-cm-x-210-cm-beidseitig-bedruckt.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

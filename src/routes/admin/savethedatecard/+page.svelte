@@ -143,6 +143,7 @@
 			class="hover:underline"
 			href="https://www.wir-machen-druck.de/einladungskarte-din-lang-quer-210-cm-x-99-cm-beidseitig-bedruckt.html"
 			target="_blank"
+			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>

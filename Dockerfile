@@ -1,10 +1,10 @@
-FROM node:16 as build-stage
+FROM node:18 as build-stage
 WORKDIR /app
 COPY . .
 RUN npm ci
 RUN npm run build
 
-FROM node:16 as production-stage
+FROM node:18 as production-stage
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build-stage /app/package*.json ./
