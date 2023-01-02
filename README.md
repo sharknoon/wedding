@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 
-[![Build and push image](https://github.com/Sharknoon/wedding/actions/workflows/build-and-push-image.yml/badge.svg)](https://github.com/Sharknoon/wedding/actions/workflows/build-and-push-image.yml)
+[![Build, push and deploy image](https://github.com/Sharknoon/wedding/actions/workflows/build-push-and-deploy-image.yml/badge.svg)](https://github.com/Sharknoon/wedding/actions/workflows/build-push-and-deploy-image.yml)
 
 # Midrène's and Josua's Wedding
 
