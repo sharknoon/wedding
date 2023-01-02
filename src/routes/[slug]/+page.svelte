@@ -7,6 +7,7 @@
 	import Map from './map.svelte';
 	import FAQ from './faq.svelte';
 	import type { PageData } from './$types';
+	import Program from './program.svelte';
 
 	export let data: PageData;
 
@@ -19,7 +20,7 @@
 		<Home />
 		<Info />
 		<Details />
-		<!--<Program {details} />-->
+		<!-- <Program /> -->
 		<Map />
 		<FAQ />
 	</div>

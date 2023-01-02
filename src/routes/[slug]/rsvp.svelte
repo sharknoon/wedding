@@ -132,73 +132,78 @@
 </div>
 {#if showModal}
 	<div
-		class="fixed inset-0 h-screen w-screen max-w-[100vw] font-oswald"
+		class="fixed inset-0 flex items-center justify-center bg-black/50 font-oswald"
 		transition:fade
-		on:click|stopPropagation={() => (showModal = false)}
+		on:click|stopPropagation={(e) => {
+			if (e.target === e.currentTarget) {
+				showModal = false;
+			}
+		}}
+		on:keypress={(e) => {
+			if (e.code === 'Escape') {
+				showModal = false;
+			}
+		}}
 	>
-		<div class="flex h-full items-center justify-center bg-black/50">
-			<div
-				on:click|stopPropagation
-				transition:scale
-				class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
-			>
-				{#if $invitation.members.length > 1}
-					<div class="flex h-full items-center">Wir bringen</div>
-					<div class="flex">
-						<div class="flex flex-col">
-							{#each $invitation.members as member, index}
-								<div>
-									<input
-										type="checkbox"
-										id={'rsvp-' + index}
-										checked={member.accepted === 'true'}
-										class="h-5 w-5 border-transparent bg-gray-300 text-black transition hover:text-black focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-white"
-										on:change={(e) =>
-											(member.accepted = e.currentTarget.checked ? 'true' : 'false')}
-									/>
-									<label for={'rsvp-' + index}>{member.name}</label>
-								</div>
-							{/each}
-						</div>
-						<div class="ml-4 flex h-full items-center">mit</div>
+		<div
+			transition:scale
+			class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
+		>
+			{#if $invitation.members.length > 1}
+				<div class="flex h-full items-center">Wir bringen</div>
+				<div class="flex">
+					<div class="flex flex-col">
+						{#each $invitation.members as member, index}
+							<div>
+								<input
+									type="checkbox"
+									id={'rsvp-' + index}
+									checked={member.accepted === 'true'}
+									class="h-5 w-5 border-transparent bg-gray-300 text-black transition hover:text-black focus:border-transparent focus:bg-gray-300 focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-white"
+									on:change={(e) => (member.accepted = e.currentTarget.checked ? 'true' : 'false')}
+								/>
+								<label for={'rsvp-' + index}>{member.name}</label>
+							</div>
+						{/each}
 					</div>
-				{/if}
-				{#each $invitation.members as member}
-					<span>
-						{#if $invitation.members.length > 1}
-							{member.name.split(' ')[0]} isst
-						{:else}
-							Ich esse
-						{/if}
-					</span>
-					<select class="w-48 border-2 border-black p-1 text-xl" bind:value={member.diet}>
-						<option value="unknown" hidden>Bitte auswählen</option>
-						<option value="omnivorian">omnivorisch (Alles)</option>
-						<option value="pescetarian">pescetarisch (Fisch)</option>
-						<option value="vegetarian">vegetarisch</option>
-						<option value="vegan">vegan</option>
-					</select>
-				{/each}
-
-				<span>Allergien</span>
-				<textarea
-					rows="2"
-					placeholder="Max hat eine Nussallergie"
-					class="border-2 border-black"
-					bind:value={$invitation.allergies}
-				/>
-
-				<button
-					on:click={() => updateInvitation()}
-					class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
-				>
-					{#if $invitation.members.every((m) => m.accepted === 'false')}
-						Absagen
+					<div class="ml-4 flex h-full items-center">mit</div>
+				</div>
+			{/if}
+			{#each $invitation.members as member}
+				<span>
+					{#if $invitation.members.length > 1}
+						{member.name.split(' ')[0]} isst
 					{:else}
-						Zusagen
+						Ich esse
 					{/if}
-				</button>
-			</div>
+				</span>
+				<select class="w-48 border-2 border-black p-1 text-xl" bind:value={member.diet}>
+					<option value="unknown" hidden>Bitte auswählen</option>
+					<option value="omnivorian">omnivorisch (Alles)</option>
+					<option value="pescetarian">pescetarisch (Fisch)</option>
+					<option value="vegetarian">vegetarisch</option>
+					<option value="vegan">vegan</option>
+				</select>
+			{/each}
+
+			<span>Allergien</span>
+			<textarea
+				rows="2"
+				placeholder="Max hat eine Nussallergie"
+				class="border-2 border-black"
+				bind:value={$invitation.allergies}
+			/>
+
+			<button
+				on:click={() => updateInvitation()}
+				class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+			>
+				{#if $invitation.members.every((m) => m.accepted === 'false')}
+					Absagen
+				{:else}
+					Zusagen
+				{/if}
+			</button>
 		</div>
 	</div>
 {/if}

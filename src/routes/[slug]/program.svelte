@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type { Details } from '$lib/types';
-	export let details: Details;
-
-	// TODO add image preloading
+	import { details } from '$lib/client/stores';
 
 	$: activeItem = 0;
 </script>
@@ -10,15 +7,16 @@
 <div
 	id="program"
 	class="flex min-h-screen flex-col bg-cover bg-center bg-no-repeat transition-all"
-	style="background-image: url('/images/backgrounds/{details?.program?.[activeItem]?.background}'"
+	style="background-image: url('/images/backgrounds/{$details?.program?.[activeItem]
+		?.background}.webp'"
 >
 	<div class="m-6 flex self-start md:m-12 md:max-w-[50%]">
 		<div class="divide-y-2 divide-red-600 border-4 border-black bg-white p-6 md:p-12">
 			<h1 class="pb-2 font-cheap-pine text-4xl text-gray-900 md:text-6xl">
-				{details?.program?.[activeItem]?.title}
+				{$details?.program?.[activeItem]?.title}
 			</h1>
 			<div class="pt-2">
-				{#each details?.program?.[activeItem]?.description || [] as line}
+				{#each $details?.program?.[activeItem]?.description || [] as line}
 					<p class="font-oswald text-xl text-gray-900 md:text-2xl">{line}</p>
 				{/each}
 			</div>
@@ -30,8 +28,9 @@
 		<div
 			class="absolute top-1/2 left-16 right-16 hidden h-4 -translate-y-1/2 bg-black sm:block md:left-28 md:right-28"
 		/>
-		{#each details?.program || [] as programItem, i}
-			<div
+		{#each $details?.program || [] as programItem, i}
+			<button
+				type="button"
 				on:click={() => (activeItem = i)}
 				class="{activeItem === i
 					? 'bg-black text-white ring-red-600 hover:bg-gray-900'
@@ -46,7 +45,7 @@
 					</span>
 					<span>Uhr</span>
 				</span>
-			</div>
+			</button>
 		{/each}
 	</div>
 </div>
