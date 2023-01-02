@@ -1,6 +1,7 @@
+import { env } from '$env/dynamic/private';
+import { building } from '$app/environment';
 import {
 	type Collection,
-	type Db,
 	type DeleteResult,
 	type Document,
 	type InsertOneResult,
@@ -11,30 +12,28 @@ import {
 	ObjectId
 } from 'mongodb';
 import type { Details, Invitation } from '$lib/types';
-import { env } from '$env/dynamic/private';
 
-if (!env.MONGODB_URL) {
-	console.error('Missing MONGODB_URL env');
-	process.exit();
-}
-
-const client = new MongoClient(env.MONGODB_URL, {
-	pkFactory: { createPk: () => new ObjectId().toString() }
-});
-
-let db: Db;
 let invitationsCollection: Collection<Invitation>;
 let detailsCollection: Collection<Details>;
 
-async function setup() {
-	if (db) return;
+if (!building) {
+	if (!env.MONGODB_URL) {
+		console.error('Missing MONGODB_URL env');
+		process.exit();
+	}
+
+	const client = new MongoClient(env.MONGODB_URL, {
+		pkFactory: { createPk: () => new ObjectId().toString() }
+	});
 	await client.connect();
-	db = client.db('wedding');
+	const db = client.db('wedding');
 	await db.command({ ping: 1 });
 	console.info('Connected to MongoDB');
+
 	invitationsCollection = db.collection('invitations');
 	invitationsCollection.createIndex({ slug: 1 }, { unique: true });
 	detailsCollection = db.collection('details');
+
 	if ((await detailsCollection.countDocuments()) === 0) {
 		detailsCollection.insertOne({
 			date: '2042-01-01T00:00:42.000',
@@ -60,7 +59,7 @@ async function setup() {
 			privateStreet: 'privateStreet',
 			privateCity: 'privateCity',
 			milestones: [{ date: '2042-01-01T00:00:42.000', title: 'title', image: 'heart' }]
-		});
+		} satisfies Details);
 		console.info(
 			'Database has been freshly initialized. Please fill in the required informations in the details collection in the database.'
 		);
@@ -68,12 +67,10 @@ async function setup() {
 }
 
 export async function getInvitationBySlug(slug: string): Promise<WithId<Invitation> | null> {
-	await setup();
 	return invitationsCollection.findOne({ slug: slug });
 }
 
 export async function getDetails(): Promise<WithId<Details> | null> {
-	await setup();
 	return detailsCollection.findOne();
 }
 
@@ -81,30 +78,25 @@ export async function updateInvitation(
 	id: string,
 	invitation: Invitation
 ): Promise<Document | UpdateResult> {
-	await setup();
 	return invitationsCollection.replaceOne({ _id: id }, invitation);
 }
 
 export async function getAllInvitations(): Promise<WithId<Invitation>[]> {
-	await setup();
 	return invitationsCollection.find().toArray();
 }
 
 export async function streamAllInvitations(): Promise<ChangeStream<Invitation>> {
-	await setup();
 	return invitationsCollection.watch(undefined, {
 		fullDocument: 'updateLookup'
 	});
 }
 
 export async function deleteInvitation(id: string): Promise<DeleteResult> {
-	await setup();
 	return invitationsCollection.deleteOne({ _id: id });
 }
 
 export async function createInvitation(
 	invitation: Invitation
 ): Promise<InsertOneResult<Invitation>> {
-	await setup();
 	return invitationsCollection.insertOne(invitation);
 }
