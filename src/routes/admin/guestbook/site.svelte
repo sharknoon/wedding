@@ -147,7 +147,7 @@
 
 <style>
 	.bg-placeholder-photo {
-		background-image: url('/images/icons/heart.svg');
+		background-image: url('/static/images/icons/heart.svg');
 		background-size: 2rem;
 	}
 </style>
