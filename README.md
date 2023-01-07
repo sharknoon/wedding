@@ -1,8 +1,6 @@
-<!-- markdownlint-disable MD041 -->
+# Midrène's and Josua's Wedding
 
 [![Build, push and deploy image](https://github.com/Sharknoon/wedding/actions/workflows/build-push-and-deploy-image.yml/badge.svg)](https://github.com/Sharknoon/wedding/actions/workflows/build-push-and-deploy-image.yml)
-
-# Midrène's and Josua's Wedding
 
 This is the website for our personal wedding. This site serves as a digital wedding invitation. Users can give a response, if they are participating on the wedding.
 
@@ -10,27 +8,27 @@ This is the website for our personal wedding. This site serves as a digital wedd
 
 These environment variables configure your setup:
 
-| Name                       | Required                       | Example / Default                                                                     |
-| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------- |
-| MONGODB_URL                | yes                            | mongodb://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/myFirstDatabase |
-| PUBLIC_GOOGLE_MAPS_API_KEY | yes                            | SDLKFALSFJKSJGAshAHaYeSMKWvrekl2MERK342                                               |
-| ADMIN_LOGIN                | no, but strongly recommended   | admin:admin                                                                           |
-| PUBLIC_PLAUSIBLE_URL       | no, only if you want analytics | https://plausible.yourdomain.com                                                      |
+| Name                       | Description                                                                                                                                                                       | Required                     | Example / Default                                                                     |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------- |
+| MONGODB_URL                | The connection to the database                                                                                                                                                    | yes                          | mongodb://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/myFirstDatabase |
+| PUBLIC_GOOGLE_MAPS_API_KEY | A Google Maps API Key from [Google Cloud](https://console.cloud.google.com/marketplace/product/google/maps-embed-backend.googleapis.com) to display a map of the wedding location | no                           | SDLKFALSFJKSJGAshAHaYeSMKWvrekl2MERK342                                               |
+| ADMIN_LOGIN                | The credendials of the Admin panel. **IT IS STRONGLY ADVISED TO CHANGE THIS SETTING**                                                                                             | no, but strongly recommended | admin:admin                                                                           |
+| PUBLIC_PLAUSIBLE_URL       | You can get some privacy-friendly analytics by using Plausible. Just copy the URL from the JS-Snipped from the Plausible Website                                                  | no                           | <https://plausible.yourdomain.com/js/script.js>                                       |
 
 ## Docker
 
-The two environment variables `MONGODB_URL` and `PUBLIC_GOOGLE_MAPS_API_KEY` are needed to start the container.
+The environment variable `MONGODB_URL` is needed to start the container.
 
 ```bash
-docker run -d -p 3000:3000 -e MONGODB_URL=<mongodb-url> -e PUBLIC_GOOGLE_MAPS_API_KEY=<google-maps-api-key> -e ADMIN_LOGIN=<admin-login> ghcr.io/sharknoon/wedding
+docker run -d -p 3000:3000 -e MONGODB_URL=<mongodb-url> -e ADMIN_LOGIN=<admin-login> ghcr.io/sharknoon/wedding
 ```
 
 ## Docker Compose
 
-When starting the app with `docker compose`, only the `PUBLIC_GOOGLE_MAPS_API_KEY` variable is required, all other environment variables are optional.
+When starting the app with `docker compose`, all environment variables are optional.
 
 ```bash
-PUBLIC_GOOGLE_MAPS_API_KEY=<google-maps-api-key> docker compose up
+ADMIN_LOGIN=<admin-login> docker compose up
 ```
 
 ---

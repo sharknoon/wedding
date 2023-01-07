@@ -5,7 +5,7 @@
 
 <svelte:head>
 	{#if env.PUBLIC_PLAUSIBLE_URL}
-		<script defer data-domain={$page.url.host} src={env.PUBLIC_PLAUSIBLE_URL + '/js/script.js'}>
+		<script defer data-domain={$page.url.host} src={env.PUBLIC_PLAUSIBLE_URL}>
 		</script>
 	{/if}
 </svelte:head>
