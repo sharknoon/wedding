@@ -4,8 +4,8 @@
 
 @font-face {
 	font-family: 'Cheap Pine Sans';
-	src: url('/static/fonts/cheap-pine-sans.woff2') format('woff2'),
-		url('/static/fonts/cheap-pine-sans.woff') format('woff');
+	src: url('/fonts/cheap-pine-sans.woff2') format('woff2'),
+		url('/fonts/cheap-pine-sans.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 	font-cheap-pine: swap;
@@ -13,8 +13,8 @@
 
 @font-face {
 	font-family: 'Cheap Pine Regular';
-	src: url('/static/fonts/cheap-pine-regular.woff2') format('woff2'),
-		url('/static/fonts/cheap-pine-regular.woff') format('woff');
+	src: url('/fonts/cheap-pine-regular.woff2') format('woff2'),
+		url('/fonts/cheap-pine-regular.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 	font-cheap-pine: swap;
@@ -22,8 +22,7 @@
 
 @font-face {
 	font-family: 'Oswald';
-	src: url('/static/fonts/oswald.woff2') format('woff2'),
-		url('/static/fonts/oswald.woff') format('woff');
+	src: url('/fonts/oswald.woff2') format('woff2'), url('/fonts/oswald.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 	font-cheap-pine: swap;
