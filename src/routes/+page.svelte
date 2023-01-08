@@ -26,6 +26,7 @@
 		<button
 			on:click={() => (window.location.href = href)}
 			class="flex items-center bg-black py-2 px-3 text-white"
+			aria-label="Next"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
