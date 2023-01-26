@@ -171,6 +171,12 @@
 	let modalTitle = '';
 	let expandedMember: number | undefined = undefined;
 
+	$: parties = $invitations.length;
+
+	$: guests = $invitations
+		.map((i) => i.members.length)
+		.reduce((partialSum, a) => partialSum + a, 0);
+
 	$: acceptances = $invitations
 		.map((i) => i.members.filter((m) => m.accepted === 'true').length)
 		.reduce((partialSum, a) => partialSum + a, 0);
@@ -182,8 +188,6 @@
 	$: notYetResponded = $invitations
 		.map((i) => i.members.filter((m) => m.accepted !== 'true' && m.accepted !== 'false').length)
 		.reduce((partialSum, a) => partialSum + a, 0);
-
-	$: parties = $invitations.length;
 </script>
 
 <div class="container mx-auto font-oswald">
@@ -369,6 +373,9 @@
 		<div class="flex items-center gap-4">
 			<span>
 				{parties} Parteien
+			</span>
+			<span>
+				{guests} Gäste
 			</span>
 			<span>
 				{acceptances} Zusagen
