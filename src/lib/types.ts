@@ -4,6 +4,7 @@ export type Invitation = {
 	salutation: string;
 	members: Member[];
 	allergies: string;
+	position: number;
 };
 
 export type Member = {

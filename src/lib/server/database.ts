@@ -82,7 +82,7 @@ export async function updateInvitation(
 }
 
 export async function getAllInvitations(): Promise<WithId<Invitation>[]> {
-	return invitationsCollection.find().toArray();
+	return invitationsCollection.find().sort({ position: 1 }).toArray();
 }
 
 export async function streamAllInvitations(): Promise<ChangeStream<Invitation>> {
