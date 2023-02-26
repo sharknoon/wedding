@@ -10,30 +10,49 @@
 	let downloadables: HTMLElement[] = [];
 </script>
 
-<div class="flex flex-col items-center gap-16">
-	<DownloadButton {downloadables} />
+<div class="flex flex-col items-center">
+	<DownloadButton {downloadables} scale={4} />
 	<div
-		class="h-[303mm] w-[426mm] max-w-[426mm] bg-white p-[9mm] shadow-2xl"
+		class="h-[599.5mm] w-[425.5mm] max-w-[425.5mm] bg-white p-[4mm] shadow-2xl"
 		id="welcomeposter"
 		bind:this={downloadables[0]}
 	>
 		<div
-			class="grid h-full grid-cols-[4fr_3fr] items-center border-[3px] border-dashed border-black"
+			class="flex h-full flex-col items-center justify-evenly border-[5px] border-dashed border-black"
 		>
-			<div class="flex flex-col justify-center gap-4 text-center">
-				<h1 class="mb-16 font-cheap-pine text-8xl">Herzlich Willkommen</h1>
+			<div class="grid aspect-square h-[52.5rem] grid-cols-2">
+				<div
+					style="background-image: url('/images/people/midrene-and-josua-large.avif')"
+					class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat"
+				/>
+				<div class="col-start-2 row-start-1 flex flex-col">
+					<div
+						class="flex flex-1 items-end justify-center text-center font-cheap-pine-sans text-[6rem] uppercase leading-none tracking-wider"
+					>
+						B l a c k
+					</div>
+					<div
+						class="flex-1 bg-black text-center font-cheap-pine-sans text-[6rem] uppercase leading-none tracking-wider text-white"
+					>
+						W h i t e
+					</div>
+				</div>
+			</div>
+
+			<div class="flex flex-col justify-center gap-10 text-center">
+				<h1 class="font-cheap-pine text-9xl">Herzlich Willkommen</h1>
 				<div class="font-cheap-pine text-7xl uppercase">zur Hochzeit</div>
-				<div class="pt-4 font-cheap-pine-sans text-6xl uppercase">
+				<div class="font-cheap-pine-sans text-8xl uppercase">
 					von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 				</div>
-				<div class="pt-1 pb-2 font-cheap-pine-sans text-3xl uppercase leading-4 tracking-wider">
+				<div class="pt-1 pb-2 font-cheap-pine-sans text-5xl uppercase leading-4 tracking-wider">
 					Gesucht und Gefunden, in Liebe verbunden
 				</div>
 				<div class="mx-16 flex items-center gap-5 px-5">
-					<div class="grow border-t-[3px] border-black" />
+					<div class="grow border-t-[5px] border-black" />
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-16 w-16"
+						class="h-20 w-20"
 						viewBox="0 0 20 20"
 						fill="rgb(220,38,38)"
 					>
@@ -43,7 +62,7 @@
 							clip-rule="evenodd"
 						/>
 					</svg>
-					<div class="grow border-t-[3px] border-black" />
+					<div class="grow border-t-[5px] border-black" />
 				</div>
 				<div class="font-cheap-pine-sans text-6xl leading-none">{location}</div>
 				<div class="font-cheap-pine-sans text-5xl leading-none text-red-600">
@@ -54,38 +73,19 @@
 					})}
 				</div>
 			</div>
-
-			<div class="mx-auto grid aspect-square h-[35rem] grid-cols-2">
-				<div
-					style="background-image: url('/images/people/midrene-and-josua-large.avif')"
-					class="col-start-1 row-start-1 bg-cover bg-center bg-no-repeat"
-				/>
-				<div class="col-start-2 row-start-1 flex flex-col">
-					<div
-						class="flex flex-1 items-end justify-center text-center font-cheap-pine-sans text-6xl uppercase tracking-wider"
-					>
-						B l a c k
-					</div>
-					<div
-						class="flex-1 bg-black text-center font-cheap-pine-sans text-6xl uppercase tracking-wider text-white"
-					>
-						W h i t e
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 
 	<div class="text-center">
-		420x297mm, Plakat DIN A3 quer einseitig 4/0-farbig bedruckt, 300g Papier, <a
+		1189x841mm, Veranstaltungsplakat auf Hohlkammerplatte Doppel-A1 einseitig 4/0-farbig bedruckt, <a
 			class="hover:underline"
-			href="https://www.wir-machen-druck.de/plakat-din-a3-quer-420-x-297-mm-einseitig-40farbig-bedruckt-topseller.html"
+			href="https://www.wir-machen-druck.de/veranstaltungsplakat-auf-hohlkammerplatte-doppela1-einseitig-40farbig-bedruckt.html"
 			target="_blank"
 			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>
 		<br />
-		Datenformat: 426x303mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
+		Datenformat: 1199x851mm, Beschnitt: 5mm, Sicherheitsabstand: 3mm
 	</div>
 </div>
