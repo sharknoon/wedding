@@ -2,42 +2,91 @@
 	import { invitations } from '$lib/client/stores';
 	import DownloadButton from '../download-button.svelte';
 
-	let downloadables: HTMLElement[] = [];
+	const downloadables: HTMLElement[] = [];
+
+	const members = $invitations.flatMap((i) => i.members);
+	const tables = [...new Set(members.map((m) => m.table))].sort().filter((t) => t > 0);
+
+	const namesCount = new Map<string, { names: string[]; count: number }>();
+	members.forEach((m) => {
+		const firstName = m.name.split(' ')[0];
+
+		const nameCount = namesCount.get(firstName);
+		if (nameCount) {
+			nameCount.count += 1;
+			nameCount.names.push(m.name);
+		} else {
+			namesCount.set(firstName, { names: [m.name], count: 1 });
+		}
+	});
+
+	function generateLastNameForDuplicates(lastName: string, lastNames: string[]): string {
+		console.log(lastName, lastNames);
+		for (let index = 0; index < lastName.length; index++) {
+			const chars = lastName.substring(0, index + 1);
+			console.log(lastNames.some((n) => n.substring(0, index + 1) === chars));
+			if (lastNames.some((n) => n.substring(0, index + 1) === chars)) continue;
+			else return lastName.substring(0, index + 1) + '.';
+		}
+		return lastName;
+	}
 </script>
 
 <div class="flex flex-col items-center gap-16">
 	<DownloadButton {downloadables} scale={4} />
-	<div
-		class="h-[426mm] w-[600mm] max-w-[600mm] bg-white p-[9mm] shadow-2xl "
-		id="tableassignments"
-		bind:this={downloadables[0]}
-	>
-		<div class="grid h-full grid-cols-3 border-4 border-dashed border-black p-6 text-center">
-			<h1 class="col-span-3 font-cheap-pine text-8xl">Sitzplan</h1>
-
-			{#each [1, 2, 3, 4, 5, 6] as table}
-				<div class="flex flex-col gap-3">
-					<h2 class="font-cheap-pine-sans text-6xl text-red-600">Tisch {table}</h2>
-					{#each $invitations as invitation}
-						{#each invitation.members.filter((m) => m.table === table && m.accepted === 'true') as member}
-							<div class="font-oswald text-4xl">{member.name}</div>
-						{/each}
+	{#each tables as table}
+		<div
+			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl "
+			id="tableassignments"
+			bind:this={downloadables[0]}
+		>
+			<div class="flex h-full flex-col border-4 border-dashed border-black p-6 text-center">
+				<h1 class="col-span-3 m-3 font-cheap-pine text-6xl">
+					{#if table === 1}
+						Brauttisch
+					{:else}
+						Tisch <span class="text-red-600">{table}</span>
+					{/if}
+				</h1>
+				<div class="my-6 flex grow flex-col gap-6">
+					{#each members.filter((m) => m.table === table) as member}
+						{@const firstName = member.name.split(' ')[0]}
+						<div
+							class="font-oswald text-2xl {member.name.startsWith('Midrène') ||
+							member.name.startsWith('Josua')
+								? 'text-red-600'
+								: ''}"
+						>
+							{#if (namesCount.get(firstName)?.count ?? 1) > 1}
+								{@const lastName = member.name.split(' ')[1]}
+								{firstName}
+								{generateLastNameForDuplicates(
+									lastName,
+									members
+										.filter((m) => m.name.split(' ')[0] === firstName)
+										.filter((m) => m.name !== member.name)
+										.map((m) => m.name.split(' ')[1])
+								)}
+							{:else}
+								{firstName}
+							{/if}
+						</div>
 					{/each}
 				</div>
-			{/each}
+			</div>
 		</div>
-	</div>
+	{/each}
 
 	<div class="text-center">
-		594x420mm, Plakat DIN A2 quer einseitig 4/0-farbig bedruckt, 250g Papier, <a
+		105x210mm, Flyer DIN lang - Topseller, einseitig bedruckt, 400g Papier, <a
 			class="hover:underline"
-			href="https://www.wir-machen-druck.de/plakat-din-a2-quer-594-x-420-mm-einseitig-40farbig-bedruckt-topseller.html"
+			href="https://www.wir-machen-druck.de/flyer-din-lang-105-cm-x-210-cm-topseller-einseitig-bedruckt.html"
 			target="_blank"
 			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>
 		<br />
-		Datenformat: 600x426mm, Beschnitt: 3mm, Sicherheitsabstand: 6mm
+		Datenformat: 111x216mm, Beschnitt: 3mm, Sicherheitsabstand: 3mm
 	</div>
 </div>
