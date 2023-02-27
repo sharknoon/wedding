@@ -57,9 +57,9 @@
 								? 'text-red-600'
 								: ''}"
 						>
+							{firstName}
 							{#if (namesCount.get(firstName)?.count ?? 1) > 1}
 								{@const lastName = member.name.split(' ')[1]}
-								{firstName}
 								{generateLastNameForDuplicates(
 									lastName,
 									members
@@ -67,8 +67,6 @@
 										.filter((m) => m.name !== member.name)
 										.map((m) => m.name.split(' ')[1])
 								)}
-							{:else}
-								{firstName}
 							{/if}
 						</div>
 					{/each}
