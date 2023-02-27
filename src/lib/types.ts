@@ -19,7 +19,8 @@ export type Details = {
 	locationName: string;
 	street: string;
 	city: string;
-	text: string[];
+	textSingular: string[];
+	textPlural: string[];
 	deadline: string;
 	program: ProgramItem[];
 	faqs: FAQ[];

@@ -150,7 +150,7 @@
 			class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
 		>
 			{#if $invitation.members.length > 1}
-				<div class="flex h-full items-center">Wir bringen</div>
+				<div class="flex h-full items-center">Es kommen</div>
 				<div class="flex">
 					<div class="flex flex-col">
 						{#each $invitation.members as member, index}
@@ -166,7 +166,6 @@
 							</div>
 						{/each}
 					</div>
-					<div class="ml-4 flex h-full items-center">mit</div>
 				</div>
 			{/if}
 			{#each $invitation.members as member}

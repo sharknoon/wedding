@@ -247,7 +247,7 @@
 			<div>
 				<h2 class="font-cheap-pine-sans text-3xl">Einzug der Braut</h2>
 				<div class="text-lg">Gesang: Mareike Riegert</div>
-				<div class="text-lg">Pianist:</div>
+				<div class="text-lg">Pianist: Patrick Winter</div>
 			</div>
 			<div>
 				<h2 class="font-cheap-pine-sans text-3xl">Begrüßung</h2>
@@ -334,7 +334,7 @@
 			<div>
 				<h2 class="font-cheap-pine-sans text-3xl">Trauungslied</h2>
 				<div class="text-lg">Gesang: Mareike Riegert</div>
-				<div class="text-lg">Pianist:</div>
+				<div class="text-lg">Pianist: Patrick Winter</div>
 			</div>
 			<div>
 				<h2 class="font-cheap-pine-sans text-3xl">Fürbitten</h2>
@@ -368,13 +368,13 @@
 			<div>
 				<h2 class="font-cheap-pine-sans text-3xl">Auszug des Brautpaares</h2>
 				<div class="text-lg">Gesang: Mareike Riegert</div>
-				<div class="text-lg">Pianist:</div>
+				<div class="text-lg">Pianist: Patrick Winter</div>
 			</div>
 			<div>
 				<h2 class="font-cheap-pine-sans text-3xl">Sektempfang</h2>
 				<div class="text-lg">Karikaturist: Stefan Theurer</div>
 				<div class="text-lg">Gesang: Mareike Riegert</div>
-				<div class="text-lg">Pianist:</div>
+				<div class="text-lg">Pianist: Patrick Winter</div>
 			</div>
 		</div>
 		<Divider direction="up" />
