@@ -40,7 +40,14 @@ if (!building) {
 			locationName: 'locationName',
 			street: 'street',
 			city: 'city',
-			text: ['This is some example invitation text.', 'Change me in the database.'],
+			textSingular: [
+				'This is some example invitation text for a single person.',
+				'Change me in the database.'
+			],
+			textPlural: [
+				'This is some example invitation text for multiple persons.',
+				'Change me in the database.'
+			],
 			deadline: '2042-01-01T00:00:42.000',
 			program: [
 				{

@@ -46,7 +46,7 @@
 			})} bei uns, damit wir wissen, ob Du kommst.
 		{/if}
 	</p>
-	<div class="flex w-64 items-center gap-4">
+	<div class="flex w-64 items-center gap-4 md:mt-4">
 		<div class="grow border-t-2 border-black" />
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
