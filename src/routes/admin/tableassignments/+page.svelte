@@ -35,6 +35,7 @@
 <div class="flex flex-col items-center gap-16">
 	<DownloadButton {downloadables} scale={4} />
 	{#each tables as table}
+		{@const tableMembers = members.filter((m) => m.table === table)}
 		<div
 			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl "
 			id="tableassignments"
@@ -48,8 +49,11 @@
 						Tisch <span class="text-red-600">{table}</span>
 					{/if}
 				</h1>
-				<div class="my-6 flex grow flex-col gap-6">
-					{#each members.filter((m) => m.table === table) as member}
+				<div
+					class="my-6 flex flex-col justify-between"
+					style="height: {tableMembers.length * 3.333}rem;"
+				>
+					{#each tableMembers as member}
 						{@const firstName = member.name.split(' ')[0]}
 						<div
 							class="font-oswald text-2xl {member.name.startsWith('Midrène') ||
