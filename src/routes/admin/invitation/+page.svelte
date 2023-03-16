@@ -141,7 +141,7 @@
 					<div
 						class="col-start-5 row-span-5 row-start-1 rotate-180 justify-self-center font-cheap-pine-sans text-2xl uppercase leading-[1.1] vertical-lr"
 					>
-						Ab 14 Uhr
+						Ab {date.toLocaleTimeString('DE-DE', { hour: '2-digit', minute: '2-digit' })} Uhr
 					</div>
 					<div
 						class="col-span-5 col-start-1 row-start-5 text-center font-cheap-pine-sans text-2xl uppercase leading-[0.8] tracking-widest"
