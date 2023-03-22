@@ -30,7 +30,8 @@
 				<div class="font-cheap-pine-sans text-3xl">Beilagen</div>
 				<div>Schwäbische Butterstpätzle, Pommes Frites</div>
 				<div class="font-cheap-pine-sans text-3xl">Nachtisch</div>
-				<div>Hochzeitstorte</div>
+				<div>Schoko-Banane-Stracciatella Torte</div>
+				<div>Brownie-Cheesecake Torte</div>
 			</div>
 			<Divider direction="up" />
 			<Footer />

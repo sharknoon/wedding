@@ -34,12 +34,12 @@
 
 <div class="flex flex-col items-center gap-16">
 	<DownloadButton {downloadables} scale={4} />
-	{#each tables as table}
+	{#each tables as table, i}
 		{@const tableMembers = members.filter((m) => m.table === table)}
 		<div
 			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl "
-			id="tableassignments"
-			bind:this={downloadables[0]}
+			id="tableassignments-{table}"
+			bind:this={downloadables[i]}
 		>
 			<div class="flex h-full flex-col border-4 border-dashed border-black p-6 text-center">
 				<h1 class="col-span-3 m-3 font-cheap-pine text-6xl">

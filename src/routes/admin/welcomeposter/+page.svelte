@@ -10,10 +10,10 @@
 	let downloadables: HTMLElement[] = [];
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center gap-8">
 	<DownloadButton {downloadables} scale={4} />
 	<div
-		class="h-[599.5mm] w-[425.5mm] max-w-[425.5mm] bg-white p-[4mm] shadow-2xl"
+		class="h-[567.33mm] w-[402.66mm] max-w-[402.66mm] bg-white p-[5mm] shadow-2xl"
 		id="welcomeposter"
 		bind:this={downloadables[0]}
 	>
@@ -77,15 +77,16 @@
 	</div>
 
 	<div class="text-center">
-		1189x841mm, Veranstaltungsplakat auf Hohlkammerplatte Doppel-A1 einseitig 4/0-farbig bedruckt, <a
+		594x841mm, Veranstaltungsplakat auf Hohlkammerplatte DIN A1 einseitig 4/0-farbig bedruckt,
+		plano, <a
 			class="hover:underline"
-			href="https://www.wir-machen-druck.de/veranstaltungsplakat-auf-hohlkammerplatte-doppela1-einseitig-40farbig-bedruckt.html"
+			href="https://www.wir-machen-druck.de/veranstaltungsplakat-auf-hohlkammerplatte-din-a1-einseitig-40farbig-bedruckt-plano.html"
 			target="_blank"
 			rel="noreferrer"
 		>
 			WIRmachenDRUCK
 		</a>
 		<br />
-		Datenformat: 1199x851mm, Beschnitt: 5mm, Sicherheitsabstand: 3mm
+		Datenformat: 604x851mm, Beschnitt: 5mm, Sicherheitsabstand: 3mm
 	</div>
 </div>
