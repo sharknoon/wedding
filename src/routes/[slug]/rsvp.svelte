@@ -3,56 +3,61 @@
 	import { fade, scale } from 'svelte/transition';
 
 	type State = 'declined' | 'partly accepted' | 'completly accepted' | 'unknown';
-	let state: State = getState();
+	let state: State = 'unknown';
 
-	function getState(): State {
+	$: {
 		if ($invitation.members.every((m) => m.accepted === 'unknown')) {
-			return 'unknown';
+			state = 'unknown';
 		} else if ($invitation.members.every((m) => m.accepted === 'true')) {
-			return 'completly accepted';
+			state = 'completly accepted';
 		} else if ($invitation.members.every((m) => m.accepted === 'false')) {
-			return 'declined';
+			state = 'declined';
 		} else if ($invitation.members.some((m) => m.accepted === 'true')) {
-			return 'partly accepted';
+			state = 'partly accepted';
+		} else {
+			state = 'unknown';
 		}
-		return 'unknown';
 	}
+
+	let workingInvitation = $invitation;
 
 	let showModal = false;
 
 	function declineInvitation() {
-		$invitation?.members?.forEach((m) => (m.accepted = 'false'));
+		workingInvitation?.members?.forEach((m) => (m.accepted = 'false'));
 		updateInvitation();
 	}
 
 	function acceptInvitation() {
-		$invitation?.members?.forEach((m) => (m.accepted = 'true'));
+		workingInvitation?.members?.forEach((m) => (m.accepted = 'true'));
 		showModal = true;
 	}
 
 	function updateInvitation() {
 		// Need to add the diet if you plan to attend
 		if (
-			$invitation.members.some((m) => m.accepted === 'true' && (m.diet === 'unknown' || !m.diet))
+			workingInvitation.members.some(
+				(m) => m.accepted === 'true' && (m.diet === 'unknown' || !m.diet)
+			)
 		) {
 			alert('Bitte gebt auch eure Ernährungsform an.');
 			return;
 		}
-		for (const member of $invitation.members) {
+		for (const member of workingInvitation.members) {
 			if (member.accepted !== 'true' && member.accepted !== 'false') {
 				member.accepted = 'false';
 			}
 		}
-		fetch(`/api/invitations/${$invitation._id}`, {
+		fetch(`/api/invitations/${workingInvitation._id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify($invitation)
+			body: JSON.stringify(workingInvitation)
 		}).then(async (response) => {
 			if (response.status === 200) {
 				showModal = false;
-				state = getState();
+				$invitation = workingInvitation;
 			} else {
 				alert(
 					`Fehler beim Speichern der Einladung\n${response.statusText} ${await response.text()}`
@@ -149,11 +154,11 @@
 			transition:scale
 			class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
 		>
-			{#if $invitation.members.length > 1}
+			{#if workingInvitation.members.length > 1}
 				<div class="flex h-full items-center">Es kommen</div>
 				<div class="flex">
 					<div class="flex flex-col">
-						{#each $invitation.members as member, index}
+						{#each workingInvitation.members as member, index}
 							<div>
 								<input
 									type="checkbox"
@@ -168,9 +173,9 @@
 					</div>
 				</div>
 			{/if}
-			{#each $invitation.members as member}
+			{#each workingInvitation.members as member}
 				<span>
-					{#if $invitation.members.length > 1}
+					{#if workingInvitation.members.length > 1}
 						{member.name.split(' ')[0]} isst
 					{:else}
 						Ich esse
@@ -190,14 +195,14 @@
 				rows="2"
 				placeholder="Max hat eine Nussallergie"
 				class="border-2 border-black"
-				bind:value={$invitation.allergies}
+				bind:value={workingInvitation.allergies}
 			/>
 
 			<button
 				on:click={() => updateInvitation()}
 				class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
-				{#if $invitation.members.every((m) => m.accepted === 'false')}
+				{#if workingInvitation.members.every((m) => m.accepted === 'false')}
 					Absagen
 				{:else}
 					Zusagen

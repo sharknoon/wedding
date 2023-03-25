@@ -34,8 +34,8 @@
 					<span class="text-red-600">3.</span> Ins Gästebuch kleben
 				</div>
 				<div class="mb-4">
-					Klebt euer ausgedrucktes Bild ins Gästebuch und schreibt etwas dazu. Gerne könnt ihr auch
-					noch weitere Bilder für euch machen.
+					Klebt euer ausgedrucktes Bild und die Aufgabenkarte ins Gästebuch und schreibt etwas dazu.
+					Gerne könnt ihr auch noch weitere Bilder für euch machen.
 				</div>
 				<div class="font-cheap-pine-sans text-4xl">
 					<span class="text-red-600">4.</span> Weitersagen!

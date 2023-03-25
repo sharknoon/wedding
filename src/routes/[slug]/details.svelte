@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { invitation, details } from '$lib/client/stores';
 
+	$: date = new Date($details?.date);
 	$: deadline = new Date($details?.deadline);
 	$: text = $invitation.members.length > 1 ? $details.textPlural : $details.textSingular;
 </script>
@@ -14,7 +15,10 @@
 	</h1>
 	{#each text || [] as line}
 		<p class="text-center font-oswald text-lg md:text-xl lg:text-2xl">
-			{line}
+			{line.replace(
+				'{time}',
+				date.toLocaleTimeString('DE-DE', { hour: '2-digit', minute: '2-digit' })
+			)}
 		</p>
 	{/each}
 	<p class="text-center font-oswald text-lg md:text-xl lg:text-2xl">
