@@ -56,8 +56,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete old image versions
-        uses: actions/delete-package-versions@v3
+        uses: actions/delete-package-versions@v4
         with:
+          package-type: 'container'
           package-name: 'wedding'
           token: ${{ secrets.GHCR_PAT }}
           min-versions-to-keep: 1
