@@ -1,7 +1,5 @@
 <script lang="ts">
 	import DownloadButton from '../download-button.svelte';
-	import Divider from './divider.svelte';
-	import Footer from './footer.svelte';
 	import Header from './header.svelte';
 
 	let downloadables: HTMLElement[] = [];
