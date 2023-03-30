@@ -55,7 +55,7 @@
 		</g>
 	</svg>
 
-	<div class="absolute top-[0.45rem] w-full text-center font-cheap-pine text-3xl tracking-widest">
+	<div class="absolute top-[0.45rem] w-full text-center font-cheap-pine text-2xl tracking-widest">
 		{title}
 	</div>
 </div>

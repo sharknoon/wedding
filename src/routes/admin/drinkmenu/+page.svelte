@@ -17,24 +17,33 @@
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Header title="Alkoholfreie Getränke" />
 			<Divider />
-			<div class="flex grow flex-col items-center justify-center gap-8 font-oswald text-xl">
-				<div>Mineralwasser ohne Kohlensäure</div>
-				<div>Mineralwasser mit Kohlensäure</div>
-				<div>Cola, Fanta, Sprite</div>
-				<div>Orangensaft / -schorle</div>
-				<div>Apfelsaft / -schorle</div>
-				<div>TODO</div>
+			<div
+				class="flex grow flex-col items-center justify-center gap-6 text-center font-oswald text-xl"
+			>
+				<div>Tafelwasser still / prickelnd</div>
+				<div>Cola / Cola light / Fanta / Spezi</div>
+				<div>Apfel- / Annanas- / Orangen- / Johannisbeersaft</div>
+				<div>Cranberry- / Maracuja-Nektar</div>
+				<div>Saftschorle nach Wunsch</div>
+				<div>Dianas Schorle (Cranberry, Bitterlemon, Mineralwasser)</div>
+				<div>Bitter Lemon / Tonic Water / Ginger Ale</div>
+				<div>
+					Alpi Klostergarten-Limonaden (Apfel-Rosmarin / Birne-Ingwer / Apfel-Johannisbeer-Lavendel)
+				</div>
 			</div>
 			<Divider direction="up" />
 			<Footer />
 		</div>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
-			<Header title="Warme Getränke" />
+			<Header title="Heiße Getränke" />
 			<Divider />
-			<div class="flex grow flex-col items-center justify-center gap-8 font-oswald text-xl">
-				<div>Schwarztee</div>
-				<div>Früchtetee</div>
-				<div>TODO</div>
+			<div
+				class="flex grow flex-col items-center justify-center gap-6 text-center font-oswald text-xl"
+			>
+				<div>Tasse Kaffee / Kaffee Hag</div>
+				<div>(Doppelter) Espresso, Milchkaffee, Cappuccino, Latte Macchiato</div>
+				<div>Heiße Schokolade</div>
+				<div>Kännchen Tee</div>
 			</div>
 			<Divider direction="up" />
 			<Footer />
@@ -42,10 +51,16 @@
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Header title="Alkoholische Getränke" />
 			<Divider />
-			<div class="flex grow flex-col items-center justify-center gap-8 font-oswald text-xl">
-				<div>Bier 1 Alpirsbacher Klosterbräu</div>
-				<div>Bier 2 Alpirsbacher Klosterbräu</div>
-				<div>TODO</div>
+			<div
+				class="flex grow flex-col items-center justify-center gap-6 text-center font-oswald text-xl"
+			>
+				<div class="font-cheap-pine-sans text-3xl">Biere</div>
+				<div>Alpirsbacher Pils / Spezial / Hefeweizen / Alkoholfrei</div>
+				<div>Radler süß / sauer</div>
+				<div class="font-cheap-pine-sans text-3xl">Weine</div>
+				<div>Grauer Burgunder trocken - Weingut Kiefer, Baden</div>
+				<div>Spätburgunder Weißherbst - Durbacher Winzergenossenschaft, Baden</div>
+				<div>Trentatre Rosso - Rocca, Italien</div>
 			</div>
 			<Divider direction="up" />
 			<Footer />

@@ -16,25 +16,30 @@
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Header title="Menü" />
-			<Divider />
-			<div
-				class="flex grow flex-col items-center justify-center gap-2 text-center font-oswald text-xl"
-			>
-				<div class="font-cheap-pine-sans text-3xl">Vorspeise</div>
+			<div class="flex grow flex-col items-center justify-center gap-2 text-center font-oswald">
+				<div class="font-cheap-pine-sans text-2xl">Vorspeise</div>
 				<div>Tomaten-Basilikumsuppe mit Gin-Sahne und Croûtons</div>
-				<div class="font-cheap-pine-sans text-3xl">Buffet</div>
-				<div>Karotten-. Kraut-, Gurken und Kartoffelsalat</div>
-				<div>Rinderrücken Steak oder im Ganzen gebraten</div>
-				<div>Gebratenes Lachsfilet mit Kräutern</div>
-				<div>Risotto und Falaffel von Grünkern mit mediterranem Gemüse und Parmesanspänen</div>
-				<div class="font-cheap-pine-sans text-3xl">Beilagen</div>
-				<div>Schwäbische Butterstpätzle, Pommes Frites</div>
-				<div class="font-cheap-pine-sans text-3xl">Nachtisch</div>
+				<div class="font-cheap-pine-sans text-2xl">Salat</div>
+				<div>
+					Mühlensalatteller: Marinierte Blatt- und Rohkostsalate mit hausgemachtem Kartoffelsalat
+					und Joghurt-Kräuterdressing
+				</div>
+				<div class="font-cheap-pine-sans text-2xl">Buffet</div>
+				<div>Gebratene Rinderrückensteaks</div>
+				<div>Medaillons vom Schweinefilet</div>
+				<div>Gebratene Tranches vom Lachs mit frischen Kräutern und Zitrone</div>
+				<div>Panierte Schnitzel von der Putenbrust</div>
+				<div class="font-cheap-pine-sans text-2xl">Beilagen</div>
+				<div>Schwäbische Butterstpätzle, gebackene Kartoffelkrapfen, glasiertes Sommergemüse</div>
+				<div class="font-cheap-pine-sans text-2xl">Vegetarisch</div>
+				<div>Zweierlei vom Grünkern</div>
+				<div>
+					Cremiges Risotto und gebackene Falafel auf glasiertem Sommergemüse mit Parmesanspänen
+				</div>
+				<div class="font-cheap-pine-sans text-2xl">Nachtisch</div>
 				<div>Schoko-Banane-Stracciatella Torte</div>
 				<div>Brownie-Cheesecake Torte</div>
 			</div>
-			<Divider direction="up" />
-			<Footer />
 		</div>
 	</div>
 
@@ -45,27 +50,31 @@
 	>
 		<div class="flex h-full max-h-full flex-col border-2 border-dashed border-gray-900 p-3">
 			<Header title="Getränke" />
-			<Divider />
-			<div
-				class="flex grow flex-col items-center justify-center gap-2 text-center font-oswald text-xl"
-			>
-				<div class="font-cheap-pine-sans text-3xl">Alkoholische Getränke</div>
-				<div>Bier 1 Alpirsbacher Klosterbräu</div>
-				<div>Bier 2 Alpirsbacher Klosterbräu</div>
-				<div>TODO</div>
-				<div>TODO</div>
-				<div class="font-cheap-pine-sans text-3xl">Alkoholfreie Getränke</div>
-				<div>Mineralwasser ohne / mit Kohlensäure</div>
-				<div>Cola, Fanta, Sprite</div>
-				<div>Orangensaft / -schorle</div>
-				<div>Apfelsaft / -schorle</div>
-				<div>TODO</div>
-				<div class="font-cheap-pine-sans text-3xl">Heißgetränke</div>
-				<div>Schwarztee</div>
-				<div>Früchtetee</div>
-				<div>TODO</div>
+			<div class="flex grow flex-col items-center justify-center gap-1 text-center font-oswald">
+				<div class="font-cheap-pine-sans text-2xl">Biere</div>
+				<div>Alpirsbacher Pils / Spezial / Hefeweizen / Alkoholfrei</div>
+				<div>Radler süß / sauer</div>
+				<div class="font-cheap-pine-sans text-2xl">Weine</div>
+				<div>Grauer Burgunder trocken - Weingut Kiefer, Baden</div>
+				<div>Spätburgunder Weißherbst - Durbacher Winzergenossenschaft, Baden</div>
+				<div>Trentatre Rosso - Rocca, Italien</div>
+				<div class="font-cheap-pine-sans text-2xl">Alkoholfreie Getränke</div>
+				<div>Tafelwasser still / prickelnd</div>
+				<div>Cola / Cola light / Fanta / Spezi</div>
+				<div>Apfel- / Annanas- / Orangen- / Johannisbeersaft</div>
+				<div>Cranberry- / Maracuja-Nektar</div>
+				<div>Saftschorle nach Wunsch</div>
+				<div>Dianas Schorle (Cranberry, Bitterlemon, Mineralwasser)</div>
+				<div>Bitter Lemon / Tonic Water / Ginger Ale</div>
+				<div>
+					Alpi Klostergarten-Limonaden (Apfel-Rosmarin / Birne-Ingwer / Apfel-Johannisbeer-Lavendel)
+				</div>
+				<div class="font-cheap-pine-sans text-2xl">Heiße Getränke</div>
+				<div>Tasse Kaffee / Kaffee Hag</div>
+				<div>(Doppelter) Espresso, Milchkaffee, Cappuccino, Latte Macchiato</div>
+				<div>Heiße Schokolade</div>
+				<div>Kännchen Tee</div>
 			</div>
-			<Divider direction="up" />
 		</div>
 	</div>
 

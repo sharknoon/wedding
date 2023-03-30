@@ -5,21 +5,27 @@
 
 	const foods = [
 		{ title: 'Tomaten-Basilikumsuppe', description: 'mit Gin-Sahne und Croûtons' },
-		{ title: 'Karottensalat', description: '' },
-		{ title: 'Krautsalat', description: '' },
-		{ title: 'Gurkensalat', description: '' },
-		{ title: 'Kartoffelsalat', description: '' },
-		{ title: 'Rinderrücken', description: 'Steak oder im Ganzen gebraten' },
-		{ title: 'Gebratenes Lachsfilet', description: 'mit Kräutern' },
 		{
-			title: 'Risotto und Falaffel von Grünkern',
-			description: 'mit mediterranem Gemüse und Parmesanspänen'
+			title: 'Marinierte Blatt- und Rohkostsalate',
+			description: 'mit Joghurt-Kräuterdressing'
 		},
+		{ title: 'Gebratene Rinderrückensteaks', description: '' },
+		{ title: 'Medaillons vom Schweinefilet', description: '' },
+		{ title: 'Gebratene Tranches vom Lachs', description: 'mit frischen Kräutern und Zitrone' },
+		{ title: 'Panierte Schnitzel', description: 'von der Putenbrust' },
 		{ title: 'Schwäbische Butterstpätzle', description: '' },
-		{ title: 'Pommes Frites', description: '' },
-		{ title: 'Nutella-, Vanille- und Fruchtmacarons', description: '' },
-		{ title: 'Schoko-Banane-Stracciatella', description: 'obere Torte' },
-		{ title: 'Brownie-Cheesecake', description: 'untere Torte' }
+		{
+			title: 'Gebackene Kartoffelkrapfen',
+			description: ''
+		},
+		{ title: 'Glasiertes Sommergemüse', description: '' },
+		{ title: 'Zweierlei vom Grünkern', description: '' },
+		{
+			title: 'Cremiges Risotto und gebackene Falafel',
+			description: 'glasiertem Sommergemüse mit Parmesanspänen'
+		},
+		{ title: 'Schoko-Banane-Stracciatella', description: 'Torte' },
+		{ title: 'Brownie-Cheesecake', description: 'Torte' }
 	];
 </script>
 
