@@ -6,15 +6,13 @@
 </script>
 
 {#if apiKey}
-	<div id="map" class="h-full">
-		<iframe
-			src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(
-				$details.locationName
-			)}&maptype=satellite`}
-			loading="lazy"
-			title="Map"
-			allow="fullscreen"
-			class="h-full w-full snap-start border-none"
-		/>
-	</div>
+	<iframe
+		src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(
+			$details.locationName
+		)}&maptype=satellite`}
+		loading="lazy"
+		title="Map"
+		allow="fullscreen"
+		class="h-full w-full border-none"
+	/>
 {/if}

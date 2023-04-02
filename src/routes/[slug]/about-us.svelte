@@ -11,9 +11,10 @@
 	};
 </script>
 
-<div id="about-us" class="flex min-h-full snap-start">
+<div class="flex w-full flex-col justify-evenly">
+	<h1 class="text-center font-cheap-pine text-3xl lg:text-5xl">Unsere gemeinsame Geschichte</h1>
 	<div
-		class="grid w-full grid-cols-[1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr] grid-rows-[1fr_1fr_auto_1fr_1fr] items-center justify-center"
+		class="grid grid-cols-[1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr] grid-rows-[1fr_1fr_auto_1fr_1fr] items-center justify-center"
 	>
 		<div class="relative col-start-1 row-start-3 py-4">
 			<hr class="absolute inset-x-0 top-1/2 -translate-y-1/2 border border-black" />
@@ -71,79 +72,5 @@
 			</div>
 		{/each}
 	</div>
-	<!-- <div class="relative m-3 grow">
-		<div class="absolute right-0 left-0 top-1/2 -translate-y-1/2">
-		</div>
-		<div class="absolute right-0 left-0 top-1/2 mx-4 flex -translate-y-1/2 justify-around">
-			{#each $details.milestones as _}
-				<div class="h-3 w-3 rounded-full bg-black" />
-			{/each}
-		</div>
-		<div class="absolute top-0 right-0 bottom-0 left-0 mx-4 flex items-center justify-around">
-			{#each $details.milestones as _, id}
-			{/each}
-		</div>
-		<div
-			class="absolute top-0 right-0 bottom-0 left-0 grid grid-cols-12 grid-rows-2 font-cheap-pine-sans text-3xl"
-		>
-			{#each $details.milestones as milestone, id}
-				{@const date = new Date(milestone.date)}
-				<div
-					class="col-span-2 flex flex-col text-center {id % 2 === 0
-						? 'row-start-2'
-						: 'row-start-1'} min-w-[4.5rem]"
-				>
-					<span class="font-cheap-pine text-6xl leading-[0.9]">{date.getDate()}</span>
-					<span
-						class="bg-black px-1 font-cheap-pine-sans text-lg leading-none tracking-wider text-white"
-					>
-						{date.toLocaleDateString('DE-DE', {
-							month: 'long'
-						})}
-					</span>
-					<div class="flex justify-between font-cheap-pine-sans text-3xl font-bold">
-						{#each date.getFullYear().toString().split('') as num}
-							<span>{num}</span>
-						{/each}
-					</div>
-				</div>
-			{/each}
-		</div>
-		<div class="absolute top-0 right-0 bottom-0 left-0 mr-8 flex items-center justify-start">
-			{#each $details.milestones as milestone, id}
-				{#if id % 2 == 0}
-					<div class="relative mr-3 mb-[85%]">
-						<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
-						<div
-							class="relative flex min-h-[6rem] min-w-[5rem] max-w-[5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
-						>
-							{@html icons[milestone.image]}
-							<span class="self-stretch bg-black text-center text-sm text-white">
-								{milestone.title}
-							</span>
-						</div>
-					</div>
-					<div class="grow" />
-				{/if}
-			{/each}
-		</div>
-		<div class="absolute top-0 right-0 bottom-0 left-0 ml-8 flex items-center justify-end">
-			{#each $details.milestones as milestone, id}
-				{#if id % 2 == 1}
-					<div class="grow" />
-					<div class="relative mb-3 mr-3 mt-[85%]">
-						<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
-						<div
-							class="relative flex min-h-[6rem] min-w-[5rem] max-w-[5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
-						>
-							{@html icons[milestone.image]}
-							<span class="self-stretch bg-black text-center text-sm text-white">
-								{milestone.title}
-							</span>
-						</div>
-					</div>
-				{/if}
-			{/each}
-		</div>
-	</div> -->
+	<div />
 </div>

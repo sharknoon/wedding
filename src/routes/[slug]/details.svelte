@@ -7,8 +7,7 @@
 </script>
 
 <div
-	id="rsvp"
-	class="container mx-auto flex min-h-full snap-start flex-col items-center justify-center gap-2 p-6 md:gap-6"
+	class="container mx-auto flex min-h-full flex-col items-center justify-center gap-2 p-6 md:gap-6"
 >
 	<h1 class="my-2 max-w-full break-words text-center font-cheap-pine text-4xl md:my-4 md:text-6xl">
 		{$invitation?.salutation || ''}

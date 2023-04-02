@@ -2,8 +2,17 @@
 	import { details } from '$lib/client/stores';
 </script>
 
-<div id="faqs" class="min-h-full snap-start md:pb-14">
+<div class="min-h-full pb-12 md:pb-14">
 	<h1 class="pt-6 pb-4 text-center font-cheap-pine text-6xl">Häufige Fragen</h1>
+	<div class="text-center font-oswald text-xl">
+		<p>Bei weiteren Fragen meldet euch bei unserer Hochzeitsplanerin Jessica Schhömer</p>
+		<p>
+			E-Mailadresse: <a href="mailto:info@amabelle-hochzeiten.de" class="hover:underline">
+				info@amabelle-hochzeiten.de
+			</a>
+		</p>
+		<p>Telefon: <a href="tel:+4917623352354" class="hover:underline">0176/23352354</a></p>
+	</div>
 	<div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 		{#each $details?.faqs || [] as faq}
 			<div class="min-w-0 border-4 border-black p-2">

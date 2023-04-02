@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { details, invitation } from '$lib/client/stores';
+	import Section from './section.svelte';
 	import RSVP from './rsvp.svelte';
 	import Home from './home.svelte';
 	import Info from './info.svelte';
@@ -18,13 +19,25 @@
 
 <div class="fixed inset-0 flex flex-col">
 	<div class="grow snap-y snap-proximity overflow-y-scroll">
-		<Home />
-		<Info />
-		<Details />
+		<Section name="home" scrollTo="info">
+			<Home />
+		</Section>
+		<Section name="info" scrollTo="rsvp" color="text-red-600">
+			<Info />
+		</Section>
+		<Section name="rsvp" scrollTo="faqs">
+			<Details />
+		</Section>
 		<!-- <Program /> -->
-		<AboutUs />
-		<Map />
-		<FAQ />
+		<Section name="faqs" scrollTo="map">
+			<FAQ />
+		</Section>
+		<Section name="map" scrollTo="about-us">
+			<Map />
+		</Section>
+		<Section name="about-us">
+			<AboutUs />
+		</Section>
 	</div>
 	<RSVP />
 </div>

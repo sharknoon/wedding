@@ -49,7 +49,7 @@
 	});
 </script>
 
-<div id="info" class="relative h-full snap-start">
+<div class="relative min-h-full min-w-full">
 	<picture>
 		<source srcset="/images/backgrounds/info.avif" type="image/avif" />
 		<source srcset="/images/backgrounds/info.webp" type="image/webp" />
@@ -59,7 +59,7 @@
 			alt="info"
 		/>
 	</picture>
-	<div class="relative flex h-full flex-col items-center justify-between gap-8 p-2 md:pb-[4.5rem]">
+	<div class="relative flex h-full flex-col items-center justify-between gap-8 p-2 pb-16 md:pb-20">
 		<div
 			class="flex flex-col divide-y-2 divide-black border-4 border-black bg-white p-2 font-cheap-pine-sans"
 		>
