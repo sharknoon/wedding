@@ -4,11 +4,6 @@
 	let downloadables: HTMLElement[] = [];
 
 	const foods = [
-		{ title: 'Tomaten-Basilikumsuppe', description: 'mit Gin-Sahne und Croûtons' },
-		{
-			title: 'Marinierte Blatt- und Rohkostsalate',
-			description: 'mit Joghurt-Kräuterdressing'
-		},
 		{ title: 'Gebratene Rinderrückensteaks', description: '' },
 		{ title: 'Medaillons vom Schweinefilet', description: '' },
 		{ title: 'Gebratene Tranches vom Lachs', description: 'mit frischen Kräutern und Zitrone' },
@@ -25,7 +20,8 @@
 			description: 'glasiertem Sommergemüse mit Parmesanspänen'
 		},
 		{ title: 'Schoko-Banane-Stracciatella', description: 'Torte' },
-		{ title: 'Brownie-Cheesecake', description: 'Torte' }
+		{ title: 'Brownie-Cheesecake', description: 'Torte' },
+		{ title: 'Macarons', description: 'Nutella, Vanille, Frucht' }
 	];
 </script>
 
@@ -40,7 +36,10 @@
 			<div class="flex h-full flex-col justify-center border-2 border-dashed border-gray-900">
 				<div class="text-center">
 					<div class="font-cheap-pine-sans text-3xl first-letter:text-red-600">
-						{food.title.substring(0, food.title.length - 1)}<span class="text-red-600"
+						<span class="text-red-600">{food.title.substring(0, 1)}</span>{food.title.substring(
+							1,
+							food.title.length - 1
+						)}<span class="text-red-600"
 							>{food.title.substring(food.title.length - 1, food.title.length)}</span
 						>
 					</div>
