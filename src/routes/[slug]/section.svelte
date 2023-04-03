@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let name: string;
 	export let scrollTo: string | undefined = undefined;
-	export let color: string = 'text-gray-800';
+	export let color = 'text-gray-800';
 
 	function scrollDown() {
 		const element = document.querySelector('#' + scrollTo);
