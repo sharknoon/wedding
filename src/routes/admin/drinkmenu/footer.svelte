@@ -25,7 +25,7 @@
 		>
 	</div>
 	<div class="flex grow flex-col text-center">
-		<span class="font-cheap-pine-sans text-xl leading-none tracking-widest">
+		<span class="font-cheap-pine-sans text-lg leading-none tracking-widest">
 			Midrène's und Josua's
 		</span>
 		<div class="flex items-center justify-between px-3">
