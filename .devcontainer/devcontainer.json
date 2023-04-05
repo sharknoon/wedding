@@ -37,8 +37,12 @@
 				"svelte.svelte-vscode",
 				// TailwindCSS companion extension
 				"bradlc.vscode-tailwindcss",
+				// Eslint for finding code errors
+				"dbaeumer.vscode-eslint",
 				// Prettier as the default formatter
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				// Playwright for tests
+				"ms-playwright.playwright"
 			]
 		}
 	}
