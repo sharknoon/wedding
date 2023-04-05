@@ -117,19 +117,19 @@
 		<Header title="Programm" />
 		<Divider />
 		<div class="relative flex grow py-3">
-			<div class="absolute left-1/2 top-2 bottom-2 w-[0.125rem] -translate-x-1/2 bg-black" />
-			<div class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around">
+			<div class="absolute bottom-2 left-1/2 top-2 w-[0.125rem] -translate-x-1/2 bg-black" />
+			<div class="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-around">
 				{#each $details.program as _, id}
 					<div class="h-[0.175rem] w-[47.5%] bg-black {id % 2 === 0 ? '' : 'self-end'}" />
 				{/each}
 			</div>
-			<div class="absolute left-1/2 top-0 bottom-0 flex -translate-x-1/2 flex-col justify-around">
+			<div class="absolute bottom-0 left-1/2 top-0 flex -translate-x-1/2 flex-col justify-around">
 				{#each $details.program as _}
 					<div class="h-3 w-3 rounded-full bg-black" />
 				{/each}
 			</div>
 			<div
-				class="absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-around font-cheap-pine-sans text-2xl tracking-widest"
+				class="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-around font-cheap-pine-sans text-2xl tracking-widest"
 			>
 				{#each $details.program as programItem, id}
 					{@const time = new Date(programItem.time)}
@@ -142,7 +142,7 @@
 				{#each $details.program as programItem, id}
 					<div class="relative mb-2 mr-2 {id % 2 === 0 ? 'self-start' : 'self-end'}">
 						<div
-							class="absolute top-[6px] left-[6px] h-full w-full border-4 border-red-600 bg-white ring-8 ring-white"
+							class="absolute left-[6px] top-[6px] h-full w-full border-4 border-red-600 bg-white ring-8 ring-white"
 						/>
 						<div class="relative border-2 border-white bg-black px-1">
 							{programItem.title}
@@ -159,21 +159,21 @@
 		<Header title="Das Brautpaar" />
 		<Divider />
 		<div class="relative grow">
-			<div class="absolute right-0 left-0 top-1/2 -translate-y-1/2">
+			<div class="absolute left-0 right-0 top-1/2 -translate-y-1/2">
 				<hr class="border border-black" />
 			</div>
-			<div class="absolute right-0 left-0 top-1/2 mx-4 flex -translate-y-1/2 justify-around">
+			<div class="absolute left-0 right-0 top-1/2 mx-4 flex -translate-y-1/2 justify-around">
 				{#each $details.milestones as _}
 					<div class="h-3 w-3 rounded-full bg-black" />
 				{/each}
 			</div>
-			<div class="absolute top-0 right-0 bottom-0 left-0 mx-4 flex items-center justify-around">
+			<div class="absolute bottom-0 left-0 right-0 top-0 mx-4 flex items-center justify-around">
 				{#each $details.milestones as _, id}
 					<div class="h-28 w-[0.175rem] bg-black {id % 2 === 0 ? 'mb-36' : 'mt-36'}" />
 				{/each}
 			</div>
 			<div
-				class="absolute top-0 right-0 bottom-0 left-0 mx-4 flex items-center justify-around font-cheap-pine-sans text-3xl"
+				class="absolute bottom-0 left-0 right-0 top-0 mx-4 flex items-center justify-around font-cheap-pine-sans text-3xl"
 			>
 				{#each $details.milestones as milestone, id}
 					{@const date = new Date(milestone.date)}
@@ -198,11 +198,11 @@
 					</div>
 				{/each}
 			</div>
-			<div class="absolute top-0 right-0 bottom-0 left-0 mr-8 flex items-center justify-start">
+			<div class="absolute bottom-0 left-0 right-0 top-0 mr-8 flex items-center justify-start">
 				{#each $details.milestones as milestone, id}
 					{#if id % 2 == 0}
-						<div class="relative mr-3 mb-[85%]">
-							<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
+						<div class="relative mb-[85%] mr-3">
+							<div class="absolute left-2 top-2 h-full w-full border-4 border-red-600 bg-white" />
 							<div
 								class="relative flex min-h-[6rem] min-w-[5rem] max-w-[5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
 							>
@@ -216,12 +216,12 @@
 					{/if}
 				{/each}
 			</div>
-			<div class="absolute top-0 right-0 bottom-0 left-0 ml-8 flex items-center justify-end">
+			<div class="absolute bottom-0 left-0 right-0 top-0 ml-8 flex items-center justify-end">
 				{#each $details.milestones as milestone, id}
 					{#if id % 2 == 1}
 						<div class="grow" />
 						<div class="relative mb-3 mr-3 mt-[85%]">
-							<div class="absolute top-2 left-2 h-full w-full border-4 border-red-600 bg-white" />
+							<div class="absolute left-2 top-2 h-full w-full border-4 border-red-600 bg-white" />
 							<div
 								class="relative flex min-h-[6rem] min-w-[5rem] max-w-[5rem] flex-col items-center border-4 border-black bg-white ring-2 ring-white"
 							>
@@ -347,7 +347,7 @@
 
 	<Page id="schedule-9" withFooter={false} bind:that={downloadables[8]}>
 		<Timeline index={5} />
-		<div class="-mt-2 -mb-2 flex grow flex-col items-center justify-center">
+		<div class="-mb-2 -mt-2 flex grow flex-col items-center justify-center">
 			<h2 class="-mt-2 font-cheap-pine-sans text-2xl">Der Herr segne dich</h2>
 			<img
 				src="/images/sheetmusic/Der_Herr_segne_dich.svg"

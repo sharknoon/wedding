@@ -3,7 +3,7 @@
 </script>
 
 <div class="min-h-full pb-12 md:pb-14">
-	<h1 class="pt-6 pb-4 text-center font-cheap-pine text-6xl">Häufige Fragen</h1>
+	<h1 class="pb-4 pt-6 text-center font-cheap-pine text-6xl">Häufige Fragen</h1>
 	<div class="text-center font-oswald text-xl">
 		<p>Bei weiteren Fragen meldet euch bei unserer Hochzeitsplanerin Jessica Schhömer</p>
 		<p>

@@ -18,7 +18,7 @@
 			</div>
 			<div class="row-span-2 self-end">
 				<div class="text-center font-cheap-pine-sans text-4xl">Verwandt:</div>
-				<div class="mt-2 mb-2 grid grid-cols-4 items-center justify-center gap-3">
+				<div class="mb-2 mt-2 grid grid-cols-4 items-center justify-center gap-3">
 					<div class="test-center col-span-2">Braut:</div>
 					<div class="col-span-2 text-center">Bräutigam:</div>
 					<div class="uppercase">Ja</div>
@@ -70,7 +70,7 @@
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="absolute top-1/2 left-1/2 h-96 -translate-x-1/2 -translate-y-1/2 text-white"
+					class="absolute left-1/2 top-1/2 h-96 -translate-x-1/2 -translate-y-1/2 text-white"
 					viewBox="0 0 20 20"
 					fill="currentColor"
 				>
@@ -88,7 +88,7 @@
 					/>
 				</svg>
 				<div
-					class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-cheap-pine-sans text-2xl"
+					class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-cheap-pine-sans text-2xl"
 				>
 					Bitte klebt hier euer Foto von euch aus der Fotobox ein.<br />
 					<span class="text-3xl">Dankeschön!</span>

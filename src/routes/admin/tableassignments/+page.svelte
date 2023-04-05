@@ -37,7 +37,7 @@
 	{#each tables as table, i}
 		{@const tableMembers = members.filter((m) => m.table === table)}
 		<div
-			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl "
+			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl"
 			id="tableassignments-{table}"
 			bind:this={downloadables[i]}
 		>

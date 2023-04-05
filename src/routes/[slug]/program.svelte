@@ -26,7 +26,7 @@
 	<div class="grow" />
 	<div class="relative grid grid-cols-3 justify-between gap-12 p-8 sm:flex sm:p-16 md:p-24">
 		<div
-			class="absolute top-1/2 left-16 right-16 hidden h-4 -translate-y-1/2 bg-black sm:block md:left-28 md:right-28"
+			class="absolute left-16 right-16 top-1/2 hidden h-4 -translate-y-1/2 bg-black sm:block md:left-28 md:right-28"
 		/>
 		{#each $details?.program || [] as programItem, i}
 			<button

@@ -60,9 +60,9 @@
 					: 'row-start-5'} mx-auto h-[6.5rem] w-[5.5rem] lg:h-36 lg:w-28"
 				style="grid-column-start: {Math.max(i * 3 + 1, 1)};"
 			>
-				<div class="absolute top-2 left-2 right-0 bottom-0 border-4 border-red-600 bg-white" />
+				<div class="absolute bottom-0 left-2 right-0 top-2 border-4 border-red-600 bg-white" />
 				<div
-					class="absolute top-0 right-2 bottom-2 left-0 flex flex-col items-center border-4 border-black bg-white ring-2 ring-white"
+					class="absolute bottom-2 left-0 right-2 top-0 flex flex-col items-center border-4 border-black bg-white ring-2 ring-white"
 				>
 					{@html icons[milestone.image]}
 					<span class="self-stretch bg-black text-center text-sm text-white lg:text-lg">

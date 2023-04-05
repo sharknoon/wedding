@@ -7,7 +7,7 @@
 <div class="flex flex-col items-center gap-16">
 	<DownloadButton {downloadables} />
 	<div
-		class="h-[51mm] w-[51mm] max-w-[51mm] bg-white p-[7mm] shadow-2xl "
+		class="h-[51mm] w-[51mm] max-w-[51mm] bg-white p-[7mm] shadow-2xl"
 		id="tissuesticker"
 		bind:this={downloadables[0]}
 	>

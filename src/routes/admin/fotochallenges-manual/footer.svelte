@@ -1,4 +1,4 @@
-<div class="my-2 mx-6 flex items-center justify-between">
+<div class="mx-6 my-2 flex items-center justify-between">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		class="h-12 w-12 text-red-600"

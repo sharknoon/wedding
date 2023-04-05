@@ -45,7 +45,7 @@
 				<div class="font-cheap-pine-sans text-8xl uppercase">
 					von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 				</div>
-				<div class="pt-1 pb-2 font-cheap-pine-sans text-5xl uppercase leading-4 tracking-wider">
+				<div class="pb-2 pt-1 font-cheap-pine-sans text-5xl uppercase leading-4 tracking-wider">
 					Gesucht und Gefunden, in Liebe verbunden
 				</div>
 				<div class="mx-16 flex items-center gap-5 px-5">

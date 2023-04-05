@@ -34,7 +34,7 @@
 	>
 		<div class="relative">
 			<div
-				class="absolute top-8 left-8 h-2/3 w-2/3 border-2 border-black bg-cover bg-center bg-no-repeat"
+				class="absolute left-8 top-8 h-2/3 w-2/3 border-2 border-black bg-cover bg-center bg-no-repeat"
 				style="background-image: url(/images/tmp/gruppenbild.bmp);"
 			/>
 			<div
@@ -104,7 +104,7 @@
 					<div class="grow border-t-2 border-black" />
 				</div>
 				<div
-					class="mt-2 inline bg-black py-1 px-2 text-center font-cheap-pine-sans text-2xl tracking-widest text-white"
+					class="mt-2 inline bg-black px-2 py-1 text-center font-cheap-pine-sans text-2xl tracking-widest text-white"
 				>
 					Für <span class="text-red-600">euer</span> Kommen
 				</div>
@@ -129,7 +129,7 @@
 			/>
 			<div class="font-cheap-pine-sans text-xl">www.{$page.url.host}/bilder</div>
 		</div>
-		<div class="pt-6 pl-8">
+		<div class="pl-8 pt-6">
 			<h1 class="font-cheap-pine text-3xl tracking-wide">{data.salutation}</h1>
 			<p class="mt-2 font-oswald text-xl">
 				Ihr habt dazu beigetragen,<br />

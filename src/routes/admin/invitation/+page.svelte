@@ -57,7 +57,7 @@
 					von <span class="text-red-600">Midrène</span> & <span class="text-red-600">Josua</span>
 				</div>
 				<div
-					class="pt-1 pb-2 text-center font-cheap-pine-sans text-xl uppercase leading-4 tracking-wider"
+					class="pb-2 pt-1 text-center font-cheap-pine-sans text-xl uppercase leading-4 tracking-wider"
 				>
 					Gesucht und Gefunden, in Liebe verbunden
 				</div>

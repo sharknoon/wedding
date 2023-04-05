@@ -23,12 +23,12 @@
 </script>
 
 <div class="relative mb-1">
-	<hr class="absolute left-0 right-4 bottom-1/2 border-2 border-black" />
+	<hr class="absolute bottom-1/2 left-0 right-4 border-2 border-black" />
 	<div class="flex justify-between">
 		{#each marriageItems as marriageItem, i}
 			<div class="relative mb-2 mr-2">
 				<div
-					class="absolute top-[6px] left-[6px] h-full w-full {index === i
+					class="absolute left-[6px] top-[6px] h-full w-full {index === i
 						? 'border-4 border-red-600 bg-white ring-4 ring-white'
 						: ''}"
 				/>

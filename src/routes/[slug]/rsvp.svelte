@@ -78,7 +78,7 @@
 			</button>
 			<button
 				on:click={() => declineInvitation()}
-				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
+				class="relative grow border-0 bg-red-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
 			>
 				Absagen
 			</button>
@@ -102,13 +102,13 @@
 			</div>
 			<button
 				on:click={() => acceptInvitation()}
-				class="relative grow border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+				class="relative grow border-0 bg-black px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
 				Teilnahme ändern
 			</button>
 			<button
 				on:click={() => declineInvitation()}
-				class="relative grow border-0 bg-red-600 py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
+				class="relative grow border-0 bg-red-600 px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
 			>
 				Absagen
 			</button>
@@ -200,7 +200,7 @@
 
 			<button
 				on:click={() => updateInvitation()}
-				class="relative col-span-2 mt-4 border-0 bg-black py-2 px-4 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
+				class="relative col-span-2 mt-4 border-0 bg-black px-4 py-2 text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/75 focus:ring-2"
 			>
 				{#if workingInvitation.members.every((m) => m.accepted === 'false')}
 					Absagen

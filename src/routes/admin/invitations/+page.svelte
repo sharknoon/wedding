@@ -196,10 +196,10 @@
 	<table class="w-full table-auto border-2 border-black text-lg">
 		<thead>
 			<tr class="h-full bg-black font-cheap-pine-sans text-xl text-white">
-				<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Name </th>
-				<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Teilnahme </th>
-				<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Anrede </th>
-				<th class="py-2 px-1 sm:px-6 sm:py-4 sm:text-3xl"> Aktionen </th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Name </th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Teilnahme </th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Anrede </th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Aktionen </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -226,7 +226,7 @@
 								{#if member.accepted === 'true'}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
+										class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -237,7 +237,7 @@
 								{:else if member.accepted === 'false'}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
+										class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -248,7 +248,7 @@
 								{:else}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
+										class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -366,7 +366,7 @@
 		</tbody>
 	</table>
 
-	<div class="my-6 mx-2 flex flex-col items-center justify-between gap-4 md:mx-0 md:flex-row">
+	<div class="mx-2 my-6 flex flex-col items-center justify-between gap-4 md:mx-0 md:flex-row">
 		<div class="flex items-center gap-4">
 			<span>
 				{parties} Parteien

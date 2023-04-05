@@ -10,7 +10,7 @@
 	<DownloadButton {downloadables} scale={4} />
 	{#each members as member}
 		<div
-			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl "
+			class="h-[216mm] w-[111mm] max-w-[111mm] bg-white p-[6mm] shadow-2xl"
 			id="tableassignments"
 			bind:this={downloadables[0]}
 		>

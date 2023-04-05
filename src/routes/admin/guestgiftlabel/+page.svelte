@@ -7,7 +7,7 @@
 <div class="flex flex-col items-center gap-16">
 	<DownloadButton {downloadables} />
 	<div
-		class="h-[75mm] w-[75mm] max-w-[75mm] bg-white p-[6mm] shadow-2xl "
+		class="h-[75mm] w-[75mm] max-w-[75mm] bg-white p-[6mm] shadow-2xl"
 		id="guestgiftlabel-salt"
 		bind:this={downloadables[0]}
 	>
@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	<div
-		class="h-[75mm] w-[75mm] max-w-[75mm] bg-white p-[6mm] shadow-2xl "
+		class="h-[75mm] w-[75mm] max-w-[75mm] bg-white p-[6mm] shadow-2xl"
 		id="guestgiftlabel-pepper"
 		bind:this={downloadables[1]}
 	>
