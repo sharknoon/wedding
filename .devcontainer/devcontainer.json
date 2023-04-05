@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "Wedding",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		// Docker to build the production build outside of the ci (for testing purposes)
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		// Node.js for developing in JavaScript
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "18"
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// 5173 is the dev port (npm run dev), 4173 is the preview port (npm run build -> npm run preview)
+	"forwardPorts": [5173, 4173],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// `npm install` installs all dependencies for you
+	"postCreateCommand": "npm install",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {
+				"editor.formatOnSave": true,
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"files.autoSave": "onFocusChange",
+				"workbench.startupEditor": "none"
+			},
+			"extensions": [
+				// This extension lets you easily control your docker containers from within vscode
+				"ms-azuretools.vscode-docker",
+				// SvelteKit companion extension
+				"svelte.svelte-vscode",
+				// TailwindCSS companion extension
+				"bradlc.vscode-tailwindcss",
+				// Prettier as the default formatter
+				"esbenp.prettier-vscode"
+			]
+		}
+	}
+}
