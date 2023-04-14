@@ -22,7 +22,7 @@
 		<Section name="home" scrollTo="info">
 			<Home />
 		</Section>
-		<Section name="info" scrollTo="rsvp" color="text-red-600">
+		<Section name="info" scrollTo="rsvp" color="text-white">
 			<Info />
 		</Section>
 		<Section name="rsvp" scrollTo="faqs">
