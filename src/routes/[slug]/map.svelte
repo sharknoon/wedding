@@ -13,6 +13,6 @@
 		loading="lazy"
 		title="Map"
 		allow="fullscreen"
-		class="h-full w-full border-none"
+		class="min-h-full w-full border-none"
 	/>
 {/if}
