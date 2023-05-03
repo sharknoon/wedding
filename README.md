@@ -1,6 +1,6 @@
 # Midrène's and Josua's Wedding
 
-[![Build, push and deploy image](https://github.com/Sharknoon/wedding/actions/workflows/build-push-and-deploy-image.yml/badge.svg)](https://github.com/Sharknoon/wedding/actions/workflows/build-push-and-deploy-image.yml)
+[![Test, build, push and deploy image](https://github.com/Sharknoon/wedding/actions/workflows/test-build-push-and-deploy-image.yml/badge.svg)](https://github.com/Sharknoon/wedding/actions/workflows/test-build-push-and-deploy-image.yml)
 
 This is the website for our personal wedding. This site serves as a digital wedding invitation. Users can give a response, if they are participating on the wedding.
 
