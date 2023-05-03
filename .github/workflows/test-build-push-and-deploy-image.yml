@@ -1,4 +1,4 @@
-name: Build, push and deploy image
+name: Test, build, push and deploy image
 on:
   push:
     branches:
