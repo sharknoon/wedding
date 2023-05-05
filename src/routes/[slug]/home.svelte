@@ -52,11 +52,11 @@
 	<div
 		class="flex aspect-square max-w-full grow flex-col justify-center sm:gap-4 lg:grow-0 lg:gap-8"
 	>
-		<div
+		<h1
 			class="text-center font-cheap-pine text-4xl uppercase transition hover:-rotate-3 hover:drop-shadow-2xl lg:text-8xl"
 		>
 			Die Hochzeit
-		</div>
+		</h1>
 		<div class="group pt-3 text-center font-cheap-pine-sans text-3xl uppercase md:text-4xl">
 			von <div class="inline-block text-red-600 transition group-hover:translate-x-[7.5rem]">
 				Midrène

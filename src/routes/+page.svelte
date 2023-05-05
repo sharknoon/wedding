@@ -40,5 +40,7 @@
 			</svg>
 		</button>
 	</div>
-	<span class="text-center text-lg font-bold text-red-600">{message}</span>
+	<span id="invitation-code-not-found-error" class="text-center text-lg font-bold text-red-600"
+		>{message}</span
+	>
 </div>

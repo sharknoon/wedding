@@ -21,10 +21,8 @@
 	});
 
 	function generateLastNameForDuplicates(lastName: string, lastNames: string[]): string {
-		console.log(lastName, lastNames);
 		for (let index = 0; index < lastName.length; index++) {
 			const chars = lastName.substring(0, index + 1);
-			console.log(lastNames.some((n) => n.substring(0, index + 1) === chars));
 			if (lastNames.some((n) => n.substring(0, index + 1) === chars)) continue;
 			else return lastName.substring(0, index + 1) + '.';
 		}
