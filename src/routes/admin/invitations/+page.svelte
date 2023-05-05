@@ -43,7 +43,7 @@
 		salutation: '',
 		members: [{ ...defaultMember }],
 		allergies: '',
-		position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b)) + 10
+		position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b),0) + 10
 	};
 
 	function generateSlug(existingInvitations: Invitation[], invitation: Invitation): string {
@@ -99,7 +99,7 @@
 				salutation: '',
 				members: [{ ...defaultMember }],
 				allergies: '',
-				position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b)) + 10
+				position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b),0) + 10
 			};
 			modalTitle = 'Neue Einladung erstellen';
 		}

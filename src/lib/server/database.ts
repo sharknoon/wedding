@@ -35,42 +35,46 @@ if (!building) {
 	detailsCollection = db.collection('details');
 
 	if ((await detailsCollection.countDocuments()) === 0) {
-		detailsCollection.insertOne({
-			date: '2042-01-01T00:00:42.000',
-			locationName: 'locationName',
-			street: 'street',
-			city: 'city',
-			textSingular: [
-				'This is some example invitation text for a single person.',
-				'Change me in the database.'
-			],
-			textPlural: [
-				'This is some example invitation text for multiple persons.',
-				'Change me in the database.'
-			],
-			deadline: '2042-01-01T00:00:42.000',
-			program: [
-				{
-					time: '2042-01-01T00:00:42.000',
-					title: 'Program item no. 1',
-					background: 'some-image.jpg',
-					description: ['This is a example text for a program item.', 'Change me in the database.']
-				}
-			],
-			faqs: [
-				{
-					question: 'Example question no. 1',
-					answer: ['This is a example answer for a faq item.', 'Change me in the database.']
-				}
-			],
-			privateStreet: 'privateStreet',
-			privateCity: 'privateCity',
-			milestones: [{ date: '2042-01-01T00:00:42.000', title: 'title', image: 'heart' }]
-		} satisfies Details);
-		console.info(
-			'Database has been freshly initialized. Please fill in the required informations in the details collection in the database.'
-		);
+		seedDB();
 	}
+}
+
+function seedDB() {
+	detailsCollection.insertOne({
+		date: '2042-01-01T00:00:42.000',
+		locationName: 'locationName',
+		street: 'street',
+		city: 'city',
+		textSingular: [
+			'This is some example invitation text for a single person.',
+			'Change me in the database.'
+		],
+		textPlural: [
+			'This is some example invitation text for multiple persons.',
+			'Change me in the database.'
+		],
+		deadline: '2042-01-01T00:00:42.000',
+		program: [
+			{
+				time: '2042-01-01T00:00:42.000',
+				title: 'Program item no. 1',
+				background: 'some-image.jpg',
+				description: ['This is a example text for a program item.', 'Change me in the database.']
+			}
+		],
+		faqs: [
+			{
+				question: 'Example question no. 1',
+				answer: ['This is a example answer for a faq item.', 'Change me in the database.']
+			}
+		],
+		privateStreet: 'privateStreet',
+		privateCity: 'privateCity',
+		milestones: [{ date: '2042-01-01T00:00:42.000', title: 'title', image: 'heart' }]
+	} satisfies Details);
+	console.info(
+		'Database has been freshly seeded. Please fill in the required informations in the details collection of the database.'
+	);
 }
 
 export async function getInvitationBySlug(slug: string): Promise<WithId<Invitation> | null> {
