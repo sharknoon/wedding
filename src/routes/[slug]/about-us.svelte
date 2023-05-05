@@ -9,36 +9,42 @@
 		ring: `<svg class="h-10 w-10 grow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 64C109.1 64 0 125.9 0 208v98.13C0 384.5 114.6 448 256 448s256-63.5 256-141.9V208C512 125.9 401.1 64 256 64zM256 112c110.5 0 200 35.88 200 80c0 9.125-4 17.75-11 25.88C398.2 192.2 331 176 256 176S113.8 192.2 67 217.9C60 209.8 56 201.1 56 192C56 147.9 145.5 112 256 112zM397.8 248.5C361.5 263 311.4 272 256 272S150.5 263 114.2 248.5C149.1 234.2 198.4 224 256 224S361.1 234.2 397.8 248.5zM464 306.1C464 344.4 383 400 256 400s-208-55.63-208-93.88V266.4C94.38 298.8 170.1 320 256 320s161.6-21.25 208-53.63V306.1z"></path></svg>`,
 		rings: `<svg class="h-10 w-10 grow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M371.9 147.7c10.13 18.5 17.75 38.37 22.38 59c41.13 21.25 69.63 63.75 69.63 113.2c0 70.75-57.25 128-128 128s-128-57.25-128-128c0-54.63 34.5-101.1 82.88-119.5c8.5 17.25 13 36.25 13.13 55.5c0 37.37-16.38 70.75-42 94.12c6.25 15.25 17.13 28.12 31 37c44.75-39.75 66.13-99.63 56.75-158.7c-9.375-59.25-48.25-109.5-103.1-133.5l41.38-66.25L232.4-16H119.4l-55.5 44.62l41.25 66.25C29.03 128.4-13.35 210.6 3.777 292.1s88.88 139.8 172.1 139.9c7.625-.125 15.25-.625 22.88-1.875c48.5 60.5 131 82.13 203 53.12c71.88-28.87 116.4-101.6 109.5-178.9S447.8 163.5 371.9 147.7zM127.9 39.37l8.5-7.375h79l8.5 7.375l-25.5 42.25c-14.88-2.125-30.13-2.125-45 0L127.9 39.37zM47.9 255.1c.125-70.62 57.38-127.9 128-128c33 0 62.88 12.88 85.63 33.5c-59.88 28-101.6 88-101.6 158.5c0 21.75 4.125 43.38 12 63.63C103.3 381.5 47.9 325.2 47.9 255.1z"></path></svg>`
 	};
+
+	$: gridTemplateColumns = `1fr${$details.milestones.map(() => ' 1fr auto 1fr')} 1fr`;
 </script>
 
 <div class="flex w-full flex-col justify-evenly">
 	<h1 class="text-center font-cheap-pine text-3xl lg:text-5xl">Unsere gemeinsame Geschichte</h1>
 	<div
-		class="grid grid-cols-[1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr_auto_1fr_1fr] grid-rows-[1fr_1fr_auto_1fr_1fr] items-center justify-center"
+		class="grid grid-rows-[1fr_1fr_auto_1fr_1fr] items-center"
+		style:grid-template-columns={gridTemplateColumns}
 	>
 		<div class="relative col-start-1 row-start-3 py-4">
 			<hr class="absolute inset-x-0 top-1/2 -translate-y-1/2 border border-black" />
 		</div>
-		<div class="relative col-start-[20] row-start-3 py-4">
+		<div
+			class="relative row-start-3 py-4"
+			style:grid-column-start={2 + $details.milestones.length * 3}
+		>
 			<hr class="absolute inset-x-0 top-1/2 -translate-y-1/2 border border-black" />
 		</div>
 
 		{#each $details.milestones as milestone, i}
 			{@const date = new Date(milestone.date)}
-			<div class="relative col-span-3 row-start-3 py-2" style="grid-column-start: {i * 3 + 2};">
+			<div class="relative col-span-3 row-start-3 py-2" style:grid-column-start={i * 3 + 2}>
 				<div class="mx-auto h-3 w-3 rounded-full bg-black lg:h-4 lg:w-4" />
 				<hr class="absolute inset-x-0 top-1/2 -translate-y-1/2 border border-black" />
 			</div>
 			<div
 				class="mx-auto h-5/6 w-[0.175rem] bg-black
                  {i % 2 === 0 ? 'row-start-2' : 'row-start-4'}"
-				style="grid-column-start: {i * 3 + 3};"
+				style:grid-column-start={i * 3 + 3}
 			/>
 
 			<div
 				class="col-span-5 mx-auto flex min-w-[5rem] flex-col justify-center text-center lg:min-w-[10rem]
                 {i % 2 === 0 ? 'row-start-4' : 'row-start-2'}"
-				style="grid-column-start: {Math.max(i * 3 + 1, 1)};"
+				style:grid-column-start={Math.max(i * 3 + 1, 1)}
 			>
 				<span class="font-cheap-pine text-6xl leading-[0.9] lg:text-7xl">{date.getDate()}</span>
 				<span
@@ -58,7 +64,7 @@
 				class="relative col-span-5 {i % 2 === 0
 					? 'row-start-1'
 					: 'row-start-5'} mx-auto h-[6.5rem] w-[5.5rem] lg:h-36 lg:w-28"
-				style="grid-column-start: {Math.max(i * 3 + 1, 1)};"
+				style:grid-column-start={Math.max(i * 3 + 1, 1)}
 			>
 				<div class="absolute bottom-0 left-2 right-0 top-2 border-4 border-red-600 bg-white" />
 				<div

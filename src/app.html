@@ -12,7 +12,7 @@
 		<meta name="msapplication-TileColor" content="#ffffff" />
 		<meta name="msapplication-config" content="%sveltekit.assets%/browserconfig.xml" />
 		<meta name="theme-color" content="#ffffff" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width" />
 		<meta
 			name="description"
 			content="Herzlich willkommen zur Hochzeit von Midrène und Josua. Hier findest du alle Informationen rund um unseren besonderen Tag."
@@ -20,7 +20,7 @@
 		%sveltekit.head%
 	</head>
 
-	<body>
-		<div id="svelte">%sveltekit.body%</div>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
