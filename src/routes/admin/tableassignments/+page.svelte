@@ -4,7 +4,7 @@
 
 	const downloadables: HTMLElement[] = [];
 
-	const members = $invitations.flatMap((i) => i.members);
+	const members = $invitations.filter((i) => i.hidden !== true).flatMap((i) => i.members);
 	const tables = [...new Set(members.map((m) => m.table))].sort().filter((t) => t > 0);
 
 	const namesCount = new Map<string, { names: string[]; count: number }>();

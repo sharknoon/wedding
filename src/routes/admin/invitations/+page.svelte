@@ -43,7 +43,8 @@
 		salutation: '',
 		members: [{ ...defaultMember }],
 		allergies: '',
-		position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b),0) + 10
+		position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b), 0) + 10,
+		hidden: false
 	};
 
 	function generateSlug(existingInvitations: Invitation[], invitation: Invitation): string {
@@ -99,7 +100,8 @@
 				salutation: '',
 				members: [{ ...defaultMember }],
 				allergies: '',
-				position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b),0) + 10
+				position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b), 0) + 10,
+				hidden: false
 			};
 			modalTitle = 'Neue Einladung erstellen';
 		}
@@ -203,7 +205,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each $invitations as invitation, invitationIndex}
+			{#each $invitations.filter((i) => i.hidden !== true) as invitation, invitationIndex}
 				{@const rowspan = invitation.members.length}
 				{#each invitation.members as member, memberIndex}
 					<tr
