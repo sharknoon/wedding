@@ -175,21 +175,25 @@
 	let modalTitle = '';
 	let expandedMember: number | undefined = undefined;
 
-	$: parties = $invitations.length;
+	$: parties = $invitations.filter((i) => i.hidden !== true).length;
 
 	$: guests = $invitations
+		.filter((i) => i.hidden !== true)
 		.map((i) => i.members.length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
 	$: acceptances = $invitations
+		.filter((i) => i.hidden !== true)
 		.map((i) => i.members.filter((m) => m.accepted === 'true').length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
 	$: cancellations = $invitations
+		.filter((i) => i.hidden !== true)
 		.map((i) => i.members.filter((m) => m.accepted === 'false').length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 
 	$: notYetResponded = $invitations
+		.filter((i) => i.hidden !== true)
 		.map((i) => i.members.filter((m) => m.accepted !== 'true' && m.accepted !== 'false').length)
 		.reduce((partialSum, a) => partialSum + a, 0);
 </script>
