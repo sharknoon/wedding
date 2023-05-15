@@ -44,7 +44,8 @@
 		members: [{ ...defaultMember }],
 		allergies: '',
 		position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b), 0) + 10,
-		hidden: false
+		hidden: false,
+		views: 0
 	};
 
 	function generateSlug(existingInvitations: Invitation[], invitation: Invitation): string {
@@ -101,7 +102,8 @@
 				members: [{ ...defaultMember }],
 				allergies: '',
 				position: $invitations.map((i) => i.position).reduce((a, b) => (a > b ? a : b), 0) + 10,
-				hidden: false
+				hidden: false,
+				views: 0
 			};
 			modalTitle = 'Neue Einladung erstellen';
 		}
@@ -199,13 +201,12 @@
 </script>
 
 <div class="container mx-auto font-oswald">
-	<table class="w-full table-auto border-2 border-black text-lg">
+	<table class="w-full table-fixed border-2 border-black text-lg break-words">
 		<thead>
 			<tr class="h-full bg-black font-cheap-pine-sans text-xl text-white">
-				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Name </th>
-				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Teilnahme </th>
-				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Anrede </th>
-				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl"> Aktionen </th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl">Name</th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl" colspan="2">Infos</th>
+				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl">Aktionen</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -217,63 +218,144 @@
 						class={memberIndex === 0 ? 'border-t-2 border-black' : ''}
 					>
 						<td
-							class="h-7 px-3"
+							class="px-2 sm:px-3"
 							class:pt-3={memberIndex === 0}
 							class:pb-3={memberIndex === rowspan - 1}
 						>
 							<div transition:slide|local>{member.name}</div>
 						</td>
 						<td
-							class="px-3"
+							class="px-2 sm:px-3"
 							class:pt-3={memberIndex === 0}
 							class:pb-3={memberIndex === rowspan - 1}
+							transition:slide|local
 						>
-							<div class="relative mx-auto h-7 w-7" transition:slide|local>
-								{#if member.accepted === 'true'}
+							<div class="flex flex-wrap gap-1 sm:gap-2">
+								<div
+									class="rounded-full p-0.5 text-white"
+									class:bg-green-600={member.accepted === 'true'}
+									class:bg-red-600={member.accepted === 'false'}
+									class:bg-yellow-500={member.accepted === 'unknown'}
+								>
+									{#if member.accepted === 'true'}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+										</svg>
+									{:else if member.accepted === 'false'}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M6 18L18 6M6 6l12 12"
+											/>
+										</svg>
+									{:else}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+											/>
+										</svg>
+									{/if}
+								</div>
+								<div class="flex items-center gap-1 rounded-full bg-black pl-1 pr-2 text-white">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										stroke-width="2"
-									>
-										<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-									</svg>
-								{:else if member.accepted === 'false'}
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										stroke-width="2"
-									>
-										<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-									</svg>
-								{:else}
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 transition-all"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										stroke-width="2"
+										class="h-6 w-6"
+										viewBox="0 0 448 512"
+										fill="currentColor"
 									>
 										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+											d="M443.6 315.9L428.8 283.9C420.1 266.9 403.9 256 385.2 256h-1.212L384 112C384 50.25 333.8 0 272 0h-96C114.3 0 64 50.25 64 112L63.1 256H62.79C44.13 256 27.02 266.9 19.2 283.9L4.436 315.9c-6.883 14.95-5.697 32.13 3.156 45.98C13.43 371 22.13 377.4 32 380.9L31.1 496c0 8.836 7.164 16 16 16S64 504.8 64 496L63.1 384h320L384 496c0 8.836 7.166 16 16 16s16-7.164 16-16L416 380.9c9.873-3.512 18.57-9.91 24.41-19.05C449.3 348 450.4 330.8 443.6 315.9zM288 33.62C324.5 41.05 352 73.36 352 112V256h-64V33.62zM192 32h64v224H192V32zM96 112c0-38.64 27.53-70.95 64-78.38V256H96V112zM399.1 352H48.02c-11.74 0-19.38-12.17-14.53-22.7l14.76-32C50.86 291.6 56.56 288 62.79 288h322.4c6.223 0 11.93 3.648 14.53 9.297l14.76 31.99C419.4 339.9 411.6 352 399.1 352z"
 										/>
 									</svg>
+									{member.table}
+								</div>
+								{#if member.diet === 'pescetarian' || member.diet === 'vegetarian' || member.diet === 'vegan'}
+									<div class="group relative rounded-full p-0.5 text-white" class:bg-blue-700={member.diet === 'pescetarian'} class:bg-green-500={member.diet === 'vegetarian'} class:bg-green-700={member.diet === 'vegan'}>
+										<div
+											class="absolute -top-1 left-1/2 hidden -translate-x-1/2 -translate-y-full rounded border-2 border-white bg-black px-1 text-white group-hover:block"
+										>
+											{#if member.diet === 'pescetarian'}
+												Pescetarier:in
+											{:else if member.diet === 'vegetarian'}
+												Vegetarier:in
+											{:else if member.diet === 'vegan'}
+												Veganer:in
+											{/if}
+										</div>
+										{#if member.diet === 'pescetarian'}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 576 512"
+												class="h-6 w-6"
+												fill="currentColor"
+											>
+												<path
+													d="M180.5 141.5C219.7 108.5 272.6 80 336 80s116.3 28.5 155.5 61.5c39.1 33 66.9 72.4 81 99.8c4.7 9.2 4.7 20.1 0 29.3c-14.1 27.4-41.9 66.8-81 99.8C452.3 403.5 399.4 432 336 432s-116.3-28.5-155.5-61.5c-16.2-13.7-30.5-28.5-42.7-43.1L48.1 379.6c-12.5 7.3-28.4 5.3-38.7-4.9S-3 348.7 4.2 336.1L50 256 4.2 175.9c-7.2-12.6-5-28.4 5.3-38.6s26.1-12.2 38.7-4.9l89.7 52.3c12.2-14.6 26.5-29.4 42.7-43.1zM448 256c0-17.7-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32s32-14.3 32-32z"
+												/>
+											</svg>
+										{:else if member.diet === 'vegetarian'}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 512 512"
+												class="h-6 w-6"
+												fill="currentColor"
+											>
+												<path
+													d="M272 96c-78.6 0-145.1 51.5-167.7 122.5c33.6-17 71.5-26.5 111.7-26.5h88c8.8 0 16 7.2 16 16s-7.2 16-16 16H288 216s0 0 0 0c-16.6 0-32.7 1.9-48.3 5.4c-25.9 5.9-49.9 16.4-71.4 30.7c0 0 0 0 0 0C38.3 298.8 0 364.9 0 440v16c0 13.3 10.7 24 24 24s24-10.7 24-24V440c0-48.7 20.7-92.5 53.8-123.2C121.6 392.3 190.3 448 272 448l1 0c132.1-.7 239-130.9 239-291.4c0-42.6-7.5-83.1-21.1-119.6c-2.6-6.9-12.7-6.6-16.2-.1C455.9 72.1 418.7 96 376 96L272 96z"
+												/>
+											</svg>
+										{:else if member.diet === 'vegan'}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 512 512"
+												class="h-6 w-6"
+												fill="currentColor"
+											>
+												<path
+													d="M512 32V64c0 113.6-84.6 207.5-194.2 222c-7.1-53.4-30.6-101.6-65.3-139.3C290.8 78.3 364 32 448 32h64zM0 96H64c123.7 0 224 100.3 224 224v32 96 32H224V448 352C100.3 352 0 251.7 0 128V96z"
+												/>
+											</svg>
+										{/if}
+									</div>
+								{/if}
+								{#if member.allergy}
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+										><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path
+											d="M198.4 36C208.8 14.7 230.7 0 256 0s47.2 14.7 57.6 36c7-2.6 14.5-4 22.4-4c35.3 0 64 28.7 64 64v2c5.1-1.3 10.5-2 16-2c35.3 0 64 28.7 64 64V336c0 1.5-.1 3-.4 4.5c-6.2 91.7-79.4 165-171.1 171.1c-1.5 .3-2.9 .4-4.5 .4h-8-8.5c-67.9 0-133-27-181-75L18.7 349.3c-25-25-25-65.5 0-90.5s65.5-25 90.5 0l2.7 2.7V96c0-35.3 28.7-64 64-64c7.9 0 15.4 1.4 22.4 4zM240 232c0 13.3-10.7 24-24 24s-24-10.7-24-24V95.9c0-8.8-7.2-15.9-16-15.9c-8.8 0-16 7.2-16 16V319.4c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2L75.3 292.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l87.8 87.8c39 39 91.9 60.9 147.1 60.9H296h4.9c.6-.1 1.3-.1 1.9-.2c69.7-3.4 125.6-59.3 129-129c0-.6 .1-1.3 .2-1.9V160c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 .1V232c0 13.3-10.7 24-24 24s-24-10.7-24-24V152l0-.1V96c0-8.8-7.2-16-16-16s-16 7.1-16 16l0 .1V232c0 13.3-10.7 24-24 24s-24-10.7-24-24V96l0-.1V64c0-8.8-7.2-16-16-16s-16 7.2-16 16V96l0 .1V232zm0 88a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zm48 48a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zm80-64a16 16 0 1 1 0 32 16 16 0 1 1 0-32zM320 416a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zm-64-16a16 16 0 1 1 0 32 16 16 0 1 1 0-32zm-80-32a16 16 0 1 1 32 0 16 16 0 1 1 -32 0z"
+										/></svg
+									>
 								{/if}
 							</div>
 						</td>
+												{#if memberIndex === 0}
+							<td class="p-2 sm:p-3" {rowspan}>{invitation.allergies}</td>
+							{/if}
 						{#if memberIndex === 0}
-							<td class="p-3" {rowspan}>
-								<div transition:slide|local>{invitation.salutation}</div>
-							</td>
-							<td class="p-3" {rowspan}>
+							<td class="p-2 sm:p-3" {rowspan}>
 								<div
 									transition:slide|local
 									class="flex h-full flex-wrap items-center justify-center gap-4 md:flex-nowrap"

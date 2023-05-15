@@ -152,8 +152,25 @@
 	>
 		<div
 			transition:scale
-			class="grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
+			class="relative grid max-h-screen w-[32rem] max-w-[32rem] grid-cols-[auto_auto] flex-col gap-2 overflow-auto border-2 border-black bg-white p-3 text-xl"
 		>
+			<button
+				type="button"
+				class="absolute right-2 top-2"
+				on:click|stopPropagation={() => (showModal = false)}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="h-8 w-8"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+
 			{#if workingInvitation.members.length > 1}
 				<div class="flex h-full items-center">Es kommen</div>
 				<div class="flex">

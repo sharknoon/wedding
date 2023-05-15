@@ -6,6 +6,7 @@ export type Invitation = {
 	allergies: string;
 	position: number;
 	hidden: boolean;
+	views: number;
 };
 
 export type Member = {
