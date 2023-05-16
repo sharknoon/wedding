@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { invitation } from '$lib/client/stores';
+	import { onMount } from 'svelte';
 	import { fade, scale } from 'svelte/transition';
 
 	type State = 'declined' | 'partly accepted' | 'completly accepted' | 'unknown';
@@ -65,6 +66,21 @@
 			}
 		});
 	}
+
+	onMount(() => {
+		if (workingInvitation.views !== undefined) {
+			workingInvitation.views += 1;
+		}else {
+			workingInvitation.views = 0;
+		}
+		fetch(`/api/invitations/${workingInvitation._id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(workingInvitation)
+		});
+	})
 </script>
 
 <div class="bg-white p-2 md:fixed md:bottom-0 md:right-0">
