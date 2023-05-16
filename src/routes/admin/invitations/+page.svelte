@@ -151,7 +151,7 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(workingInvitation)
+			body: JSON.stringify(invitation)
 		})
 			.then((res) => {
 				if (res.status >= 400) {
@@ -163,8 +163,10 @@
 	}
 
 	function deleteInvitation(invitation: Invitation) {
-		if (confirm('Sind Sie sich sicher, dass Sie die diese Einladung entgültig löschen möchten?')) {
-			fetch(`/api/invitations/${invitation._id}`, { method: 'DELETE' }).catch((err) => alert(err));
+		if (confirm('Sind Sie sich sicher, dass Sie die diese Einladung entfernen möchten?')) {
+			invitation.hidden = true;
+			updateInvitation(invitation);
+			//fetch(`/api/invitations/${invitation._id}`, { method: 'DELETE' }).catch((err) => alert(err));
 		}
 	}
 
@@ -201,7 +203,7 @@
 </script>
 
 <div class="container mx-auto font-oswald">
-	<table class="w-full table-fixed border-2 border-black text-lg break-words">
+	<table class="w-full table-fixed break-words border-2 border-black text-lg">
 		<thead>
 			<tr class="h-full bg-black font-cheap-pine-sans text-xl text-white">
 				<th class="px-1 py-2 sm:px-6 sm:py-4 sm:text-3xl">Name</th>
@@ -294,7 +296,12 @@
 									{member.table}
 								</div>
 								{#if member.diet === 'pescetarian' || member.diet === 'vegetarian' || member.diet === 'vegan'}
-									<div class="group relative rounded-full p-0.5 text-white" class:bg-blue-700={member.diet === 'pescetarian'} class:bg-green-500={member.diet === 'vegetarian'} class:bg-green-700={member.diet === 'vegan'}>
+									<div
+										class="group relative rounded-full p-0.5 text-white"
+										class:bg-blue-700={member.diet === 'pescetarian'}
+										class:bg-green-500={member.diet === 'vegetarian'}
+										class:bg-green-700={member.diet === 'vegan'}
+									>
 										<div
 											class="absolute -top-1 left-1/2 hidden -translate-x-1/2 -translate-y-full rounded border-2 border-white bg-black px-1 text-white group-hover:block"
 										>
@@ -351,9 +358,9 @@
 								{/if}
 							</div>
 						</td>
-												{#if memberIndex === 0}
+						{#if memberIndex === 0}
 							<td class="p-2 sm:p-3" {rowspan}>{invitation.allergies}</td>
-							{/if}
+						{/if}
 						{#if memberIndex === 0}
 							<td class="p-2 sm:p-3" {rowspan}>
 								<div
