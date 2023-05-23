@@ -13,7 +13,9 @@
 		'Frank',
 		'die Schwester des Bräutigams',
 		'die Schwester des Bräutigams',
-		'den Schwager des Bräutigams'
+		'den Schwager des Bräutigams',
+		'Brautjungfer',
+		'Brautjungfer'
 	];
 </script>
 
