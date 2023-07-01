@@ -6,7 +6,7 @@
 	<h1 class="pb-4 pt-6 text-center font-cheap-pine text-6xl">Häufige Fragen</h1>
 	<div class="text-center font-oswald text-xl sm:text-2xl my-4">
 		<p>Bei weiteren Fragen wendet euch bitte an unsere Hochzeitsplanerin:</p>
-		<p>Jessica Schhömer</p>
+		<p>Jessica Schömer</p>
 		<p>
 			E-Mailadresse: <a href="mailto:info@amabelle-hochzeiten.de" class="hover:underline">
 				info@amabelle-hochzeiten.de
