@@ -11,6 +11,7 @@ module.exports = {
 	},
 	plugins: [
 		require('@tailwindcss/forms'),
+		require('@tailwindcss/typography'),
 		plugin(function ({ addUtilities }) {
 			addUtilities({
 				'.horizontal-tb': {
