@@ -5,6 +5,7 @@ on:
       - main
 
 jobs:
+  # switch to bun as soon as "bunx playwright test" runs without failing
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest

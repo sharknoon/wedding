@@ -1,54 +1,54 @@
 {
-	"name": "wedding",
-	"version": "0.0.1",
-	"private": true,
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Sharknoon/wedding.git"
-	},
-	"license": "Unlicense",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"preview:development": "vite preview --mode development",
-		"test": "playwright test",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin=prettier-plugin-svelte --plugin=prettier-plugin-tailwindcss --check . && eslint .",
-		"format": "prettier --plugin=prettier-plugin-svelte --plugin=prettier-plugin-tailwindcss --write ."
-	},
-	"devDependencies": {
-		"@faker-js/faker": "^8.0.2",
-		"@playwright/test": "^1.37.1",
-		"@prettier/plugin-xml": "^3.2.1",
-		"@sveltejs/adapter-node": "^1.3.1",
-		"@sveltejs/kit": "^1.24.1",
-		"@tailwindcss/forms": "^0.5.6",
-		"@tailwindcss/typography": "^0.5.10",
-		"@types/dom-to-image": "^2.6.4",
-		"@types/qrcode": "^1.5.2",
-		"@typescript-eslint/eslint-plugin": "^6.7.0",
-		"@typescript-eslint/parser": "^6.7.0",
-		"autoprefixer": "^10.4.15",
-		"eslint": "^8.49.0",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-plugin-svelte": "^2.33.1",
-		"postcss": "^8.4.29",
-		"prettier": "^3.0.3",
-		"prettier-plugin-svelte": "^3.0.3",
-		"prettier-plugin-tailwindcss": "^0.5.4",
-		"svelte": "^4.2.0",
-		"svelte-check": "^3.5.1",
-		"tailwindcss": "^3.3.3",
-		"tslib": "^2.6.2",
-		"typescript": "^5.2.2",
-		"vite": "^4.4.9"
-	},
-	"type": "module",
-	"dependencies": {
-		"dom-to-image": "^2.6.0",
-		"mongodb": "^6.0.0",
-		"qrcode": "^1.5.3"
-	}
+  "name": "wedding",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sharknoon/wedding.git"
+  },
+  "license": "Unlicense",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "preview:development": "vite preview --mode development",
+    "test": "playwright test",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "prettier --plugin=prettier-plugin-svelte --plugin=prettier-plugin-tailwindcss --check . && eslint .",
+    "format": "prettier --plugin=prettier-plugin-svelte --plugin=prettier-plugin-tailwindcss --write ."
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@playwright/test": "^1.37.1",
+    "@prettier/plugin-xml": "^3.2.1",
+    "@sveltejs/kit": "^1.24.1",
+    "@tailwindcss/forms": "^0.5.6",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/dom-to-image": "^2.6.4",
+    "@types/qrcode": "^1.5.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-svelte": "^2.33.1",
+    "postcss": "^8.4.29",
+    "prettier": "^3.0.3",
+    "prettier-plugin-svelte": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "svelte": "^4.2.0",
+    "svelte-adapter-bun": "^0.5.0",
+    "svelte-check": "^3.5.1",
+    "tailwindcss": "^3.3.3",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  },
+  "type": "module",
+  "dependencies": {
+    "dom-to-image": "^2.6.0",
+    "mongodb": "^6.0.0",
+    "qrcode": "^1.5.3"
+  }
 }
