@@ -4,7 +4,7 @@
 
 <div class="min-h-full w-full pb-12 md:pb-14">
 	<h1 class="pb-4 pt-6 text-center font-cheap-pine text-6xl">Häufige Fragen</h1>
-	<div class="text-center font-oswald text-xl sm:text-2xl my-4">
+	<div class="my-4 text-center font-oswald text-xl sm:text-2xl">
 		<p>Bei weiteren Fragen wendet euch bitte an unsere Hochzeitsplanerin:</p>
 		<p>Jessica Schömer</p>
 		<p>

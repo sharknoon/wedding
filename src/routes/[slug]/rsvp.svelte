@@ -70,7 +70,7 @@
 	onMount(() => {
 		if (workingInvitation.views !== undefined) {
 			workingInvitation.views += 1;
-		}else {
+		} else {
 			workingInvitation.views = 0;
 		}
 		fetch(`/api/invitations/${workingInvitation._id}`, {
@@ -80,7 +80,7 @@
 			},
 			body: JSON.stringify(workingInvitation)
 		});
-	})
+	});
 </script>
 
 <div class="bg-white p-2 md:fixed md:bottom-0 md:right-0">
@@ -154,6 +154,8 @@
 {#if showModal}
 	<div
 		class="fixed inset-0 flex items-center justify-center bg-black/50 font-oswald"
+		role="button"
+		tabindex="0"
 		transition:fade
 		on:click|stopPropagation={(e) => {
 			if (e.target === e.currentTarget) {
