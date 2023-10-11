@@ -1,8 +1,8 @@
 <script lang="ts">
 	import '../app.css';
-	import Plausible from './plausible.svelte';
+	import Tracking from './tracking.svelte';
 </script>
 
-<Plausible />
+<Tracking />
 
 <slot />
