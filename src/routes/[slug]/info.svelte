@@ -16,6 +16,14 @@
 		const startDate = new Date(new Date().toISOString().substring(0, 10));
 		const endDate = new Date(date.toISOString().substring(0, 10));
 
+		if (startDate.getTime() >= endDate.getTime()) {
+			return [
+				{ unit: 'Jahre', value: 0 },
+				{ unit: 'Monate', value: 0 },
+				{ unit: 'Tage', value: 0 }
+			];
+		}
+
 		const startYear = startDate.getFullYear();
 		const february =
 			(startYear % 4 === 0 && startYear % 100 !== 0) || startYear % 400 === 0 ? 29 : 28;
