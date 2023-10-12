@@ -4,6 +4,6 @@
 
 <svelte:head>
 	{#if env.PUBLIC_TRACKING_SCRIPT}
-		{@html env.PUBLIC_TRACKING_SCRIPT}
+		{@html decodeURIComponent(env.PUBLIC_TRACKING_SCRIPT)}
 	{/if}
 </svelte:head>
