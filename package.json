@@ -48,6 +48,7 @@
 	"type": "module",
 	"dependencies": {
 		"dom-to-image": "^2.6.0",
+		"lightgallery": "^2.7.2",
 		"mongodb": "^6.0.0",
 		"qrcode": "^1.5.3"
 	}

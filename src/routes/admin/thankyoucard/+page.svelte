@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
-	import type { PageData } from './$types';
 	import { details } from '$lib/client/stores';
 	import { page } from '$app/stores';
 	import DownloadButton from '../download-button.svelte';
-
-	export let data: PageData;
 
 	$: qrcode = '';
 
 	onMount(() => {
 		QRCode.toDataURL(
-			`${$page.url.origin}/bilder`,
+			`${$page.url.origin}/bilder?ref=Dankeskarte`,
 			{
 				errorCorrectionLevel: 'H',
 				margin: 0,
@@ -29,7 +26,7 @@
 	<DownloadButton {downloadables} />
 	<div
 		class="grid h-[111mm] w-[302mm] max-w-[302mm] grid-cols-2 bg-white p-[6mm] shadow-2xl"
-		id={'thankyou-outer-' + data.slug}
+		id={'thankyou-outer'}
 		bind:this={downloadables[0]}
 	>
 		<div class="relative">
@@ -114,7 +111,7 @@
 
 	<div
 		class="grid h-[111mm] w-[302mm] max-w-[302mm] grid-cols-2 bg-white p-[6mm] shadow-2xl"
-		id={'thankyou-inner-' + data.slug}
+		id={'thankyou-inner'}
 		bind:this={downloadables[1]}
 	>
 		<div class="flex flex-col items-center justify-center gap-6">
@@ -127,10 +124,9 @@
 				class="mx-2 self-center"
 				style="image-rendering: pixelated;"
 			/>
-			<div class="font-cheap-pine-sans text-xl">www.{$page.url.host}/bilder</div>
+			<div class="font-cheap-pine-sans text-xl">{$page.url.host}/bilder</div>
 		</div>
 		<div class="pl-8 pt-6">
-			<h1 class="font-cheap-pine text-3xl tracking-wide">{data.salutation}</h1>
 			<p class="mt-2 font-oswald text-xl">
 				Ihr habt dazu beigetragen,<br />
 				dass dieser Tag für uns unvergesslich bleiben wird.<br /><br />
