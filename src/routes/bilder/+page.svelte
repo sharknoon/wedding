@@ -34,7 +34,12 @@
 
 	onMount(() => {
 		gallery = lightGallery(galleryElement, {
-			plugins: [lgZoom, lgThumbnail, lgVideo, lgAutoplay, lgFullscreen]
+			plugins: [lgZoom, lgThumbnail, lgVideo, lgAutoplay, lgFullscreen],
+			mobileSettings: {
+				showCloseIcon: true,
+				download: true,
+				preload: 1
+			}
 		});
 	});
 
