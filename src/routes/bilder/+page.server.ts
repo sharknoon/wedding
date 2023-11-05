@@ -43,7 +43,7 @@ export const actions = {
 					const fileUUID = crypto.randomUUID();
 
 					const originalFileName = `${fileUUID}.${fileExtension}`;
-					await put(originalFileName, buffer);
+					const originalUrl = await put(originalFileName, buffer);
 
 					const compressedFileName = `${fileUUID}-compressed.webp`;
 					const compressed = await s
@@ -54,7 +54,7 @@ export const actions = {
 
 					const thumbnailFileName = `${fileUUID}-thumbnail.webp`;
 					const thumbnail = await s
-						.resize(Math.min(metadata.width ?? 250, 250))
+						.resize(undefined, Math.min(metadata.height ?? 200, 200))
 						.toFormat('webp')
 						.toBuffer({ resolveWithObject: true });
 					const thumbnailUrl = await put(thumbnailFileName, thumbnail.data);
@@ -65,7 +65,8 @@ export const actions = {
 						type: 'image/webp',
 						width: compressed.info.width,
 						height: compressed.info.height,
-						thumbnailUrl
+						thumbnailUrl,
+						originalUrl
 					});
 				} else if (blob.type.startsWith('video/')) {
 					/*if (blob.size > 1024 * 1024 * 1024) {
@@ -97,7 +98,7 @@ export const actions = {
 					const thumbnailFileName = `${fileUUID}-thumbnail.jpg`;
 					await video.fnExtractFrameToJPG(uploadDirectory, {
 						number: 1,
-						size: '250x?',
+						size: '?x200',
 						file_name: thumbnailFileName
 					});
 
@@ -107,7 +108,8 @@ export const actions = {
 						type: blob.type,
 						width: 0,
 						height: 0,
-						thumbnailUrl: '/uploads/' + thumbnailFileName
+						thumbnailUrl: '/uploads/' + thumbnailFileName,
+						originalUrl: '/uploads/' + originalFileName
 					});
 				}
 			}

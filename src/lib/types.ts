@@ -56,4 +56,5 @@ export type Upload = {
 	width: number;
 	height: number;
 	thumbnailUrl: string;
+	originalUrl: string;
 };

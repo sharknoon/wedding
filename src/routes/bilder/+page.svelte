@@ -35,6 +35,7 @@
 	onMount(() => {
 		gallery = lightGallery(galleryElement, {
 			plugins: [lgZoom, lgThumbnail, lgVideo, lgAutoplay, lgFullscreen],
+			thumbnail: true,
 			mobileSettings: {
 				showCloseIcon: true,
 				download: true,
@@ -155,14 +156,17 @@
 	</form>
 </div>
 
-<div
-	class="mt-8 grid grid-cols-2 place-content-evenly gap-2 p-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-8 4xl:grid-cols-9 5xl:grid-cols-10 6xl:grid-cols-11 7xl:grid-cols-12 8xl:grid-cols-[repeat(13,_minmax(0,_1fr))] 9xl:grid-cols-[repeat(14,_minmax(0,_1fr))] 10xl:grid-cols-[repeat(15,_minmax(0,_1fr))] 11xl:grid-cols-[repeat(16,_minmax(0,_1fr))] 12xl:grid-cols-[repeat(17,_minmax(0,_1fr))]"
-	bind:this={galleryElement}
->
-	{#each data.images as { _id, url, type, width, height, thumbnailUrl }}
+<div class="container mx-auto my-8 flex flex-wrap gap-2" bind:this={galleryElement}>
+	{#each data.images as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
 		{#if type.startsWith('image/')}
-			<a href={url} data-sub-html="<div></div>" data-lg-size={`${width}-${height}`}>
-				<img alt={_id.toString()} src={thumbnailUrl} class="mx-auto" />
+			<a
+				href={url}
+				data-sub-html="<div></div>"
+				data-lg-size={`${width}-${height}`}
+				data-download-url={originalUrl}
+				class="max-h-[200px] max-w-[350px] flex-grow"
+			>
+				<img alt={_id.toString()} src={thumbnailUrl} class="h-full w-full object-cover" />
 			</a>
 		{:else if type.startsWith('video/')}
 			<!-- svelte-ignore a11y-missing-attribute -->
@@ -207,6 +211,12 @@
 				Herzlichen Dank für deinen Beitrag zur Gallerie. Dank dir gibt es unsere Hochzeit von noch
 				mehr Blickwinkeln zu erkunden 📷
 			</p>
+
+			{#if progress >= 1}
+				<p class="text-center font-oswald text-xl">
+					Dies wird einige Minuten dauern. Sobald deine Aufnahmen fertig sind, erscheinen sie hier.
+				</p>
+			{/if}
 
 			{#if progress < 1}
 				<progress value={progress}>{progress * 100} %</progress>
