@@ -9,10 +9,6 @@ if (!building) {
 		console.error('Missing MINIO_ENDPOINT env');
 		process.exit();
 	}
-	if (!env.MINIO_PORT) {
-		console.error('Missing MINIO_PORT env');
-		process.exit();
-	}
 	if (!env.MINIO_ACCESS_KEY) {
 		console.error('Missing MINIO_ACCESS_KEY env');
 		process.exit();
@@ -21,8 +17,11 @@ if (!building) {
 		console.error('Missing MINIO_SECRET_KEY env');
 		process.exit();
 	}
-	env.MINIO_USE_SSL = env.MINIO_USE_SSL || 'false';
-	env.MINIO_PUBLIC_ENDPOINT = env.MINIO_PUBLIC_ENDPOINT || env.MINIO_ENDPOINT;
+	env.MINIO_PORT = env.MINIO_PORT || '9000';
+	env.MINIO_USE_SSL = env.MINIO_USE_SSL || 'true';
+	env.MINIO_PUBLIC_URL =
+		env.MINIO_PUBLIC_URL ||
+		`${env.MINIO_USE_SSL ? 'https' : 'http'}://${env.MINIO_ENDPOINT}:${env.MINIO_PORT}`;
 
 	minioClient = new Client({
 		endPoint: env.MINIO_ENDPOINT,
@@ -53,8 +52,7 @@ if (!building) {
 
 export const put = async (objectName: string, buffer: Buffer): Promise<string> => {
 	await minioClient.putObject('wedding', objectName, buffer);
-	const scheme = env.MINIO_USE_SSL === 'true' ? 'https' : 'http';
-	return `${scheme}://${env.MINIO_PUBLIC_ENDPOINT}:${env.MINIO_PORT}/wedding/${objectName}`;
+	return `${env.MINIO_PUBLIC_URL}/wedding/${objectName}`;
 };
 
 export const purge = async () => {
