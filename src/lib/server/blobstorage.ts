@@ -21,11 +21,13 @@ if (!building) {
 		console.error('Missing MINIO_SECRET_KEY env');
 		process.exit();
 	}
+	env.MINIO_USE_SSL = env.MINIO_USE_SSL || 'false';
+	env.MINIO_PUBLIC_ENDPOINT = env.MINIO_PUBLIC_ENDPOINT || env.MINIO_ENDPOINT;
 
 	minioClient = new Client({
 		endPoint: env.MINIO_ENDPOINT,
 		port: parseInt(env.MINIO_PORT),
-		useSSL: false,
+		useSSL: env.MINIO_USE_SSL === 'true',
 		accessKey: env.MINIO_ACCESS_KEY,
 		secretKey: env.MINIO_SECRET_KEY
 	});
@@ -49,14 +51,10 @@ if (!building) {
 	minioClient.setBucketPolicy('wedding', JSON.stringify(bucketPolicy));
 }
 
-export const put = async (
-	objectName: string,
-	buffer: Buffer,
-	clientFacingUrl?: string
-): Promise<string> => {
+export const put = async (objectName: string, buffer: Buffer): Promise<string> => {
 	await minioClient.putObject('wedding', objectName, buffer);
-	const hostname = clientFacingUrl ? clientFacingUrl : env.MINIO_ENDPOINT;
-	return `http://${hostname}:${env.MINIO_PORT}/wedding/${objectName}`;
+	const scheme = env.MINIO_USE_SSL === 'true' ? 'https' : 'http';
+	return `${scheme}://${env.MINIO_PUBLIC_ENDPOINT}:${env.MINIO_PORT}/wedding/${objectName}`;
 };
 
 export const purge = async () => {

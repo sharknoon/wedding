@@ -14,7 +14,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-	upload: async ({ request, url }) => {
+	upload: async ({ request }) => {
 		try {
 			const formData = await request.formData();
 			const blobs = formData.getAll('uploads') as Blob[];
@@ -43,21 +43,21 @@ export const actions = {
 					const fileUUID = crypto.randomUUID();
 
 					const originalFileName = `${fileUUID}.${fileExtension}`;
-					await put(originalFileName, buffer, url.hostname);
+					await put(originalFileName, buffer);
 
 					const compressedFileName = `${fileUUID}-compressed.webp`;
 					const compressed = await s
 						.resize(Math.min(metadata.width ?? 1440, 1440))
 						.toFormat('webp')
 						.toBuffer({ resolveWithObject: true });
-					const compressedUrl = await put(compressedFileName, compressed.data, url.hostname);
+					const compressedUrl = await put(compressedFileName, compressed.data);
 
 					const thumbnailFileName = `${fileUUID}-thumbnail.webp`;
 					const thumbnail = await s
 						.resize(Math.min(metadata.width ?? 250, 250))
 						.toFormat('webp')
 						.toBuffer({ resolveWithObject: true });
-					const thumbnailUrl = await put(thumbnailFileName, thumbnail.data, url.hostname);
+					const thumbnailUrl = await put(thumbnailFileName, thumbnail.data);
 
 					uploads.push({
 						createdAt: new Date().toISOString(),
@@ -78,7 +78,7 @@ export const actions = {
 					const fileUUID = crypto.randomUUID();
 
 					const originalFileName = `${fileUUID}.${fileExtension}`;
-					await put(originalFileName, buffer, url.hostname);
+					await put(originalFileName, buffer);
 					const originalFilePath = path.join(uploadDirectory, originalFileName);
 					await fs.writeFile(originalFilePath, buffer);
 
