@@ -48,3 +48,12 @@ export type Milestone = {
 	title: string;
 	image: string;
 };
+
+export type Upload = {
+	createdAt: string;
+	url: string;
+	type: string;
+	width: number;
+	height: number;
+	thumbnailUrl: string;
+};

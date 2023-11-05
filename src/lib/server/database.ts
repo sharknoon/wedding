@@ -11,10 +11,11 @@ import {
 	type ChangeStream,
 	ObjectId
 } from 'mongodb';
-import type { Details, Invitation } from '$lib/types';
+import type { Details, Invitation, Upload } from '$lib/types';
 
 let invitationsCollection: Collection<Invitation>;
 let detailsCollection: Collection<Details>;
+let uploadsCollection: Collection<Upload>;
 
 if (!building) {
 	if (!env.MONGODB_URL) {
@@ -33,6 +34,8 @@ if (!building) {
 	invitationsCollection = db.collection('invitations');
 	invitationsCollection.createIndex({ slug: 1 }, { unique: true });
 	detailsCollection = db.collection('details');
+	uploadsCollection = db.collection('uploads');
+	uploadsCollection.createIndex({ createdAt: 1 });
 
 	if ((await detailsCollection.countDocuments()) === 0) {
 		seedDB();
@@ -110,4 +113,17 @@ export async function createInvitation(
 	invitation: Invitation
 ): Promise<InsertOneResult<Invitation>> {
 	return invitationsCollection.insertOne(invitation);
+}
+
+export async function getUploads(): Promise<WithId<Upload>[]> {
+	return uploadsCollection.find().sort({ createdAt: 1 }).toArray();
+}
+
+export async function addUploads(uploads: Upload[]) {
+	if (uploads.length === 0) return;
+	await uploadsCollection.insertMany(uploads);
+}
+
+export async function purgeUploads() {
+	await uploadsCollection.deleteMany({});
 }

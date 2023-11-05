@@ -13,12 +13,25 @@ services:
     command: >
       mongosh --host db:27017 --eval 'rs.initiate();'
 
+  blobstorage:
+    image: minio/minio
+    restart: always
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: miniominio
+
   app:
     build: .
     depends_on:
       - db-init
+      - blobstorage
     ports:
       - 3000:3000
     environment:
       MONGODB_URL: mongodb://db/
       ADMIN_LOGIN: admin:admin
+      MINIO_ENDPOINT: blobstorage
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: miniominio
