@@ -7,14 +7,14 @@ import { addUploads, getUploads, purgeUploads } from '$lib/server/database';
 import type { Upload } from '$lib/types';
 import sharp from 'sharp';
 import ffmpeg from 'ffmpeg';
-import { put } from '$lib/server/blobstorage';
+import { purge, put } from '$lib/server/blobstorage';
 
 export const load: PageServerLoad = async () => {
 	return { images: getUploads() };
 };
 
 export const actions = {
-	upload: async ({ request }) => {
+	upload: async ({ request, url }) => {
 		try {
 			const formData = await request.formData();
 			const blobs = formData.getAll('uploads') as Blob[];
@@ -43,21 +43,21 @@ export const actions = {
 					const fileUUID = crypto.randomUUID();
 
 					const originalFileName = `${fileUUID}.${fileExtension}`;
-					await put(originalFileName, buffer);
+					await put(originalFileName, buffer, url.hostname);
 
 					const compressedFileName = `${fileUUID}-compressed.webp`;
 					const compressed = await s
 						.resize(Math.min(metadata.width ?? 1440, 1440))
 						.toFormat('webp')
 						.toBuffer({ resolveWithObject: true });
-					const compressedUrl = await put(compressedFileName, compressed.data);
+					const compressedUrl = await put(compressedFileName, compressed.data, url.hostname);
 
 					const thumbnailFileName = `${fileUUID}-thumbnail.webp`;
 					const thumbnail = await s
 						.resize(Math.min(metadata.width ?? 250, 250))
 						.toFormat('webp')
 						.toBuffer({ resolveWithObject: true });
-					const thumbnailUrl = await put(thumbnailFileName, thumbnail.data);
+					const thumbnailUrl = await put(thumbnailFileName, thumbnail.data, url.hostname);
 
 					uploads.push({
 						createdAt: new Date().toISOString(),
@@ -78,7 +78,7 @@ export const actions = {
 					const fileUUID = crypto.randomUUID();
 
 					const originalFileName = `${fileUUID}.${fileExtension}`;
-					await put(originalFileName, buffer);
+					await put(originalFileName, buffer, url.hostname);
 					const originalFilePath = path.join(uploadDirectory, originalFileName);
 					await fs.writeFile(originalFilePath, buffer);
 
@@ -118,7 +118,7 @@ export const actions = {
 		}
 	},
 	purge: async () => {
-		await fs.rm(path.join(process.cwd(), 'static', 'uploads'), { recursive: true, force: true });
+		await purge();
 		await purgeUploads();
 	}
 } satisfies Actions;

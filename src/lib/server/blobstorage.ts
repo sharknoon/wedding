@@ -30,7 +30,7 @@ if (!building) {
 		secretKey: env.MINIO_SECRET_KEY
 	});
 
-	if (!await minioClient.bucketExists('wedding')) {
+	if (!(await minioClient.bucketExists('wedding'))) {
 		await minioClient.makeBucket('wedding');
 	}
 
@@ -49,7 +49,19 @@ if (!building) {
 	minioClient.setBucketPolicy('wedding', JSON.stringify(bucketPolicy));
 }
 
-export const put = async (objectName: string, buffer: Buffer): Promise<string> => {
+export const put = async (
+	objectName: string,
+	buffer: Buffer,
+	clientFacingUrl?: string
+): Promise<string> => {
 	await minioClient.putObject('wedding', objectName, buffer);
-	return `http://${env.MINIO_ENDPOINT}:${env.MINIO_PORT}/wedding/${objectName}`;
+	const hostname = clientFacingUrl ? clientFacingUrl : env.MINIO_ENDPOINT;
+	return `http://${hostname}:${env.MINIO_PORT}/wedding/${objectName}`;
+};
+
+export const purge = async () => {
+	const objects = minioClient.listObjects('wedding');
+	for await (const object of objects) {
+		await minioClient.removeObject('wedding', object.name);
+	}
 };
