@@ -27,10 +27,10 @@ export const actions = {
 				}
 
 				if (blob.type.startsWith('image/')) {
-					if (blob.size > 20 * 1024 * 1024) {
+					/*if (blob.size > 20 * 1024 * 1024) {
 						// 20MB
-						return fail(400, { err: 'image too large (>20MB)' });
-					}
+						return fail(400, { err: 'image too large (>50MB)' });
+					}*/
 
 					const buffer = Buffer.from(await blob.arrayBuffer());
 					const s = sharp(buffer);
@@ -72,6 +72,19 @@ export const actions = {
 						thumbnailBlobName: thumbnailFileName,
 						originalBlobName: originalFileName
 					});
+					console.log(JSON.stringify({
+						createdAt: new Date().toISOString(),
+						url: compressedUrl,
+						type: 'image/webp',
+						width: compressed.info.width,
+						height: compressed.info.height,
+						thumbnailUrl,
+						originalUrl,
+						originalFilename: blob.name,
+						blobName: compressedFileName,
+						thumbnailBlobName: thumbnailFileName,
+						originalBlobName: originalFileName
+					}))
 				} else if (blob.type.startsWith('video/')) {
 					/*if (blob.size > 1024 * 1024 * 1024) {
 						// 1GB
