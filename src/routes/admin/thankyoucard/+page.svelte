@@ -9,7 +9,7 @@
 
 	onMount(() => {
 		QRCode.toDataURL(
-			`${$page.url.origin}/bilder?ref=Dankeskarte`,
+			`https://wedding.sharknoon.de/bilder?ref=Dankeskarte`,
 			{
 				errorCorrectionLevel: 'H',
 				margin: 0,
@@ -32,7 +32,7 @@
 		<div class="relative">
 			<div
 				class="absolute left-8 top-8 h-2/3 w-2/3 border-2 border-black bg-cover bg-center bg-no-repeat"
-				style="background-image: url(/images/tmp/gruppenbild.bmp);"
+				style="background-image: url(/images/wedding/danke.jpg);"
 			/>
 			<div
 				class="absolute bottom-8 right-8 border-2 border-black bg-white p-2 font-oswald tracking-wide"
@@ -51,15 +51,15 @@
 				</div>
 				<div
 					class="col-span-2 bg-cover bg-center bg-no-repeat"
-					style="background-image: url(/images/tmp/gran-canaria.jpg);"
+					style="background-image: url(/images/wedding/bruecke.jpg);"
 				/>
 				<div
 					class="bg-cover bg-center bg-no-repeat"
-					style="background-image: url(/images/tmp/hochzeitstorte.bmp);"
+					style="background-image: url(/images/wedding/straus.jpg);"
 				/>
 				<div
 					class="row-span-2 bg-cover bg-center bg-no-repeat"
-					style="background-image: url(/images/people/midrene-and-josua-large.avif);"
+					style="background-image: url(/images/wedding/portrait.jpg);"
 				/>
 				<div
 					class="bg-cover bg-center bg-no-repeat"
@@ -67,7 +67,7 @@
 				/>
 				<div
 					class="bg-cover bg-center bg-no-repeat"
-					style="background-image: url(/images/tmp/gruppenbild.bmp);"
+					style="background-image: url(/images/wedding/herz.jpg);"
 				/>
 				<div
 					class="col-start-3 row-start-3 text-center font-cheap-pine-sans text-2xl tracking-wider"
@@ -124,7 +124,7 @@
 				class="mx-2 self-center"
 				style="image-rendering: pixelated;"
 			/>
-			<div class="font-cheap-pine-sans text-xl">{$page.url.host}/bilder</div>
+			<div class="font-cheap-pine-sans text-xl">wedding.sharknoon.de/bilder</div>
 		</div>
 		<div class="pl-8 pt-6">
 			<p class="mt-2 font-oswald text-xl">

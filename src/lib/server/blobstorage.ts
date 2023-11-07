@@ -55,9 +55,6 @@ export const put = async (objectName: string, buffer: Buffer): Promise<string> =
 	return `${env.MINIO_PUBLIC_URL}/wedding/${objectName}`;
 };
 
-export const purge = async () => {
-	const objects = minioClient.listObjects('wedding');
-	for await (const object of objects) {
-		await minioClient.removeObject('wedding', object.name);
-	}
+export const del = async (objectName: string): Promise<void> => {
+	await minioClient.removeObject('wedding', objectName);
 };

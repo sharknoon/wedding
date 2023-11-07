@@ -115,6 +115,10 @@ export async function createInvitation(
 	return invitationsCollection.insertOne(invitation);
 }
 
+export async function getUpload(id: string): Promise<WithId<Upload> | null> {
+	return uploadsCollection.findOne({ _id: new ObjectId(id) });
+}
+
 export async function getUploads(): Promise<WithId<Upload>[]> {
 	return uploadsCollection.find().sort({ createdAt: 1 }).toArray();
 }
@@ -124,6 +128,6 @@ export async function addUploads(uploads: Upload[]) {
 	await uploadsCollection.insertMany(uploads);
 }
 
-export async function purgeUploads() {
-	await uploadsCollection.deleteMany({});
+export async function deleteUpload(id: string): Promise<DeleteResult> {
+	return uploadsCollection.deleteOne({ _id: new ObjectId(id) });
 }

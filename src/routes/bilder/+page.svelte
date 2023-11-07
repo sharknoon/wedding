@@ -72,11 +72,6 @@
 	}
 </script>
 
-{#if dev}
-	<form action="?/purge" method="post">
-		<button>Purge DB</button>
-	</form>
-{/if}
 <div class="mt-8 flex flex-col items-center gap-4 p-2 text-center md:mt-48">
 	<h1 class="font-cheap-pine text-8xl">Danke<span class="text-red-600">!</span></h1>
 	<h2 class="font-cheap-pine-sans text-4xl">dass ihr dabei wart</h2>

@@ -57,4 +57,8 @@ export type Upload = {
 	height: number;
 	thumbnailUrl: string;
 	originalUrl: string;
+	originalFilename: string;
+	blobName: string;
+	thumbnailBlobName: string;
+	originalBlobName: string;
 };

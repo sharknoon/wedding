@@ -3,11 +3,11 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import { fail } from '@sveltejs/kit';
-import { addUploads, getUploads, purgeUploads } from '$lib/server/database';
+import { addUploads, getUploads } from '$lib/server/database';
 import type { Upload } from '$lib/types';
 import sharp from 'sharp';
 import ffmpeg from 'ffmpeg';
-import { purge, put } from '$lib/server/blobstorage';
+import { put } from '$lib/server/blobstorage';
 
 export const load: PageServerLoad = async () => {
 	return { images: getUploads() };
@@ -66,7 +66,11 @@ export const actions = {
 						width: compressed.info.width,
 						height: compressed.info.height,
 						thumbnailUrl,
-						originalUrl
+						originalUrl,
+						originalFilename: blob.name,
+						blobName: compressedFileName,
+						thumbnailBlobName: thumbnailFileName,
+						originalBlobName: originalFileName
 					});
 				} else if (blob.type.startsWith('video/')) {
 					/*if (blob.size > 1024 * 1024 * 1024) {
@@ -109,7 +113,11 @@ export const actions = {
 						width: 0,
 						height: 0,
 						thumbnailUrl: '/uploads/' + thumbnailFileName,
-						originalUrl: '/uploads/' + originalFileName
+						originalUrl: '/uploads/' + originalFileName,
+						originalFilename: blob.name,
+						blobName: compressedFileName,
+						thumbnailBlobName: thumbnailFileName,
+						originalBlobName: originalFileName
 					});
 				}
 			}
@@ -118,9 +126,5 @@ export const actions = {
 			console.error(err);
 			return fail(500);
 		}
-	},
-	purge: async () => {
-		await purge();
-		await purgeUploads();
 	}
 } satisfies Actions;
