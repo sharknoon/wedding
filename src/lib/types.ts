@@ -50,6 +50,7 @@ export type Milestone = {
 };
 
 export type Upload = {
+	_id?: string;
 	createdAt: string;
 	url: string;
 	type: string;

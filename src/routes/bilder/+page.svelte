@@ -25,6 +25,11 @@
 
 	export let data: PageData;
 
+	let uploadsWithDate = data.images.map((upload) => ({
+		...upload,
+		date: new Date(upload.createdAt)
+	}));
+
 	let uploadInput: HTMLInputElement;
 	let galleryElement: HTMLDivElement;
 
@@ -152,7 +157,7 @@
 </div>
 
 <div class="container mx-auto my-8 flex flex-wrap gap-2" bind:this={galleryElement}>
-	{#each data.images as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
+	{#each uploadsWithDate.sort((a, b) => a.date.getTime() - b.date.getTime()) as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
 		{#if type.startsWith('image/')}
 			<a
 				href={url}

@@ -116,7 +116,7 @@ export async function createInvitation(
 }
 
 export async function getUpload(id: string): Promise<WithId<Upload> | null> {
-	return uploadsCollection.findOne({ _id: new ObjectId(id) });
+	return uploadsCollection.findOne({ _id: id });
 }
 
 export async function getUploads(): Promise<WithId<Upload>[]> {
@@ -129,5 +129,5 @@ export async function addUploads(uploads: Upload[]) {
 }
 
 export async function deleteUpload(id: string): Promise<DeleteResult> {
-	return uploadsCollection.deleteOne({ _id: new ObjectId(id) });
+	return uploadsCollection.deleteOne({ _id: id });
 }
