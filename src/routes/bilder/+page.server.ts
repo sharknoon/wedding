@@ -29,14 +29,14 @@ export const actions = {
 				if (blob.type.startsWith('image/')) {
 					/*if (blob.size > 20 * 1024 * 1024) {
 						// 20MB
-						return fail(400, { err: 'image too large (>50MB)' });
+						continue;
 					}*/
 
 					const buffer = Buffer.from(await blob.arrayBuffer());
 					const s = sharp(buffer);
 					const metadata = await s.metadata();
 					/*if (metadata.width || 0 < 640 || metadata.height || 0 < 480) {
-						return fail(400, { err: 'image too small (<640x480)' });
+						continue;
 					}*/
 
 					const fileExtension = blob.name.split('.').pop();
@@ -72,23 +72,10 @@ export const actions = {
 						thumbnailBlobName: thumbnailFileName,
 						originalBlobName: originalFileName
 					});
-					console.log(JSON.stringify({
-						createdAt: new Date().toISOString(),
-						url: compressedUrl,
-						type: 'image/webp',
-						width: compressed.info.width,
-						height: compressed.info.height,
-						thumbnailUrl,
-						originalUrl,
-						originalFilename: blob.name,
-						blobName: compressedFileName,
-						thumbnailBlobName: thumbnailFileName,
-						originalBlobName: originalFileName
-					}))
 				} else if (blob.type.startsWith('video/')) {
 					/*if (blob.size > 1024 * 1024 * 1024) {
 						// 1GB
-						return fail(400, { err: 'image too large (>1GB)' });
+						continue;
 					}*/
 
 					const buffer = Buffer.from(await blob.arrayBuffer());
