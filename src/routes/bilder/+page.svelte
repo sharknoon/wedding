@@ -22,6 +22,7 @@
 	// @ts-expect-error
 	import lgFullscreen from 'lightgallery/plugins/fullscreen/lg-fullscreen.umd';
 	import 'lightgallery/css/lg-fullscreen.css';
+	import type { Upload } from '$lib/types';
 
 	export let data: PageData;
 
@@ -48,6 +49,16 @@
 			}
 		});
 	});
+
+	function download() {
+		const a = document.createElement('a');
+		a.style.display = 'none';
+		a.href = 'https://minio-content.sharknoon.de/wedding/Hochzeit%20Midr%C3%A8ne%20und%20Josua.zip';
+		a.download = 'Hochzeit Midrène und Josua.zip';
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+	}
 
 	function upload() {
 		progress = 0;
@@ -91,8 +102,8 @@
 	</div>
 
 	<button
-		on:click={() => {}}
-		class="flex gap-2 self-center border-0 bg-red-600 px-4 py-2 font-oswald text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
+		on:click={download}
+		class="flex gap-2 self-center border-0 bg-black px-4 py-2 font-oswald text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -123,13 +134,14 @@
 	</div>
 
 	<form method="POST" action="?/upload" enctype="multipart/form-data">
+		<!-- accept="image/*,video/*" -->
 		<input
 			type="file"
 			name="uploads"
 			class="hidden"
 			bind:this={uploadInput}
 			multiple
-			accept="image/*,video/*"
+			accept="image/*"
 			on:change={upload}
 		/>
 		<button
@@ -156,7 +168,10 @@
 	</form>
 </div>
 
-<div class="container mx-auto my-8 flex flex-wrap gap-2" bind:this={galleryElement}>
+<div
+	class="container mx-auto my-8 flex flex-wrap justify-center gap-2 p-2"
+	bind:this={galleryElement}
+>
 	{#each uploadsWithDate.sort((a, b) => a.date.getTime() - b.date.getTime()) as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
 		{#if type.startsWith('image/')}
 			<a
@@ -164,7 +179,7 @@
 				data-sub-html="<div></div>"
 				data-lg-size={`${width}-${height}`}
 				data-download-url={originalUrl}
-				class="max-h-[200px] max-w-[350px] flex-grow"
+				class="max-h-[100px] max-w-[175px] flex-grow md:max-h-[200px] md:max-w-[400px]"
 			>
 				<img alt={_id.toString()} src={thumbnailUrl} class="h-full w-full object-cover" />
 			</a>
