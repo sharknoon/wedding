@@ -168,7 +168,7 @@
 </div>
 
 <div
-	class="container mx-auto my-8 flex flex-wrap justify-center gap-2 p-2"
+	class="grid grid-cols-2 place-items-center min-[525px]:container min-[525px]:mx-auto my-8 min-[525px]:flex min-[525px]:flex-wrap justify-center gap-2 p-2"
 	bind:this={galleryElement}
 >
 	{#each uploadsWithDate.sort((a, b) => a.date.getTime() - b.date.getTime()) as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
@@ -178,7 +178,7 @@
 				data-sub-html="<div></div>"
 				data-lg-size={`${width}-${height}`}
 				data-download-url={originalUrl}
-				class="max-h-[100px] max-w-[175px] flex-grow md:max-h-[200px] md:max-w-[400px]"
+				class="max-h-[125px] max-w-[250px] flex-grow md:max-h-[200px] md:max-w-[400px] overflow-hidden"
 			>
 				<img alt={_id.toString()} src={thumbnailUrl} class="h-full w-full object-cover" />
 			</a>
