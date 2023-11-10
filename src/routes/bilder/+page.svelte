@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { fade, scale } from 'svelte/transition';
 	import { invalidateAll } from '$app/navigation';
-	import { dev } from '$app/environment';
 	import type { PageData } from './$types';
 	import lightGallery from 'lightgallery';
 	import type { LightGallery } from 'lightgallery/lightgallery';
