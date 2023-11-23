@@ -87,22 +87,13 @@
 	}
 </script>
 
-<div class="mt-8 flex flex-col items-center gap-4 p-2 text-center md:mt-48">
+<div class="mt-8 flex flex-col items-center gap-4 p-2 text-center md:mt-32">
 	<h1 class="font-cheap-pine text-8xl">Danke<span class="text-red-600">!</span></h1>
-	<h2 class="font-cheap-pine-sans text-4xl">dass ihr dabei wart</h2>
-
-	<div class="font-oswald text-xl">
-		<p>Ihr habt dazu beigetragen, dass dieser Tag für uns unvergesslich bleiben wird.</p>
-		<p>
-			Für die Hilfe und Unterstützung, die vielen Ideen und tollen Überraschungen, die zahlreichen
-			Glückwünsche und Geschenke bedanken wir uns von ganzem Herzen.
-		</p>
-		<p>Unser Tag war wunderbar!</p>
-	</div>
+	<h2 class="font-cheap-pine-sans text-4xl mb-4">dass ihr dabei wart</h2>
 
 	<button
 		on:click={download}
-		class="flex gap-2 self-center border-0 bg-black px-4 py-2 font-oswald text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-red-700 hover:text-white focus:ring-2"
+		class="flex gap-2 self-center border-0 bg-black px-4 py-2 font-oswald text-xl text-white ring-black ring-offset-2 ring-offset-white transition hover:bg-black/80 hover:text-white focus:ring-2"
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -118,18 +109,18 @@
 				d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
 			/>
 		</svg>
-		Aufnahmen herunterladen
+		Alle Bilder herunterladen
 	</button>
 
 	<h2 class="mt-6 font-cheap-pine-sans text-4xl">Zeig uns deine Aufnahmen von der Hochzeit!</h2>
 
 	<div class="font-oswald text-xl">
 		<p>
-			Lade bitte nur Bilder und Videos hoch, bei denen du dich wohlfühlst, wenn andere
+			Lade bitte nur Bilder hoch, bei denen du dich wohlfühlst, wenn andere
 			Hochzeitsgäste sie sehen.
 		</p>
 
-		<p>Deine Aufnahmen werden hier auf der Website für die anderen Hochzeitsgäste angezeigt.</p>
+		<p>Deine Bilder werden hier auf der Website für die anderen Hochzeitsgäste angezeigt.</p>
 	</div>
 
 	<form method="POST" action="?/upload" enctype="multipart/form-data">
@@ -162,7 +153,7 @@
 					d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
 				/>
 			</svg>
-			Aufnahmen hochladen
+			Bilder hochladen
 		</button>
 	</form>
 </div>
