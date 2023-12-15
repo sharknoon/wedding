@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import QRCode from 'qrcode';
 	import { details } from '$lib/client/stores';
-	import { page } from '$app/stores';
 	import DownloadButton from '../download-button.svelte';
 
 	$: qrcode = '';

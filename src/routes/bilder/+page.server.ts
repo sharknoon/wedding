@@ -10,7 +10,7 @@ import ffmpeg from 'ffmpeg';
 import { put } from '$lib/server/blobstorage';
 
 export const load: PageServerLoad = async () => {
-	return { images: getUploads() };
+	return { images: await getUploads() };
 };
 
 export const actions = {

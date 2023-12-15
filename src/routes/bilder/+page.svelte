@@ -6,22 +6,16 @@
 	import lightGallery from 'lightgallery';
 	import type { LightGallery } from 'lightgallery/lightgallery';
 	import 'lightgallery/css/lightgallery.css';
-	// @ts-expect-error
-	import lgThumbnail from 'lightgallery/plugins/thumbnail/lg-thumbnail.umd';
+	import lgThumbnail from 'lightgallery/plugins/thumbnail';
 	import 'lightgallery/css/lg-thumbnail.css';
-	// @ts-expect-error
-	import lgZoom from 'lightgallery/plugins/zoom/lg-zoom.umd';
+	import lgZoom from 'lightgallery/plugins/zoom';
 	import 'lightgallery/css/lg-zoom.css';
-	// @ts-expect-error
-	import lgVideo from 'lightgallery/plugins/video/lg-video.umd';
+	import lgVideo from 'lightgallery/plugins/video';
 	import 'lightgallery/css/lg-video.css';
-	// @ts-expect-error
-	import lgAutoplay from 'lightgallery/plugins/autoplay/lg-autoplay.umd';
+	import lgAutoplay from 'lightgallery/plugins/autoplay';
 	import 'lightgallery/css/lg-autoplay.css';
-	// @ts-expect-error
-	import lgFullscreen from 'lightgallery/plugins/fullscreen/lg-fullscreen.umd';
+	import lgFullscreen from 'lightgallery/plugins/fullscreen';
 	import 'lightgallery/css/lg-fullscreen.css';
-	import type { Upload } from '$lib/types';
 
 	export let data: PageData;
 
@@ -89,7 +83,7 @@
 
 <div class="mt-8 flex flex-col items-center gap-4 p-2 text-center md:mt-32">
 	<h1 class="font-cheap-pine text-8xl">Danke<span class="text-red-600">!</span></h1>
-	<h2 class="font-cheap-pine-sans text-4xl mb-4">dass ihr dabei wart</h2>
+	<h2 class="mb-4 font-cheap-pine-sans text-4xl">dass ihr dabei wart</h2>
 
 	<button
 		on:click={download}
@@ -116,8 +110,8 @@
 
 	<div class="font-oswald text-xl">
 		<p>
-			Lade bitte nur Bilder hoch, bei denen du dich wohlfühlst, wenn andere
-			Hochzeitsgäste sie sehen.
+			Lade bitte nur Bilder hoch, bei denen du dich wohlfühlst, wenn andere Hochzeitsgäste sie
+			sehen.
 		</p>
 
 		<p>Deine Bilder werden hier auf der Website für die anderen Hochzeitsgäste angezeigt.</p>
@@ -159,7 +153,7 @@
 </div>
 
 <div
-	class="grid grid-cols-2 place-items-center min-[525px]:container min-[525px]:mx-auto my-8 min-[525px]:flex min-[525px]:flex-wrap justify-center gap-2 p-2"
+	class="my-8 grid grid-cols-2 place-items-center justify-center gap-2 p-2 min-[525px]:container min-[525px]:mx-auto min-[525px]:flex min-[525px]:flex-wrap"
 	bind:this={galleryElement}
 >
 	{#each uploadsWithDate.sort((a, b) => a.date.getTime() - b.date.getTime()) as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
@@ -169,7 +163,7 @@
 				data-sub-html="<div></div>"
 				data-lg-size={`${width}-${height}`}
 				data-download-url={originalUrl}
-				class="max-h-[125px] max-w-[250px] flex-grow md:max-h-[200px] md:max-w-[400px] overflow-hidden"
+				class="max-h-[125px] max-w-[250px] flex-grow overflow-hidden md:max-h-[200px] md:max-w-[400px]"
 			>
 				<img alt={_id.toString()} src={thumbnailUrl} class="h-full w-full object-cover" />
 			</a>

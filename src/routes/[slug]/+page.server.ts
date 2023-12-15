@@ -6,17 +6,17 @@ export const load: import('./$types').PageServerLoad = async ({ params }) => {
 	const slug: string = params.slug;
 
 	if (!slug) {
-		throw error(100, 'Missing invitation slug');
+		error(400, 'Missing invitation slug');
 	}
 
 	const details: Details | null = await getDetails();
 	const invitation = await getInvitationBySlug(slug);
 
 	if (!details) {
-		throw error(500, 'Could not load wedding details');
+		error(500, 'Could not load wedding details');
 	}
 	if (!invitation) {
-		throw redirect(
+		redirect(
 			302,
 			`/?message=${encodeURIComponent(
 				'Der Einladungscode ' +

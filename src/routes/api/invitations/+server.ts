@@ -5,7 +5,7 @@ export const POST: import('./$types').RequestHandler = async ({ request }) => {
 	try {
 		await createInvitation(await request.json());
 	} catch {
-		throw error(500, 'Invitation could not be saved');
+		error(500, 'Invitation could not be saved');
 	}
 
 	return new Response();

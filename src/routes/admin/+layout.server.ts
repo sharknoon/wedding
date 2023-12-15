@@ -7,7 +7,7 @@ export const load: import('./$types').LayoutServerLoad = async ({ url }) => {
 	const invitations = await getAllInvitations();
 
 	if (!details) {
-		throw error(500, 'Could not load wedding details');
+		error(500, 'Could not load wedding details');
 	}
 
 	return { details: details, invitations: invitations, path: url.pathname };
