@@ -30,7 +30,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         env:
-          MONGODB_URL: mongodb://localhost:27017
+          MONGODB_URL: mongodb+srv://localhost:27017
 
   build:
     needs: test
