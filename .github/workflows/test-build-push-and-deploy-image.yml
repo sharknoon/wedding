@@ -9,22 +9,17 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    services:
-      mongo:
-        image: mongo
-        env:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: root
-        ports:
-          - 27017:27017
-    env:
-      MONGODB_URL: mongodb://root:root@localhost:27017
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
+
+      - name: Setup MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-replica-set: rs0
 
       - name: Install dependencies
         run: npm ci
@@ -34,6 +29,8 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          MONGODB_URL: mongodb://localhost:27017
 
   build:
     needs: test
