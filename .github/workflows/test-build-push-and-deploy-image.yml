@@ -9,6 +9,16 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: root
+        ports:
+          - 27017:27017
+    env:
+      MONGODB_URL: mongodb://root:root@mongo:27017
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -26,8 +36,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test
-        env:
-          MONGODB_URL: ${{ secrets.MONGODB_URL }}
 
   build:
     needs: test
