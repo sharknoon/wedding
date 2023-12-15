@@ -21,6 +21,14 @@ jobs:
         with:
           mongodb-replica-set: rs0
 
+      # TODO replace at some point with github action
+      - name: Setup minio
+        run: |
+          docker run -d -p 9000:9000
+                      -e "MINIO_ACCESS_KEY=minioadmin" 
+                      -e "MINIO_SECRET_KEY=minioadmin" 
+                      minio/minio server /data
+
       - name: Install dependencies
         run: npm ci
 
@@ -31,6 +39,10 @@ jobs:
         run: npx playwright test
         env:
           MONGODB_URL: mongodb://localhost/
+          MINIO_ENDPOINT: localhost
+          MINIO_USE_SSL: false
+          MINIO_ACCESS_KEY: minioadmin
+          MINIO_SECRET_KEY: minioadmin
 
   build:
     needs: test
