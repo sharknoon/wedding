@@ -50,6 +50,10 @@ if (!building) {
 	minioClient.setBucketPolicy('wedding', JSON.stringify(bucketPolicy));
 }
 
+export const ping = async (): Promise<boolean> => {
+	return minioClient.bucketExists('wedding');
+};
+
 export const put = async (objectName: string, buffer: Buffer): Promise<string> => {
 	await minioClient.putObject('wedding', objectName, buffer);
 	return `${env.MINIO_PUBLIC_URL}/wedding/${objectName}`;

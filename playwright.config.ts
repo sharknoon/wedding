@@ -12,7 +12,17 @@ const config: PlaywrightTestConfig = {
 		extraHTTPHeaders: {
 			Authorization: `Basic ${Buffer.from('admin:admin').toString('base64')}`
 		}
-	}
+	},
+	projects: [
+		{
+			name: 'setup',
+			testMatch: /global\.setup\.ts/
+		},
+		{
+			name: 'tests',
+			dependencies: ['setup']
+		}
+	]
 };
 
 export default config;

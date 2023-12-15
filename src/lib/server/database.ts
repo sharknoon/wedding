@@ -9,10 +9,12 @@ import {
 	type UpdateResult,
 	type WithId,
 	type ChangeStream,
-	ObjectId
+	ObjectId,
+	type Db
 } from 'mongodb';
 import type { Details, Invitation, Upload } from '$lib/types';
 
+let db: Db;
 let invitationsCollection: Collection<Invitation>;
 let detailsCollection: Collection<Details>;
 let uploadsCollection: Collection<Upload>;
@@ -27,7 +29,7 @@ if (!building) {
 		pkFactory: { createPk: () => new ObjectId().toString() }
 	});
 	await client.connect();
-	const db = client.db('wedding');
+	db = client.db('wedding');
 	await db.command({ ping: 1 });
 	console.info('Connected to MongoDB');
 
@@ -78,6 +80,10 @@ function seedDB() {
 	console.info(
 		'Database has been freshly seeded. Please fill in the required informations in the details collection of the database.'
 	);
+}
+
+export async function ping(): Promise<Document> {
+	return db.command({ ping: 1 });
 }
 
 export async function getInvitationBySlug(slug: string): Promise<WithId<Invitation> | null> {
