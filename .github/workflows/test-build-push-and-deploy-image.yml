@@ -22,11 +22,11 @@ jobs:
           mongodb-replica-set: rs0
 
       # TODO replace at some point with github action
-      - name: Setup minio
+      - name: Setup MinIO
         run: |
-          docker run -d -p 9000:9000
-                      -e "MINIO_ACCESS_KEY=minioadmin" 
-                      -e "MINIO_SECRET_KEY=minioadmin" 
+          docker run -d -p 9000:9000 \
+                      -e "MINIO_ACCESS_KEY=minioadmin" \
+                      -e "MINIO_SECRET_KEY=minioadmin" \
                       minio/minio server /data
 
       - name: Install dependencies
