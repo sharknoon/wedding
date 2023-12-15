@@ -6,15 +6,20 @@
 	import lightGallery from 'lightgallery';
 	import type { LightGallery } from 'lightgallery/lightgallery';
 	import 'lightgallery/css/lightgallery.css';
-	import lgThumbnail from 'lightgallery/plugins/thumbnail';
+	// @ts-expect-error
+	import lgThumbnail from 'lightgallery/plugins/thumbnail/lg-thumbnail.umd';
 	import 'lightgallery/css/lg-thumbnail.css';
-	import lgZoom from 'lightgallery/plugins/zoom';
+	// @ts-expect-error
+	import lgZoom from 'lightgallery/plugins/zoom/lg-zoom.umd';
 	import 'lightgallery/css/lg-zoom.css';
-	import lgVideo from 'lightgallery/plugins/video';
+	// @ts-expect-error
+	import lgVideo from 'lightgallery/plugins/video/lg-video.umd';
 	import 'lightgallery/css/lg-video.css';
-	import lgAutoplay from 'lightgallery/plugins/autoplay';
+	// @ts-expect-error
+	import lgAutoplay from 'lightgallery/plugins/autoplay/lg-autoplay.umd';
 	import 'lightgallery/css/lg-autoplay.css';
-	import lgFullscreen from 'lightgallery/plugins/fullscreen';
+	// @ts-expect-error
+	import lgFullscreen from 'lightgallery/plugins/fullscreen/lg-fullscreen.umd';
 	import 'lightgallery/css/lg-fullscreen.css';
 
 	export let data: PageData;
