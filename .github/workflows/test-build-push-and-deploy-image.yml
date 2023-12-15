@@ -18,15 +18,13 @@ jobs:
         ports:
           - 27017:27017
     env:
-      MONGODB_URL: mongodb://root:root@mongo:27017
+      MONGODB_URL: mongodb://root:root@localhost:27017
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+        uses: actions/setup-node@v4
 
       - name: Install dependencies
         run: npm ci
@@ -42,10 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login to Github Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -53,14 +51,14 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}
           tags: | # set latest tag for default branch
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
@@ -83,5 +81,4 @@ jobs:
         with:
           package-type: 'container'
           package-name: 'wedding'
-          token: ${{ secrets.GHCR_PAT }}
           min-versions-to-keep: 1
