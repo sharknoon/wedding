@@ -35,4 +35,4 @@ services:
       MINIO_PORT: 9000
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: miniominio
-      BODY_SIZE_LIMIT: 0
+      BODY_SIZE_LIMIT: 20971520
