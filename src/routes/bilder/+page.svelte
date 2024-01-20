@@ -13,9 +13,6 @@
 	import lgZoom from 'lightgallery/plugins/zoom/lg-zoom.umd';
 	import 'lightgallery/css/lg-zoom.css';
 	// @ts-expect-error
-	import lgVideo from 'lightgallery/plugins/video/lg-video.umd';
-	import 'lightgallery/css/lg-video.css';
-	// @ts-expect-error
 	import lgAutoplay from 'lightgallery/plugins/autoplay/lg-autoplay.umd';
 	import 'lightgallery/css/lg-autoplay.css';
 	// @ts-expect-error
@@ -38,7 +35,7 @@
 
 	onMount(() => {
 		gallery = lightGallery(galleryElement, {
-			plugins: [lgZoom, lgThumbnail, lgVideo, lgAutoplay, lgFullscreen],
+			plugins: [lgZoom, lgThumbnail, lgAutoplay, lgFullscreen],
 			thumbnail: true,
 			mobileSettings: {
 				showCloseIcon: true,
@@ -123,7 +120,6 @@
 	</div>
 
 	<form method="POST" action="?/upload" enctype="multipart/form-data">
-		<!-- accept="image/*,video/*" -->
 		<input
 			type="file"
 			name="uploads"
@@ -162,33 +158,15 @@
 	bind:this={galleryElement}
 >
 	{#each uploadsWithDate.sort((a, b) => a.date.getTime() - b.date.getTime()) as { _id, url, type, width, height, thumbnailUrl, originalUrl }}
-		{#if type.startsWith('image/')}
-			<a
-				href={url}
-				data-sub-html="<div></div>"
-				data-lg-size={`${width}-${height}`}
-				data-download-url={originalUrl}
-				class="max-h-[125px] max-w-[250px] flex-grow overflow-hidden md:max-h-[200px] md:max-w-[400px]"
-			>
-				<img alt={_id.toString()} src={thumbnailUrl} class="h-full w-full object-cover" />
-			</a>
-		{:else if type.startsWith('video/')}
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<a
-				data-video={JSON.stringify({
-					source: [
-						{
-							src: url,
-							type
-						}
-					],
-					attributes: { controls: true }
-				})}
-				data-sub-html="<div></div>"
-			>
-				<img alt="video" src={url} />
-			</a>
-		{/if}
+		<a
+			href={url}
+			data-sub-html="<div></div>"
+			data-lg-size={`${width}-${height}`}
+			data-download-url={originalUrl}
+			class="max-h-[125px] max-w-[250px] flex-grow overflow-hidden md:max-h-[200px] md:max-w-[400px]"
+		>
+			<img alt={_id.toString()} src={thumbnailUrl} class="h-full w-full object-cover" />
+		</a>
 	{/each}
 </div>
 

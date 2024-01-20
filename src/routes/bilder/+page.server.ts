@@ -1,12 +1,9 @@
 import type { Actions, PageServerLoad } from './$types';
-import path from 'node:path';
-import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import { fail } from '@sveltejs/kit';
 import { addUploads, getUploads } from '$lib/server/database';
 import type { Upload } from '$lib/types';
 import sharp from 'sharp';
-import ffmpeg from 'ffmpeg';
 import { put } from '$lib/server/blobstorage';
 
 export const load: PageServerLoad = async () => {
@@ -19,25 +16,20 @@ export const actions = {
 			const formData = await request.formData();
 			const blobs = formData.getAll('uploads') as Blob[];
 			const uploads: Upload[] = [];
-			const uploadDirectory = path.join(process.cwd(), 'static', 'uploads');
-			fs.mkdir(uploadDirectory, { recursive: true });
 			for (const blob of blobs) {
-				if (!blob.type.startsWith('image/') && !blob.type.startsWith('video/')) {
-					return fail(400, { err: 'file type not supported' });
+				if (!blob.type.startsWith('image/')) {
+					return fail(400, { err: `file type ${blob.type} not supported` });
 				}
 
 				if (blob.type.startsWith('image/')) {
-					/*if (blob.size > 20 * 1024 * 1024) {
-						// 20MB
+					// block images over 50MB
+					if (blob.size > 50 * 1024 * 1024) {
 						continue;
-					}*/
+					}
 
 					const buffer = Buffer.from(await blob.arrayBuffer());
 					const s = sharp(buffer);
 					const metadata = await s.metadata();
-					/*if (metadata.width || 0 < 640 || metadata.height || 0 < 480) {
-						continue;
-					}*/
 
 					const fileExtension = blob.name.split('.').pop();
 					const fileUUID = crypto.randomUUID();
@@ -67,53 +59,6 @@ export const actions = {
 						height: compressed.info.height,
 						thumbnailUrl,
 						originalUrl,
-						originalFilename: blob.name,
-						blobName: compressedFileName,
-						thumbnailBlobName: thumbnailFileName,
-						originalBlobName: originalFileName
-					});
-				} else if (blob.type.startsWith('video/')) {
-					/*if (blob.size > 1024 * 1024 * 1024) {
-						// 1GB
-						continue;
-					}*/
-
-					const buffer = Buffer.from(await blob.arrayBuffer());
-					const fileExtension = blob.name.split('.').pop();
-					const fileUUID = crypto.randomUUID();
-
-					const originalFileName = `${fileUUID}.${fileExtension}`;
-					await put(originalFileName, buffer);
-					const originalFilePath = path.join(uploadDirectory, originalFileName);
-					await fs.writeFile(originalFilePath, buffer);
-
-					const video = await new ffmpeg(originalFilePath);
-					console.log(JSON.stringify(video.metadata));
-
-					const compressedFileName = `${fileUUID}-compressed.mp4`;
-					await video
-						.setVideoSize('1440x?', true, true)
-						.setVideoCodec('mpeg4')
-						.setAudioCodec('libfaac')
-						.setAudioBitRate(128)
-						.setVideoBitRate(1024)
-						.save(path.join(uploadDirectory, compressedFileName));
-
-					const thumbnailFileName = `${fileUUID}-thumbnail.jpg`;
-					await video.fnExtractFrameToJPG(uploadDirectory, {
-						number: 1,
-						size: '?x200',
-						file_name: thumbnailFileName
-					});
-
-					uploads.push({
-						createdAt: new Date().toISOString(),
-						url: '/uploads/' + compressedFileName,
-						type: blob.type,
-						width: 0,
-						height: 0,
-						thumbnailUrl: '/uploads/' + thumbnailFileName,
-						originalUrl: '/uploads/' + originalFileName,
 						originalFilename: blob.name,
 						blobName: compressedFileName,
 						thumbnailBlobName: thumbnailFileName,
