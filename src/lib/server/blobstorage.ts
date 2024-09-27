@@ -9,12 +9,12 @@ if (!building) {
 		console.error('Missing MINIO_ENDPOINT env');
 		process.exit();
 	}
-	if (!env.MINIO_ACCESS_KEY) {
-		console.error('Missing MINIO_ACCESS_KEY env');
+	if (!env.MINIO_ROOT_USER) {
+		console.error('Missing MINIO_ROOT_USER env');
 		process.exit();
 	}
-	if (!env.MINIO_SECRET_KEY) {
-		console.error('Missing MINIO_SECRET_KEY env');
+	if (!env.MINIO_ROOT_PASSWORD) {
+		console.error('Missing MINIO_ROOT_PASSWORD env');
 		process.exit();
 	}
 	env.MINIO_PORT = env.MINIO_PORT || '9000';
@@ -27,8 +27,8 @@ if (!building) {
 		endPoint: env.MINIO_ENDPOINT,
 		port: parseInt(env.MINIO_PORT),
 		useSSL: env.MINIO_USE_SSL === 'true',
-		accessKey: env.MINIO_ACCESS_KEY,
-		secretKey: env.MINIO_SECRET_KEY
+		accessKey: env.MINIO_ROOT_USER,
+		secretKey: env.MINIO_ROOT_PASSWORD
 	});
 
 	if (!(await minioClient.bucketExists('wedding'))) {

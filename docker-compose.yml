@@ -1,30 +1,30 @@
 version: '3'
 services:
   db:
-    image: mongo
+    image: mongo:7
     restart: always
-    command: mongod --replSet rs0 --bind_ip localhost,db
-
-  db-init:
-    image: mongo
-    restart: 'no'
-    depends_on:
-      - db
-    command: >
-      mongosh --host db:27017 --eval 'rs.initiate();'
+    command: mongod --replSet rs0 --bind_ip_all
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate() }" | mongosh --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      start_interval: 1s
+      retries: 30
 
   blobstorage:
     image: minio/minio
     restart: always
     command: server /data
     environment:
-      MINIO_ACCESS_KEY: minio
-      MINIO_SECRET_KEY: miniominio
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniominio
+      MINIO_BROWSER: off
 
   app:
     build: .
     depends_on:
-      - db-init
+      - db
       - blobstorage
     ports:
       - 3000:3000
@@ -33,6 +33,7 @@ services:
       ADMIN_LOGIN: admin:admin
       MINIO_ENDPOINT: blobstorage
       MINIO_PORT: 9000
-      MINIO_ACCESS_KEY: minio
-      MINIO_SECRET_KEY: miniominio
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniominio
+      MINIO_USE_SSL: "false"
       BODY_SIZE_LIMIT: 20971520
