@@ -35,5 +35,5 @@ services:
       MINIO_PORT: 9000
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: miniominio
-      MINIO_USE_SSL: "false"
+      MINIO_USE_SSL: 'false'
       BODY_SIZE_LIMIT: 20971520
